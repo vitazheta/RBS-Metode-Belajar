@@ -19,16 +19,16 @@
                         <a href="#" class="text-decoration-none text-muted">Lupa kata sandi anda?</a>
                     </div>
                     <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-success w-100">SIGN IN</button>
+                        <button type="submit" class="btn btn-success w-100 w-100 rounded-pill py-2">SIGN IN</button>
                     </div>
                 </form>
             </div>
 
             <!-- Bagian Info dan Sign Up -->
             <div class="col-md-6 d-flex flex-column justify-content-center align-items-center bg-success text-white text-center p-5">
-                <h2 class="fw-bold">Halo, Teman!</h2>
-                <p>Daftarkan diri anda dan mulai gunakan layanan kami segera</p>
-                <a href="{{ route('register') }}" class="btn btn-outline-light mt-3">SIGN UP</a>
+                <h2 class="fw-bold">Halo, Dosen!</h2>
+                <p>Daftarkan diri Anda dan segera mulai gunakan website ini</p>
+                <a href="{{ route('register') }}" class="btn btn-outline-light w-100 rounded-pill py-2">SIGN UP</a>
             </div>
         </div>
     </div>

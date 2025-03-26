@@ -22,6 +22,7 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::get('/register', function () {
-    return 'Halaman Registrasi (Buat nanti)';
+    return view('auth.register'); // Mengarahkan ke halaman register.blade.php
 })->name('register');
+
 
