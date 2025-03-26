@@ -21,7 +21,7 @@
                 </li>
                 <!-- Login Button -->
                 <li class="nav-item">
-                    <a href="#" class="btn btn-danger px-3">Login</a>
+                    <a href="{{ route('login') }}" class="btn btn-danger px-3">Login</a>
                 </li>
             </ul>
         </div>
