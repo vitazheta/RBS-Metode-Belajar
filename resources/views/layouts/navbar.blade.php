@@ -1,4 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-dark {{ request()->is('/') ? 'bg-dark' : 'bg-black' }}">
+<style>
+    .btn:hover {
+        background-color: #1d5b3a !important;
+        border-color: #1d5b3a !important;
+    }
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2E8B57;">
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" href="#">
@@ -21,7 +29,10 @@
                 </li>
                 <!-- Login Button -->
                 <li class="nav-item">
-                    <a href="{{ route('login') }}" class="btn btn-danger px-3">Login</a>
+                    <a href="{{ route('login') }}" class="btn text-white px-3"
+                       style="background-color: #246846; border-color: #246846;">
+                        Login
+                    </a>
                 </li>
             </ul>
         </div>

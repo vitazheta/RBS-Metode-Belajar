@@ -7,6 +7,7 @@
             <!-- Bagian Form Login -->
             <div class="col-md-6 bg-white p-5">
                 <h2 class="fw-bold text-center">Sign in</h2>
+                <p class="text-center">Masuk dengan akun yang telah Anda miliki</p>
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="mb-3">

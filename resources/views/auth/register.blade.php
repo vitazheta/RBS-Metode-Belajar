@@ -15,7 +15,7 @@
             <!-- Bagian Form Register -->
             <div class="col-md-6 bg-white p-5">
                 <h2 class="fw-bold text-center">SIGN UP</h2>
-                <p>Daftarkan diri Anda dan segera mulai gunakan website ini</p>
+                <p class="text-center">Daftarkan diri Anda dan segera mulai gunakan website ini</p>
                 <form action="#" method="POST">
                     @csrf
                     <div class="mb-3">
