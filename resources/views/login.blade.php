@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Login Page</title>
@@ -20,4 +20,4 @@
         </form>
     </div>
 </body>
-</html>
+</html> -->
