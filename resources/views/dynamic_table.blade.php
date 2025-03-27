@@ -8,7 +8,7 @@
     <form action="{{ route('import.process') }}" method="POST" enctype="multipart/form-data" class="mb-3 d-flex">
         @csrf
         <input type="file" name="csv_file" class="form-control me-2" accept=".csv" required>
-        <button type="submit" class="btn btn-sm btn-primary">Import CSV</button>
+        <button type="submit" class="btn btn-sm btn-success">Import CSV</button>
     </form>
 
     <table class="table table-bordered" id="dynamicTable">
@@ -52,7 +52,12 @@
                                 <option value="Mandiri UPI">Mandiri UPI</option>
                             </select>
                         </td>
-                        <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">
+                             <i class="fas fa-trash"></i> Hapus
+                            </button>
+                        </td>
+
                     </tr>
                 @endfor
             @endif
