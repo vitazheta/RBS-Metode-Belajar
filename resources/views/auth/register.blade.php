@@ -1,42 +1,77 @@
+<body style="background-image: url('{{ asset('images/bg2.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></body>
+
 @extends('layouts.app')
 
 @section('content')
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="card shadow-lg" style="width: 800px; border-radius: 10px; overflow: hidden;">
+    <div class="card shadow-lg" style="
+    position: relative;
+    z-index: 10;
+    width: 800px; 
+    border: none; /* Menghilangkan border */
+    border-radius: 40px; 
+    overflow: visible;
+    box-shadow: 0px 10px 40px 10px #84A7CF inset; /* Shadow biru tebal */">
         <div class="row g-0">
             <!-- Bagian Info dan Sign In -->
-            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center bg-success text-white text-center p-5">
-                <h2 class="fw-bold">Halo, Dosen!</h2>
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white text-center p-5" 
+            style="
+            background-color: #0E1F4D;
+            box-shadow: -15px 0px 50px #0E1F4D;
+            border-radius: 20px;
+            border-top-right-radius: 0px;  /* Sudut kanan atas melengkung */
+            border-bottom-right-radius: 0px; /* Sudut kanan bawah melengkung */">
+                <h2 class="fw-bold">
+                <span style="color: white;">Halo,</span> 
+                <span style="color: #F37AB0;">Dosen!</span>
+                </h2>
                 <p>Sudah memiliki akun? Silakan login dengan tombol di bawah</p>
                 <!-- Tombol Sign In Dipindah ke Sini -->
                 <a href="{{ route('login') }}" class="btn btn-outline-light w-100 rounded-pill py-2">SIGN IN</a>
             </div>
 
             <!-- Bagian Form Register -->
-            <div class="col-md-6 bg-white p-5">
+            <div class="col-md-6 bg-white p-5" 
+            style="
+            box-shadow: 15px 0px 50px #35455C;
+            border-radius: 20px;
+            border-top-left-radius: 0;  /* Sudut kiri atas tetap tajam */
+            border-bottom-left-radius: 0;  /* Sudut kiri bawah tetap tajam */">
                 <h2 class="fw-bold text-center">SIGN UP</h2>
                 <p class="text-center">Daftarkan diri Anda dan segera mulai gunakan website ini</p>
-                <form action="#" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <input type="text" name="name" class="form-control" placeholder="Nama Lengkap" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="text" name="username" class="form-control" placeholder="Username" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password" required>
-                    </div>
-                    <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-success w-100 w-100 rounded-pill py-2">SIGN UP</button>
-                    </div>
-                </form>
+                <form action="{{ route('register') }}" method="POST">
+    @csrf
+    <div class="mb-3">
+    <input type="text" name="name" class="form-control" placeholder="Nama Lengkap" required>
+
+        @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+    </div>
+
+    <div class="mb-3">
+        <input type="email" name="email" class="form-control" placeholder="Email" required value="{{ old('email') }}">
+        @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+    </div>
+
+    <div class="mb-3">
+        <input type="text" name="username" class="form-control" placeholder="Username" required value="{{ old('username') }}">
+        @error('username') <small class="text-danger">{{ $message }}</small> @enderror
+    </div>
+
+    <div class="mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        @error('password') <small class="text-danger">{{ $message }}</small> @enderror
+    </div>
+
+    <div class="mb-3">
+        <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password" required>
+        @error('password_confirmation') <small class="text-danger">{{ $message }}</small> @enderror
+    </div>
+
+    <div class="text-center mt-3">
+        <button type="submit" class="btn text-white w-100 rounded-pill py-2" style="background-color: #0E1F4D;">SIGN UP</button>
+    </div>
+</form>
+
             </div>
         </div>
     </div>

@@ -25,3 +25,23 @@ class Kernel extends ConsoleKernel
         require base_path('routes/console.php');
     }
 }
+
+// ada ga sniya joined 
+//hayffffdfdfdfdfddfdffdfddf
+// dila joined the genk
+// GWS DAH
+// besok sleeg nya gimana
+// gatau
+// gatau belum buat
+//buatin dong nitip 1
+//gaterima jastip
+//aamiinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+//besok sleeg harus beres
+// gimana caranya
+// ga ngerti sleeg
+// cuma ngerti buka puasa
+// udah adan tuh 
+// Alhamdulilah
+// Allahumalakasumtu
+// Mandi dulu bye
+// aanggggggg 
