@@ -37,3 +37,8 @@ Route::get('/dynamic-table', function () {
     return view('dynamic_table');
 });
 
+use App\Http\Controllers\DashboardDosenController;
+
+Route::get('/dashboard-dosen', [DashboardDosenController::class, 'index'])->name('dashboard.dosen');
+
+
