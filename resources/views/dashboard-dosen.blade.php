@@ -12,12 +12,19 @@
         font-size: 80px;
         opacity: 0.2;
         transform: rotate(-15deg); /* Membuat ikon miring */
-
     }
 </style>
 
-<div class="container py-5">
-    <h2 class="mb-4 fw-bold">Dashboard Dosen</h2>
+<div class="container py-0"> <!-- Ubah dari py-5 ke py-3 -->
+<h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #19692c;">
+    Dashboard Dosen
+    <span class="d-block mt-1" style="height: 4px; width: 100%; background-color: #19692c;"></span>
+</h2>
+<p class="text-muted fs-5">Halo, Dosen! Berikut daftar kelas yang Anda ampu.</p>
+
+
+
+
     <div class="row">
         <!-- Kotak Jumlah Kelas -->
         <div class="col-md-4">
@@ -52,6 +59,20 @@
             </div>
         </div>
     </div>
+
+   <!-- Section Tambah Kelas -->
+<div class="card mt-0 mb-1 shadow-sm">
+    <div class="card-body d-flex justify-content-between align-items-center">
+        <div>
+            <h5 class="fw-bold mb-1">Ingin menambahkan kelas?</h5>
+            <p class="text-muted mb-0">Klik tombol di sebelah kanan untuk menambahkan kelas baru ke sistem.</p>
+        </div>
+        <a href="{{ url('/dynamic-table') }}" class="btn btn-primary btn-lg px-4 py-2">
+            <i class="fas fa-plus me-2"></i> Tambah Kelas
+        </a>
+    </div>
+</div>
+
 
     <!-- Daftar Kelas -->
     <div class="row">
