@@ -8,21 +8,29 @@
             <div class="col-md-6 bg-white p-5">
                 <h2 class="fw-bold text-center">Sign in</h2>
                 <p class="text-center">Masuk dengan akun yang telah Anda miliki</p>
+
+                @if (session('login_error'))
+                    <div class="alert alert-danger">
+                        {{ session('login_error') }}
+                    </div>
+                @endif
+
                 <form action="{{ route('login') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email atau username" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password" required>
-                    </div>
-                    <div class="text-center">
-                        <a href="#" class="text-decoration-none text-muted">Lupa kata sandi anda?</a>
-                    </div>
-                    <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-success w-100 w-100 rounded-pill py-2">SIGN IN</button>
-                    </div>
-                </form>
+    @csrf
+    <div class="mb-3">
+        <input type="email" name="email" class="form-control" placeholder="Email" required>
+    </div>
+    <div class="mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+    </div>
+    <div class="text-center">
+        <a href="#" class="text-decoration-none text-muted">Lupa kata sandi anda?</a>
+    </div>
+    <div class="text-center mt-3">
+        <button type="submit" class="btn btn-success w-100 rounded-pill py-2">SIGN IN</button>
+    </div>
+</form>
+
             </div>
 
             <!-- Bagian Info dan Sign Up -->
