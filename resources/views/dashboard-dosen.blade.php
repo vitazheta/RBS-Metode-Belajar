@@ -20,7 +20,9 @@
     Dashboard Dosen
     <span class="d-block mt-1" style="height: 4px; width: 100%; background-color: #19692c;"></span>
 </h2>
-<p class="text-muted fs-5">Halo, Dosen! Berikut daftar kelas yang Anda ampu.</p>
+<p class="text-muted fs-5">Halo, <strong> {{ucwords($dosen->nama)}}!</strong> Berikut daftar kelas yang Anda ampu.</p>
+
+
 
 
 

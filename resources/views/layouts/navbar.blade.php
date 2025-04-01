@@ -43,22 +43,47 @@
         <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto text-center gap-2">
-                <li class="nav-item">
-                    <a class="btn-nav {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">
-                        <i class="bi bi-house-door"></i> HOME
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn-nav {{ request()->is('info') ? 'active' : '' }}" href="{{ url('/info') }}">
-                        <i class="bi bi-info-circle"></i> INFO
-                    </a>
-                </li>
-                <!-- Login Button -->
-                <li class="nav-item">
-                    <a class="btn-nav {{ request()->is('login') ? 'active' : '' }}" href="{{ route('login') }}">
-                        <i class="bi bi-box-arrow-in-right"></i> LOGIN
-                    </a>
-                </li>
+                <!-- Menampilkan link Home dan Info untuk pengunjung yang belum login -->
+                @guest
+                    <li class="nav-item">
+                        <a class="btn-nav {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">
+                            <i class="bi bi-house-door"></i> HOME
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn-nav {{ request()->is('info') ? 'active' : '' }}" href="{{ url('/info') }}">
+                            <i class="bi bi-info-circle"></i> INFO
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn-nav {{ request()->is('login') ? 'active' : '' }}" href="{{ route('login') }}">
+                            <i class="bi bi-box-arrow-in-right"></i> LOGIN
+                        </a>
+                    </li>
+                @endguest
+
+                <!-- Menampilkan link Dashboard, Tambah Kelas, dan Logout untuk pengguna yang sudah login -->
+                @auth
+                    <li class="nav-item">
+                        <a class="btn-nav {{ request()->is('dashboard-dosen') ? 'active' : '' }}" href="{{ route('dashboard.dosen') }}">
+                            <i class="bi bi-house-door"></i> DASHBOARD
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="btn-nav {{ request()->is('dynamic-table') ? 'active' : '' }}" href="{{ route('dynamic.table') }}">
+
+                            <i class="bi bi-plus-circle"></i> TAMBAH KELAS
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn-nav" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="bi bi-box-arrow-right"></i> LOGOUT
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>
