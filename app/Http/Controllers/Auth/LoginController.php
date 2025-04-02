@@ -27,6 +27,13 @@ public function login(Request $request)
         'password' => 'required',
     ]);
 
+    //Cek email terdaftar 
+    $user = Dosen::where('email', $request->email)->first();
+
+    if (!$user) {
+        return redirect()->back()->with('login_error', 'Akun Anda belum terdaftar!');
+    }
+    
     // Attempt to log the user in
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         // Redirect ke dashboard setelah login berhasil

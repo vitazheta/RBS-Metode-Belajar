@@ -13,7 +13,7 @@ return new class extends Migration
 {
     Schema::create('dosen', function (Blueprint $table) {
         $table->id();
-        $table->string('nama')->nullable();
+        $table->string('nama lengkap')->nullable();
         $table->string('email')->unique();
         $table->string('username')->unique();
         $table->string('password');
