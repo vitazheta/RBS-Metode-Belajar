@@ -27,6 +27,10 @@ class ImportController extends Controller
             fclose($handle);
         }
 
+        // Simpan data CSV ke session
+        session()->put('csv_data', $data);
+        session()->put('nama_kelas', $request->nama_kelas);
+        session()->put('kode_mata_kuliah', $request->kode_mata_kuliah);
         return redirect('/dynamic-table')->with('data', $data);
 
     }
