@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mahasiswa extends Model
+class DataMahasiswa extends Model
 {
     use HasFactory;
 
@@ -18,6 +18,6 @@ class Mahasiswa extends Model
         'kesiapan_akademik',
         'kesiapan_ekonomi',
         'dukungan_ortu',
-        'endurance_citacita',
+        'endurance_cita-cita',
     ];
 }
