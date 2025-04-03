@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_kelas', function (Blueprint $table) {
+        Schema::create('kelas', function (Blueprint $table) {
             $table->id();
+            $table->string('dosen_id');
             $table->string('nama_kelas');
             $table->string('kode_matkul');
-            $table->string('kolom1'); // Sesuaikan dengan data di CSV
-            $table->string('kolom2'); // Sesuaikan dengan data di CSV
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_kelas');
+        Schema::dropIfExists('kelas');
     }
 };
