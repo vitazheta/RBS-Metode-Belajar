@@ -22,11 +22,6 @@
 </h2>
 <p class="text-muted fs-5">Halo, <strong> {{ucwords($dosen->nama)}}!</strong> Berikut daftar kelas yang Anda ampu.</p>
 
-
-
-
-
-
     <div class="row">
         <!-- Kotak Jumlah Kelas -->
         <div class="col-md-4">
