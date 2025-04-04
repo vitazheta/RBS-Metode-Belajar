@@ -12,19 +12,24 @@
     }
 
     .btn-nav:hover {
-        background-color: #1d5b3a !important;
+        background-color: #84A7CF !important;
     }
 
     .btn-nav.active {
-        background-color: #246846 !important;
+        background-color: #0E1F4D !important;
     }
 
     /* Navbar Styling */
     .navbar-custom {
-        background-color: #2E8B57;
+        background-color: #0E1F4D;
         border-radius: 0 0 20px 20px; /* Rounded hanya di bagian bawah */
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan halus */
         padding: 10px 20px;
+        position: fixed;  /* Menempel di layar */
+        top: 0;  /* Melekat di bagian atas */
+        left: 0;  /* Mulai dari sisi kiri */
+        width: 100%;  /* Lebar penuh */
+        z-index: 1000;  /* Agar tetap di atas elemen lain */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk efek elegan */
     }
 </style>
 
@@ -32,7 +37,7 @@
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" href="#">
-            <img src="{{ asset('images/KFC.png') }}" alt="Logo" style="height: 40px;">
+            <img src="{{ asset('images/logontext.png') }}" alt="Logo" style="height: 40px;">
         </a>
 
         <!-- Toggle Button for Mobile -->

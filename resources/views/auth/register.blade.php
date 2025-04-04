@@ -5,7 +5,7 @@
     <div class="card shadow-lg" style="width: 800px; border-radius: 10px; overflow: hidden;">
         <div class="row g-0">
             <!-- Bagian Info dan Sign In -->
-            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center bg-success text-white text-center p-5">
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white text-center p-5" style="background-color: #0E1F4D;">
                 <h2 class="fw-bold">Halo, Dosen!</h2>
                 <p>Sudah memiliki akun? Silakan login dengan tombol di bawah</p>
                 <!-- Tombol Sign In Dipindah ke Sini -->
