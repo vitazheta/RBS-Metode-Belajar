@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container mt-5" style="padding-top: 80px;">
     <h2 class="mb-4">Data Kelas</h2>
     <div id="kelasContainer">
     <div class="kelas-item mb-3 d-flex justify-content-between">

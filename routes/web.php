@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardDosenController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DynamicTableController;
+use App\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------|
@@ -41,5 +42,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Route untuk data kelas
-use App\Http\Controllers\KelasController;
+//use App\Http\Controllers\KelasController;
+Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelas.store');
+
 
