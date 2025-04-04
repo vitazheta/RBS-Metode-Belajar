@@ -2,7 +2,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
 <!-- Banner Section -->
-<section class="banner d-flex align-items-center py-5">
+<section id="banner" class="banner d-flex align-items-center py-5">
     <div class="container">
         <div class="row align-items-center">
             <!-- Teks Animasi -->

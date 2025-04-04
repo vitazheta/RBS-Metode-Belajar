@@ -36,7 +36,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid">
         <!-- Logo -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#banner">
             <img src="{{ asset('images/logontext.png') }}" alt="Logo" style="height: 40px;">
         </a>
 
