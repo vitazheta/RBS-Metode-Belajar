@@ -48,14 +48,15 @@
     </form>
 
 <div style="overflow: hidden; border-radius: 10px;">    
+<div style="overflow: hidden; border-radius: 10px;">    
     <table class="table table-bordered" id="dynamicTable">
         <thead>
             <tr>
-                <th style="background-color: #0E1F4D; color: white;">No</th>
-                <th style="background-color: #0E1F4D; color: white;">Nama</th>
-                <th style="background-color: #0E1F4D; color: white;">Email</th>
-                <th style="background-color: #0E1F4D; color: white;">Jalur Masuk</th>
-                <th style="background-color: #0E1F4D; color: white;">Aksi</th>
+                <th style="background-color: #0E1F4D; color: white;" style="background-color: #0E1F4D; color: white;">No</th>
+                <th style="background-color: #0E1F4D; color: white;" style="background-color: #0E1F4D; color: white;">Nama</th>
+                <th style="background-color: #0E1F4D; color: white;" style="background-color: #0E1F4D; color: white;">Email</th>
+                <th style="background-color: #0E1F4D; color: white;" style="background-color: #0E1F4D; color: white;">Jalur Masuk</th>
+                <th style="background-color: #0E1F4D; color: white;" style="background-color: #0E1F4D; color: white;">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -91,7 +92,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">
-                                <i class="fas fa-trash"></i> Hapus
+                                   <i class="fas fa-trash"></i> Hapus
                             </button>
                         </td>
 
@@ -100,7 +101,7 @@
             @endif
         </tbody>
     </table>
-    <button type="submit" class="btn btn-sm btn-danger">Save</button>
+    <button type="submit" class="btn text-white btn-sm" style="background-color: #0E1F4D;">Save</button>
 
 </div>
 
