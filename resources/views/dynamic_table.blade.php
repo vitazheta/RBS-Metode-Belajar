@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5" style="padding-top: 80px;">
-    <h2 class="mb-4">Data Kelas</h2>
-</div>
+
+<div class="container" style="padding-top: 70px;">
+    <h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
+        Data Kelas
+        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
+    </h2>
 
     <!-- Form Upload CSV -->
     <form action="{{ route('import.process') }}" method="POST" enctype="multipart/form-data">
@@ -83,8 +86,9 @@
             @endif
         </tbody>
     </table>
-    <button type="submit" class="btn btn-sm btn-danger">Save</button>
-</div>
+    <button type="button" id="saveButton" class="btn btn-danger">Save</button>
+    </div>
+<div id="outputData" class="mt-4"></div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -173,6 +177,67 @@
             row.cells[0].textContent = index + 1;
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const saveBtn = document.getElementById('saveButton');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', function () {
+                console.log("Tombol Save diklik"); // untuk cek di console
+
+                let outputDiv = document.getElementById('outputData');
+                outputDiv.innerHTML = '';
+
+                let namaKelas = document.querySelector('input[name="nama_kelas[]"]').value;
+                let kodeMatkul = document.querySelector('input[name="kode_mata_kuliah[]"]').value;
+
+                let resultHTML = `
+                    <h4 class="mt-4">Hasil Data</h4>
+                    <p><strong>Nama Kelas:</strong> ${namaKelas}</p>
+                    <p><strong>Kode Mata Kuliah:</strong> ${kodeMatkul}</p>
+                    <table class="table table-bordered mt-3">
+                        <thead class="table-light">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Jalur Masuk</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                const rows = document.querySelectorAll('#dynamicTable tbody tr');
+                rows.forEach((row, index) => {
+                    const nama = row.querySelector('input[name="nama[]"]').value;
+                    const email = row.querySelector('input[name="email[]"]').value;
+                    const jalur = row.querySelector('select[name="jalur_masuk[]"]').value;
+
+                    if (nama.trim() !== '' && email.trim() !== '') {
+                        resultHTML += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${nama}</td>
+                                <td>${email}</td>
+                                <td>${jalur}</td>
+                            </tr>
+                        `;
+                    }
+                });
+
+                resultHTML += `
+                        </tbody>
+                    </table>
+                `;
+
+                outputDiv.innerHTML = resultHTML;
+                
+            });
+        }
+    });
+    <button id="generateButton" class="btn btn-success mt-3">Generate</button>
+
 </script>
+
+
 
 @endsection
