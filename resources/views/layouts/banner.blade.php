@@ -33,7 +33,7 @@
                 </div>
                 <!-- Gambar Produk -->
                 <div class="col-lg-6 text-center">
-                <img src="{{ asset('images/logo-banner.png') }}" alt="Produk Web" class="img-fluid rounded shadow img-banner">
+                <img src="{{ asset('images/logo-banner.png') }}" alt="Produk Web" class="img-fluid rounded shadow img-banner floating">
                 </div>
             </div>
         </div>
@@ -118,6 +118,18 @@
         background-color: var(--text-color);
         border-color: var(--text-color);
         color: var(--primary-color);
+    }
+
+    /* Animasi Logo */
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+    }
+
+    .floating {
+        /* animation: float 3s ease-in-out infinite; */
+        animation: float 2s linear infinite;
     }
 </style>
 

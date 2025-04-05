@@ -5,6 +5,17 @@
 <h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
         Data Kelas
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        padding-top: 80px; /* Sesuaikan dengan tinggi navbar */
+        background-color: #EBEDF4;
+    }
+</style>
+<div class="container mt-5">
+    <h2 class="mb-4">Data Kelas
+    <span class="d-block mt-1" style="height: 4px; width: 18%; background-color: #84A7CF;"></span>
     </h2>
 </div>
 
@@ -36,14 +47,15 @@
     </div>
     </form>
 
+<div style="overflow: hidden; border-radius: 10px;">    
     <table class="table table-bordered" id="dynamicTable">
-        <thead class="table-dark">
+        <thead>
             <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Jalur Masuk</th>
-                <th>Aksi</th>
+                <th style="background-color: #0E1F4D; color: white;">No</th>
+                <th style="background-color: #0E1F4D; color: white;">Nama</th>
+                <th style="background-color: #0E1F4D; color: white;">Email</th>
+                <th style="background-color: #0E1F4D; color: white;">Jalur Masuk</th>
+                <th style="background-color: #0E1F4D; color: white;">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -79,7 +91,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">
-                             <i class="fas fa-trash"></i> Hapus
+                                <i class="fas fa-trash"></i> Hapus
                             </button>
                         </td>
 
