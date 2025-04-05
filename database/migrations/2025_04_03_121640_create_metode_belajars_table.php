@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('kelas_id');
             $table->string('metode_ajar');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }

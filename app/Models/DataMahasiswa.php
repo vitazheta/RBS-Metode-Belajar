@@ -14,6 +14,8 @@ class DataMahasiswa extends Model
     protected $fillable = [
         'kelas_id',
         'nama_lengkap',
+        'email',
+        'jalur_masuk',
         'profil_sekolah',
         'kesiapan_akademik',
         'kesiapan_ekonomi',

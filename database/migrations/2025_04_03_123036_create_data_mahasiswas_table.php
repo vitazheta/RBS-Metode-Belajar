@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('kelas_id');
             $table->string('nama_lengkap');
+            $table->string('email');
+            $table->string('jalur_masuk');
             $table->string('profil_sekolah');
             $table->string('kesiapan_akademik');
             $table->string('kesiapan_ekonomi');

@@ -14,6 +14,6 @@ class MetodeBelajar extends Model
     protected $fillable = [
         'kelas_id',
         'metode_ajar',
-
+        'deskripsi',
     ];
 }
