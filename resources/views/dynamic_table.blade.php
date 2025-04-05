@@ -76,6 +76,8 @@
             @endif
         </tbody>
     </table>
+    <button type="submit" class="btn btn-sm btn-danger">Save</button>
+
 </div>
 
 <script>
