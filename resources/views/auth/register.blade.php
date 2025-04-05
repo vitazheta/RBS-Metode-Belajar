@@ -10,7 +10,7 @@
     width: 800px; 
     border: none; /* Menghilangkan border */
     border-radius: 40px; 
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0px 10px 40px 10px #84A7CF inset; /* Shadow biru tebal */">
         <div class="row g-0">
             <!-- Bagian Info dan Sign In -->
