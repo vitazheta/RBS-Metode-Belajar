@@ -1,17 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5" style="padding-top: 80px;">
-    <h2 class="mb-4">Data Kelas</h2>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        padding-top: 80px; /* Sesuaikan dengan tinggi navbar */
+        background-color: #EBEDF4;
+    }
+</style>
+<div class="container mt-5">
+    <h2 class="mb-4">Data Kelas
+    <span class="d-block mt-1" style="height: 4px; width: 18%; background-color: #84A7CF;"></span>
+    </h2>
     <div id="kelasContainer">
     <div class="kelas-item mb-3 d-flex justify-content-between">
         <div class="w-50 me-3"> <!-- me-3 memberi margin kanan -->
             <label>Nama Kelas:</label>
-            <input type="text" name="nama_kelas[]" class="form-control mb-2" value="{{ old('nama_kelas.0', session('nama_kelas.0')) }}">
+            <input type="text" name="nama_kelas[]" class="form-control border-0 mb-2" value="{{ old('nama_kelas.0', session('nama_kelas.0')) }}">
         </div>
         <div class="w-50">
             <label>Kode Mata Kuliah:</label>
-            <input type="text" name="kode_mata_kuliah[]" class="form-control mb-2">
+            <input type="text" name="kode_mata_kuliah[]" class="form-control border-0 mb-2">
         </div>
     </div>
 </div>
@@ -24,14 +34,15 @@
         <button type="submit" class="btn btn-sm btn-success">Import CSV</button>
     </form>
 
+<div style="overflow: hidden; border-radius: 10px;">    
     <table class="table table-bordered" id="dynamicTable">
-        <thead class="table-dark">
+        <thead>
             <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Jalur Masuk</th>
-                <th>Aksi</th>
+                <th style="background-color: #0E1F4D; color: white;">No</th>
+                <th style="background-color: #0E1F4D; color: white;">Nama</th>
+                <th style="background-color: #0E1F4D; color: white;">Email</th>
+                <th style="background-color: #0E1F4D; color: white;">Jalur Masuk</th>
+                <th style="background-color: #0E1F4D; color: white;">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -67,7 +78,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">
-                             <i class="fas fa-trash"></i> Hapus
+                                <i class="fas fa-trash"></i> Hapus
                             </button>
                         </td>
 
@@ -76,7 +87,7 @@
             @endif
         </tbody>
     </table>
-    <button type="submit" class="btn btn-sm btn-danger">Save</button>
+    <button type="submit" class="btn text-white btn-sm" style="background-color: #0E1F4D;">Save</button>
 
 </div>
 
