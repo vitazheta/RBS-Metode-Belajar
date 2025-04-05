@@ -2,18 +2,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
 <!-- Banner Section -->
-<section class="banner d-flex align-items-center py-5">
+<section id="banner" class="banner d-flex align-items-center py-5">
     <div class="container">
         <div class="row align-items-center">
             <!-- Teks Animasi -->
             <div class="col-lg-6 text-center text-lg-start">
+                <img src="{{ asset('images/textlogo.png') }}" alt="Gambar Baru" class="img-fluid text-logo">
                 <h1 id="animatedText" class="fw-bold"></h1>
                 <p class="text-muted">Sistem kami membantu mahasiswa menemukan gaya belajar terbaik berdasarkan analisis data.</p>
                 <a href="#" class="btn btn-primary mt-3">Pelajari Lebih Lanjut</a>
             </div>
             <!-- Gambar Produk -->
             <div class="col-lg-6 text-center">
-            <img src="{{ asset('images/img-banner.jpg') }}" alt="Produk Web" class="img-fluid rounded shadow img-banner">
+            <img src="{{ asset('images/logo-banner.png') }}" alt="Produk Web" class="img-fluid rounded shadow img-banner">
             </div>
         </div>
     </div>
@@ -24,43 +25,54 @@
     .img-banner {
     max-width: 80%; /* Ubah ukuran sesuai kebutuhan, misal 80% dari parent */
     height: auto; /* Menjaga proporsi gambar */
+    box-shadow: none !important; /* Menghilangkan shadow */
     }
+
+    .text-logo {
+    width: 150px; /* Sesuaikan ukuran lebar */
+    height: auto; /* Biarkan tinggi menyesuaikan proporsi */
+    box-shadow: none !important; /* Menghilangkan shadow */
+    }
+
+
 
     /* Warna sesuai color palette */
     :root {
-        --primary-color: #1D5B3A; /* Hijau tua */
-        --secondary-color: #F8F9FA; /* Abu-abu terang */
-        --accent-color: #FF8C42; /* Orange */
-        --text-color: #ffffff; /* Putih */
-        --dark-text-color: #333333; /* Abu gelap */
+        --primary-color: #0E1F4D; /* Navy */
+        --secondary-color: #84A7CF; /* Light Blue */
+        --accent-color: #F37AB0; /* Pink */
+        --secondary-accent-color: #E6CAD9; /* Light Pink */
+        --text-color: #ffffff; /* White */
+        --dark-text-color: #000000; /* Black */
     }
 
     .banner {
-        background: var(--secondary-color);
-        min-height: 60vh;
+        background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color)); 
+        min-height: 100vh;
     }
 
     /* Gaya untuk teks animasi */
     #animatedText {
         font-family: 'Montserrat', sans-serif;
-        font-size: 42px;
+        font-size: 64px;
         font-weight: bold;
-        color: var(--primary-color); /* Hijau tua */
+        color: var(--text-color); /* Navy */
     }
 
     .text-muted {
-        color: var(--dark-text-color) !important;
+        color: var(--text-color) !important;
     }
 
     .btn-primary {
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
         color: var(--text-color);
     }
 
     .btn-primary:hover {
-        background-color: var(--accent-color);
-        border-color: var(--accent-color);
+        background-color: var(--secondary-accent-color);
+        border-color: var(--secondary-accent-color);
+        color: var(--primary-color);
     }
 </style>
 

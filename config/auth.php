@@ -58,18 +58,16 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Dosen::class, // Pastikan model Dosen digunakan di sini
     ],
+],
+
+
+
+
 
     /*
     |--------------------------------------------------------------------------
