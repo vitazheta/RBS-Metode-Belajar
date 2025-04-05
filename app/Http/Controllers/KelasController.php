@@ -11,12 +11,12 @@ class KelasController extends Controller
     {
         $request->validate([
             'nama_kelas' => 'required|string|max:255',
-            'kode_matkul' => 'required|string|max:20|unique:kelas,kode_matkul',
+            'kode_mata_kuliah' => 'required|string|max:20|unique:kelas,kode_mata_kuliah',
         ]);
 
         Kelas::create([
             'nama_kelas' => $request->nama_kelas,
-            'kode_matkul' => $request->kode_matkul,
+            'kode_mata_kuliah' => $request->kode_mata_kuliah,
         ]);
 
         return redirect()->back()->with('success', 'Kelas berhasil ditambahkan!');
