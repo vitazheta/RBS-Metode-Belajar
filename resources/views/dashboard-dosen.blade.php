@@ -31,7 +31,7 @@
     <div class="row">
         <!-- Kotak Jumlah Kelas -->
         <div class="col-md-4">
-            <div class="card text-white mb-3 position-relative" style="background-color: #0E1F4D;">
+            <div class="card text-white mb-3 position-relative" style="background-color: #E6CAD9;">
                 <div class="card-body">
                     <h5 class="card-title">Jumlah Kelas</h5>
                     <p class="card-text display-4">{{ $jumlah_kelas }}</p>
@@ -109,9 +109,9 @@
                 datasets: [{
                     data: [{{ $k->persen_visual }}, {{ $k->persen_auditori }}, {{ $k->persen_kinestetik }}],
                     backgroundColor: [
-    "#3498db", // Biru untuk Visual
-    "#f1c40f", // Kuning untuk Auditori
-    "#e74c3c"  // Merah untuk Kinestetik
+    "#1E2E45", // Biru tua untuk Visual
+    "#748DAC", // Biru muda untuk Auditori
+    "#E0E1DC"  // Cream untuk Kinestetik
 ]
 ,
                     hoverOffset: 10 // Efek animasi saat hover

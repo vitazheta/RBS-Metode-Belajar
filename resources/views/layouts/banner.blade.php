@@ -2,19 +2,39 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
 <!-- Banner Section -->
-<section id="banner" class="banner d-flex align-items-center py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Teks Animasi -->
-            <div class="col-lg-6 text-center text-lg-start">
-                <img src="{{ asset('images/textlogo.png') }}" alt="Gambar Baru" class="img-fluid text-logo">
-                <h1 id="animatedText" class="fw-bold"></h1>
-                <p class="text-muted">Sistem kami membantu mahasiswa menemukan gaya belajar terbaik berdasarkan analisis data.</p>
-                <a href="#" class="btn btn-primary mt-3">Pelajari Lebih Lanjut</a>
+<section id="banner" class="position-relative">
+    <!-- Carousel Background -->
+    <div id="backgroundCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel1.png') }}');"></div>
             </div>
-            <!-- Gambar Produk -->
-            <div class="col-lg-6 text-center">
-            <img src="{{ asset('images/logo-banner.png') }}" alt="Produk Web" class="img-fluid rounded shadow img-banner">
+            <div class="carousel-item">
+                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel2.png') }}');"></div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel3.png') }}');"></div>
+            </div>
+                <div class="carousel-item">
+            <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel4.png') }}');"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Overlay konten di atas carousel -->
+    <div class="carousel-overlay d-flex align-items-center py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Teks Animasi -->
+                <div class="col-lg-6 text-center text-lg-start">
+                    <img src="{{ asset('images/textlogo.png') }}" alt="Gambar Baru" class="img-fluid text-logo">
+                    <h1 id="animatedText" class="fw-bold"></h1>
+                    <p class="text-muted">Sistem kami membantu mahasiswa menemukan gaya belajar terbaik berdasarkan analisis data.</p>
+                    <a href="#" class="btn btn-primary mt-3">Pelajari Lebih Lanjut</a>
+                </div>
+                <!-- Gambar Produk -->
+                <div class="col-lg-6 text-center">
+                <img src="{{ asset('images/logo-banner.png') }}" alt="Produk Web" class="img-fluid rounded shadow img-banner">
+                </div>
             </div>
         </div>
     </div>
@@ -34,6 +54,31 @@
     box-shadow: none !important; /* Menghilangkan shadow */
     }
 
+    /* Image Carousel */
+    .carousel-bg {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    }
+
+    #backgroundCarousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    }
+
+    .carousel-overlay {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    background: rgba(14, 31, 77, 0.7); /* semi-transparent navy overlay */
+    }
 
 
     /* Warna sesuai color palette */
@@ -70,8 +115,8 @@
     }
 
     .btn-primary:hover {
-        background-color: var(--secondary-accent-color);
-        border-color: var(--secondary-accent-color);
+        background-color: var(--text-color);
+        border-color: var(--text-color);
         color: var(--primary-color);
     }
 </style>
