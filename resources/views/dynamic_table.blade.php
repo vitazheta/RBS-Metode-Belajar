@@ -116,12 +116,6 @@
 
     <!-- Output Data -->
     <div id="outputData" class="mt-4"></div> 
-    
-    <!-- Tombol Generate Metode -->
-    <form action="{{ route('generate.metode') }}" method="POST" class="mt-3">
-        @csrf
-        <button type="submit" class="btn btn-sm btn-primary">Generate Metode Belajar</button>
-    </form>
 </div>
 
 <script>

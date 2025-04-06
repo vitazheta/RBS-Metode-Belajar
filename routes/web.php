@@ -7,7 +7,6 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DynamicTableController;
 use App\Http\Controllers\KelasController;
-use App\Http\Controllers\MetodeController;
 
 /*
 |--------------------------------------------------------------------------|
@@ -46,11 +45,4 @@ Route::middleware(['auth'])->group(function () {
 //use App\Http\Controllers\KelasController;
 Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelas.store');
 
-//Route untuk controller generate
-Route::post('/generate-metode', [MetodeController::class, 'generate'])->name('generate.metode');
-Route::get('/data-kelas', [MetodeController::class, 'showDataKelas'])->name('data.kelas');
-
-//Route untuk proses generate dan tampilkan data kelas
-Route::post('/generate-metode', [App\Http\Controllers\KelasController::class, 'generateMetode'])->name('generate.metode');
-Route::get('/data-kelas', [App\Http\Controllers\KelasController::class, 'dataKelas'])->name('data.kelas');
 
