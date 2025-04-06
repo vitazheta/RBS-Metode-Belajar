@@ -1,16 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container" style="padding-top: 70px;">
-    <h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
+<h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
         Data Kelas
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
     </h2>
+</div>
 
     <!-- Form Upload CSV -->
-    <form action="{{ route('import.process') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('import.process') }}" method="POST" enctype="multipart/form-data" >
         @csrf
+
         <div class="mb-3 d-flex">
             <div id="kelasContainer" class="d-flex w-100">
                 <div class="w-50 me-3"> <!-- me-3 memberi margin kanan -->
@@ -36,7 +37,7 @@
     </form>
 
     <table class="table table-bordered" id="dynamicTable">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>No</th>
                 <th>Nama</th>
@@ -87,7 +88,7 @@
             @endif
         </tbody>
     </table>
-    <button type="submit" class="btn text-white btn-sm" style="background-color: #0E1F4D;">Save</button>
+    <button type="submit" class="btn btn-sm btn-danger">Save</button>
 
 </div>
 
