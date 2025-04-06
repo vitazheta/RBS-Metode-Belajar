@@ -13,10 +13,12 @@
         background-color: #EBEDF4;
     }
 </style>
-<div class="container mt-5">
-    <h2 class="mb-4">Data Kelas
-    <span class="d-block mt-1" style="height: 4px; width: 18%; background-color: #84A7CF;"></span>
-    </h2>
+
+<div class="container" style="padding-top: 70px;">
+        <h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
+            Data Kelas
+            <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
+        </h2>
 </div>
 
     <!-- Form Upload CSV -->
@@ -46,8 +48,7 @@
         
     </div>
     </form>
-
-<div style="overflow: hidden; border-radius: 10px;">    
+ 
 <div style="overflow: hidden; border-radius: 10px;">    
     <table class="table table-bordered" id="dynamicTable">
         <thead>
@@ -101,9 +102,10 @@
             @endif
         </tbody>
     </table>
-    <button type="submit" class="btn text-white btn-sm" style="background-color: #0E1F4D;">Save</button>
-
+    <button type="button" id="saveButton" class="btn btn-danger">Save</button>
 </div>
+
+<div id="outputData" class="mt-4"></div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
