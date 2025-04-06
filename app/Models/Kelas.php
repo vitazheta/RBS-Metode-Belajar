@@ -10,7 +10,7 @@ class Kelas extends Model
 {
     use HasFactory;
 
-    protected $table = 'Kelas'; // Nama tabel di database
+    protected $table = 'kelas'; // Nama tabel di database
 
     protected $fillable = [
         'dosen_id',

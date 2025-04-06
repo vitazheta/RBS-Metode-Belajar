@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DynamicTableController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\RekomendasiMetodeController;
 
 /*
 |--------------------------------------------------------------------------|
@@ -48,4 +49,7 @@ Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelas.stor
 //Route daftar kelas
 Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
 Route::get('/kelas/{id}', [KelasController::class, 'show'])->name('kelas.show');
+
+//Route rekomendasi metode belajar
+Route::get('/rekomendasi', [RekomendasiMetodeController::class, 'index'])->name('rekomendasi.metode');
 

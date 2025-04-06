@@ -293,8 +293,8 @@
                         </tbody>
                     </table>
                     <div class="mt-3">
-                    <button id="generateButton" class="btn btn-success">Generate Rekomendasi Belajar</button>
-                </div>
+                        <button class="btn btn-success" id="generateButton">Generate</button>
+                    </div>
 
                 <!-- Output Data -->
                 <footer class="bg-light text-center text-lg-start mt-5">
