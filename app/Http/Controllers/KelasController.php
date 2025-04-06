@@ -43,8 +43,8 @@ class KelasController extends Controller
                 'kelas_id' => $kelas->id,
             ]);
         }
-
-        return redirect()->route('kelas.index')->with('success', 'Kelas dan data siswa berhasil ditambahkan.');
+        session(['kelas_id' => $kelas->id]);
+        return redirect()->route('dynamic.table')->with('success', 'Kelas dan data siswa berhasil ditambahkan.')->with('kelas_id', $kelas->id);
     }
 
     public function edit($id)
@@ -76,7 +76,7 @@ class KelasController extends Controller
 
     public function show($id)
     {
-        $kelas = Kelas::with('siswa')->findOrFail($id);
+        $kelas = Kelas::with('mahasiswa')->findOrFail($id);
         return view('kelas.show', compact('kelas'));
     }
 

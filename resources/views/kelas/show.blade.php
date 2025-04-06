@@ -1,7 +1,11 @@
-<h2>{{ $kelas->nama_kelas }}</h2>
-<p>Kode Mata Kuliah: {{ $kelas->kode_mata_kuliah }}</p>
+@extends('layouts.app')
 
-<table border="1" cellpadding="5">
+@section('content')
+<div class="container">
+    <h2>{{ $kelas->nama_kelas }}</h2>
+    <p>Kode Mata Kuliah: {{ $kelas->kode_matkul }}</p>
+
+    <table border="1" cellpadding="5">
     <thead>
         <tr>
             <th>No</th>
@@ -15,10 +19,11 @@
             <th>Profil Ortu</th>
             <th>Pola Belajar</th>
             <th>Adaptasi</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($kelas->siswa as $index => $siswa)
+        @foreach ($kelas->mahasiswa as $index => $mahasiswa)
         <tr>
             <td>{{ $index + 1 }}</td>
             <td>{{ $siswa->nama }}</td>
@@ -34,4 +39,6 @@
         </tr>
         @endforeach
     </tbody>
-</table>
+    </table>
+</div>
+@endsection

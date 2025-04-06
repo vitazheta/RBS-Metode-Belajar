@@ -24,10 +24,10 @@ class Kelas extends Model
       //  return $this->belongsTo(Dosen::class);
     //}
 
-    //public function mahasiswa()
-    //{
-      //  return $this->hasMany(DataMahasiswa::class);
-    //}
+    public function mahasiswa()
+    {
+        return $this->hasMany(DataMahasiswa::class, 'kelas_id');
+    }
 
     //public function metodeBelajar()
     //{

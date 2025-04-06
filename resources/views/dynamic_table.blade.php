@@ -114,6 +114,13 @@
     <!-- Tombol Save -->
     <button type="button" id="saveButton" class="btn btn-primary">Save</button>
 
+    <!-- Tombol Generate Metode Belajar -->
+    @if(session('kelas_id'))
+    <a href="{{ route('kelas.show', ['id' => session('kelas_id')]) }}" class="btn btn-success mt-3">
+        Generate Metode Belajar
+    </a>
+    @endif
+
     <!-- Output Data -->
     <div id="outputData" class="mt-4"></div> 
 </div>
