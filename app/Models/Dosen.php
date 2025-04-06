@@ -12,7 +12,11 @@ class Dosen extends Authenticatable
 
     protected $table = 'dosen'; // Nama tabel di database
 
-    protected $fillable = ['nama', 'email', 'username', 'password'];
+    protected $fillable = [
+        'nama', 
+        'email', 
+        'username', 
+        'password'];
 
     protected $hidden = [
         'password',
@@ -20,8 +24,19 @@ class Dosen extends Authenticatable
     ];
 
     public function getAuthIdentifierName()
-{
-    return 'username';
-}
+    {
+        return 'username';
+    }
+    
+    // Relasi: Dosen punya banyak kelas
+    //public function kelas()
+    //{
+      //  return $this->hasMany(Kelas::class);
+    //}
 
+    // Relasi: Dosen punya banyak metode ajar (jika nanti butuh, opsional)
+    //public function metodeBelajar()
+    //{
+      //  return $this->hasMany(MetodeBelajar::class);
+    //}
 }

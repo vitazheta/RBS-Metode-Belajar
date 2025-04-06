@@ -18,6 +18,17 @@
     .btn-nav.active {
         background-color: #0E1F4D !important;
     }
+    
+    /* button login & logout */
+    .btn-log {
+        background-color: #F37AB0;
+    }
+
+    .btn-log:hover {
+        background-color: transparent !important;
+        color: #F37AB0 !important;
+        border: 2px solid #F37AB0;
+    }
 
     /* Navbar Styling */
     .navbar-custom {
@@ -36,7 +47,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid">
         <!-- Logo -->
-        <a class="navbar-brand" href="#banner">
+        <a class="navbar-brand" href="{{ url('/#banner') }}">
             <img src="{{ asset('images/logontext.png') }}" alt="Logo" style="height: 40px;">
         </a>
 
@@ -61,7 +72,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn-nav {{ request()->is('login') ? 'active' : '' }}" href="{{ route('login') }}">
+                        <a class="btn-nav btn-log {{ request()->is('login') ? 'active' : '' }}" href="{{ route('login') }}">
                             <i class="bi bi-box-arrow-in-right"></i> LOGIN
                         </a>
                     </li>
@@ -81,7 +92,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn-nav" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a class="btn-nav btn-log" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="bi bi-box-arrow-right"></i> LOGOUT
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

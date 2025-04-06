@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('Metode_Belajar', function (Blueprint $table) {
             $table->id();
-            $table->integer('kelas_id');
+            $table->unsignedBigInteger('kelas_id');
             $table->string('metode_ajar');
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
+
+            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
         });
     }
 
