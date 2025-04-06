@@ -45,4 +45,7 @@ Route::middleware(['auth'])->group(function () {
 //use App\Http\Controllers\KelasController;
 Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelas.store');
 
+//Route daftar kelas
+Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+Route::get('/kelas/{id}', [KelasController::class, 'show'])->name('kelas.show');
 
