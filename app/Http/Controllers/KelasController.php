@@ -21,4 +21,26 @@ class KelasController extends Controller
 
         return redirect()->back()->with('success', 'Kelas berhasil ditambahkan!');
     }
+
+    public function edit($id)
+    {
+        $kelas = Kelas::with('siswa')->findOrFail($id);
+        return view('kelas.edit', compact('kelas'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $kelas = Kelas::findOrFail($id);
+
+        foreach ($kelas->siswa as $index => $siswa) {
+            $siswa->update([
+                'nama' => $request->nama[$index],
+                'email' => $request->email[$index],
+            'jalur_masuk' => $request->jalur_masuk[$index],
+            ]);
+        }
+
+        return redirect()->route('data.kelas')->with('success', 'Data kelas berhasil diperbarui.');
+    }
+
 }

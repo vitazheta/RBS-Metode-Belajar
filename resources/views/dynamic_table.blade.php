@@ -105,13 +105,22 @@
                         <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">
                             <i class="fas fa-trash"></i> Hapus
                         </button>
-                         </td>
+                        </td>
                     </tr>
                 @endfor
             @endif
         </tbody>
     </table>
+    <!-- Tombol Save -->
     <button type="button" id="saveButton" class="btn btn-primary">Save</button>
+
+    <!-- Tombol Generate Metode -->
+<form action="{{ route('generate.metode') }}" method="POST" class="d-inline ms-2">
+    @csrf
+    <input type="hidden" name="nama_kelas" value="{{ old('nama_kelas.0', session('nama_kelas.0')) }}">
+    <input type="hidden" name="kode_mata_kuliah" value="{{ old('kode_mata_kuliah.0') }}">
+    <button type="submit" class="btn btn-sm btn-primary">Generate Metode Belajar</button>
+</form>
     <div id="outputData" class="mt-4"></div>    
 </div>
 
