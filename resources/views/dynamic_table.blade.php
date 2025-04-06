@@ -88,7 +88,7 @@
             @endif
         </tbody>
     </table>
-    <button type="button" id="saveButton" class="btn btn-primary">Save</button>
+    <button type="button" id="saveButton" class="btn btn-danger">Save</button>
     <div id="outputData" class="mt-4"></div>    
 </div>
 
