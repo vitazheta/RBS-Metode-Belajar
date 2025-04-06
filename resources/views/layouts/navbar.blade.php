@@ -92,6 +92,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                    <a class="btn-nav {{ request()->is('dynamic-table') ? 'active' : '' }}" href="{{ route('data.kelas') }}">
+
+                            <i class="bi bi-plus-circle"></i> DATA KELAS
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="btn-nav btn-log" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="bi bi-box-arrow-right"></i> LOGOUT
                         </a>

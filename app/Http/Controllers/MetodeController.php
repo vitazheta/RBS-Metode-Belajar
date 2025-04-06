@@ -1,3 +1,5 @@
+<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -19,18 +21,20 @@ class MetodeController extends Controller
             ]
         ];
 
-        foreach ($dataSiswa as $row) {
-            $metode = $this->tentukanMetode($row);
-            $hasil['siswa'][] = [
-                'nama' => $row[0],
-                'email' => $row[1],
-                'jalur_masuk' => $row[2],
-                'pola' => $row[3],
-                'adaptasi' => $row[4],
-                'endurance' => $row[5],
-                'metode' => $metode
-            ];
-            $hasil['count'][$metode]++;
+        if (is_array($dataSiswa)) {
+            foreach ($dataSiswa as $row) {
+                $metode = $this->tentukanMetode($row);
+                $hasil['siswa'][] = [
+                    'nama' => $row[0],
+                    'email' => $row[1],
+                    'jalur_masuk' => $row[2],
+                    'pola' => $row[3],
+                    'adaptasi' => $row[4],
+                    'endurance' => $row[5],
+                    'metode' => $metode
+                ];
+                $hasil['count'][$metode]++;
+            }
         }
 
         // cari metode dominan
@@ -54,6 +58,6 @@ class MetodeController extends Controller
     public function showDataKelas()
     {
         $data = session('kelas_tergenerate');
-        return view('data-kelas', compact('data'));
+        return view('data_kelas', compact('data'));
     }
 }
