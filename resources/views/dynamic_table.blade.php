@@ -43,6 +43,13 @@
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Jalur Masuk</th>
+                <th>Akademik</th>
+                <th>Ekonomi</th>
+                <th>Endurance</th>
+                <th>Profil Sekolah</th>
+                <th>Profil Ortu</th>
+                <th>Pola Belajar</th>
+                <th>Adaptasi</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -60,6 +67,14 @@
                     <option value="Mandiri UPI" {{ $row[2] == 'Mandiri UPI' ? 'selected' : '' }}>Mandiri UPI</option>
                 </select>
             </td>
+            <td><input type="text" name="kesiapan_akademik[]" class="form-control" value="{{ $row[3] }}" oninput="checkAndAddRow()"></td>
+            <td><input type="text" name="kesiapan_ekonomi[]" class="form-control" value="{{ $row[4] }}" oninput="checkAndAddRow()"></td>
+            <td><input type="text" name="endurance_citacita[]" class="form-control" value="{{ $row[5] }}" oninput="checkAndAddRow()"></td>
+            <td><input type="text" name="profil_sekolah[]" class="form-control" value="{{ $row[6] }}" oninput="checkAndAddRow()"></td>
+            <td><input type="text" name="profil_ortu[]" class="form-control" value="{{ $row[7] }}" oninput="checkAndAddRow()"></td>
+            <td><input type="text" name="pola_belajar[]" class="form-control" value="{{ $row[8] }}" oninput="checkAndAddRow()"></td>
+            <td><input type="text" name="adaptasi[]" class="form-control" value="{{ $row[9] }}" oninput="checkAndAddRow()"></td>
+
             <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
         </tr>
         @endforeach
@@ -77,21 +92,27 @@
                                 <option value="Mandiri UPI">Mandiri UPI</option>
                             </select>
                         </td>
-                        <td>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">
-                             <i class="fas fa-trash"></i> Hapus
-                            </button>
-                        </td>
 
+                        <td><input type="text" name="kesiapan_akademik[]" class="form-control" oninput="checkLastRow(this)"></td>
+                        <td><input type="text" name="kesiapan_ekonomi[]" class="form-control" oninput="checkLastRow(this)"></td>
+                        <td><input type="text" name="endurance_citacita[]" class="form-control" oninput="checkLastRow(this)"></td>
+                        <td><input type="text" name="profil_sekolah[]" class="form-control" oninput="checkLastRow(this)"></td>
+                        <td><input type="text" name="profil_ortu[]" class="form-control" oninput="checkLastRow(this)"></td>
+                        <td><input type="text" name="pola_belajar[]" class="form-control" oninput="checkLastRow(this)"></td>
+                        <td><input type="text" name="adaptasi[]" class="form-control" oninput="checkLastRow(this)"></td>
+                        
+                        <td>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                         </td>
                     </tr>
                 @endfor
             @endif
         </tbody>
     </table>
-    <button type="button" id="saveButton" class="btn btn-danger">Save</button>
+    <button type="button" id="saveButton" class="btn btn-primary">Save</button>
     <div id="outputData" class="mt-4"></div>    
-</div>
-
 </div>
 
 <script>
@@ -163,6 +184,15 @@
                     <option value="Mandiri UPI">Mandiri UPI</option>
                 </select>
             </td>
+
+            <td><input type="text" name="kesiapan_akademik[]" class="form-control" oninput="checkLastRow(this)"></td>
+            <td><input type="text" name="kesiapan_ekonomi[]" class="form-control" oninput="checkLastRow(this)"></td>
+            <td><input type="text" name="endurance_citacita[]" class="form-control" oninput="checkLastRow(this)"></td>
+            <td><input type="text" name="profil_sekolah[]" class="form-control" oninput="checkLastRow(this)"></td>
+            <td><input type="text" name="profil_ortu[]" class="form-control" oninput="checkLastRow(this)"></td>
+            <td><input type="text" name="pola_belajar[]" class="form-control" oninput="checkLastRow(this)"></td>
+            <td><input type="text" name="adaptasi[]" class="form-control" oninput="checkLastRow(this)"></td>
+
             <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
         `;
         table.appendChild(newRow);
@@ -205,6 +235,13 @@
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Jalur Masuk</th>
+                                <th>Akademik</th>
+                                <th>Ekonomi</th>
+                                <th>Endurance</th>
+                                <th>Profil Sekolah</th>
+                                <th>Profil Ortu</th>
+                                <th>Pola Belajar</th>
+                                <th>Adaptasi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -215,6 +252,13 @@
                     const nama = row.querySelector('input[name="nama[]"]').value;
                     const email = row.querySelector('input[name="email[]"]').value;
                     const jalur = row.querySelector('select[name="jalur_masuk[]"]').value;
+                    const akademik = row.querySelector('input[name="kesiapan_akademik[]"]').value;
+                    const ekonomi = row.querySelector('input[name="kesiapan_ekonomi[]"]').value;
+                    const endurance = row.querySelector('input[name="endurance_citacita[]"]').value;
+                    const profilsekolah = row.querySelector('input[name="profil_sekolah[]"]').value;
+                    const profilortu = row.querySelector('input[name="profil_ortu[]"]').value;
+                    const polabelajar = row.querySelector('input[name="pola_belajar[]"]').value;
+                    const adaptasi = row.querySelector('input[name="adaptasi[]"]').value;
 
                     if (nama.trim() !== '' && email.trim() !== '') {
                         resultHTML += `
@@ -223,6 +267,13 @@
                                 <td>${nama}</td>
                                 <td>${email}</td>
                                 <td>${jalur}</td>
+                                <td>${akademik}</td>
+                                <td>${ekonomi}</td>
+                                <td>${endurance}</td>
+                                <td>${profilsekolah}</td>
+                                <td>${profilortu}</td>
+                                <td>${polabelajar}</td>
+                                <td>${profilsekolah}</td>
                             </tr>
                         `;
                     }
