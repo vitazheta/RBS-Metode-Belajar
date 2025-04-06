@@ -6,15 +6,25 @@
         Data Kelas
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
 
-<style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        padding-top: 80px; /* Sesuaikan dengan tinggi navbar */
-        background-color: #EBEDF4;
-    }
-</style>
-
 <div class="container" style="padding-top: 70px;">
+    <h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
+        Data Kelas
+        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
+    </h2>
+
+    <!-- Form Upload CSV -->
+    <form action="{{ route('import.process') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="mb-3 d-flex">
+            <div id="kelasContainer" class="d-flex w-100">
+                <div class="w-50 me-3"> <!-- me-3 memberi margin kanan -->
+                    <label>Nama Kelas:</label>
+                    <input type="text" name="nama_kelas[]" class="form-control mb-2" value="{{ old('nama_kelas.0', session('nama_kelas.0')) }}">
+                </div>
+                <div class="w-50">
+                    <label>Kode Mata Kuliah:</label>
+                    <input type="text" name="kode_mata_kuliah[]" class="form-control mb-2" value="{{ old('kode_mata_kuliah.0', session('kode_mata_kuliah.0')) }}">
+                </div>
         <h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
             Data Kelas
             <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
@@ -48,16 +58,21 @@
         
     </div>
     </form>
- 
+
 <div style="overflow: hidden; border-radius: 10px;">    
     <table class="table table-bordered" id="dynamicTable">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th style="background-color: #0E1F4D; color: white;" style="background-color: #0E1F4D; color: white;">No</th>
                 <th style="background-color: #0E1F4D; color: white;" style="background-color: #0E1F4D; color: white;">Nama</th>
                 <th style="background-color: #0E1F4D; color: white;" style="background-color: #0E1F4D; color: white;">Email</th>
                 <th style="background-color: #0E1F4D; color: white;" style="background-color: #0E1F4D; color: white;">Jalur Masuk</th>
                 <th style="background-color: #0E1F4D; color: white;" style="background-color: #0E1F4D; color: white;">Aksi</th>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Jalur Masuk</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -93,7 +108,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">
-                                   <i class="fas fa-trash"></i> Hapus
+                                <i class="fas fa-trash"></i> Hapus
                             </button>
                         </td>
 
@@ -103,8 +118,7 @@
         </tbody>
     </table>
     <button type="button" id="saveButton" class="btn btn-danger">Save</button>
-</div>
-
+    </div>
 <div id="outputData" class="mt-4"></div>
 
 <script>
