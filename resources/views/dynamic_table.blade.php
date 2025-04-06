@@ -235,6 +235,13 @@
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Jalur Masuk</th>
+                                <th>Akademik</th>
+                                <th>Ekonomi</th>
+                                <th>Endurance</th>
+                                <th>Profil Sekolah</th>
+                                <th>Profil Ortu</th>
+                                <th>Pola Belajar</th>
+                                <th>Adaptasi</th>
                             </tr>
                         </thead>
                         <tbody>
