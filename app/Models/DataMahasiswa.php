@@ -22,8 +22,8 @@ class DataMahasiswa extends Model
         'dukungan_ortu',
         'endurance_cita-cita',
     ];
-    public function kelas()
-    {
-        return $this->belongsTo(Kelas::class);
-    }
+   // public function kelas()
+    //{
+      //  return $this->belongsTo(Kelas::class);
+    //}
 }

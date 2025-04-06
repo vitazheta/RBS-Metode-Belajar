@@ -19,18 +19,18 @@ class Kelas extends Model
         'kolom1',
         'kolom2',
     ];
-    public function dosen()
-    {
-        return $this->belongsTo(Dosen::class);
-    }
+  // public function dosen()
+    //{
+      //  return $this->belongsTo(Dosen::class);
+    //}
 
-    public function mahasiswa()
-    {
-        return $this->hasMany(DataMahasiswa::class);
-    }
+    //public function mahasiswa()
+    //{
+      //  return $this->hasMany(DataMahasiswa::class);
+    //}
 
-    public function metodeBelajar()
-    {
-        return $this->hasOne(MetodeBelajar::class);
-    }
+    //public function metodeBelajar()
+    //{
+      //  return $this->hasOne(MetodeBelajar::class);
+    //}
 }
