@@ -46,12 +46,6 @@ Route::middleware(['auth'])->group(function () {
 //use App\Http\Controllers\KelasController;
 Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelas.store');
 
-//Route untuk generate
-Route::post('/generate-metode', [App\Http\Controllers\MetodeController::class, 'generate'])->name('generate.metode');
-Route::get('/data-kelas', [App\Http\Controllers\MetodeController::class, 'index'])->name('data.kelas');
-Route::get('/data-kelas/{id}/edit', [App\Http\Controllers\MetodeController::class, 'edit'])->name('data.kelas.edit');
-Route::put('/data-kelas/{id}', [App\Http\Controllers\MetodeController::class, 'update'])->name('data.kelas.update');
-
-//Route buat edit kelas
-Route::get('/kelas/{id}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
-Route::put('/kelas/{id}', [KelasController::class, 'update'])->name('kelas.update');
+//Route untuk controller generate
+Route::post('/generate-metode', [MetodeController::class, 'generate'])->name('generate.metode');
+Route::get('/data-kelas', [MetodeController::class, 'showDataKelas'])->name('data.kelas');
