@@ -188,7 +188,7 @@
             <td><input type="text" name="kesiapan_akademik[]" class="form-control" oninput="checkLastRow(this)"></td>
             <td><input type="text" name="kesiapan_ekonomi[]" class="form-control" oninput="checkLastRow(this)"></td>
             <td><input type="text" name="endurance_citacita[]" class="form-control" oninput="checkLastRow(this)"></td>
-            <td><input type="text" name="profil_sekolah]" class="form-control" oninput="checkLastRow(this)"></td>
+            <td><input type="text" name="profil_sekolah[]" class="form-control" oninput="checkLastRow(this)"></td>
             <td><input type="text" name="profil_ortu[]" class="form-control" oninput="checkLastRow(this)"></td>
             <td><input type="text" name="pola_belajar[]" class="form-control" oninput="checkLastRow(this)"></td>
             <td><input type="text" name="adaptasi[]" class="form-control" oninput="checkLastRow(this)"></td>
@@ -252,6 +252,13 @@
                     const nama = row.querySelector('input[name="nama[]"]').value;
                     const email = row.querySelector('input[name="email[]"]').value;
                     const jalur = row.querySelector('select[name="jalur_masuk[]"]').value;
+                    const akademik = row.querySelector('input[name="kesiapan_akademik[]"]').value;
+                    const ekonomi = row.querySelector('input[name="kesiapan_ekonomi[]"]').value;
+                    const endurance = row.querySelector('input[name="endurance_citacita[]"]').value;
+                    const profilsekolah = row.querySelector('input[name="profil_sekolah[]"]').value;
+                    const profilortu = row.querySelector('input[name="profil_ortu[]"]').value;
+                    const polabelajar = row.querySelector('input[name="pola_belajar[]"]').value;
+                    const adaptasi = row.querySelector('input[name="adaptasi[]"]').value;
 
                     if (nama.trim() !== '' && email.trim() !== '') {
                         resultHTML += `
@@ -260,6 +267,13 @@
                                 <td>${nama}</td>
                                 <td>${email}</td>
                                 <td>${jalur}</td>
+                                <td>${akademik}</td>
+                                <td>${ekonomi}</td>
+                                <td>${endurance}</td>
+                                <td>${profilsekolah}</td>
+                                <td>${profilortu}</td>
+                                <td>${polabelajar}</td>
+                                <td>${profilsekolah}</td>
                             </tr>
                         `;
                     }
