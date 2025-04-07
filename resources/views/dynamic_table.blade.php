@@ -36,6 +36,7 @@
     </div>
     </form>
 
+    <form action="{{ route('kelas.store') }}" method="POST" enctype="multipart/form-data">
     <table class="table table-bordered" id="dynamicTable">
         <thead class="table-dark">
             <tr>
@@ -112,8 +113,9 @@
         </tbody>
     </table>
     <!-- Tombol Save -->
+    @csrf
     <button type="button" id="saveButton" class="btn btn-danger">Save</button>
-
+    </form>
     <!-- Tombol Generate Metode Belajar 
     @if(session('kelas_id'))
     <a href="{{ route('kelas.show', ['id' => session('kelas_id')]) }}" class="btn btn-success mt-3">

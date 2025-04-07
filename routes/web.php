@@ -43,13 +43,12 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Route untuk data kelas
-//use App\Http\Controllers\KelasController;
-Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelas.store');
+Route::get('/kelas/store', [KelasController::class, 'store'])->name('kelas.store');
 
 //Route daftar kelas
-Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
-Route::get('/kelas/{id}', [KelasController::class, 'show'])->name('kelas.show');
+//Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+//Route::get('/kelas/{id}', [KelasController::class, 'show'])->name('kelas.show');
 
 //Route rekomendasi metode belajar
-Route::get('/rekomendasi', [RekomendasiMetodeController::class, 'index'])->name('rekomendasi.metode');
+//Route::get('/rekomendasi', [RekomendasiMetodeController::class, 'index'])->name('rekomendasi.metode');
 
