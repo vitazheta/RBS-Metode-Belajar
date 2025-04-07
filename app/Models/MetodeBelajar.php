@@ -16,8 +16,8 @@ class MetodeBelajar extends Model
         'metode_ajar',
         'deskripsi',
     ];
-    //public function kelas()
-    //{
-    //  return $this->belongsTo(Kelas::class);
-    //}
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
 }

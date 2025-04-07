@@ -10,7 +10,7 @@ class Kelas extends Model
 {
     use HasFactory;
 
-    protected $table = 'Kelas'; // Nama tabel di database
+    protected $table = 'kelas'; // Nama tabel di database
 
     protected $fillable = [
         'dosen_id',
@@ -19,18 +19,18 @@ class Kelas extends Model
         'kolom1',
         'kolom2',
     ];
-  // public function dosen()
-    //{
-      //  return $this->belongsTo(Dosen::class);
-    //}
+    public function dosen()
+    {
+        return $this->belongsTo(Dosen::class);
+    }
 
     public function mahasiswa()
     {
         return $this->hasMany(DataMahasiswa::class, 'kelas_id');
     }
 
-    //public function metodeBelajar()
-    //{
-      //  return $this->hasOne(MetodeBelajar::class);
-    //}
+    public function metodeBelajar()
+    {
+        return $this->hasOne(MetodeBelajar::class);
+    }
 }

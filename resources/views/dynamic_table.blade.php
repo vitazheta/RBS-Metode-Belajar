@@ -36,6 +36,7 @@
     </div>
     </form>
 
+    <form action="{{ route('kelas.store') }}" method="POST" enctype="multipart/form-data">
     <table class="table table-bordered" id="dynamicTable">
         <thead class="table-dark">
             <tr>
@@ -112,14 +113,15 @@
         </tbody>
     </table>
     <!-- Tombol Save -->
-    <button type="button" id="saveButton" class="btn btn-primary">Save</button>
-
-    <!-- Tombol Generate Metode Belajar -->
+    @csrf
+    <button type="button" id="saveButton" class="btn btn-danger">Save</button>
+    </form>
+    <!-- Tombol Generate Metode Belajar 
     @if(session('kelas_id'))
     <a href="{{ route('kelas.show', ['id' => session('kelas_id')]) }}" class="btn btn-success mt-3">
         Generate Metode Belajar
     </a>
-    @endif
+    @endif-->
 
     <!-- Output Data -->
     <div id="outputData" class="mt-4"></div> 
@@ -292,12 +294,30 @@
                 resultHTML += `
                         </tbody>
                     </table>
-                `;
+                    <div class="mt-3">
+                        <button class="btn btn-success" id="generateButton">Generate</button>
+                    </div>
 
+                <!-- Output Data -->
+                <footer class="bg-light text-center text-lg-start mt-5">
+                    <div class="text-center p-3" style="background-color: #f8f9fa;">
+                        © {{ date('Y') }} Learning Recommendation System —
+                    <a class="text-primary" href="#">Universitas Pendidikan Indonesia</a>
+                    </div>
+                </footer>
+                `;
                 outputDiv.innerHTML = resultHTML;
+                
             });
         }
     });
 </script>
+
+<!--Tambah Footer
+<footer class="bg-dark text-white text-center text-lg-start mt-5">
+    <div class="text-center p-3" style="background-color: rgba(0,0,0,0.2);">
+        © {{ date('Y') }} Learning Recommendation System — Universitas Pendidikan Indonesia
+    </div>
+</footer>-->
 
 @endsection
