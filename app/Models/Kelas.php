@@ -15,9 +15,9 @@ class Kelas extends Model
     protected $fillable = [
         'dosen_id',
         'nama_kelas',
-        'kode_matkul',
-        'kolom1',
-        'kolom2',
+        'kode_mata_kuliah',
+        // 'kolom1',
+        // 'kolom2',
     ];
     public function dosen()
     {
