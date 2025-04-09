@@ -25,7 +25,7 @@
 <div class="container py-0"> <!-- Ubah dari py-5 ke py-3 -->
 <h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
     Dashboard Dosen
-    <span class="d-block mt-1" style="height: 4px; width: 100%; background-color: #84A7CF;"></span>
+<span class="d-block mt-1" style="height: 4px; width: 100%; background-color: #84A7CF;"></span>
 </h2>
 <p class="text-muted fs-5">Halo, <strong> {{ucwords($dosen->nama)}}!</strong> Berikut daftar kelas yang Anda ampu.</p>
 
@@ -43,14 +43,14 @@
     </div>
 
     <!-- Gambar kecil kanan dalam -->
-    <img src="{{ asset('images/img-dashboard.png') }}" alt="Icon Tambah Kelas" 
+    <img src="{{ asset('images/img-dashboard.png') }}" alt="Icon Tambah Kelas"
         style="position: absolute; right: 50px; bottom: 20px; height: 150px;">
 </div>
 
     <div class="row g-6">
         <!-- Kotak Jumlah Kelas -->
         <div class="col-md-4">
-            <div class="card shadow-sm text-white mb-3 position-relative" 
+            <div class="card shadow-sm text-white mb-3 position-relative"
             style="background-color: #84A7CF; border: none;">
                 <div class="card-body">
                     <h5 class="card-title">Jumlah Kelas</h5>
@@ -62,7 +62,7 @@
 
         <!-- Kotak Total Mahasiswa -->
         <div class="col-md-4">
-            <div class="card shadow-sm text-white mb-3 position-relative" 
+            <div class="card shadow-sm text-white mb-3 position-relative"
             style="background-color: #84A7CF; border: none;">
                 <div class="card-body">
                     <h5 class="card-title">Total Mahasiswa</h5>
@@ -74,7 +74,7 @@
 
         <!-- Kotak Metode Dominan -->
         <div class="col-md-4">
-            <div class="card shadow-sm text-white mb-3 position-relative" 
+            <div class="card shadow-sm text-white mb-3 position-relative"
             style="background-color: #84A7CF; border: none;">
                 <div class="card-body">
                     <h5 class="card-title">Metode Dominan</h5>

@@ -10,31 +10,33 @@ class Dosen extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
-    protected $table = 'dosen'; // Nama tabel di database
+    // Guard untuk autentikasi dosen
+    protected $guard = 'dosen';
 
+    // Nama tabel yang digunakan
+    protected $table = 'dosen';
+
+    // Field yang bisa diisi
     protected $fillable = [
-        'nama', 
-        'email', 
-        'username', 
-        'password'];
+        'nama',
+        'email',
+        'username',
+        'password',
+    ];
 
+    // Field yang disembunyikan
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    public function getAuthIdentifierName()
-    {
-        return 'username';
-    }
-    
     // Relasi: Dosen punya banyak kelas
     public function kelas()
     {
         return $this->hasMany(Kelas::class);
     }
 
-    // Relasi: Dosen punya banyak metode ajar (jika nanti butuh, opsional)
+    // Relasi opsional: Dosen punya banyak metode belajar
     public function metodeBelajar()
     {
         return $this->hasMany(MetodeBelajar::class);

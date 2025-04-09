@@ -14,9 +14,10 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
-    ],
+    'guard' => 'dosen',
+    'passwords' => 'dosens',
+],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -89,13 +90,14 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
+    'dosens' => [
+        'provider' => 'dosens',
+        'table' => 'password_reset_tokens',
+        'expire' => 60,
+        'throttle' => 60,
     ],
+],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -109,5 +111,32 @@ return [
     */
 
     'password_timeout' => 10800,
+
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
+
+    'dosen' => [
+        'driver' => 'session',
+        'provider' => 'dosens',
+    ],
+],
+
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
+    ],
+
+    'dosens' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Dosen::class,
+    ],
+],
+
+
+
 
 ];
