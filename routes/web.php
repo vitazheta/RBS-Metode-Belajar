@@ -50,7 +50,7 @@ Route::middleware(['auth:dosen'])->group(function() {
 });
 
 //Route untuk data kelas
-Route::get('/kelas/store', [KelasController::class, 'store'])->name('kelas.store');
+Route::post('/kelas/store', [KelasController::class, 'generate'])->name('kelas.store');
 
 //Route::post('/kelas/generate', [KelasController::class, 'generate'])->name('kelas.generate');
 
@@ -58,12 +58,18 @@ Route::post('/kelas/generate', [KelasController::class, 'generate'])->name('kela
 
 Route::post('/import-csv', [MahasiswaController::class, 'importCSV'])->name('import.process');
 
+Route::post('/generate-data', [KelasController::class, 'generateData'])->name('kelas.generateData');
 
 use App\Http\Controllers\DataMahasiswaController;
 
 Route::post('/generate', [DataMahasiswaController::class, 'generate']);
 
+Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
 
+Route::post('/simpan-mahasiswa', [DataMahasiswaController::class, 'simpan'])->name('simpan.mahasiswa');
+
+
+Route::post('/import-csv', [DataMahasiswaController::class, 'import'])->name('import.csv');
 
 
 //Route daftar kelas

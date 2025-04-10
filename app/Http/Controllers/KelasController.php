@@ -3,97 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\DataMahasiswa;
 
+
+
 class KelasController extends Controller
 {
-    public function store(Request $request)
-{
-    $request->validate([
-        'nama_kelas' => 'required|string|max:255',
-        'kode_mata_kuliah' => 'required|string|max:20|unique:kelas,kode_mata_kuliah',
-    ]);
-
-    $kelas = Kelas::create([
-
-        'dosen_id' => Auth::user()->id,
-        'nama_kelas' => $request->nama_kelas,
-        'kode_mata_kuliah' => $request->kode_mata_kuliah,
-    ]);
-    session(['kelas_id' => $kelas->id]);
-
-
-    // Jika ada file CSV, proses sebagai file
-    if ($request->hasFile('csv_file')) {
-        $file = $request->file('csv_file');
-        $data = array_map('str_getcsv', file($file));
-        $header = array_map('strtolower', array_map('trim', $data[0]));
-        unset($data[0]);
-
-        foreach ($data as $row) {
-            $siswaData = array_combine($header, $row);
-
-            DataMahasiswa::create([
-                'kelas_id' => $kelas->id,
-                'nama_lengkap' => $row[0],
-                'email' => $row[1],
-                'jalur_masuk' => $row[2],
-                'kesiapan_akademik' => $row[3],
-                'kesiapan_ekonomi' => $row[4],
-                'endurance_cita-cita' => $row[5],
-                'profil_sekolah' => $row[6],
-                'profil_ortu' => $row[7],
-                'pola_belajar' => $row[8],
-                'kemampuan_adaptasi' => $row[9],
-            ]);
-        }
-    } else {
-        // Proses data dari form manual (input[] array)
-        $nama_lengkap = $request->input('nama_lengkap');
-        $asal_sekolah = $request->input('asal_sekolah');
-        $gap_year = $request->input('gap_year');
-        $bimbel = $request->input('bimbel');
-
-        for ($i = 0; $i < count($nama_lengkap); $i++) {
-            DataMahasiswa::create([
-                'kelas_id' => $kelas->id,
-                'nama_lengkap' => $nama_lengkap[$i],
-                'asal_sekolah' => $asal_sekolah[$i],
-                'gap_year' => $gap_year[$i],
-                'bimbel' => $bimbel[$i],
-            ]);
-        }
-    }
-
-    session(['kelas_id' => $kelas->id]);
-
-    return redirect()->route('kelas.show', $kelas->id);
-}
-
-
-    public function edit($id)
-    {
-        $kelas = Kelas::with('siswa')->findOrFail($id);
-        return view('kelas.edit', compact('kelas'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $kelas = Kelas::findOrFail($id);
-
-        foreach ($kelas->siswa as $index => $siswa) {
-            $siswa->update([
-                'nama' => $request->nama[$index],
-                'email' => $request->email[$index],
-                'jalur_masuk' => $request->jalur_masuk[$index],
-            ]);
-        }
-
-        return redirect()->route('data.kelas')->with('success', 'Data kelas berhasil diperbarui.');
-    }
-
     public function index()
     {
         $daftarKelas = Kelas::all();
@@ -106,86 +24,90 @@ class KelasController extends Controller
         return view('kelas.show', compact('kelas'));
     }
 
-    public function generate(Request $request)
-{
-    dd($request->all());
-
-    $nama_kelas = session('nama_kelas');
-    $kode_mata_kuliah = session('kode_mata_kuliah');
-
-    if (!$nama_kelas || !$kode_mata_kuliah) {
-        return back()->with('error', 'Data kelas belum lengkap!');
-    }
-    // Cek dulu datanya ada atau nggak
-    if (!$request->filled('nama_kelas') || !$request->filled('kode_mata_kuliah')) {
-        return back()->with('error', 'Nama kelas dan kode mata kuliah harus diisi.');
+    public function edit($id)
+    {
+        $kelas = Kelas::with('mahasiswa')->findOrFail($id);
+        return view('kelas.edit', compact('kelas'));
     }
 
-    // Simpan ke tabel `kelas`
-    $kelas = Kelas::create([
-        'dosen_id' => auth()->id(), // atau bisa pakai: Auth::user()->id
-        'nama_kelas' => $request->nama_kelas,
-        'kode_mata_kuliah' => $request->kode_mata_kuliah, // <- Pastikan ini masuk
-    ]);
+    public function update(Request $request, $id)
+    {
+        $kelas = Kelas::findOrFail($id);
 
-    // Simpan ke tabel `data_mahasiswa`
-    foreach ($request->nama as $index => $nama) {
-        DataMahasiswa::create([
-            'kelas_id' => $kelas->id,
-            'nama' => $nama,
-            'asal_sekolah' => $request->asal_sekolah[$index],
-            'gap_year' => $request->gap_year[$index],
-            'bimbel' => $request->bimbel[$index],
+        foreach ($kelas->mahasiswa as $index => $mhs) {
+            $mhs->update([
+                'nama_lengkap' => $request->nama[$index],
+                'email' => $request->email[$index],
+                'jalur_masuk' => $request->jalur_masuk[$index],
+                // Tambahkan field lain jika perlu
+            ]);
+        }
+
+        return redirect()->route('data.kelas')->with('success', 'Data kelas berhasil diperbarui.');
+    }
+
+    public function preview(Request $request)
+    {
+        session([
+            'summary' => [
+                'nama_kelas' => $request->nama_kelas,
+                'kode_mata_kuliah' => $request->kode_mata_kuliah,
+                'mahasiswa' => $request->mahasiswa // dari input JSON atau array form
+            ]
         ]);
+
+        return back();
     }
 
-    return redirect()->route('hasil.rekomendasi', ['kelas_id' => $kelas->id]);
-}
+    public function store(Request $request)
+    {
+        // Decode JSON dari input hidden
+        $mahasiswa = json_decode($request->input('mahasiswa_data'), true);
 
-public function preview(Request $request)
-{
-    session([
-        'summary' => [
-            'nama_kelas' => $request->nama_kelas,
-            'kode_mata_kuliah' => $request->kode_mata_kuliah,
-            'mahasiswa' => $request->mahasiswa // atau array manual dari input[]
-        ]
-    ]);
-
-    return back();
-
-}
-
-public function generateData(Request $request)
-{
-    // Ambil data dari request
-    $kelas = new Kelas();
-    $kelas->dosen_id = auth()->user()->id;
-    $kelas->nama_kelas = $request->nama_kelas;
-    $kelas->kode_mata_kuliah = $request->kode_mata_kuliah;
-    $kelas->save();
-
-    $mahasiswaList = json_decode($request->mahasiswa_data, true);
-    foreach ($mahasiswaList as $m) {
-        DataMahasiswa::create([
-            'kelas_id' => $kelas->id,
-            'nama' => $m['nama'],
-            'email' => $m['email'],
-            'jalur_masuk' => $m['jalur'],
-            'kesiapan_akademik' => $m['akademik'],
-            'kesiapan_ekonomi' => $m['ekonomi'],
-            'endurance_citacita' => $m['endurance'],
-            'profil_sekolah' => $m['sekolah'],
-            'profil_ortu' => $m['ortu'],
-            'pola_belajar' => $m['pola'],
-            'adaptasi' => $m['adaptasi'],
+        // Validasi dasar untuk kelas
+        $validatedKelas = $request->validate([
+            'nama_kelas' => 'required|string',
+            'kode_mata_kuliah' => 'required|string',
         ]);
+
+        // Validasi data mahasiswa manual setelah decode
+        if (!is_array($mahasiswa) || count($mahasiswa) === 0) {
+            return back()->withErrors(['mahasiswa_data' => 'Data mahasiswa tidak valid.']);
+        }
+
+        foreach ($mahasiswa as $mhs) {
+            // Cek field wajib
+            if (empty($mhs['nama']) || empty($mhs['email'])) {
+                return back()->withErrors(['mahasiswa_data' => 'Semua mahasiswa harus punya nama dan email.']);
+            }
+        }
+
+        // Simpan kelas
+        $kelas = Kelas::create([
+            'dosen_id' => auth()->user()->id,
+            'nama_kelas' => $validatedKelas['nama_kelas'],
+            'kode_mata_kuliah' => $validatedKelas['kode_mata_kuliah'],
+        ]);
+
+        // Simpan data mahasiswa
+        foreach ($mahasiswa as $mhs) {
+            DataMahasiswa::create([
+                'kelas_id' => $kelas->id,
+                'nama' => $mhs['nama'],
+                'email' => $mhs['email'],
+                'jalur_masuk' => $mhs['jalur_masuk'] ?? null,
+                'kesiapan_akademik' => $mhs['kesiapan_akademik'] ?? null,
+                'kesiapan_ekonomi' => $mhs['kesiapan_ekonomi'] ?? null,
+                'endurance_cita_cita' => $mhs['endurance_cita_cita'] ?? null,
+                'profil_sekolah' => $mhs['profil_sekolah'] ?? null,
+                'profil_ortu' => $mhs['profil_ortu'] ?? null,
+                'pola_belajar' => $mhs['pola_belajar'] ?? null,
+                'adaptasi' => $mhs['adaptasi'] ?? null,
+            ]);
+        }
+
+        return redirect()->route('hasil.rekomendasi', ['kelas' => $kelas->id]);
     }
-
-    return redirect()->route('hasil.rekomendasi', $kelas->id);
-}
-
-
 
 
 }
