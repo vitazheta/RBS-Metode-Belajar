@@ -23,28 +23,26 @@ class LoginController extends Controller
 public function login(Request $request)
 {
     $request->validate([
-        'email' => 'required|email',
+        'username' => 'required|string',
         'password' => 'required',
     ]);
 
-    //Cek email terdaftar
-    $user = Dosen::where('email', $request->email)->first();
+    //Cek username terdaftar
+    $user = Dosen::where('username', $request->username)->first();
 
     if (!$user) {
         return redirect()->back()->with('login_error', 'Akun Anda belum terdaftar!');
     }
 
     // Attempt to log the user in
-    if (Auth::guard('dosen')->attempt(['email' => $request->email, 'password' => $request->password])) {
+    if (Auth::guard('dosen')->attempt(['username' => $request->username, 'password' => $request->password])) {
         // Redirect ke dashboard setelah login berhasil
         return redirect()->route('dashboard.dosen');
     }
 
     // Jika login gagal, kirimkan pesan error dan kembali ke halaman login
-    return back()->with('login_error', 'Email atau password salah');
+    return back()->with('login_error', 'Username atau password salah');
 }
-
-
 
 public function logout()
 {
