@@ -27,15 +27,15 @@ public function login(Request $request)
         'password' => 'required',
     ]);
 
-    //Cek email terdaftar 
+    //Cek email terdaftar
     $user = Dosen::where('email', $request->email)->first();
 
     if (!$user) {
         return redirect()->back()->with('login_error', 'Akun Anda belum terdaftar!');
     }
-    
+
     // Attempt to log the user in
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+    if (Auth::guard('dosen')->attempt(['email' => $request->email, 'password' => $request->password])) {
         // Redirect ke dashboard setelah login berhasil
         return redirect()->route('dashboard.dosen');
     }
@@ -46,9 +46,10 @@ public function login(Request $request)
 
 
 
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('login');
-    }
+public function logout()
+{
+    Auth::guard('dosen')->logout();
+    return redirect()->route('login');
+}
+
 }
