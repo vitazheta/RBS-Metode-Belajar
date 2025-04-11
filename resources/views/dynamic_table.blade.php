@@ -436,7 +436,15 @@ data.push(rowData);
 
 //     const namaKelas = document.getElementById('nama_kelas')?.value || '-';
 // const kodeMK = document.getElementById('kode_mata_kuliah')?.value || '-';
-
+setTimeout(() => {
+        const summary = document.getElementById('summaryContainer');
+        if (summary) {
+            window.scrollTo({
+                top: summary.offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    }, 500);
     let summaryHTML = `
      <div class="card mt-4 p-4 shadow-sm" style="background-color: #f8f9fa;">
     <h4 class="mb-2 fw-bold" style="color: #0E1F4D;">Ringkasan Data</h4>
@@ -473,6 +481,10 @@ data.push(rowData);
     // Simpan data ke input hidden
     document.getElementById('mahasiswaData').value = JSON.stringify(data);
 
+    //Scroll kebawah after klik button save
+    setTimeout(() => {
+        document.getElementById('summaryContainer')?.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
 
 });
     }
