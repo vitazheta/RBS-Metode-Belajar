@@ -769,7 +769,7 @@
             body { /*selamat datang*/
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #84A7CF;
+            background-color: #ffff;
             color: #333; 
         }
 
@@ -819,22 +819,28 @@
 
         header {
             background: url('https://source.unsplash.com/1600x900/?nature,forest') no-repeat center center/cover;
-            height: 400px;
-            color: white;
+            height: 350px;
+            padding-top: 25px;
+            /* color: white; */
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
+            /* position: relative; */
         }
 
         header h1 {
             font-size: 3em;
             margin: 0;
+            color: #0E1F4D;
         }
 
         header p {
-            font-size: 1.5em;
+            font-size: 1.4rem;
+            max-width: 1000px;
+            margin: 30px auto 40px;
+            line-height: 1.6; 
+            color: black;   
         }
 
         .overlay { /*overlay selamat datang */
@@ -865,6 +871,7 @@
     <body>
     @include('layouts.navbar')
     @include('layouts.banner')
+    
 
 
 
@@ -883,10 +890,16 @@
         <div class="overlay"></div>
             <div class="content">
                 <h1>Selamat Datang di EdVise</h1>
-                <p>Website ini dibuat untuk membantu pengajar memilih metode balajar yang tepat untuk kelas</p>
+                <!-- <p>Website ini dibuat untuk membantu pengajar memilih metode balajar yang tepat untuk kelas</p> -->
+                <p>Website ini dibuat untuk membantu para guru dan tenaga pendidik memahami gaya belajar siswa secara personal. Dengan teknologi cerdas 
+                    dan pendekatan berbasis data, kami memberikan rekomendasi metode pengajaran yang efektif sesuai karakteristik belajar siswa.</p>
             </div>
         </div>
+        
     </header>
+
+    @include('layouts.info')
+    @include('layouts.metode')
 </body>
 
 

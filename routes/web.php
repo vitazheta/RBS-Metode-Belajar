@@ -79,3 +79,6 @@ Route::post('/import-csv', [DataMahasiswaController::class, 'import'])->name('im
 //Route rekomendasi metode belajar
 //Route::get('/rekomendasi', [RekomendasiMetodeController::class, 'index'])->name('rekomendasi.metode');
 
+// Route::get('/info', function () {
+//     return view('info');
+// });
