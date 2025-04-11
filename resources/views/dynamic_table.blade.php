@@ -436,15 +436,18 @@ data.push(rowData);
 
 //     const namaKelas = document.getElementById('nama_kelas')?.value || '-';
 // const kodeMK = document.getElementById('kode_mata_kuliah')?.value || '-';
+
+//Scrool saat Klik save 
 setTimeout(() => {
-        const summary = document.getElementById('summaryContainer');
-        if (summary) {
-            window.scrollTo({
-                top: summary.offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    }, 500);
+    const summary = document.getElementById('summaryContainer');
+    if (summary) {
+        const offset = summary.offsetTop - 80; // 100px margin biar ga ketutupan header
+        window.scrollTo({
+            top: offset,
+            behavior: 'smooth'
+        });
+    }
+}, 500);
     let summaryHTML = `
      <div class="card mt-4 p-4 shadow-sm" style="background-color: #f8f9fa;">
     <h4 class="mb-2 fw-bold" style="color: #0E1F4D;">Ringkasan Data</h4>
