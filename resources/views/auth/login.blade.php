@@ -31,7 +31,7 @@
                 <form action="{{ route('login') }}" method="POST">
     @csrf
     <div class="mb-3">
-        <input type="email" name="email" class="form-control" placeholder="Email" required>
+        <input type="username" name="username" class="form-control" placeholder="Username" required>
     </div>
     <div class="mb-3">
         <input type="password" name="password" class="form-control" placeholder="Password" required>
