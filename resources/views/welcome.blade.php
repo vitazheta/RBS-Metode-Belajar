@@ -819,7 +819,7 @@
 
         header {
             background: url('https://source.unsplash.com/1600x900/?nature,forest') no-repeat center center/cover;
-            height: 350px;
+            height: 400px;
             padding-top: 25px;
             /* color: white; */
             display: flex;
