@@ -35,6 +35,12 @@
   border-color: #355c99;
 }
 
+input::placeholder {
+    font-weight: 300;
+    color: #888;
+    font-style: italic;
+  }
+
     .custom-table {
         border-collapse: collapse;
         width: 100%;
@@ -95,10 +101,38 @@
 
 
 <div class="container" style="padding-top: 70px;">
-    <h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
+    <h2 class="mb-2 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
         Data Kelas
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
     </h2>
+<!-- Tombol Toggle -->
+<button class="btn btn-link p-0 text-decoration-none small d-flex align-items-center"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#tutorialPengisian"
+        aria-expanded="false"
+        aria-controls="tutorialPengisian"
+        id="toggleBtn"
+        style="color: #0e1e4b; margin-top: 0px; margin-bottom: 8px;">
+  <span id="toggleIcon">📘</span> &nbsp; Lihat panduan pengisian
+</button>
+
+
+<!-- Konten Collapse -->
+<div class="collapse mt-2" id="tutorialPengisian">
+  <div class="card border-0 shadow-sm" style="background-color: #fdf9ed; font-size: 0.9rem; color: #0e1e4b; margin-bottom: 10px;">
+    <div class="card-body">
+      Masukkan nama kelas sesuai format penamaan institusi. Contoh:
+      <ul class="mb-1 ps-3">
+        <li><strong>Pendidikan Ilmu Komputer B - 2021</strong></li>
+        <li><strong>Sistem Informasi A - 2022</strong></li>
+      </ul>
+      <p class="mb-0">Gunakan huruf kapital untuk singkatan jurusan jika perlu, dan tambahkan tahun angkatan untuk mempermudah identifikasi kelas.</p>
+    </div>
+  </div>
+</div>
+
+
 
     <!-- FORM UTAMA -->
     <form method="POST" action="{{ route('simpan.mahasiswa') }}">
@@ -114,11 +148,11 @@
         <div class="mb-3 d-flex">
             <div class="w-50 me-3">
                 <label>Nama Kelas:</label>
-                <input type="text" name="nama_kelas" id="nama_kelas" class="form-control" required>
+                <input type="text" name="nama_kelas" id="nama_kelas" class="form-control" required placeholder="Contoh: Pendidikan Ilmu Komputer B - 2021">
             </div>
             <div class="w-50">
                 <label>Kode Mata Kuliah:</label>
-                <input type="text" name="kode_mata_kuliah" id="kode_mata_kuliah" class="form-control" required>
+                <input type="text" name="kode_mata_kuliah" id="kode_mata_kuliah" class="form-control" required placeholder="Contoh: IK-303 Sistem Basis Data">
             </div>
         </div>
 
@@ -188,7 +222,7 @@
         <!-- Tombol Simpan -->
         <div class="d-flex gap-2 mt-3">
         <button type="button" id="addRowBtn" class="btn btn-success ms-2">Tambah Baris</button>
-        <button type="button" class="btn btn-primary" id="saveBtn">Save Data Kelas</button>
+        <button type="button" class="btn btn-primary" id="saveBtn">Simpan Data Kelas</button>
         </div>
 
 
@@ -500,7 +534,20 @@ if (generateBtn) {
     </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+  const collapseEl = document.getElementById('tutorialPengisian');
+  const toggleIcon = document.getElementById('toggleIcon');
+
+  collapseEl.addEventListener('show.bs.collapse', function () {
+    toggleIcon.textContent = '🔼'; // Saat terbuka
+  });
+
+  collapseEl.addEventListener('hide.bs.collapse', function () {
+    toggleIcon.textContent = '📘'; // Saat tertutup
+  });
+</script>
 
 
 @endsection
