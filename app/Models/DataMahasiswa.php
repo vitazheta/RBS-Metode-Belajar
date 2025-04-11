@@ -9,15 +9,26 @@ class DataMahasiswa extends Model
 {
     use HasFactory;
 
-    protected $table = 'Mahasiswa'; // Nama tabel di database
+    protected $table = 'data_mahasiswa'; // Nama tabel di database
 
     protected $fillable = [
         'kelas_id',
         'nama_lengkap',
-        'profil_sekolah',
+        'email',
+        'jalur_masuk',
         'kesiapan_akademik',
         'kesiapan_ekonomi',
-        'dukungan_ortu',
-        'endurance_cita-cita',
+        'endurance_cita_cita',
+        'profil_sekolah',
+        'profil_ortu',
+        'pola_belajar',
+        'kemampuan_adaptasi',
     ];
+
+
+
+    public function kelas()
+    {
+      return $this->belongsTo(Kelas::class);
+    }
 }
