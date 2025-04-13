@@ -10,6 +10,13 @@
         padding-top: 0 !important; /* Menghilangkan padding-top saat print */
     }
 }
+
+    #profilChart {
+    max-width: 400px;
+    max-height: 400px;
+    margin: 0 auto;
+    }
+
 </style>
 
 <div class="pdf-header" style="display: none; padding: 20px; border-bottom: 2px solid #000; margin-bottom: 20px;">
@@ -33,16 +40,16 @@
     {{-- Informasi Kelas --}}
     <div class="card mb-2">
         <div class="card-body">
-            <h5 class="card-title">📘 Informasi Kelas</h5>
-            <p><strong>Nama Kelas:</strong>
+            <h5 class="card-title"><strong>📘 Informasi Kelas</strong></h5>
+            <p>Nama Kelas:
             <span class="badge bg-success fs-6">{{ $kelas->nama_kelas }}</span>
             </p>
 
-            <p><strong>Kode Mata Kuliah:</strong>
+            <p>Kode Mata Kuliah:
                 <span class="badge bg-warning text-dark fs-6">{{ $kelas->kode_mata_kuliah }}</span>
             </p>
-            <p><strong>Dosen Pengampu:</strong>
-                <span class="text-muted">{{ auth()->user()->nama }}</span>
+            <p>Dosen Pengampu:
+            <span class="badge bg-success fs-6">{{ auth()->user()->nama }}</span>
             </p>
             <div class="text-end mb-1">
     <button id="exportPDF" class="btn btn-danger">
@@ -59,10 +66,55 @@
     <div class="card-header bg-primary text-white">
         <h5 class="mb-0">Distribusi Gaya Belajar Mahasiswa</h5>
     </div>
-    <div class="card-body text-center">
-        <canvas id="profilChart" width="300" height="300"></canvas>
+    <div class="card-body">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 text-center">
+                <canvas id="profilChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <h6>📊 Rincian Distribusi</h6>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="col-4">Visual</div>
+                            <div class="col-4 text-center">
+                                <span class="badge bg-primary rounded-pill" id="persenVisual">-</span>
+                            </div>
+                            <div class="col-4 text-end">
+                                <span class="badge bg-secondary rounded-pill" id="jumlahVisual">- mahasiswa</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="col-4">Auditori</div>
+                            <div class="col-4 text-center">
+                                <span class="badge bg-primary rounded-pill" id="persenAuditori">-</span>
+                            </div>
+                            <div class="col-4 text-end">
+                                <span class="badge bg-secondary rounded-pill" id="jumlahAuditori">- mahasiswa</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="col-4">Kinestetik</div>
+                            <div class="col-4 text-center">
+                                <span class="badge bg-primary rounded-pill" id="persenKinestetik">-</span>
+                            </div>
+                            <div class="col-4 text-end">
+                                <span class="badge bg-secondary rounded-pill" id="persenKinestetik">- mahasiswa</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
+
 
 
     {{-- Tabel Hasil Rekomendasi --}}
@@ -116,40 +168,59 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const ctx = document.getElementById('profilChart');
+   document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById('profilChart');
 
-        if (ctx) {
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Visual', 'Auditori', 'Kinestetik'],
-                    datasets: [{
-                        // GANTI INI DENGAN DATA DUMMY
-                        data: [10, 5, 7],
-                        backgroundColor: ['#1E2E45', '#748DAC', '#E0E1DC'],
-                        hoverOffset: 10
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    return context.label + ": " + context.raw + " mahasiswa";
-                                }
+    if (ctx) {
+        const dataJumlah = [10, 5, 7]; // GANTI DENGAN DATA SEBENARNYA
+        const total = dataJumlah.reduce((a, b) => a + b, 0);
+
+        const chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Visual', 'Auditori', 'Kinestetik'],
+                datasets: [{
+                    data: dataJumlah,
+                    backgroundColor: ['#1E2E45', '#748DAC', '#E0E1DC'],
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return context.label + ": " + context.raw + " mahasiswa";
                             }
                         }
                     }
                 }
-            });
-        }
-    });
+            }
+        });
+
+        // Tampilkan data persentase dan jumlah
+        const persen = dataJumlah.map(jml => ((jml / total) * 100).toFixed(1) + '%');
+
+        document.getElementById("persenVisual").innerText = persen[0];
+        document.getElementById("jumlahVisual").innerText = dataJumlah[0] + " mahasiswa";
+
+        document.getElementById("persenAuditori").innerText = persen[1];
+        document.getElementById("jumlahAuditori").innerText = dataJumlah[1] + " mahasiswa";
+
+        document.getElementById("persenKinestetik").innerText = persen[2];
+        document.getElementById("jumlahKinestetik").innerText = dataJumlah[2] + " mahasiswa";
+    }
+});
+
 </script>
+
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -200,27 +271,6 @@
     });
 </script>
 
-
-
-
-<!-- <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
-
-<script>
-    document.getElementById("exportPDF").addEventListener("click", function () {
-        const element = document.querySelector('.container');
-
-        const opt = {
-            margin:       0,
-            filename:     'hasil-rekomendasi.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 1.5, useCORS: true },
-            jsPDF:        { unit: 'px', format: 'a4', orientation: 'portrait' },
-            pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
-        };
-
-        html2pdf().set(opt).from(element).save();
-    });
-</script> -->
 
 
 
