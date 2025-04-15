@@ -12,11 +12,28 @@ use App\Models\DataMahasiswa;
 
 class KelasController extends Controller
 {
-    public function index()
-    {
-        $daftarKelas = Kelas::all();
-        return view('kelas.index', compact('daftarKelas'));
-    }
+    // public function index()
+    // {
+    //     $daftarKelas = Kelas::all();
+    //     return view('kelas.index', compact('daftarKelas'));
+    // }
+
+//     public function index()
+// {
+//     $daftarKelas = \App\Models\Kelas::all();
+//     return view('daftar_kelas', compact('daftarKelas'));
+
+// }
+
+public function index()
+{
+    // Ambil kelas yang hanya terkait dengan dosen yang sedang login
+    $daftarKelas = Kelas::where('dosen_id', auth()->user()->id)->get();
+
+    return view('daftar_kelas', compact('daftarKelas'));
+}
+
+
 
     public function show($id)
     {
@@ -108,6 +125,11 @@ class KelasController extends Controller
 
         return redirect()->route('hasil.rekomendasi', ['kelas' => $kelas->id]);
     }
+
+    public function mahasiswa_count()
+{
+    return $this->mahasiswa()->count(); // Menghitung jumlah mahasiswa yang terhubung dengan kelas ini
+}
 
 
 }

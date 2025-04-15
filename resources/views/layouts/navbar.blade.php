@@ -18,7 +18,7 @@
     .btn-nav.active {
         background-color: #0E1F4D !important;
     }
-    
+
     /* button login & logout */
     .btn-log {
         background-color: #F37AB0;
@@ -83,6 +83,11 @@
                     <li class="nav-item">
                         <a class="btn-nav {{ request()->is('dashboard-dosen') ? 'active' : '' }}" href="{{ route('dashboard.dosen') }}">
                             <i class="bi bi-house-door"></i> DASHBOARD
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn-nav {{ request()->is('daftar-kelas') ? 'active' : '' }}" href="{{ route('kelas.index') }}">
+                            <i class="bi bi-book"></i> DAFTAR KELAS
                         </a>
                     </li>
                     <li class="nav-item">
