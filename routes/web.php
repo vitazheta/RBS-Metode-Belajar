@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DynamicTableController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\RekomendasiMetodeController;
-
+use App\Http\Controllers\HasilRekomendasiController;
 /*
 |--------------------------------------------------------------------------|
 | Web Routes                                                               |
@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::middleware(['auth:dosen'])->group(function () {
     Route::get('/dynamic-table', [DynamicTableController::class, 'index'])->name('dynamic.table');
     Route::get('/dashboard-dosen', [DashboardDosenController::class, 'dashboard'])->name('dashboard.dosen');
+    Route::get('/hasil-rekomendasi/{id}', [HasilRekomendasiController::class, 'show'])->name('hasil.rekomendasi');
 });
 
 Route::post('/import', [ImportController::class, 'processImport'])->name('import.process');

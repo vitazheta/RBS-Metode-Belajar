@@ -62,7 +62,10 @@ class DataMahasiswaController extends Controller
         \Log::info('Berhasil simpan mahasiswa:', $mahasiswaBaru->toArray());
     }
 
-    return redirect()->route('dashboard.dosen')->with('success', 'Data berhasil disimpan.');
+     // 3. Redirect ke halaman hasil rekomendasi kelas yang baru disimpan
+     return redirect()->route('hasil.rekomendasi', ['id' => $kelas->id]);
+
+    // return redirect()->route('dashboard.dosen')->with('success', 'Data berhasil disimpan.');
 }
 
 
