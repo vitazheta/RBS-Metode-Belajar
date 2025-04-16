@@ -52,7 +52,7 @@
             <span class="badge bg-success fs-6">{{ auth()->user()->nama }}</span>
             </p>
             <div class="text-end mb-1">
-    <button id="exportPDF" class="btn btn-danger">
+    <button id="exportPDF" class="btn btn-danger no-print">
         <i class="bi bi-file-earmark-pdf"></i> Export as PDF
     </button>
 </div>

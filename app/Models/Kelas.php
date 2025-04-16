@@ -5,6 +5,7 @@ namespace App\Models;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Kelas extends Model
 {
@@ -33,4 +34,11 @@ class Kelas extends Model
     {
         return $this->hasOne(MetodeBelajar::class);
     }
+
+    // Accessor untuk menghitung jumlah mahasiswa
+    public function getMahasiswaCountAttribute()
+    {
+        return $this->mahasiswa()->count(); // Menghitung jumlah mahasiswa yang terhubung dengan kelas ini
+    }
+
 }

@@ -25,6 +25,8 @@ Route::middleware(['auth:dosen'])->group(function () {
     Route::get('/dynamic-table', [DynamicTableController::class, 'index'])->name('dynamic.table');
     Route::get('/dashboard-dosen', [DashboardDosenController::class, 'dashboard'])->name('dashboard.dosen');
     Route::get('/hasil-rekomendasi/{id}', [HasilRekomendasiController::class, 'show'])->name('hasil.rekomendasi');
+    Route::get('/daftar-kelas', [KelasController::class, 'index'])->name('kelas.index');
+
 });
 
 Route::post('/import', [ImportController::class, 'processImport'])->name('import.process');
@@ -74,8 +76,7 @@ Route::post('/import-csv', [DataMahasiswaController::class, 'import'])->name('im
 
 
 //Route daftar kelas
-//Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
-//Route::get('/kelas/{id}', [KelasController::class, 'show'])->name('kelas.show');
+
 
 //Route rekomendasi metode belajar
 //Route::get('/rekomendasi', [RekomendasiMetodeController::class, 'index'])->name('rekomendasi.metode');
