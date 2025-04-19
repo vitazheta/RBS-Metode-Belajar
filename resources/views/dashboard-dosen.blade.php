@@ -72,15 +72,14 @@
             </div>
         </div>
 
-        <!-- Kotak Metode Dominan -->
-        <div class="col-md-4">
-            <div class="card shadow-sm text-white mb-3 position-relative"
-            style="background-color: #84A7CF; border: none;">
-                <div class="card-body">
-                    <h5 class="card-title">Metode Dominan</h5>
-                    <p class="card-text display-4">{{ $metode_dominan }}</p>
-                    <i class="fas fa-chalkboard-teacher position-absolute siluet"></i>
-                </div>
+<!-- Kotak Jalur Masuk Dominan -->
+<div class="col-md-4">
+        <div class="card shadow-sm text-white mb-3 position-relative"
+        style="background-color: #84A7CF; border: none;">
+            <div class="card-body">
+                <h5 class="card-title">Jalur Masuk Dominan</h5>
+                <p class="card-text display-4">{{ $jalur_masuk_dominan ?? 'Tidak Ada' }}</p>
+                <i class="fas fa-chart-pie position-absolute siluet"></i>
             </div>
         </div>
     </div>
@@ -94,7 +93,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ $k->nama_kelas }}</h5>
                     <canvas id="chart-{{ $index }}" width="200" height="200"></canvas>
-                    <p class="mt-2">Persentase Gaya Belajar</p>
+                    <p class="mt-2">Persentase Aspek Penunjang Rekomendasi</p>
                 </div>
             </div>
         </div>
@@ -107,81 +106,53 @@
 @section('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-    @foreach ($kelas as $index => $k)
-    var ctx = document.getElementById("chart-{{ $index }}");
+        @foreach ($kelas as $index => $k)
+        var ctx = document.getElementById("chart-{{ $index }}");
 
-    if (ctx) {
-        var chart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["Akademik dan Endurance", "Latar Belakang", "Pola Belajar", "Proses Perkuliahan"],
-                datasets: [{
-                    data: [{{ $k->persen_visual }}, {{ $k->persen_auditori }}, {{ $k->persen_kinestetik }}],
-                    backgroundColor: [
-    "#1E2E45", // Biru tua untuk Visual
-    "#748DAC", // Biru muda untuk Auditori
-    "#E0E1DC"  // Cream untuk Kinestetik
-]
-,
-                    hoverOffset: 10 // Efek animasi saat hover
-                }]
-            },
-            options: {
-                responsive: true,
-                cutout: "70%",
-                plugins: {
-                    legend: { display: false }
+        if (ctx) {
+            var chart = new Chart(ctx, {
+                type: 'pie', // Ganti dari 'doughnut' ke 'pie'
+                data: {
+                    labels: ["Akademik dan Endurance", "Latar Belakang", "Pola Belajar", "Proses Perkuliahan"],
+                    datasets: [{
+                        data: [
+                            {{ $k->persen_akademik ?? 0 }},
+                            {{ $k->persen_latar_belakang ?? 0 }},
+                            {{ $k->persen_pola_belajar ?? 0 }},
+                            {{ $k->persen_proses_perkuliahan ?? 0 }}
+                        ],
+                        backgroundColor: [
+                            "#1E2E45", // Biru tua untuk Akademik dan Endurance
+                            "#748DAC", // Biru muda untuk Latar Belakang
+                            "#E0E1DC", // Cream untuk Pola Belajar
+                            "#F37AB0"  // Merah muda untuk Proses Perkuliahan
+                        ],
+                        hoverOffset: 10 // Efek animasi saat hover
+                    }]
                 },
-                animation: {
-                    animateRotate: true, // Animasi rotasi saat muncul
-                    animateScale: true  // Animasi pembesaran saat muncul
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                let value = tooltipItem.raw;
-                                return value + "%"; // Menampilkan persen di tooltip
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true }, // Tampilkan legenda
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    let value = tooltipItem.raw;
+                                    return value + "%"; // Menampilkan persen di tooltip
+                                }
                             }
                         }
+                    },
+                    animation: {
+                        animateRotate: true, // Animasi rotasi saat muncul
+                        animateScale: true  // Animasi pembesaran saat muncul
                     }
                 }
-            }
-        });
+            });
 
-        // Tambahkan teks di tengah
-        Chart.register({
-    id: 'centerText',
-    beforeDraw: function(chart) {
-        var width = chart.width,
-            height = chart.height,
-            ctx = chart.ctx;
-
-        ctx.save();
-        ctx.font = "bold 20px Poppins, sans-serif"; // Lebih besar & tebal
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-
-        let data = chart.data.datasets[0].data;
-        let labels = chart.data.labels;
-
-        let maxIndex = data.indexOf(Math.max(...data));
-        let dominantMethod = labels[maxIndex]; // Gaya belajar dominan
-
-        // Posisi teks di tengah
-        var textX = width / 2;
-        var textY = height / 2;
-
-        ctx.fillText(dominantMethod, textX, textY);
-        ctx.restore();
-    }
-});
-
-
-
-        chart.update(); // Update chart setelah menambahkan teks tengah
-    }
-    @endforeach
-});
+            chart.update(); // Update chart setelah konfigurasi
+        }
+        @endforeach
+    });
 </script>
 @endsection

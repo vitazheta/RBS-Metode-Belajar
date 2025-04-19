@@ -9,6 +9,8 @@ use App\Http\Controllers\DynamicTableController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\RekomendasiMetodeController;
 use App\Http\Controllers\HasilRekomendasiController;
+use Dflydev\DotAccessData\Data;
+
 /*
 |--------------------------------------------------------------------------|
 | Web Routes                                                               |
@@ -59,7 +61,7 @@ Route::post('/kelas/store', [KelasController::class, 'generate'])->name('kelas.s
 
 Route::post('/kelas/generate', [KelasController::class, 'generate'])->name('kelas.generate');
 
-Route::post('/import-csv', [MahasiswaController::class, 'importCSV'])->name('import.process');
+//Route::post('/import-csv', [MahasiswaController::class, 'importCSV'])->name('import.process');
 
 Route::post('/generate-data', [KelasController::class, 'generateData'])->name('kelas.generateData');
 
