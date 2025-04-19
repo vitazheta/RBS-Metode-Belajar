@@ -47,8 +47,8 @@
         style="position: absolute; right: 50px; bottom: 20px; height: 150px;">
 </div>
 
-    <div class="row g-6">
         <!-- Kotak Jumlah Kelas -->
+    <div class="row g-6">
         <div class="col-md-4">
             <div class="card shadow-sm text-white mb-3 position-relative"
             style="background-color: #84A7CF; border: none;">
@@ -72,8 +72,8 @@
             </div>
         </div>
 
-<!-- Kotak Jalur Masuk Dominan -->
-<div class="col-md-4">
+    <!-- Kotak Jalur Masuk Dominan -->
+    <div class="col-md-4">
         <div class="card shadow-sm text-white mb-3 position-relative"
         style="background-color: #84A7CF; border: none;">
             <div class="card-body">
@@ -83,7 +83,7 @@
             </div>
         </div>
     </div>
-
+    </div>
 
     <!-- Daftar Kelas -->
     <div class="row g-6">
