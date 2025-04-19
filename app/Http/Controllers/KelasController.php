@@ -113,13 +113,10 @@ public function index()
                 'nama' => $mhs['nama'],
                 'email' => $mhs['email'],
                 'jalur_masuk' => $mhs['jalur_masuk'] ?? null,
-                'kesiapan_akademik' => $mhs['kesiapan_akademik'] ?? null,
-                'kesiapan_ekonomi' => $mhs['kesiapan_ekonomi'] ?? null,
-                'endurance_cita_cita' => $mhs['endurance_cita_cita'] ?? null,
-                'profil_sekolah' => $mhs['profil_sekolah'] ?? null,
-                'profil_ortu' => $mhs['profil_ortu'] ?? null,
+                'akademik_endurance' => $mhs['akademik_endurance'] ?? null,
+                'latar_belakang' => $mhs['latar_belakang'] ?? null,
                 'pola_belajar' => $mhs['pola_belajar'] ?? null,
-                'adaptasi' => $mhs['adaptasi'] ?? null,
+                'proses_perkuliahan' => $mhs['proses_perkuliahan'] ?? null,
             ]);
         }
 

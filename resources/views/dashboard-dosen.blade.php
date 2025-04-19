@@ -114,7 +114,7 @@
         var chart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ["Visual", "Auditori", "Kinestetik"],
+                labels: ["Akademik dan Endurance", "Latar Belakang", "Pola Belajar", "Proses Perkuliahan"],
                 datasets: [{
                     data: [{{ $k->persen_visual }}, {{ $k->persen_auditori }}, {{ $k->persen_kinestetik }}],
                     backgroundColor: [

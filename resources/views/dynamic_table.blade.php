@@ -184,13 +184,10 @@ input::placeholder {
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Jalur Masuk</th>
-                    <th>Akademik</th>
-                    <th>Ekonomi</th>
-                    <th>Endurance</th>
-                    <th>Sekolah</th>
-                    <th>Ortu</th>
-                    <th>Pola</th>
-                    <th>Adaptasi</th>
+                    <th>Akademik dan Endurance</th>
+                    <th>Latar Belakang</th>
+                    <th>Pola Belajar</th>
+                    <th>Proses Perkuliahan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -207,13 +204,10 @@ input::placeholder {
                             <option value="Mandiri UPI">Mandiri UPI</option>
                         </select>
                     </td>
-                    <td><input type="text" name="mahasiswa[0][kesiapan_akademik]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][kesiapan_ekonomi]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][endurance_cita_cita]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][profil_sekolah]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][profil_ortu]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][akademik_endurance]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][latar_belakang]" class="form-control"></td>
                     <td><input type="text" name="mahasiswa[0][pola_belajar]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][adaptasi]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][proses_perkuliahan]" class="form-control"></td>
                     <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
                 </tr>
             </tbody>
@@ -262,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
             tableBody.innerHTML = '';
 
             dataRows.forEach((cols, index) => {
-                if (cols.length < 10) return;
+                if (cols.length < 7) return;
 
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
@@ -277,13 +271,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             <option value="Mandiri" ${cols[2] === 'Mandiri' ? 'selected' : ''}>Mandiri</option>
                         </select>
                     </td>
-                    <td><input type="text" name="mahasiswa[${index}][kesiapan_akademik]" class="form-control" value="${cols[3]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][kesiapan_ekonomi]" class="form-control" value="${cols[4]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][endurance_cita_cita]" class="form-control" value="${cols[5]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][profil_sekolah]" class="form-control" value="${cols[6]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][profil_ortu]" class="form-control" value="${cols[7]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][pola_belajar]" class="form-control" value="${cols[8]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][adaptasi]" class="form-control" value="${cols[9]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][akademik_endurance]" class="form-control" value="${cols[3]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][latar_belakang]" class="form-control" value="${cols[4]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][pola_belajar]" class="form-control" value="${cols[5]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][proses_perkuliahan]" class="form-control" value="${cols[6]}"></td>
                     <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
                 `;
                 tableBody.appendChild(newRow);
@@ -345,13 +336,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     <option value="Mandiri UPI">Mandiri UPI</option>
                 </select>
             </td>
-            <td><input type="text" name="mahasiswa[${rowCount}][kesiapan_akademik]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][kesiapan_ekonomi]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][endurance_cita_cita]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][profil_sekolah]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][profil_ortu]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][akademik_endurance]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][latar_belakang]" class="form-control"></td>
             <td><input type="text" name="mahasiswa[${rowCount}][pola_belajar]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][adaptasi]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][proses_perkuliahan]" class="form-control"></td>
             <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
         `;
         table.appendChild(newRow);
@@ -402,13 +390,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (name.includes('[nama]')) rowData.nama = value;
         else if (name.includes('[email]')) rowData.email = value;
         else if (name.includes('[jalur_masuk]')) rowData.jalur = value;
-        else if (name.includes('[kesiapan_akademik]')) rowData.akademik = value;
-        else if (name.includes('[kesiapan_ekonomi]')) rowData.ekonomi = value;
-        else if (name.includes('[endurance_cita_cita]')) rowData.endurance = value;
-        else if (name.includes('[profil_sekolah]')) rowData.sekolah = value;
-        else if (name.includes('[profil_ortu]')) rowData.ortu = value;
+        else if (name.includes('[akademik_endurance]')) rowData.akademik = value;
+        else if (name.includes('[latar_belakang]')) rowData.latar = value;
         else if (name.includes('[pola_belajar]')) rowData.pola = value;
-        else if (name.includes('[adaptasi]')) rowData.adaptasi = value;
+        else if (name.includes('[proses_perkuliahan]')) rowData.kuliah = value;
     });
 
     // Jika semua kolom kosong, skip aja
@@ -465,15 +450,14 @@ setTimeout(() => {
 
 
         <table class="custom-table"><thead><tr>
-        <th>Nama</th><th>Email</th><th>Jalur</th><th>Akademik</th><th>Ekonomi</th><th>Endurance</th>
-        <th>Sekolah</th><th>Ortu</th><th>Pola</th><th>Adaptasi</th>
+        <th>Nama</th><th>Email</th><th>Jalur</th><th>Akademik</th><th>Latar Belakang</th><th>Pola Belajar</th>
+        <th>Proses Perkuliahan</th>
         </tr></thead><tbody>`;
 
     data.forEach(item => {
         summaryHTML += `<tr>
             <td>${item.nama}</td><td>${item.email}</td><td>${item.jalur}</td><td>${item.akademik}</td>
-            <td>${item.ekonomi}</td><td>${item.endurance}</td><td>${item.sekolah}</td>
-            <td>${item.ortu}</td><td>${item.pola}</td><td>${item.adaptasi}</td>
+            <td>${item.latar}</td><td>${item.pola}</td><td>${item.kuliah}</td>
         </tr>`;
     });
 
@@ -491,14 +475,6 @@ setTimeout(() => {
 
 });
     }
-
-
-
-
-
-
-
-
 
 
 

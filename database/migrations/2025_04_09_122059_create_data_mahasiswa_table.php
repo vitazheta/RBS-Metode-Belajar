@@ -14,13 +14,10 @@ class CreateDataMahasiswaTable extends Migration
             $table->string('nama_lengkap');
             $table->string('email');
             $table->string('jalur_masuk');
-            $table->double('kesiapan_akademik', 8, 2)->nullable();
-            $table->double('kesiapan_ekonomi', 8, 2)->nullable();
-            $table->double('endurance_cita_cita', 8, 2)->nullable();
-            $table->double('profil_sekolah', 8, 2)->nullable();
-            $table->double('profil_ortu', 8, 2)->nullable();
+            $table->double('akademik_endurance', 8, 2)->nullable();
+            $table->double('latar_belakang', 8, 2)->nullable();
             $table->double('pola_belajar', 8, 2)->nullable();
-            $table->double('kemampuan_adaptasi', 8, 2)->nullable();
+            $table->double('proses_perkuliahan', 8, 2)->nullable();
             $table->timestamps();
 
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');

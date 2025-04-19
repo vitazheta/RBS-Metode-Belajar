@@ -74,7 +74,7 @@ Route::post('/simpan-mahasiswa', [DataMahasiswaController::class, 'simpan'])->na
 
 Route::post('/import-csv', [DataMahasiswaController::class, 'import'])->name('import.csv');
 
-
+Route::get('/hasil-rekomendasi/{id}', [HasilRekomendasiController::class, 'show'])->name('hasil.rekomendasi');
 //Route daftar kelas
 
 
