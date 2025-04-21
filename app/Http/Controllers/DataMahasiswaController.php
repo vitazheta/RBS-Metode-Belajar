@@ -52,7 +52,7 @@ class DataMahasiswaController extends Controller
             'jalur_masuk' => $data['jalur_masuk'],
             'kesiapan_akademik' => $data['kesiapan_akademik'],
             'kesiapan_ekonomi' => $data['kesiapan_ekonomi'],
-            'endurance_cita_cita' => $data['endurance_cita_cita'],
+            'endurance-cita-cita' => $data['endurance_cita_cita'],
             'profil_sekolah' => $data['profil_sekolah'],
             'profil_ortu' => $data['profil_ortu'],
             'pola_belajar' => $data['pola_belajar'],

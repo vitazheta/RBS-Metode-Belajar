@@ -9,11 +9,20 @@ use App\Http\Controllers\DynamicTableController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\RekomendasiMetodeController;
 use App\Http\Controllers\HasilRekomendasiController;
+use App\Http\Controllers\InfoController;
+
 /*
 |--------------------------------------------------------------------------|
 | Web Routes                                                               |
 |--------------------------------------------------------------------------|
 */
+//Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
+
+//Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
+;
+
+Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -73,6 +82,9 @@ Route::post('/simpan-mahasiswa', [DataMahasiswaController::class, 'simpan'])->na
 
 
 Route::post('/import-csv', [DataMahasiswaController::class, 'import'])->name('import.csv');
+
+
+
 
 
 //Route daftar kelas

@@ -29,7 +29,7 @@
                     <img src="{{ asset('images/textlogo.png') }}" alt="Gambar Baru" class="img-fluid text-logo">
                     <h1 id="animatedText" class="fw-bold"></h1>
                     <p class="text-muted">Sistem kami membantu mahasiswa menemukan gaya belajar terbaik berdasarkan analisis data.</p>
-                    <a href="#" class="btn btn-primary mt-3">Pelajari Lebih Lanjut</a>
+                    <a href="{{ route('pelajari') }}" class="btn btn-primary mt-3">Pelajari Lebih Lanjut</a>
                 </div>
                 <!-- Gambar Produk -->
                 <div class="col-lg-6 text-center">
