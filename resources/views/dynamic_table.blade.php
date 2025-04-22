@@ -117,7 +117,6 @@ input::placeholder {
   <span id="toggleIcon">📘</span> &nbsp; Lihat panduan pengisian
 </button>
 
-
 <!-- Konten Collapse -->
 <div class="collapse mt-2" id="tutorialPengisian">
   <div class="card border-0 shadow-sm" style="background-color: #fdf9ed; font-size: 0.9rem; color: #0e1e4b; margin-bottom: 10px;">
@@ -132,17 +131,11 @@ input::placeholder {
   </div>
 </div>
 
-
-
     <!-- FORM UTAMA -->
     <form method="POST" action="{{ route('simpan.mahasiswa') }}">
 
-
-
         @csrf
         <input type="hidden" name="mahasiswa" id="mahasiswaJSON">
-
-
 
         <!-- Info Kelas -->
         <div class="mb-3 d-flex">
@@ -157,8 +150,8 @@ input::placeholder {
         </div>
 
         <!-- Tombol Import CSV -->
-        <div class="mb-3">
-    <label class="form-label">Import dari CSV:</label>
+    <div class="mb-3">
+        <label class="form-label">Import dari CSV:</label>
     <div class="input-group">
         <input type="file" id="csvFile" accept=".csv" class="form-control form-control-m rounded-start">
         <!-- <button type="button" class="btn btn-success" onclick="handleCSVImport()">Import CSV</button> -->
@@ -173,7 +166,6 @@ input::placeholder {
 </div> -->
 
 </div>
-
 
 
         <!-- Tabel Input Mahasiswa -->
@@ -195,7 +187,7 @@ input::placeholder {
                 <tr>
                     <td>1</td>
                     <td><input type="text" name="mahasiswa[0][nama]"                    class="form-control"></td>
-                    <td><input type="email" name="mahasiswa[0][email]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][email]" class="form-control"></td>
                     <td>
                         <select name="mahasiswa[0][jalur_masuk]" class="form-control">
                             <option value="">Pilih Jalur</option>

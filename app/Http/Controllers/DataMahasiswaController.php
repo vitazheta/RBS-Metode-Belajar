@@ -45,7 +45,7 @@ class DataMahasiswaController extends Controller
         $mahasiswaBaru = DataMahasiswa::create([
             'kelas_id' => $kelas->id,
             'nama_lengkap' => $data['nama'],
-            'email' => $data['email'],
+            'asal_sekolah' => $data['asal_sekolah'],
             'jalur_masuk' => $data['jalur_masuk'],
             'akademik_endurance' => $data['akademik_endurance'],
             'latar_belakang' => $data['latar_belakang'],

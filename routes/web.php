@@ -79,7 +79,14 @@ Route::post('/import-csv', [DataMahasiswaController::class, 'import'])->name('im
 Route::get('/hasil-rekomendasi/{id}', [HasilRekomendasiController::class, 'show'])->name('hasil.rekomendasi');
 //Route daftar kelas
 
+use App\Http\Controllers\FileUploadController;
 
+// Rute untuk menampilkan halaman upload file
+Route::get('/upload-excel', [FileUploadController::class, 'showUploadForm'])->name('upload.xlsx');
+
+// Rute untuk memproses upload file
+Route::post('/upload-excel', [FileUploadController::class, 'processUpload'])->name('upload.xlsx.process');
+Route::get('/download-csv', [FileUploadController::class, 'downloadCsv'])->name('download.csv');
 //Route rekomendasi metode belajar
 //Route::get('/rekomendasi', [RekomendasiMetodeController::class, 'index'])->name('rekomendasi.metode');
 

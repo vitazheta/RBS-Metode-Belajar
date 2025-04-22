@@ -36,8 +36,8 @@
             <h5 class="fw-bold mb-2">Ingin menambahkan kelas?</h5>
             <p class="text-muted mb-3">Klik tombol di bawah ini untuk menambahkan kelas baru ke sistem.</p>
             <!-- Tombol Tambah Kelas -->
-            <a href="{{ url('/dynamic-table') }}" class="btn text-white btn-lg px-2 py-1" style="background-color: #F37AB0; font-size: 0.8rem; padding: 6px 12px;">
-            <i class="fas fa-plus me-2"></i> Tambah Kelas
+            <a href="{{ url('/upload-excel') }}" class="btn text-white btn-lg px-2 py-1" style="background-color: #F37AB0; font-size: 0.8rem; padding: 6px 12px;">
+            <i class="fas fa-plus me-2"></i> Upload Data Formulir
             </a>
         </div>
     </div>
