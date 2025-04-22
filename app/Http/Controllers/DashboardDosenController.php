@@ -61,8 +61,8 @@ class DashboardDosenController extends Controller
                 ? round($k->mahasiswa->avg('pola_belajar'), 2)
                 : 0;
 
-            $k->persen_proses_perkuliahan = $total_mahasiswa_kelas > 0
-                ? round($k->mahasiswa->avg('proses_perkuliahan'), 2)
+            $k->persen_perkuliahan = $total_mahasiswa_kelas > 0
+                ? round($k->mahasiswa->avg('perkuliahan'), 2)
                 : 0;
 
             return $k;

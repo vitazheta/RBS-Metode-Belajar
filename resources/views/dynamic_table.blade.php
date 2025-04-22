@@ -174,12 +174,12 @@ input::placeholder {
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Email</th>
+                    <th>Asal Sekolah</th>
                     <th>Jalur Masuk</th>
                     <th>Akademik dan Endurance</th>
                     <th>Latar Belakang</th>
                     <th>Pola Belajar</th>
-                    <th>Proses Perkuliahan</th>
+                    <th>Perkuliahan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -187,7 +187,7 @@ input::placeholder {
                 <tr>
                     <td>1</td>
                     <td><input type="text" name="mahasiswa[0][nama]"                    class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][email]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][asal_sekolah]" class="form-control"></td>
                     <td>
                         <select name="mahasiswa[0][jalur_masuk]" class="form-control">
                             <option value="">Pilih Jalur</option>
@@ -199,7 +199,7 @@ input::placeholder {
                     <td><input type="text" name="mahasiswa[0][akademik_endurance]" class="form-control"></td>
                     <td><input type="text" name="mahasiswa[0][latar_belakang]" class="form-control"></td>
                     <td><input type="text" name="mahasiswa[0][pola_belajar]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][proses_perkuliahan]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][perkuliahan]" class="form-control"></td>
                     <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
                 </tr>
             </tbody>
@@ -243,30 +243,33 @@ document.addEventListener('DOMContentLoaded', function () {
         reader.onload = function (e) {
             const text = e.target.result;
             const rows = text.trim().split('\n').map(r => r.split(','));
-            const dataRows = rows.slice(0);
+            const dataRows = rows.slice(0); // Ambil semua baris
             const tableBody = document.querySelector('#dynamicTable tbody');
             tableBody.innerHTML = '';
 
             dataRows.forEach((cols, index) => {
                 if (cols.length < 7) return;
 
+                // Hapus tanda kutip dari setiap elemen data
+                const cleanedCols = cols.map(col => col.replace(/"/g, ''));
+
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
                     <td>${index + 1}</td>
-                    <td><input type="text" name="mahasiswa[${index}][nama]" class="form-control" value="${cols[0]}"></td>
-                    <td><input type="email" name="mahasiswa[${index}][email]" class="form-control" value="${cols[1]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][nama]" class="form-control" value="${cleanedCols[0]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][asal_sekolah]" class="form-control" value="${cleanedCols[1]}"></td>
                     <td>
                         <select name="mahasiswa[${index}][jalur_masuk]" class="form-control">
-                            <option value="SNBP" ${cols[2] === 'SNBP' ? 'selected' : ''}>SNBP</option>
-                            <option value="SNBT" ${cols[2] === 'SNBT' ? 'selected' : ''}>SNBT</option>
-                            <option value="Mandiri UPI" ${cols[2] === 'Mandiri UPI' ? 'selected' : ''}>Mandiri UPI</option>
-                            <option value="Mandiri" ${cols[2] === 'Mandiri' ? 'selected' : ''}>Mandiri</option>
+                            <option value="SNBP" ${cleanedCols[2] === 'SNBP' ? 'selected' : ''}>SNBP</option>
+                            <option value="SNBT" ${cleanedCols[2] === 'SNBT' ? 'selected' : ''}>SNBT</option>
+                            <option value="Mandiri UPI" ${cleanedCols[2] === 'Mandiri UPI' ? 'selected' : ''}>Mandiri UPI</option>
+                            <option value="Mandiri" ${cleanedCols[2] === 'Mandiri' ? 'selected' : ''}>Mandiri</option>
                         </select>
                     </td>
-                    <td><input type="text" name="mahasiswa[${index}][akademik_endurance]" class="form-control" value="${cols[3]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][latar_belakang]" class="form-control" value="${cols[4]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][pola_belajar]" class="form-control" value="${cols[5]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][proses_perkuliahan]" class="form-control" value="${cols[6]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][akademik_endurance]" class="form-control" value="${cleanedCols[3]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][latar_belakang]" class="form-control" value="${cleanedCols[4]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][pola_belajar]" class="form-control" value="${cleanedCols[5]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][perkuliahan]" class="form-control" value="${cleanedCols[6]}"></td>
                     <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
                 `;
                 tableBody.appendChild(newRow);
@@ -319,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function () {
         newRow.innerHTML = `
             <td>${rowCount}</td>
             <td><input type="text" name="mahasiswa[${rowCount}][nama]" class="form-control"></td>
-            <td><input type="email" name="mahasiswa[${rowCount}][email]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][asal_sekolah]" class="form-control"></td>
             <td>
                 <select name="mahasiswa[${rowCount}][jalur_masuk]" class="form-control">
                     <option value="">Pilih Jalur</option>
@@ -331,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <td><input type="text" name="mahasiswa[${rowCount}][akademik_endurance]" class="form-control"></td>
             <td><input type="text" name="mahasiswa[${rowCount}][latar_belakang]" class="form-control"></td>
             <td><input type="text" name="mahasiswa[${rowCount}][pola_belajar]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][proses_perkuliahan]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][perkuliahan]" class="form-control"></td>
             <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
         `;
         table.appendChild(newRow);
@@ -380,12 +383,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const name = input.name;
         if (name.includes('[nama]')) rowData.nama = value;
-        else if (name.includes('[email]')) rowData.email = value;
+        else if (name.includes('[asal_sekolah]')) rowData.sekolah = value;
         else if (name.includes('[jalur_masuk]')) rowData.jalur = value;
         else if (name.includes('[akademik_endurance]')) rowData.akademik = value;
         else if (name.includes('[latar_belakang]')) rowData.latar = value;
         else if (name.includes('[pola_belajar]')) rowData.pola = value;
-        else if (name.includes('[proses_perkuliahan]')) rowData.kuliah = value;
+        else if (name.includes('[perkuliahan]')) rowData.kuliah = value;
     });
 
     // Jika semua kolom kosong, skip aja
@@ -442,13 +445,13 @@ setTimeout(() => {
 
 
         <table class="custom-table"><thead><tr>
-        <th>Nama</th><th>Email</th><th>Jalur</th><th>Akademik</th><th>Latar Belakang</th><th>Pola Belajar</th>
-        <th>Proses Perkuliahan</th>
+        <th>Nama</th><th>Asal Sekolah</th><th>Jalur</th><th>Akademik</th><th>Latar Belakang</th><th>Pola Belajar</th>
+        <th>Perkuliahan</th>
         </tr></thead><tbody>`;
 
     data.forEach(item => {
         summaryHTML += `<tr>
-            <td>${item.nama}</td><td>${item.email}</td><td>${item.jalur}</td><td>${item.akademik}</td>
+            <td>${item.nama}</td><td>${item.sekolah}</td><td>${item.jalur}</td><td>${item.akademik}</td>
             <td>${item.latar}</td><td>${item.pola}</td><td>${item.kuliah}</td>
         </tr>`;
     });

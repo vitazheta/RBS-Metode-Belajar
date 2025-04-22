@@ -113,19 +113,19 @@
             var chart = new Chart(ctx, {
                 type: 'pie', // Ganti dari 'doughnut' ke 'pie'
                 data: {
-                    labels: ["Akademik dan Endurance", "Latar Belakang", "Pola Belajar", "Proses Perkuliahan"],
+                    labels: ["Akademik dan Endurance", "Latar Belakang", "Pola Belajar", "Perkuliahan"],
                     datasets: [{
                         data: [
                             {{ $k->persen_akademik ?? 0 }},
                             {{ $k->persen_latar_belakang ?? 0 }},
                             {{ $k->persen_pola_belajar ?? 0 }},
-                            {{ $k->persen_proses_perkuliahan ?? 0 }}
+                            {{ $k->persen_perkuliahan ?? 0 }}
                         ],
                         backgroundColor: [
                             "#1E2E45", // Biru tua untuk Akademik dan Endurance
                             "#748DAC", // Biru muda untuk Latar Belakang
                             "#E0E1DC", // Cream untuk Pola Belajar
-                            "#F37AB0"  // Merah muda untuk Proses Perkuliahan
+                            "#F37AB0"  // Merah muda untuk Perkuliahan
                         ],
                         hoverOffset: 10 // Efek animasi saat hover
                     }]

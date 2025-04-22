@@ -87,12 +87,12 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Email</th>
+                    <th>Asal Sekolah</th>
                     <th>Jalur Masuk</th>
                     <th>Akademik dan Endurance</th>
                     <th>Latar Belakang</th>
                     <th>Pola Belajar</th>
-                    <th>Proses Perkuliahan</th>
+                    <th>Perkuliahan</th>
                 </tr>
             </thead>
             <tbody>
@@ -100,12 +100,12 @@
                     <tr>
                         <td class="text-center">{{ $index + 1 }}</td>
                         <td>{{ $mhs->nama_lengkap }}</td>
-                        <td>{{ $mhs->email }}</td>
+                        <td>{{ $mhs->asal_sekolah}}</td>
                         <td class="text-center">{{ $mhs->jalur_masuk }}</td>
                         <td class="text-center">{{ $mhs->akademik_endurance }}</td>
                         <td class="text-center">{{ $mhs->latar_belakang }}</td>
                         <td class="text-center">{{ $mhs->pola_belajar }}</td>
-                        <td class="text-center">{{ $mhs->proses_perkuliahan}}</td>
+                        <td class="text-center">{{ $mhs->perkuliahan}}</td>
                     </tr>
                 @empty
                     <tr>
@@ -128,7 +128,7 @@
         <strong>{{ $rekomendasi['akademik_endurance'] }}</strong>, 
         dengan memerhatikan <strong>{{ $rekomendasi['latar_belakang'] }}</strong> 
         dan juga menggunakan <strong>{{ $rekomendasi['pola_belajar'] }}</strong>, 
-        serta menggunakan <strong>{{ $rekomendasi['proses_perkuliahan'] }}</strong>.
+        serta menggunakan <strong>{{ $rekomendasi['perkuliahan'] }}</strong>.
     </p>
 </div>
 
@@ -148,14 +148,14 @@
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Akademik', 'Latar Belakang', 'Pola Belajar', 'Proses Perkuliahan'],
+                labels: ['Akademik', 'Latar Belakang', 'Pola Belajar', 'Perkuliahan'],
                 datasets: [{
                     label: label,
                     data: [
                         data.akademik_endurance,
                         data.latar_belakang,
                         data.pola_belajar,
-                        data.proses_perkuliahan
+                        data.perkuliahan
                     ],
                     backgroundColor: ['#0E1F4D', '#27548A', '#578FCA', '#D4EBF8']
                 }]

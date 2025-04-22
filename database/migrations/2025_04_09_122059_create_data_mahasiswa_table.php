@@ -12,12 +12,12 @@ class CreateDataMahasiswaTable extends Migration
             $table->id();
             $table->unsignedBigInteger('kelas_id');
             $table->string('nama_lengkap');
-            $table->string('email');
+            $table->string('asal sekolah');
             $table->string('jalur_masuk');
             $table->double('akademik_endurance', 8, 2)->nullable();
             $table->double('latar_belakang', 8, 2)->nullable();
             $table->double('pola_belajar', 8, 2)->nullable();
-            $table->double('proses_perkuliahan', 8, 2)->nullable();
+            $table->double('perkuliahan', 8, 2)->nullable();
             $table->timestamps();
 
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');

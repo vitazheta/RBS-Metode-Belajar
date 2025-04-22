@@ -50,7 +50,7 @@ class DataMahasiswaController extends Controller
             'akademik_endurance' => $data['akademik_endurance'],
             'latar_belakang' => $data['latar_belakang'],
             'pola_belajar' => $data['pola_belajar'],
-            'proses_perkuliahan' => $data['proses_perkuliahan'],
+            'perkuliahan' => $data['perkuliahan'],
         ]);
 
         \Log::info('Berhasil simpan mahasiswa:', $mahasiswaBaru->toArray());

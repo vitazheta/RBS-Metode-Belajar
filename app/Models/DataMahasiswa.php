@@ -14,12 +14,12 @@ class DataMahasiswa extends Model
     protected $fillable = [
         'kelas_id',
         'nama_lengkap',
-        'email',
+        'asal_sekolah',
         'jalur_masuk',
         'akademik_endurance',
         'latar_belakang',
         'pola_belajar',
-        'proses_perkuliahan',
+        'perkuliahan',
     ];
 
     public function kelas()

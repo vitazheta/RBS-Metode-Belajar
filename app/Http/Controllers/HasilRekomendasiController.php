@@ -32,7 +32,7 @@ class HasilRekomendasiController extends Controller
                 'akademik_endurance' => $data->avg('akademik_endurance') ?? 0,
                 'latar_belakang' => $data->avg('latar_belakang') ?? 0,
                 'pola_belajar' => $data->avg('pola_belajar') ?? 0,
-                'proses_perkuliahan' => $data->avg('proses_perkuliahan') ?? 0,
+                'perkuliahan' => $data->avg('perkuliahan') ?? 0,
             ];
         }
 
@@ -78,7 +78,7 @@ class HasilRekomendasiController extends Controller
                 case 'pola_belajar':
                     $ruleSet = $this->getRuleSetPolaBelajar();
                     break;
-                case 'proses_perkuliahan':
+                case 'perkuliahan':
                     $ruleSet = $this->getRuleSetProsesKuliah();
                     break;
                 default:
