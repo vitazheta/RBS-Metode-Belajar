@@ -211,10 +211,34 @@ class HasilRekomendasiController extends Controller
     private function getAlasanLatarBelakang()
     {
         return [
-            'rendah-rendah-rendah' => 'mahasiswa dari semua jalur memiliki keterbatasan latar belakang pendidikan',
-            'rendah-rendah-sedang' => 'mahasiswa SNBP dan SNBT memiliki keterbatasan, sementara mahasiswa Mandiri cukup baik',
-            'rendah-rendah-tinggi' => 'mahasiswa SNBP dan SNBT memiliki keterbatasan, sementara mahasiswa Mandiri sangat baik',
-            // Tambahkan alasan lainnya sesuai kebutuhan...
+            'rendah-rendah-rendah' => 'Mahasiswa dari jalur SNBP, SNBT, dan Mandiri memiliki latar belakang yang kurang mendukung: berasal dari sekolah dengan fasilitas terbatas, orang tua berpendidikan rendah, dan kondisi ekonomi lemah.',
+            'rendah-rendah-sedang' => 'Mahasiswa SNBP dan SNBT memiliki latar belakang kurang mendukung, sedangkan mahasiswa Mandiri berasal dari keluarga dengan ekonomi cukup dan pendidikan orang tua yang lebih baik.',
+            'rendah-rendah-tinggi' => 'Mahasiswa SNBP dan SNBT berasal dari latar belakang yang terbatas, namun mahasiswa Mandiri berasal dari sekolah yang baik, orang tua berpendidikan tinggi, dan ekonomi kuat.',
+            'rendah-sedang-rendah' => 'Mahasiswa SNBP berasal dari latar belakang terbatas, mahasiswa SNBT memiliki latar belakang sedang, dan mahasiswa Mandiri berasal dari kondisi ekonomi lemah.',
+            'rendah-sedang-sedang' => 'Mahasiswa SNBP memiliki latar belakang terbatas, mahasiswa SNBT dan Mandiri memiliki latar belakang yang cukup baik secara pendidikan dan ekonomi.',
+            'rendah-sedang-tinggi' => 'Mahasiswa SNBP memiliki latar belakang terbatas, mahasiswa SNBT cukup baik, dan mahasiswa Mandiri sangat kuat dalam hal sekolah asal, dukungan orang tua, dan ekonomi.',
+            'rendah-tinggi-rendah' => 'Mahasiswa SNBP berasal dari latar belakang terbatas, mahasiswa SNBT sangat baik, sedangkan mahasiswa Mandiri kurang mendukung secara ekonomi dan pendidikan.',
+            'rendah-tinggi-sedang' => 'Mahasiswa SNBP berasal dari latar belakang terbatas, SNBT sangat baik, dan Mandiri cukup stabil secara ekonomi dan pendidikan.',
+            'rendah-tinggi-tinggi' => 'Mahasiswa SNBP berasal dari latar belakang kurang mendukung, SNBT dan Mandiri berasal dari latar belakang yang kuat dan mapan.',
+            'sedang-rendah-rendah' => 'Mahasiswa SNBP memiliki latar belakang sedang, SNBT dan Mandiri berasal dari sekolah, keluarga, dan kondisi ekonomi yang kurang mendukung.',
+            'sedang-rendah-sedang' => 'Mahasiswa SNBP cukup baik, SNBT terbatas, dan Mandiri cukup stabil secara latar belakang.',
+            'sedang-rendah-tinggi' => 'Mahasiswa SNBP cukup kuat secara latar belakang, SNBT terbatas, dan Mandiri sangat mendukung secara ekonomi dan pendidikan.',
+            'sedang-sedang-rendah' => 'Semua jalur memiliki latar belakang sedang, kecuali mahasiswa Mandiri yang berasal dari kondisi kurang mendukung.',
+            'sedang-sedang-sedang' => 'Mahasiswa dari ketiga jalur masuk memiliki latar belakang yang cukup baik namun belum maksimal.',
+            'sedang-sedang-tinggi' => 'Mahasiswa SNBP dan SNBT memiliki latar belakang yang cukup, sedangkan mahasiswa Mandiri berasal dari latar belakang yang sangat kuat.',
+            'sedang-tinggi-rendah' => 'Mahasiswa SNBP cukup baik, SNBT sangat baik, namun mahasiswa Mandiri berasal dari latar belakang yang kurang mendukung.',
+            'sedang-tinggi-sedang' => 'Mahasiswa SNBP cukup baik, SNBT sangat kuat, dan Mandiri cukup stabil.',
+            'sedang-tinggi-tinggi' => 'Mahasiswa SNBP cukup baik, SNBT dan Mandiri berasal dari latar belakang yang sangat kuat.',
+            'tinggi-rendah-rendah' => 'Mahasiswa SNBP berasal dari latar belakang yang kuat, namun SNBT dan Mandiri dari latar belakang yang terbatas.',
+            'tinggi-rendah-sedang' => 'Mahasiswa SNBP sangat baik, SNBT terbatas, dan Mandiri cukup baik.',
+            'tinggi-rendah-tinggi' => 'SNBP dan Mandiri sangat kuat secara latar belakang, SNBT masih terbatas.',
+            'tinggi-sedang-rendah' => 'Mahasiswa SNBP sangat baik, SNBT cukup baik, dan Mandiri masih menghadapi keterbatasan.',
+            'tinggi-sedang-sedang' => 'SNBP sangat kuat, SNBT dan Mandiri cukup baik.',
+            'tinggi-sedang-tinggi' => 'Mahasiswa SNBP dan Mandiri sangat kuat, SNBT cukup baik.',
+            'tinggi-tinggi-rendah' => 'Mahasiswa SNBP dan SNBT sangat kuat secara latar belakang, Mandiri masih terbatas.',
+            'tinggi-tinggi-sedang' => 'Mahasiswa SNBP dan SNBT sangat kuat, Mandiri cukup baik.',
+            'tinggi-tinggi-tinggi' => 'Mahasiswa dari semua jalur memiliki latar belakang yang sangat kuat dari segi sekolah, pendidikan orang tua, dan ekonomi.',
+
         ];
     }
 
@@ -255,10 +279,34 @@ class HasilRekomendasiController extends Controller
     private function getAlasanPolaBelajar()
     {
         return [
-            'rendah-rendah-rendah' => 'mahasiswa dari semua jalur memerlukan bimbingan dalam membangun pola belajar yang efektif',
-            'rendah-rendah-sedang' => 'mahasiswa SNBP dan SNBT memerlukan bimbingan, sementara mahasiswa Mandiri cukup baik',
-            'rendah-rendah-tinggi' => 'mahasiswa SNBP dan SNBT memerlukan bimbingan, sementara mahasiswa Mandiri sangat baik',
-            // Tambahkan alasan lainnya sesuai kebutuhan...
+            'rendah-rendah-rendah' => 'Mahasiswa SNBP, SNBT, dan Mandiri cenderung punya gaya belajar yang santai dan tidak terlalu terikat jadwal. Belajar dilakukan saat dibutuhkan saja.',
+            'rendah-rendah-sedang' => 'Mahasiswa SNBP dan SNBT cenderung santai dalam belajar, sementara mahasiswa Mandiri mulai membentuk kebiasaan belajar yang cukup konsisten.',
+            'rendah-rendah-tinggi' => 'SNBP dan SNBT belajar dengan gaya fleksibel, sedangkan mahasiswa Mandiri sangat terstruktur dan ambisius dalam belajar.',
+            'rendah-sedang-rendah' => 'Mahasiswa SNBP dan Mandiri cenderung santai, sementara SNBT cukup konsisten dengan gaya belajar yang seimbang.',
+            'rendah-sedang-sedang' => 'SNBP lebih fleksibel, SNBT dan Mandiri memiliki pola belajar yang lumayan teratur dan berimbang.',
+            'rendah-sedang-tinggi' => 'SNBP cenderung santai, SNBT cukup terstruktur, dan mahasiswa Mandiri menunjukkan gaya belajar yang sangat ambisius.',
+            'rendah-tinggi-rendah' => 'Mahasiswa SNBP dan Mandiri lebih santai, sementara SNBT sangat aktif, penuh target dan ambisius.',
+            'rendah-tinggi-sedang' => 'Mahasiswa SNBP santai, SNBT sangat terstruktur dan ambisius, Mandiri cukup seimbang dalam belajar.',
+            'rendah-tinggi-tinggi' => 'Mahasiswa SNBP santai, namun SNBT dan Mandiri menunjukkan gaya belajar yang ambisius dan penuh motivasi.',
+            'sedang-rendah-rendah' => 'SNBP cukup teratur, SNBT dan Mandiri lebih santai dan belajar hanya saat dibutuhkan.',
+            'sedang-rendah-sedang' => 'Mahasiswa SNBP dan Mandiri cukup seimbang dalam belajar, SNBT cenderung santai.',
+            'sedang-rendah-tinggi' => 'SNBP seimbang, SNBT santai, dan Mandiri sangat ambisius dengan gaya belajar yang intens.',
+            'sedang-sedang-rendah' => 'Mahasiswa dari SNBP dan SNBT cukup terstruktur, namun Mandiri lebih santai dan fleksibel.',
+            'sedang-sedang-sedang' => 'Ketiga jalur memiliki pola belajar yang seimbang, tidak terlalu santai tapi juga tidak terlalu ambisius.',
+            'sedang-sedang-tinggi' => 'SNBP dan SNBT cukup terstruktur, Mandiri sangat fokus dan penuh semangat dalam belajar.',
+            'sedang-tinggi-rendah' => 'Mahasiswa SNBP cukup teratur, SNBT sangat ambisius, dan Mandiri lebih santai.',
+            'sedang-tinggi-sedang' => 'Mahasiswa SNBP dan Mandiri cukup konsisten, SNBT sangat aktif dan punya target belajar yang tinggi.',
+            'sedang-tinggi-tinggi' => 'SNBP cukup teratur, SNBT dan Mandiri sangat ambisius dan fokus pada pencapaian.',
+            'tinggi-rendah-rendah' => 'Mahasiswa SNBP sangat ambisius, sementara SNBT dan Mandiri lebih santai dalam belajar.',
+            'tinggi-rendah-sedang' => 'SNBP sangat aktif, SNBT santai, Mandiri cukup seimbang dalam gaya belajar.',
+            'tinggi-rendah-tinggi' => 'Mahasiswa SNBP dan Mandiri sangat terstruktur, SNBT lebih fleksibel dan santai.',
+            'tinggi-sedang-rendah' => 'SNBP sangat ambisius, SNBT cukup konsisten, dan Mandiri cenderung santai.',
+            'tinggi-sedang-sedang' => 'SNBP sangat fokus, SNBT dan Mandiri cukup terstruktur dan seimbang.',
+            'tinggi-sedang-tinggi' => 'SNBP dan Mandiri sangat aktif dan ambisius, SNBT cukup teratur.',
+            'tinggi-tinggi-rendah' => 'SNBP dan SNBT sangat ambisius dan punya target, Mandiri lebih fleksibel dan santai.',
+            'tinggi-tinggi-sedang' => 'SNBP dan SNBT sangat ambisius, Mandiri cukup terstruktur.',
+            'tinggi-tinggi-tinggi' => 'Ketiga jalur mahasiswa memiliki pola belajar yang ambisius, penuh motivasi, dan sangat terencana.',
+
         ];
     }
 
@@ -299,10 +347,34 @@ class HasilRekomendasiController extends Controller
     private function getAlasanProsesKuliah()
     {
         return [
-            'rendah-rendah-rendah' => 'mahasiswa dari semua jalur memerlukan struktur kuliah yang jelas dan terarah',
-            'rendah-rendah-sedang' => 'mahasiswa SNBP dan SNBT memerlukan struktur kuliah yang jelas, sementara mahasiswa Mandiri cukup baik',
-            'rendah-rendah-tinggi' => 'mahasiswa SNBP dan SNBT memerlukan struktur kuliah yang jelas, sementara mahasiswa Mandiri sangat baik',
-            // Tambahkan alasan lainnya sesuai kebutuhan...
+            'rendah-rendah-rendah' => 'Mahasiswa SNBP, SNBT, dan Mandiri cenderung kurang aktif di kelas maupun organisasi, adaptasi masih terbatas, dan UKT menjadi beban yang cukup berat.',
+            'rendah-rendah-sedang' => 'Mahasiswa SNBP dan SNBT cenderung kurang aktif, namun mahasiswa Mandiri mulai bisa beradaptasi dan UKT relatif bisa dikelola.',
+            'rendah-rendah-tinggi' => 'SNBP dan SNBT masih pasif, namun mahasiswa Mandiri sangat aktif di kampus dan cepat beradaptasi dengan baik.',
+            'rendah-sedang-rendah' => 'Mahasiswa SNBP dan Mandiri belum terlalu aktif, SNBT mulai menunjukkan inisiatif dalam perkuliahan dan kegiatan kampus.',
+            'rendah-sedang-sedang' => 'SNBP cenderung pasif, SNBT dan Mandiri cukup aktif dan mulai membangun relasi kampus.',
+            'rendah-sedang-tinggi' => 'SNBP cenderung pasif, SNBT cukup aktif, dan Mandiri sangat adaptif serta dominan di organisasi.',
+            'rendah-tinggi-rendah' => 'SNBP dan Mandiri pasif, SNBT sangat aktif baik di kelas maupun organisasi, cepat membaur.',
+            'rendah-tinggi-sedang' => 'SNBP kurang aktif, SNBT sangat aktif, Mandiri mulai aktif dan membangun interaksi sosial kampus.',
+            'rendah-tinggi-tinggi' => 'SNBP pasif, namun SNBT dan Mandiri sangat aktif, adaptif, dan tidak terbebani secara ekonomi.',
+            'sedang-rendah-rendah' => 'SNBP cukup aktif, SNBT dan Mandiri masih kesulitan adaptasi dan belum terlibat banyak di kampus.',
+            'sedang-rendah-sedang' => 'SNBP cukup aktif, SNBT agak pasif, Mandiri cukup baik dalam adaptasi dan partisipasi.',
+            'sedang-rendah-tinggi' => 'SNBP cukup aktif, SNBT belum maksimal, dan Mandiri sudah aktif dan tidak terganggu oleh beban ekonomi.',
+            'sedang-sedang-rendah' => 'SNBP dan SNBT cukup aktif, Mandiri masih belum banyak terlibat dan UKT menjadi tantangan.',
+            'sedang-sedang-sedang' => 'Ketiga jalur menunjukkan tingkat keterlibatan yang cukup dalam pembelajaran dan adaptasi di kampus.',
+            'sedang-sedang-tinggi' => 'SNBP dan SNBT cukup aktif, mahasiswa Mandiri sangat adaptif dan aktif di berbagai lini kampus.',
+            'sedang-tinggi-rendah' => 'SNBP cukup aktif, SNBT sangat aktif dan adaptif, Mandiri belum terlalu aktif karena faktor ekonomi.',
+            'sedang-tinggi-sedang' => 'SNBP cukup aktif, SNBT sangat aktif dan adaptif, Mandiri juga cukup baik meski masih terbatas.',
+            'sedang-tinggi-tinggi' => 'SNBP cukup aktif, SNBT dan Mandiri sangat menonjol di kelas dan organisasi kampus.',
+            'tinggi-rendah-rendah' => 'SNBP sangat aktif dan adaptif, SNBT dan Mandiri belum terlalu terlibat dan menghadapi kendala adaptasi.',
+            'tinggi-rendah-sedang' => 'SNBP sangat adaptif, SNBT belum aktif, Mandiri cukup mampu menyesuaikan diri.',
+            'tinggi-rendah-tinggi' => 'SNBP dan Mandiri sangat aktif dan percaya diri, SNBT masih menghadapi tantangan adaptasi.',
+            'tinggi-sedang-rendah' => 'SNBP sangat aktif, SNBT cukup baik, Mandiri belum aktif karena terkendala ekonomi atau lingkungan.',
+            'tinggi-sedang-sedang' => 'SNBP sangat aktif, SNBT dan Mandiri cukup terlibat dan mulai membangun adaptasi baik.',
+            'tinggi-sedang-tinggi' => 'SNBP dan Mandiri sangat aktif, SNBT cukup terlibat, semua mulai menunjukkan performa tinggi.',
+            'tinggi-tinggi-rendah' => 'SNBP dan SNBT sangat aktif, Mandiri masih tertinggal dalam keterlibatan kampus.',
+            'tinggi-tinggi-sedang' => 'SNBP dan SNBT sangat adaptif dan aktif, Mandiri cukup mengikuti meski belum terlalu menonjol.',
+            'tinggi-tinggi-tinggi' => 'Mahasiswa dari ketiga jalur sangat aktif di kelas, organisasi, cepat beradaptasi, dan UKT tidak menghambat pengalaman kuliah mereka.',
+
         ];
     }
 
