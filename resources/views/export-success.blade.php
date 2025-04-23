@@ -24,8 +24,8 @@
 
 <div class="container text-center" style="padding-top: 100px;">
     <!-- Ubah ukuran judul -->
-    <h1 class="fw-bold" style="color: #0E1F4D; font-size: 1.5rem;">Data mahasiswa yang telah diolah berhasil di-export</h1>
-    <p class="mt-3" style="font-size: 1.1rem; color: #6c757d;">File CSV Anda telah berhasil dibuat dan siap untuk diunduh.</p>
+    <h1 class="fw-bold" style="color: #0E1F4D; font-size: 1.5rem;">Data mahasiswa yang telah diolah berhasil di export</h1>
+    <p class="mt-3" style="font-size: 1.1rem; color: #6c757d;">File CSV telah diunduh, silahkan lanjut mengunggah data dengan menekan tombol dibawah ini!</p>
     
     <!-- Tombol dengan gaya baru -->
     <a href="{{ route('dynamic.table') }}" 
