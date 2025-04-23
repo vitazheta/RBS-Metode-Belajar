@@ -124,10 +124,32 @@
 <div class="card p-4 mt-3 shadow-sm">
     <p>Berdasarkan data inputan di kelas <strong>{{ $kelas->nama_kelas }}</strong>, berikut ringkasan rekomendasi pembelajaran yang dapat kami berikan:</p>
     
-    <p>> Akademik dan Endurance: {{ $alasan['akademik_endurance'] }}</p>
-    <p>> Latar Belakang: {{ $alasan['latar_belakang'] }}</p>
-    <p>> Pola Belajar: {{ $alasan['pola_belajar'] }}</p>
-    <p>> Perkuliahan: {{ $alasan['perkuliahan'] }}</p>
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Aspek</th>
+                <th>Alasan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Akademik dan Endurance</td>
+                <td>{{ $alasan['akademik_endurance'] }}</td>
+            </tr>
+            <tr>
+                <td>Latar Belakang</td>
+                <td>{{ $alasan['latar_belakang'] }}</td>
+            </tr>
+            <tr>
+                <td>Pola Belajar</td>
+                <td>{{ $alasan['pola_belajar'] }}</td>
+            </tr>
+            <tr>
+                <td>Perkuliahan</td>
+                <td>{{ $alasan['perkuliahan'] }}</td>
+            </tr>
+        </tbody>
+    </table>
 
     <p>Dengan demikian pembelajaran terbaik yang direkomendasikan adalah <strong>{{ $rekomendasi['akademik_endurance'] }}</strong> 
     dengan tetap memperhatikan <strong>{{ $rekomendasi['latar_belakang'] }}</strong>, 
