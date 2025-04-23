@@ -28,9 +28,9 @@
     <p class="mt-3" style="font-size: 1.1rem; color: #6c757d;">File CSV Anda telah berhasil dibuat dan siap untuk diunduh.</p>
     
     <!-- Tombol dengan gaya baru -->
-    <a href="{{ route('dashboard.dosen') }}" 
+    <a href="{{ route('dynamic.table') }}" 
        class="btn mt-4">
-        Kembali Ke Dashboard
+        Tambahkan Data Kelas
     </a>
 </div>
 
