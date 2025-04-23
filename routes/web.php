@@ -11,6 +11,7 @@ use App\Http\Controllers\RekomendasiMetodeController;
 use App\Http\Controllers\HasilRekomendasiController;
 use Dflydev\DotAccessData\Data;
 
+
 /*
 |--------------------------------------------------------------------------|
 | Web Routes                                                               |
@@ -87,6 +88,13 @@ Route::get('/upload-excel', [FileUploadController::class, 'showUploadForm'])->na
 // Rute untuk memproses upload file
 Route::post('/upload-excel', [FileUploadController::class, 'processUpload'])->name('upload.xlsx.process');
 Route::get('/download-csv', [FileUploadController::class, 'downloadCsv'])->name('download.csv');
+Route::get('/export-success', function () {
+    return view('export-success');
+})->name('export.success');
+
+
+
+
 //Route rekomendasi metode belajar
 //Route::get('/rekomendasi', [RekomendasiMetodeController::class, 'index'])->name('rekomendasi.metode');
 

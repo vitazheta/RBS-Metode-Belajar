@@ -58,10 +58,10 @@ class FileUploadController extends Controller
                 $akademik_endurance = $this->calculateAverage($row, range(23, 32)); // Kolom 24-33
             }
 
-            // Hitung rata-rata untuk bagian lainnya (latar belakang, pola belajar, lingkungan perkuliahan)
+            // Hitung rata-rata untuk bagian lainnya (latar belakang, pola belajar, perkuliahan)
             $latar_belakang = $this->calculateAverage($row, range(33, 42)); // Kolom 34-43
             $pola_belajar = $this->calculateAverage($row, range(43, 52)); // Kolom 44-53
-            $lingkungan_perkuliahan = $this->calculateAverage($row, range(53, 62)); // Kolom 54-63
+            $perkuliahan = $this->calculateAverage($row, range(53, 62)); // Kolom 54-63
 
             // Tambahkan data yang sudah diproses
             $processedData[] = [
@@ -71,7 +71,7 @@ class FileUploadController extends Controller
                 'akademik_endurance' => $akademik_endurance,
                 'latar_belakang' => $latar_belakang,
                 'pola_belajar' => $pola_belajar,
-                'lingkungan_perkuliahan' => $lingkungan_perkuliahan,
+                'perkuliahan' => $perkuliahan,
             ];
         }
 
@@ -124,7 +124,7 @@ class FileUploadController extends Controller
                     $data['akademik_endurance'],
                     $data['latar_belakang'],
                     $data['pola_belajar'],
-                    $data['lingkungan_perkuliahan'],
+                    $data['perkuliahan'],
                 ]);
         
                 fputcsv($handle, $cleanedData, ','); // Gunakan enclosure default

@@ -435,8 +435,7 @@ setTimeout(() => {
         Berikut ringkasan data yang telah Anda input. Silakan cek kembali sebelum menekan tombol <strong>Generate</strong>.
         </p>
     <div class="row mb-3">
-    <div class="col-md-6">
-        <strong>Nama Kelas:</strong> ${namaKelas}
+    <div class="col-md-6">        <strong>Nama Kelas:</strong> ${namaKelas}
     </div>
     <div class="col-md-6">
         <strong>Kode Mata Kuliah:</strong> ${kodeMK}

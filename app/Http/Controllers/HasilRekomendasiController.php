@@ -48,7 +48,7 @@ class HasilRekomendasiController extends Controller
     {
         $rekomendasi = [];
     
-        $aspekList = ['akademik_endurance', 'latar_belakang', 'pola_belajar', 'proses_perkuliahan'];
+        $aspekList = ['akademik_endurance', 'latar_belakang', 'pola_belajar', 'perkuliahan'];
     
         foreach ($aspekList as $aspek) {
             $snbp = $data['SNBP'][$aspek] ?? 0;

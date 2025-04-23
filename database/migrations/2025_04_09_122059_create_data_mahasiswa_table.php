@@ -12,7 +12,7 @@ class CreateDataMahasiswaTable extends Migration
             $table->id();
             $table->unsignedBigInteger('kelas_id');
             $table->string('nama_lengkap');
-            $table->string('asal sekolah');
+            $table->string('asal_sekolah');
             $table->string('jalur_masuk');
             $table->double('akademik_endurance', 8, 2)->nullable();
             $table->double('latar_belakang', 8, 2)->nullable();
