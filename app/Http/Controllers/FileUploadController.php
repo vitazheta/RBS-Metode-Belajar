@@ -58,10 +58,18 @@ class FileUploadController extends Controller
                 $akademik_endurance = $this->calculateAverage($row, range(23, 32)); // Kolom 24-33
             }
 
-            // Hitung rata-rata untuk bagian lainnya (latar belakang, pola belajar, perkuliahan)
-            $latar_belakang = $this->calculateAverage($row, range(33, 42)); // Kolom 34-43
-            $pola_belajar = $this->calculateAverage($row, range(43, 52)); // Kolom 44-53
-            $perkuliahan = $this->calculateAverage($row, range(53, 62)); // Kolom 54-63
+            $latar_belakang = 0;
+            if ($jalur_masuk === 'snbp') {
+                $latar_belakang = $this->calculateAverage($row, range(33, 42)); 
+            } elseif ($jalur_masuk === 'snbt') {
+                $latar_belakang = $this->calculateAverage($row, range(43, 52)); 
+            } elseif ($jalur_masuk === 'mandiri') {
+                $latar_belakang = $this->calculateAverage($row, range(53, 62)); 
+            }
+
+            
+            $pola_belajar = $this->calculateAverage($row, range(63, 72)); 
+            $perkuliahan = $this->calculateAverage($row, range(73, 82)); 
 
             // Tambahkan data yang sudah diproses
             $processedData[] = [

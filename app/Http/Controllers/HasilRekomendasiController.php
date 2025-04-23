@@ -93,6 +93,7 @@ class HasilRekomendasiController extends Controller
         // Tampilkan rekomendasi
         return $rekomendasi;
     }
+
     // ini rule nya masih ngaco sih sebenernya, harus diperbaiki lagi euy
     // Fungsi untuk mendapatkan rule set akademik
     private function getRuleSetAkademik()
@@ -229,4 +230,5 @@ class HasilRekomendasiController extends Controller
             'tinggi-tinggi-tinggi' => 'perkuliahan mandiri, terbuka, dan eksploratif'
         ];
     }
+
 }
