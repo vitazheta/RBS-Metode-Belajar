@@ -122,20 +122,18 @@
 
 {{-- Section: Hasil Rekomendasi --}}
 <div class="card p-4 mt-3 shadow-sm">
-    <p>
-        Berdasarkan data inputan di kelas <strong>{{ $kelas->nama_kelas }}</strong>, 
-        dapat diketahui bahwa pembelajaran yang direkomendasikan adalah 
-        <strong>{{ $rekomendasi['akademik_endurance'] }}</strong>, 
-        dengan memerhatikan <strong>{{ $rekomendasi['latar_belakang'] }}</strong> 
-        dan juga menggunakan <strong>{{ $rekomendasi['pola_belajar'] }}</strong>, 
-        serta menggunakan <strong>{{ $rekomendasi['perkuliahan'] }}</strong>.
-    </p>
+    <p>Berdasarkan data inputan di kelas <strong>{{ $kelas->nama_kelas }}</strong>, berikut ringkasan rekomendasi pembelajaran yang dapat kami berikan:</p>
+    
+    <p>> Akademik dan Endurance: {{ $alasan['akademik_endurance'] }}</p>
+    <p>> Latar Belakang: {{ $alasan['latar_belakang'] }}</p>
+    <p>> Pola Belajar: {{ $alasan['pola_belajar'] }}</p>
+    <p>> Perkuliahan: {{ $alasan['perkuliahan'] }}</p>
+
+    <p>Dengan demikian pembelajaran terbaik yang direkomendasikan adalah <strong>{{ $rekomendasi['akademik_endurance'] }}</strong> 
+    dengan tetap memperhatikan <strong>{{ $rekomendasi['latar_belakang'] }}</strong>, 
+    <strong>{{ $rekomendasi['pola_belajar'] }}</strong>, 
+    serta <strong>{{ $rekomendasi['perkuliahan'] }}</strong>.</p>
 </div>
-
-
-
-
-
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -175,14 +173,6 @@
     createChart('chartSNBT', 'Mahasiswa SNBT', chartData.SNBT);
     createChart('chartMandiri', 'Mahasiswa Mandiri', chartData.Mandiri);
 </script>
-
-
-
-
-
-
-
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -233,12 +223,6 @@
         }, 500); // cukup 500ms, kalau lambat baru naikin ke 1000ms
     });
 </script>
-
-
-
-
-
-
 
 @endpush
 

@@ -40,58 +40,70 @@ class HasilRekomendasiController extends Controller
         $rekomendasi = $this->rekomendasiBelajar($chartData);
 
         // Tampilkan view hasil rekomendasi
-        return view('hasil_rekomendasi', compact('kelas', 'mahasiswa', 'chartData', 'rekomendasi'));
+        return view('hasil_rekomendasi', [
+            'kelas' => $kelas,
+            'chartData' => $chartData,
+            'rekomendasi' => $rekomendasi['rekomendasi'], // Rekomendasi untuk setiap aspek
+            'alasan' => $rekomendasi['alasan'], // Alasan untuk setiap aspek
+        ]);
     }
     
     // MEMBUAT RULE REKOMENDASI BELAJAR
     public function rekomendasiBelajar($data)
     {
         $rekomendasi = [];
-    
+        $alasan = [];
+
         $aspekList = ['akademik_endurance', 'latar_belakang', 'pola_belajar', 'perkuliahan'];
-    
+
         foreach ($aspekList as $aspek) {
             $snbp = $data['SNBP'][$aspek] ?? 0;
             $snbt = $data['SNBT'][$aspek] ?? 0;
             $mandiri = $data['Mandiri'][$aspek] ?? 0;
-    
+
             $kategori = function ($nilai) {
                 if ($nilai <= 2) return 'rendah';
                 if ($nilai <= 3) return 'sedang';
                 return 'tinggi';
             };
-    
+
             $kat_snbp = $kategori($snbp);
             $kat_snbt = $kategori($snbt);
             $kat_mandiri = $kategori($mandiri);
-    
+
             $key = "$kat_snbp-$kat_snbt-$kat_mandiri";
-    
-            // Pilih rule set berdasarkan aspek
+
+            // Pilih rule set dan alasan berdasarkan aspek
             switch ($aspek) {
                 case 'akademik_endurance':
                     $ruleSet = $this->getRuleSetAkademik();
+                    $alasanSet = $this->getAlasanAkademik();
                     break;
                 case 'latar_belakang':
                     $ruleSet = $this->getRuleSetLatarBelakang();
+                    $alasanSet = $this->getAlasanLatarBelakang();
                     break;
                 case 'pola_belajar':
                     $ruleSet = $this->getRuleSetPolaBelajar();
+                    $alasanSet = $this->getAlasanPolaBelajar();
                     break;
                 case 'perkuliahan':
                     $ruleSet = $this->getRuleSetProsesKuliah();
+                    $alasanSet = $this->getAlasanProsesKuliah();
                     break;
                 default:
                     $ruleSet = [];
+                    $alasanSet = [];
                     break;
             }
 
-            // Ambil rekomendasi berdasarkan key atau gunakan default
+            // Ambil rekomendasi dan alasan berdasarkan key
             $rekomendasi[$aspek] = $ruleSet[$key] ?? 'Gunakan pendekatan adaptif sesuai kondisi kelas.';
+            $alasan[$aspek] = $alasanSet[$key] ?? 'Alasan belum tersedia untuk kategori ini.';
         }
 
-        // Tampilkan rekomendasi
-        return $rekomendasi;
+        // Tampilkan rekomendasi dan alasan
+        return ['rekomendasi' => $rekomendasi, 'alasan' => $alasan];
     }
 
     // ini rule nya masih ngaco sih sebenernya, harus diperbaiki lagi euy
@@ -129,6 +141,39 @@ class HasilRekomendasiController extends Controller
         ];
     }
 
+    private function getAlasanAkademik()
+    {
+        return [
+            'rendah-rendah-rendah' => 'rata-rata mahasiswa SNBP, SNBT, dan Mandiri masih memerlukan bimbingan akademik yang lebih dalam',
+            'rendah-rendah-sedang' => 'mahasiswa SNBP dan SNBT memerlukan penguatan akademik, sementara mahasiswa Mandiri cukup stabil',
+            'rendah-rendah-tinggi' => 'mahasiswa SNBP dan SNBT memerlukan bimbingan, sementara mahasiswa Mandiri sudah memiliki kemampuan akademik yang baik',
+            'rendah-sedang-rendah' => 'mahasiswa SNBP dan Mandiri memerlukan bimbingan, sementara mahasiswa SNBT cukup stabil',
+            'rendah-sedang-sedang' => 'mahasiswa SNBP memerlukan bimbingan, sementara mahasiswa SNBT dan Mandiri cukup stabil',
+            'rendah-sedang-tinggi' => 'mahasiswa SNBP memerlukan bimbingan, sementara mahasiswa SNBT cukup stabil dan mahasiswa Mandiri sudah baik',
+            'rendah-tinggi-rendah' => 'mahasiswa SNBP dan Mandiri memerlukan bimbingan, sementara mahasiswa SNBT sudah baik',
+            'rendah-tinggi-sedang' => 'mahasiswa SNBP memerlukan bimbingan, sementara mahasiswa SNBT sudah baik dan mahasiswa Mandiri cukup stabil',
+            'rendah-tinggi-tinggi' => 'mahasiswa SNBP memerlukan bimbingan, sementara mahasiswa SNBT dan Mandiri sudah baik',
+            'sedang-rendah-rendah' => 'mahasiswa SNBT dan Mandiri memerlukan bimbingan, sementara mahasiswa SNBP cukup stabil',
+            'sedang-rendah-sedang' => 'mahasiswa SNBT memerlukan bimbingan, sementara mahasiswa SNBP cukup stabil dan mahasiswa Mandiri sudah baik',
+            'sedang-rendah-tinggi' => 'mahasiswa SNBT memerlukan bimbingan, sementara mahasiswa SNBP dan Mandiri sudah baik',
+            'sedang-sedang-rendah' => 'mahasiswa Mandiri memerlukan bimbingan, sementara mahasiswa SNBP dan SNBT cukup stabil',
+            'sedang-sedang-sedang' => 'mahasiswa SNBP, SNBT, dan Mandiri cukup stabil dalam kemampuan akademik',
+            'sedang-sedang-tinggi' => 'mahasiswa SNBP dan SNBT cukup stabil, sementara mahasiswa Mandiri sudah baik',
+            'sedang-tinggi-rendah' => 'mahasiswa Mandiri memerlukan bimbingan, sementara mahasiswa SNBP dan SNBT sudah baik',
+            'sedang-tinggi-sedang' => 'mahasiswa SNBP cukup stabil, sementara mahasiswa SNBT dan Mandiri sudah baik',
+            'sedang-tinggi-tinggi' => 'mahasiswa SNBP, SNBT, dan Mandiri sudah baik dalam kemampuan akademik',
+            'tinggi-rendah-rendah' => 'mahasiswa SNBT dan Mandiri memerlukan bimbingan, sementara mahasiswa SNBP sudah baik',
+            'tinggi-rendah-sedang' => 'mahasiswa SNBT memerlukan bimbingan, sementara mahasiswa SNBP sudah baik dan mahasiswa Mandiri cukup stabil',
+            'tinggi-rendah-tinggi' => 'mahasiswa SNBT memerlukan bimbingan, sementara mahasiswa SNBP dan Mandiri sudah baik',
+            'tinggi-sedang-rendah' => 'mahasiswa Mandiri memerlukan bimbingan, sementara mahasiswa SNBP sudah baik dan mahasiswa SNBT cukup stabil',
+            'tinggi-sedang-sedang' => 'mahasiswa SNBP sudah baik, sementara mahasiswa SNBT dan Mandiri cukup stabil',
+            'tinggi-sedang-tinggi' => 'mahasiswa SNBP dan Mandiri sudah baik, sementara mahasiswa SNBT cukup stabil',
+            'tinggi-tinggi-rendah' => 'mahasiswa Mandiri memerlukan bimbingan, sementara mahasiswa SNBP dan SNBT sudah baik',
+            'tinggi-tinggi-sedang' => 'mahasiswa SNBP dan SNBT sudah baik, sementara mahasiswa Mandiri cukup stabil',
+            'tinggi-tinggi-tinggi' => 'mahasiswa SNBP, SNBT, dan Mandiri sudah sangat baik dalam kemampuan akademik'
+        ];
+    }
+
     // Fungsi untuk mendapatkan rule set latar belakang
     private function getRuleSetLatarBelakang()
     {
@@ -160,6 +205,16 @@ class HasilRekomendasiController extends Controller
             'tinggi-tinggi-rendah' => 'bantuan subsidi kuota untuk mahasiswa jalur bawah',
             'tinggi-tinggi-sedang' => 'model belajar fleksibel dan mandiri',
             'tinggi-tinggi-tinggi' => 'eksperimen pembelajaran inovatif'
+        ];
+    }
+
+    private function getAlasanLatarBelakang()
+    {
+        return [
+            'rendah-rendah-rendah' => 'mahasiswa dari semua jalur memiliki keterbatasan latar belakang pendidikan',
+            'rendah-rendah-sedang' => 'mahasiswa SNBP dan SNBT memiliki keterbatasan, sementara mahasiswa Mandiri cukup baik',
+            'rendah-rendah-tinggi' => 'mahasiswa SNBP dan SNBT memiliki keterbatasan, sementara mahasiswa Mandiri sangat baik',
+            // Tambahkan alasan lainnya sesuai kebutuhan...
         ];
     }
 
@@ -197,6 +252,16 @@ class HasilRekomendasiController extends Controller
         ];
     }
 
+    private function getAlasanPolaBelajar()
+    {
+        return [
+            'rendah-rendah-rendah' => 'mahasiswa dari semua jalur memerlukan bimbingan dalam membangun pola belajar yang efektif',
+            'rendah-rendah-sedang' => 'mahasiswa SNBP dan SNBT memerlukan bimbingan, sementara mahasiswa Mandiri cukup baik',
+            'rendah-rendah-tinggi' => 'mahasiswa SNBP dan SNBT memerlukan bimbingan, sementara mahasiswa Mandiri sangat baik',
+            // Tambahkan alasan lainnya sesuai kebutuhan...
+        ];
+    }
+
     // Fungsi untuk mendapatkan rule set proses kuliah
     private function getRuleSetProsesKuliah()
     {
@@ -228,6 +293,16 @@ class HasilRekomendasiController extends Controller
             'tinggi-tinggi-rendah' => 'jalur tinggi membimbing refleksi jalur bawah',
             'tinggi-tinggi-sedang' => 'kegiatan kolaboratif',
             'tinggi-tinggi-tinggi' => 'perkuliahan mandiri, terbuka, dan eksploratif'
+        ];
+    }
+
+    private function getAlasanProsesKuliah()
+    {
+        return [
+            'rendah-rendah-rendah' => 'mahasiswa dari semua jalur memerlukan struktur kuliah yang jelas dan terarah',
+            'rendah-rendah-sedang' => 'mahasiswa SNBP dan SNBT memerlukan struktur kuliah yang jelas, sementara mahasiswa Mandiri cukup baik',
+            'rendah-rendah-tinggi' => 'mahasiswa SNBP dan SNBT memerlukan struktur kuliah yang jelas, sementara mahasiswa Mandiri sangat baik',
+            // Tambahkan alasan lainnya sesuai kebutuhan...
         ];
     }
 
