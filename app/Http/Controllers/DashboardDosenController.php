@@ -10,31 +10,72 @@ class DashboardDosenController extends Controller
     public function __construct()
     {
         $this->middleware('auth'); // Menjamin user sudah login
-
     }
-
 
     public function dashboard()
-{
-    if (!Auth::check()) {
-        return redirect()->route('login'); // Jika belum login, kembalikan ke login
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login'); // Jika belum login, kembalikan ke login
+        }
+
+        // Ambil nama dosen dari model User (dosen yang sedang login)
+        $dosen = Auth::user(); // Pastikan ini mengambil data dosen yang login
+
+        // Ambil data kelas yang diajar oleh dosen ini dari database
+        $kelas = \App\Models\Kelas::where('dosen_id', $dosen->id)->with('mahasiswa')->get();
+
+        // Hitung jumlah kelas
+        $jumlah_kelas = $kelas->count();
+
+        // Hitung total mahasiswa dari seluruh kelas
+        $total_mahasiswa = $kelas->sum(function ($kelas) {
+            return $kelas->mahasiswa->count();
+        });
+
+        // Tentukan jalur masuk dominan berdasarkan data
+        $jalur_masuk_data = $kelas->flatMap(function ($kelas) {
+            return $kelas->mahasiswa->pluck('jalur_masuk');
+        })->countBy();
+
+        // Ubah data jalur masuk menjadi persentase
+        $jalur_masuk_persen = $jalur_masuk_data->map(function ($count) use ($total_mahasiswa) {
+            return ($total_mahasiswa > 0) ? round(($count / $total_mahasiswa) * 100, 2) : 0;
+        });
+
+        // Tentukan jalur masuk dominan
+        $jalur_masuk_dominan = $jalur_masuk_persen->sortDesc()->keys()->first();
+
+        // Siapkan data persentase untuk setiap aspek di setiap kelas
+        $kelas->map(function ($k) {
+            $total_mahasiswa_kelas = $k->mahasiswa->count();
+
+            $k->persen_akademik = $total_mahasiswa_kelas > 0
+                ? round($k->mahasiswa->avg('akademik_endurance'), 2)
+                : 0;
+
+            $k->persen_latar_belakang = $total_mahasiswa_kelas > 0
+                ? round($k->mahasiswa->avg('latar_belakang'), 2)
+                : 0;
+
+            $k->persen_pola_belajar = $total_mahasiswa_kelas > 0
+                ? round($k->mahasiswa->avg('pola_belajar'), 2)
+                : 0;
+
+            $k->persen_perkuliahan = $total_mahasiswa_kelas > 0
+                ? round($k->mahasiswa->avg('perkuliahan'), 2)
+                : 0;
+
+            return $k;
+        });
+
+        // Passing data ke view
+        return view('dashboard-dosen', compact(
+            'jumlah_kelas',
+            'total_mahasiswa',
+            'jalur_masuk_persen',
+            'jalur_masuk_dominan',
+            'kelas',
+            'dosen'
+        ));
     }
-
-    // Ambil nama dosen dari model User (dosen yang sedang login)
-    $dosen = Auth::user(); // Pastikan ini mengambil data dosen yang login
-
-    // Data lainnya
-    $jumlah_kelas = 5;
-    $total_mahasiswa = 120;
-    $metode_dominan = "Visual";
-
-    $kelas = [
-        (object) ['nama_kelas' => 'IK313 - Basis Data A', 'persen_visual' => 83, 'persen_auditori' => 15, 'persen_kinestetik' => 2],
-        (object) ['nama_kelas' => 'IK314 - Pemrograman Web', 'persen_visual' => 75, 'persen_auditori' => 20, 'persen_kinestetik' => 5],
-    ];
-
-    // Passing data ke view
-    return view('dashboard-dosen', compact('jumlah_kelas', 'total_mahasiswa', 'metode_dominan', 'kelas', 'dosen')); // Pastikan 'dosen' ada di sini
-}
-
 }
