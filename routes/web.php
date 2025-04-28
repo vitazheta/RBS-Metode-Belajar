@@ -23,6 +23,8 @@ use App\Http\Controllers\InfoController;
 
 Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
 
+Route::get('/tutorial', [InfoController::class, 'showTutorial'])->name('tutorial');
+
 
 Route::get('/', function () {
     return view('welcome');
