@@ -9,6 +9,9 @@ use App\Http\Controllers\DynamicTableController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\RekomendasiMetodeController;
 use App\Http\Controllers\HasilRekomendasiController;
+use Dflydev\DotAccessData\Data;
+
+
 /*
 |--------------------------------------------------------------------------|
 | Web Routes                                                               |
@@ -59,7 +62,7 @@ Route::post('/kelas/store', [KelasController::class, 'generate'])->name('kelas.s
 
 Route::post('/kelas/generate', [KelasController::class, 'generate'])->name('kelas.generate');
 
-Route::post('/import-csv', [MahasiswaController::class, 'importCSV'])->name('import.process');
+//Route::post('/import-csv', [MahasiswaController::class, 'importCSV'])->name('import.process');
 
 Route::post('/generate-data', [KelasController::class, 'generateData'])->name('kelas.generateData');
 
@@ -74,8 +77,22 @@ Route::post('/simpan-mahasiswa', [DataMahasiswaController::class, 'simpan'])->na
 
 Route::post('/import-csv', [DataMahasiswaController::class, 'import'])->name('import.csv');
 
-
+Route::get('/hasil-rekomendasi/{id}', [HasilRekomendasiController::class, 'show'])->name('hasil.rekomendasi');
 //Route daftar kelas
+
+use App\Http\Controllers\FileUploadController;
+
+// Rute untuk menampilkan halaman upload file
+Route::get('/upload-excel', [FileUploadController::class, 'showUploadForm'])->name('upload.xlsx');
+
+// Rute untuk memproses upload file
+Route::post('/upload-excel', [FileUploadController::class, 'processUpload'])->name('upload.xlsx.process');
+Route::get('/download-csv', [FileUploadController::class, 'downloadCsv'])->name('download.csv');
+Route::get('/export-success', function () {
+    return view('export-success');
+})->name('export.success');
+
+
 
 
 //Route rekomendasi metode belajar

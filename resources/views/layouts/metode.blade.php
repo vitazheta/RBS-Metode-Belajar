@@ -67,7 +67,8 @@
     }
 
     .card-title {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
+      font-weight: bold;
       color: #ffff;
       margin-bottom: 8px;
     }
@@ -75,6 +76,7 @@
     .card-desc {
       font-size: 0.95rem;
       color: #ffff;
+      /* text-align: center; */
     }
 
     .nav-button {
@@ -120,37 +122,38 @@
       <div class="card">
           <div class="card-content">
             <div class="card-title">Problem Based Learning</div>
-            <div class="card-desc">Siswa memecahkan masalah sebagai inti pembelajaran, mendorong pemikiran analitis dan kolaboratif.</div>
+            <div class="card-desc"> Pendekatan pembelajaran yang fokus pada penyelesaian masalah autentik kompleks 
+              untuk mengembangkan berpikir kritis, analisis, dan pemecahan masalah secara mendalam. </div>
           </div>
         </div>
         <div class="card">
           <div class="card-content">
             <div class="card-title">Project Based Learning</div>
-            <div class="card-desc">Pembelajaran berbasis proyek nyata, membangun kreativitas dan kerja tim secara mendalam.</div>
+            <div class="card-desc">Pembelajaran berbasis proyek nyata yang memperkuat pemahaman konsep sekaligus melatih kerja tim, perencanaan, manajemen waktu, dan kreativitas.</div>
           </div>
         </div>
         <div class="card">
           <div class="card-content">
-            <div class="card-title">Ceramah</div>
-            <div class="card-desc">Metode penyampaian materi oleh guru secara langsung, cocok untuk materi teoretis.</div>
+            <div class="card-title">Case-Based Learning</div>
+            <div class="card-desc">Pembelajaran berbasis kasus menggunakan situasi nyata atau simulasi yang dianalisis secara mendalam untuk melatih berpikir analitis dan pengambilan keputusan.</div>
           </div>
         </div>
         <div class="card">
           <div class="card-content">
-            <div class="card-title">Diskusi</div>
-            <div class="card-desc">Melibatkan siswa dalam bertukar pendapat, meningkatkan keterampilan berpikir kritis dan komunikasi.</div>
+            <div class="card-title">Collaborative Learning</div>
+            <div class="card-desc">Pembelajaran yang mengutamakan kerja kelompok untuk  mengembangkan keterampilan komunikasi, kepemimpinan, serta kemampuan sosial.</div>
           </div>
         </div>
         <div class="card">
           <div class="card-content">
-            <div class="card-title">Tanya Jawab</div>
-            <div class="card-desc">Guru memberikan pertanyaan dan siswa merespons, atau sebaliknya, meningkatkan partisipasi.</div>
+            <div class="card-title">Flipped Classroom</div>
+            <div class="card-desc">Metode yang mengharuskan belajar mandiri sebelum kelas, sehingga waktu tatap muka digunakan untuk diskusi, praktik, dan tugas bersama.</div>
           </div>
         </div>
         <div class="card">
           <div class="card-content">
-            <div class="card-title">Demonstrasi</div>
-            <div class="card-desc">Guru menunjukkan proses atau eksperimen secara langsung, cocok untuk pembelajaran praktis.</div>
+            <div class="card-title">Experiential Learning</div>
+            <div class="card-desc">Pembelajaran berbasis pengalaman langsung melalui praktik, simulasi, atau magang untuk mengembangkan kompetensi teknis dan sikap profesional.</div>
           </div>
         </div>
       </div>
