@@ -10,6 +10,8 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\RekomendasiMetodeController;
 use App\Http\Controllers\HasilRekomendasiController;
 use Dflydev\DotAccessData\Data;
+use App\Http\Controllers\InfoController;
+
 
 
 /*
@@ -17,6 +19,17 @@ use Dflydev\DotAccessData\Data;
 | Web Routes                                                               |
 |--------------------------------------------------------------------------|
 */
+//Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
+
+//Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
+
+
+Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
+
+//Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'namaFunction']);
+
+Route::get('/tutorial', [InfoController::class, 'showTutorial'])->name('tutorial');
+
 
 Route::get('/', function () {
     return view('welcome');
