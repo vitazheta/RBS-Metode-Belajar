@@ -2,94 +2,106 @@
 
 @section('content')
 <style>
+html, body {
+    height: 100%; /* Pastikan tinggi halaman mencakup seluruh layar */
+}
+
+body {
+    background-color: #EBEDF4;
+    font-family: Poppins, sans-serif;
+}
+
 #addRowBtn {
-  background-color: #f2c84b;
-  border-color: #f2c84b;
-  color: #0e1e4b; /* teks gelap biar kontras */
+    background-color: #F37AB0;
+    border-color: #F37AB0;
+    color: #FFFFFF; /* teks gelap biar kontras */
 }
 
 #addRowBtn:hover {
-  background-color: #d4ac30;
-  border-color: #d4ac30;
+    background-color: transparent;
+    border-color: #F37AB0;
+    color: #F37AB0;
 }
 
 #saveBtn {
-  background-color: #2b4c7e;
-  border-color: #2b4c7e;
-  color: white;
+    background-color: #0E1F4D;
+    border-color: #0E1F4D;
+    color: white;
 }
 
 #saveBtn:hover {
-  background-color: #355c99;
-  border-color: #355c99;
+    background-color: transparent;
+    border-color: #0E1F4D;
+    color: #0E1F4D;
 }
 
 #generateBtn {
-  background-color: #2b4c7e;
-  border-color: #2b4c7e;
-  color: white;
+    background-color: #0E1F4D;
+    border-color: #0E1F4D;
+    color: white;
 }
 
 #generateBtn:hover {
-  background-color: #355c99;
-  border-color: #355c99;
+    background-color: transparent;
+    border-color: #0E1F4D;
+    color: #0E1F4D;
 }
 
 input::placeholder {
     font-weight: 300;
     color: #888;
     font-style: italic;
-  }
+}
 
-    .custom-table {
-        border-collapse: collapse;
-        width: 100%;
-        font-size: 14px;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
+.custom-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
 
-    .custom-table thead {
-        background-color: #0e1e4b;
-        color: white;
-    }
+.custom-table thead {
+    background-color: #0E1F4D;
+    color: white;
+}
 
-    .custom-table th,
-    .custom-table td {
-        padding: 12px 15px;
-        text-align: center;
-        vertical-align: middle;
-    }
+.custom-table th,
+.custom-table td {
+    padding: 12px 15px;
+    text-align: center;
+    vertical-align: middle;
+}
 
-    .custom-table tbody tr:nth-child(even) {
-        background-color: #f0f4fa;
-    }
+.custom-table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
 
-    .custom-table tbody tr:hover {
-        background-color: #e6f0fa;
-        transition: all 0.2s ease-in-out;
-    }
+.custom-table tbody tr:hover {
+    background-color: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
 
-    .custom-table .btn-delete {
-        background-color: #f27aaf;
-        border: none;
-        color: white;
-        padding: 4px 8px;
-        border-radius: 6px;
-        font-size: 12px;
-    }
+.custom-table .btn-delete {
+    background-color: #F37AB0;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+}
 
-    .custom-table .btn-delete:hover {
-        background-color: #e06498;
-    }
+.custom-table .btn-delete:hover {
+    background-color: #F37AB0;
+}
 
 #dynamicTable {
     table-layout: fixed; /* Biar kolom lebarnya lebih merata */
     width: 100%;
 }
 
- #dynamicTable th,
+#dynamicTable th,
 #dynamicTable td {
     padding: 12px 6px; /* Sesuaikan jarak dalam sel */
 
@@ -97,38 +109,51 @@ input::placeholder {
     overflow-wrap: break-word;
 }
 
+.content-wrapper {
+    min-height: calc(100vh - 100px); /* Pastikan konten utama memenuhi layar */
+    margin-bottom: 100px; /* Tambahkan ruang kosong sebelum footer */
+}
+
+#toggleBtn:hover {
+    text-decoration: underline !important; /* Gunakan !important untuk memaksa aturan ini */
+    cursor: pointer;
+}
+
+.btn-link:hover {
+    text-decoration: underline !important;
+}
+
 </style>
 
 
-<div class="container" style="padding-top: 70px;">
+<div class="container content-wrapper" style="padding-top: 70px;">
     <h2 class="mb-2 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
         Data Kelas
-        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
+        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
 <!-- Tombol Toggle -->
-<button class="btn btn-link p-0 text-decoration-none small d-flex align-items-center"
+<button id="toggleBtn" class="btn btn-link p-0 text-decoration-none small d-flex align-items-center"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#tutorialPengisian"
         aria-expanded="false"
         aria-controls="tutorialPengisian"
-        id="toggleBtn"
-        style="color: #0e1e4b; margin-top: 0px; margin-bottom: 8px;">
-  <span id="toggleIcon">📘</span> &nbsp; Lihat panduan pengisian
+        style="color: #0E1F4D; margin-top: 0px; margin-bottom: 8px;">
+    <span id="toggleIcon">🔽</span> &nbsp; Lihat panduan pengisian
 </button>
 
 <!-- Konten Collapse -->
 <div class="collapse mt-2" id="tutorialPengisian">
-  <div class="card border-0 shadow-sm" style="background-color: #fdf9ed; font-size: 0.9rem; color: #0e1e4b; margin-bottom: 10px;">
-    <div class="card-body">
-      Masukkan nama kelas sesuai format penamaan institusi. Contoh:
-      <ul class="mb-1 ps-3">
-        <li><strong>Pendidikan Ilmu Komputer B - 2021</strong></li>
-        <li><strong>Sistem Informasi A - 2022</strong></li>
-      </ul>
-      <p class="mb-0">Gunakan huruf kapital untuk singkatan jurusan jika perlu, dan tambahkan tahun angkatan untuk mempermudah identifikasi kelas.</p>
+    <div class="card border-0 shadow-sm" style="background-color: #ffffff; font-size: 14px; color: #0E1F4D; margin-bottom: 10px;">
+        <div class="card-body">
+            Masukkan nama kelas sesuai format penamaan institusi. Contoh:
+            <ul class="mb-1 ps-3">
+                <li><strong>Pendidikan Ilmu Komputer B - 2021</strong></li>
+                <li><strong>Sistem Informasi A - 2022</strong></li>
+            </ul>
+            <p class="mb-0">Gunakan huruf kapital untuk singkatan jurusan jika perlu, dan tambahkan tahun angkatan untuk mempermudah identifikasi kelas.</p>
+        </div>
     </div>
-  </div>
 </div>
 
     <!-- FORM UTAMA -->
@@ -429,7 +454,7 @@ setTimeout(() => {
     }
 }, 500);
     let summaryHTML = `
-     <div class="card mt-4 p-4 shadow-sm" style="background-color: #f8f9fa;">
+     <div class="card mt-4 p-4 shadow-sm" style="background-color: #ffffff; border-0;">
     <h4 class="mb-2 fw-bold" style="color: #0E1F4D;">Ringkasan Data</h4>
         <p class="mb-4 text-muted" style="font-size: 14px;">
         Berikut ringkasan data yang telah Anda input. Silakan cek kembali sebelum menekan tombol <strong>Generate</strong>.
@@ -530,7 +555,7 @@ if (generateBtn) {
   });
 
   collapseEl.addEventListener('hide.bs.collapse', function () {
-    toggleIcon.textContent = '📘'; // Saat tertutup
+    toggleIcon.textContent = '🔽'; // Saat tertutup
   });
 </script>
 

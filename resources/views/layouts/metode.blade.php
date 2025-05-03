@@ -12,7 +12,16 @@
       margin: auto;
     }
 
+    .container h2 {
+    margin: 20;
+    color: #0E1F4D;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 56px;
+    }
+
     .section-title {
+      margin-top: 80px;
       margin-bottom: 20px;
       text-align: center;
       color: #0E1F4D;
@@ -56,7 +65,7 @@
     }
 
     .card-content {
-      background: #0E1F4D;
+      background: linear-gradient(180deg, #0E1F4D, #000D30); /* Gradasi dari atas ke bawah */
       border-radius: 10px;
       padding: 20px;
       height: 250px;
@@ -67,15 +76,17 @@
     }
 
     .card-title {
-      font-size: 1.3rem;
+      font-size: 20px;
       font-weight: bold;
       color: #ffff;
       margin-bottom: 8px;
+      padding: 10px;
     }
 
     .card-desc {
-      font-size: 0.95rem;
+      font-size: 14px;
       color: #ffff;
+      padding: 10px;
       /* text-align: center; */
     }
 

@@ -30,6 +30,9 @@ Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->n
 
 Route::get('/tutorial', [InfoController::class, 'showTutorial'])->name('tutorial');
 
+Route::get('/pelajari', function () {
+    return view('info.pelajari');
+})->name('pelajari');
 
 Route::get('/', function () {
     return view('welcome');

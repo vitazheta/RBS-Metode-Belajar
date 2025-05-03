@@ -8,6 +8,8 @@
     @media print {
     .container {
         padding-top: 0 !important; /* Menghilangkan padding-top saat print */
+        min-height: calc(100vh - 100px); /* Pastikan konten utama memenuhi layar */
+        margin-bottom: 100px;
     }
 }
 
@@ -16,6 +18,44 @@
     max-height: 400px;
     margin: 0 auto;
     }
+
+    .pdf-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 2px solid #000;
+        margin-bottom: 100px;
+    }
+
+    .card-hasil-rekomendasi {
+        margin-bottom: 100px; /* Tambahkan jarak sebelum footer */
+    }
+
+    body {
+    background-color: #EBEDF4; /* Warna latar belakang */
+    font-family: 'Poppins', sans-serif; /* Pastikan font tetap konsisten */
+    margin: 0;
+    padding: 0;
+    }
+
+    .table-responsive {
+    border-radius: 10px; /* Membuat sudut membulat */
+    overflow: hidden; /* Memastikan konten tidak keluar dari sudut */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Menambahkan shadow */
+    background-color: #ffffff; /* Warna latar belakang */
+}
+
+.container-rekomendasi {
+    max-width: 100%; /* Pastikan lebar penuh */
+    margin-bottom: 100px;
+}
+
+.container-rekomendasi .card-hasil-rekomendasi {
+    width: 100%; /* Sesuaikan dengan lebar tabel */
+    margin: 0 auto; /* Pusatkan jika diperlukan */
+    margin-top: 20px; /* Jarak antara tabel dan section hasil rekomendasi */
+}
 
 </style>
 
@@ -33,22 +73,22 @@
 <div class="container" style="padding-top: 0px;">
     <h2 class="mb-2 fw-bold position-relative d-inline-block no-print" style="color: #0E1F4D; padding-top: 70px;">
         Hasil Rekomendasi Gaya Belajar Mahasiswa
-        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
+        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
 
     {{-- Informasi Kelas --}}
-    <div class="card mb-2">
+    <div class="card mb-2" style="border: none; background: none;">
         <div class="card-body">
             <h5 class="card-title"><strong>📘 Informasi Kelas</strong></h5>
             <p>Nama Kelas:
-            <span class="badge bg-success fs-6">{{ $kelas->nama_kelas }}</span>
+            <span class="badge fs-6" style="background-color: #84A7CF;">{{ $kelas->nama_kelas }}</span>
             </p>
 
             <p>Kode Mata Kuliah:
-                <span class="badge bg-warning text-dark fs-6">{{ $kelas->kode_mata_kuliah }}</span>
+                <span class="badge fs-6" style="background-color: #F37AB0;">{{ $kelas->kode_mata_kuliah }}</span>
             </p>
             <p>Dosen Pengampu:
-            <span class="badge bg-success fs-6">{{ auth()->user()->nama }}</span>
+            <span class="badge fs-6" style="background-color: #84A7CF;">{{ auth()->user()->nama }}</span>
             </p>
             <div class="text-end mb-1">
     <button id="exportPDF" class="btn btn-danger no-print">
@@ -61,11 +101,11 @@
 
     {{-- Tambahkan canvas di atas tabel --}}
 <div class="card shadow-sm mb-4">
-    <div class="card-header bg-primary text-white">
+    <div class="card-header text-white" style="background-color: #0E1F4D;">
         <h5 class="mb-0">Distribusi Gaya Belajar Mahasiswa</h5>
     </div>
     <div class="card-body">
-       
+    
         <div class="row">
             <div class="col-md-4">
                 <canvas id="chartSNBP"></canvas>
@@ -80,81 +120,78 @@
     </div>
 </div>
 
-    {{-- Tabel Hasil Rekomendasi --}}
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped align-middle">
-            <thead class="table-dark text-center">
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Asal Sekolah</th>
-                    <th>Jalur Masuk</th>
-                    <th>Akademik dan Endurance</th>
-                    <th>Latar Belakang</th>
-                    <th>Pola Belajar</th>
-                    <th>Perkuliahan</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($kelas->mahasiswa as $index => $mhs)
+    <div class="container-rekomendasi">
+        <div class="table-responsive rounded shadow-sm">
+            <table class="table table-bordered table-striped align-middle">
+                <thead class="table-dark text-center">
                     <tr>
-                        <td class="text-center">{{ $index + 1 }}</td>
-                        <td>{{ $mhs->nama_lengkap }}</td>
-                        <td>{{ $mhs->asal_sekolah}}</td>
-                        <td class="text-center">{{ $mhs->jalur_masuk }}</td>
-                        <td class="text-center">{{ $mhs->akademik_endurance }}</td>
-                        <td class="text-center">{{ $mhs->latar_belakang }}</td>
-                        <td class="text-center">{{ $mhs->pola_belajar }}</td>
-                        <td class="text-center">{{ $mhs->perkuliahan}}</td>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Asal Sekolah</th>
+                        <th>Jalur Masuk</th>
+                        <th>Akademik dan Endurance</th>
+                        <th>Latar Belakang</th>
+                        <th>Pola Belajar</th>
+                        <th>Perkuliahan</th>
                     </tr>
-                @empty
+                </thead>
+                <tbody>
+                    @forelse ($kelas->mahasiswa as $index => $mhs)
+                        <tr>
+                            <td class="text-center">{{ $index + 1 }}</td>
+                            <td>{{ $mhs->nama_lengkap }}</td>
+                            <td>{{ $mhs->asal_sekolah}}</td>
+                            <td class="text-center">{{ $mhs->jalur_masuk }}</td>
+                            <td class="text-center">{{ $mhs->akademik_endurance }}</td>
+                            <td class="text-center">{{ $mhs->latar_belakang }}</td>
+                            <td class="text-center">{{ $mhs->pola_belajar }}</td>
+                            <td class="text-center">{{ $mhs->perkuliahan}}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="11" class="text-center text-muted">Belum ada data hasil rekomendasi.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card p-4 mt-3 shadow-sm card-hasil-rekomendasi">
+            <p>Berdasarkan data inputan di kelas <strong>{{ $kelas->nama_kelas }}</strong>, berikut ringkasan rekomendasi pembelajaran yang dapat kami berikan:</p>
+            
+            <table class="table table-bordered">
+                <thead class="table-light">
                     <tr>
-                        <td colspan="11" class="text-center text-muted">Belum ada data hasil rekomendasi.</td>
+                        <th>Aspek</th>
+                        <th>Alasan</th>
                     </tr>
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Akademik dan Endurance</td>
+                        <td>{{ $alasan['akademik_endurance'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Latar Belakang</td>
+                        <td>{{ $alasan['latar_belakang'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pola Belajar</td>
+                        <td>{{ $alasan['pola_belajar'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Perkuliahan</td>
+                        <td>{{ $alasan['perkuliahan'] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <p>Dengan demikian pembelajaran terbaik yang direkomendasikan adalah <strong>{{ $rekomendasi['akademik_endurance'] }}</strong> 
+            dengan tetap memperhatikan <strong>{{ $rekomendasi['latar_belakang'] }}</strong>, 
+            <strong>{{ $rekomendasi['pola_belajar'] }}</strong>, 
+            serta <strong>{{ $rekomendasi['perkuliahan'] }}</strong>.</p>
+        </div>
     </div>
-
-    {{-- Tombol Aksi --}}
-
-</div>
-
-{{-- Section: Hasil Rekomendasi --}}
-<div class="card p-4 mt-3 shadow-sm">
-    <p>Berdasarkan data inputan di kelas <strong>{{ $kelas->nama_kelas }}</strong>, berikut ringkasan rekomendasi pembelajaran yang dapat kami berikan:</p>
-    
-    <table class="table table-bordered">
-        <thead class="table-light">
-            <tr>
-                <th>Aspek</th>
-                <th>Alasan</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Akademik dan Endurance</td>
-                <td>{{ $alasan['akademik_endurance'] }}</td>
-            </tr>
-            <tr>
-                <td>Latar Belakang</td>
-                <td>{{ $alasan['latar_belakang'] }}</td>
-            </tr>
-            <tr>
-                <td>Pola Belajar</td>
-                <td>{{ $alasan['pola_belajar'] }}</td>
-            </tr>
-            <tr>
-                <td>Perkuliahan</td>
-                <td>{{ $alasan['perkuliahan'] }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <p>Dengan demikian pembelajaran terbaik yang direkomendasikan adalah <strong>{{ $rekomendasi['akademik_endurance'] }}</strong> 
-    dengan tetap memperhatikan <strong>{{ $rekomendasi['latar_belakang'] }}</strong>, 
-    <strong>{{ $rekomendasi['pola_belajar'] }}</strong>, 
-    serta <strong>{{ $rekomendasi['perkuliahan'] }}</strong>.</p>
 </div>
 
 @push('scripts')

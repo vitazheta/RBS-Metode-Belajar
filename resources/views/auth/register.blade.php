@@ -1,42 +1,41 @@
-<body style="background-image: url('{{ asset('images/bg2.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></body>
+<body style="background-color: #EBEDF4;">
 
 @extends('layouts.app')
 
 @section('content')
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="card shadow-lg" style="
+    <div class="card" style="
     position: relative;
     z-index: 10;
     width: 800px; 
     border: none; /* Menghilangkan border */
     border-radius: 40px; 
     overflow: visible;
-    box-shadow: 0px 10px 40px 10px #84A7CF inset; /* Shadow biru tebal */">
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow halus */">
         <div class="row g-0">
             <!-- Bagian Info dan Sign In -->
             <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white text-center p-5" 
             style="
             background-color: #0E1F4D;
-            box-shadow: -15px 0px 50px #0E1F4D;
             border-radius: 20px;
             border-top-right-radius: 0px;  /* Sudut kanan atas melengkung */
-            border-bottom-right-radius: 0px; /* Sudut kanan bawah melengkung */">
+            border-bottom-right-radius: 0px; /* Sudut kanan bawah melengkung */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow halus */">
                 <h2 class="fw-bold">
                 <span style="color: white;">Halo,</span> 
                 <span style="color: #F37AB0;">Dosen!</span>
                 </h2>
                 <p>Sudah memiliki akun? Silakan login dengan tombol di bawah</p>
-                <!-- Tombol Sign In Dipindah ke Sini -->
                 <a href="{{ route('login') }}" class="btn btn-outline-light w-100 rounded-pill py-2">SIGN IN</a>
             </div>
 
             <!-- Bagian Form Register -->
             <div class="col-md-6 bg-white p-5" 
             style="
-            box-shadow: 15px 0px 50px #35455C;
             border-radius: 20px;
             border-top-left-radius: 0;  /* Sudut kiri atas tetap tajam */
-            border-bottom-left-radius: 0;  /* Sudut kiri bawah tetap tajam */">
+            border-bottom-left-radius: 0;  /* Sudut kiri bawah tetap tajam */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow halus */">
                 <h2 class="fw-bold text-center">SIGN UP</h2>
                 <p class="text-center">Daftarkan diri Anda dan segera mulai gunakan website ini</p>
                 <form action="{{ route('register') }}" method="POST">
