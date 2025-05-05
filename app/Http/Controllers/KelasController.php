@@ -12,11 +12,28 @@ use App\Models\DataMahasiswa;
 
 class KelasController extends Controller
 {
-    public function index()
-    {
-        $daftarKelas = Kelas::all();
-        return view('kelas.index', compact('daftarKelas'));
-    }
+    // public function index()
+    // {
+    //     $daftarKelas = Kelas::all();
+    //     return view('kelas.index', compact('daftarKelas'));
+    // }
+
+//     public function index()
+// {
+//     $daftarKelas = \App\Models\Kelas::all();
+//     return view('daftar_kelas', compact('daftarKelas'));
+
+// }
+
+public function index()
+{
+    // Ambil kelas yang hanya terkait dengan dosen yang sedang login
+    $daftarKelas = Kelas::where('dosen_id', auth()->user()->id)->get();
+
+    return view('daftar_kelas', compact('daftarKelas'));
+}
+
+
 
     public function show($id)
     {
@@ -37,7 +54,7 @@ class KelasController extends Controller
         foreach ($kelas->mahasiswa as $index => $mhs) {
             $mhs->update([
                 'nama_lengkap' => $request->nama[$index],
-                'email' => $request->email[$index],
+                'asal_sekolah' => $request->email[$index],
                 'jalur_masuk' => $request->jalur_masuk[$index],
                 // Tambahkan field lain jika perlu
             ]);
@@ -94,20 +111,22 @@ class KelasController extends Controller
             DataMahasiswa::create([
                 'kelas_id' => $kelas->id,
                 'nama' => $mhs['nama'],
-                'email' => $mhs['email'],
+                'asal_sekolah' => $mhs['asal_sekolah'],
                 'jalur_masuk' => $mhs['jalur_masuk'] ?? null,
-                'kesiapan_akademik' => $mhs['kesiapan_akademik'] ?? null,
-                'kesiapan_ekonomi' => $mhs['kesiapan_ekonomi'] ?? null,
-                'endurance_cita_cita' => $mhs['endurance_cita_cita'] ?? null,
-                'profil_sekolah' => $mhs['profil_sekolah'] ?? null,
-                'profil_ortu' => $mhs['profil_ortu'] ?? null,
+                'akademik_endurance' => $mhs['akademik_endurance'] ?? null,
+                'latar_belakang' => $mhs['latar_belakang'] ?? null,
                 'pola_belajar' => $mhs['pola_belajar'] ?? null,
-                'adaptasi' => $mhs['adaptasi'] ?? null,
+                'proses_perkuliahan' => $mhs['proses_perkuliahan'] ?? null,
             ]);
         }
 
         return redirect()->route('hasil.rekomendasi', ['kelas' => $kelas->id]);
     }
+
+    public function mahasiswa_count()
+{
+    return $this->mahasiswa()->count(); // Menghitung jumlah mahasiswa yang terhubung dengan kelas ini
+}
 
 
 }

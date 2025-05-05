@@ -2,94 +2,106 @@
 
 @section('content')
 <style>
+html, body {
+    height: 100%; /* Pastikan tinggi halaman mencakup seluruh layar */
+}
+
+body {
+    background-color: #EBEDF4;
+    font-family: Poppins, sans-serif;
+}
+
 #addRowBtn {
-  background-color: #f2c84b;
-  border-color: #f2c84b;
-  color: #0e1e4b; /* teks gelap biar kontras */
+    background-color: #F37AB0;
+    border-color: #F37AB0;
+    color: #FFFFFF; /* teks gelap biar kontras */
 }
 
 #addRowBtn:hover {
-  background-color: #d4ac30;
-  border-color: #d4ac30;
+    background-color: transparent;
+    border-color: #F37AB0;
+    color: #F37AB0;
 }
 
 #saveBtn {
-  background-color: #2b4c7e;
-  border-color: #2b4c7e;
-  color: white;
+    background-color: #0E1F4D;
+    border-color: #0E1F4D;
+    color: white;
 }
 
 #saveBtn:hover {
-  background-color: #355c99;
-  border-color: #355c99;
+    background-color: transparent;
+    border-color: #0E1F4D;
+    color: #0E1F4D;
 }
 
 #generateBtn {
-  background-color: #2b4c7e;
-  border-color: #2b4c7e;
-  color: white;
+    background-color: #0E1F4D;
+    border-color: #0E1F4D;
+    color: white;
 }
 
 #generateBtn:hover {
-  background-color: #355c99;
-  border-color: #355c99;
+    background-color: transparent;
+    border-color: #0E1F4D;
+    color: #0E1F4D;
 }
 
 input::placeholder {
     font-weight: 300;
     color: #888;
     font-style: italic;
-  }
+}
 
-    .custom-table {
-        border-collapse: collapse;
-        width: 100%;
-        font-size: 14px;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
+.custom-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
 
-    .custom-table thead {
-        background-color: #0e1e4b;
-        color: white;
-    }
+.custom-table thead {
+    background-color: #0E1F4D;
+    color: white;
+}
 
-    .custom-table th,
-    .custom-table td {
-        padding: 12px 15px;
-        text-align: center;
-        vertical-align: middle;
-    }
+.custom-table th,
+.custom-table td {
+    padding: 12px 15px;
+    text-align: center;
+    vertical-align: middle;
+}
 
-    .custom-table tbody tr:nth-child(even) {
-        background-color: #f0f4fa;
-    }
+.custom-table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
 
-    .custom-table tbody tr:hover {
-        background-color: #e6f0fa;
-        transition: all 0.2s ease-in-out;
-    }
+.custom-table tbody tr:hover {
+    background-color: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
 
-    .custom-table .btn-delete {
-        background-color: #f27aaf;
-        border: none;
-        color: white;
-        padding: 4px 8px;
-        border-radius: 6px;
-        font-size: 12px;
-    }
+.custom-table .btn-delete {
+    background-color: #F37AB0;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+}
 
-    .custom-table .btn-delete:hover {
-        background-color: #e06498;
-    }
+.custom-table .btn-delete:hover {
+    background-color: #F37AB0;
+}
 
 #dynamicTable {
     table-layout: fixed; /* Biar kolom lebarnya lebih merata */
     width: 100%;
 }
 
- #dynamicTable th,
+#dynamicTable th,
 #dynamicTable td {
     padding: 12px 6px; /* Sesuaikan jarak dalam sel */
 
@@ -97,52 +109,58 @@ input::placeholder {
     overflow-wrap: break-word;
 }
 
+.content-wrapper {
+    min-height: calc(100vh - 100px); /* Pastikan konten utama memenuhi layar */
+    margin-bottom: 100px; /* Tambahkan ruang kosong sebelum footer */
+}
+
+#toggleBtn:hover {
+    text-decoration: underline !important; /* Gunakan !important untuk memaksa aturan ini */
+    cursor: pointer;
+}
+
+.btn-link:hover {
+    text-decoration: underline !important;
+}
+
 </style>
 
 
-<div class="container" style="padding-top: 70px;">
+<div class="container content-wrapper" style="padding-top: 70px;">
     <h2 class="mb-2 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
         Data Kelas
-        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
+        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
 <!-- Tombol Toggle -->
-<button class="btn btn-link p-0 text-decoration-none small d-flex align-items-center"
+<button id="toggleBtn" class="btn btn-link p-0 text-decoration-none small d-flex align-items-center"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#tutorialPengisian"
         aria-expanded="false"
         aria-controls="tutorialPengisian"
-        id="toggleBtn"
-        style="color: #0e1e4b; margin-top: 0px; margin-bottom: 8px;">
-  <span id="toggleIcon">📘</span> &nbsp; Lihat panduan pengisian
+        style="color: #0E1F4D; margin-top: 0px; margin-bottom: 8px;">
+    <span id="toggleIcon">🔽</span> &nbsp; Lihat panduan pengisian
 </button>
-
 
 <!-- Konten Collapse -->
 <div class="collapse mt-2" id="tutorialPengisian">
-  <div class="card border-0 shadow-sm" style="background-color: #fdf9ed; font-size: 0.9rem; color: #0e1e4b; margin-bottom: 10px;">
-    <div class="card-body">
-      Masukkan nama kelas sesuai format penamaan institusi. Contoh:
-      <ul class="mb-1 ps-3">
-        <li><strong>Pendidikan Ilmu Komputer B - 2021</strong></li>
-        <li><strong>Sistem Informasi A - 2022</strong></li>
-      </ul>
-      <p class="mb-0">Gunakan huruf kapital untuk singkatan jurusan jika perlu, dan tambahkan tahun angkatan untuk mempermudah identifikasi kelas.</p>
+    <div class="card border-0 shadow-sm" style="background-color: #ffffff; font-size: 14px; color: #0E1F4D; margin-bottom: 10px;">
+        <div class="card-body">
+            Masukkan nama kelas sesuai format penamaan institusi. Contoh:
+            <ul class="mb-1 ps-3">
+                <li><strong>Pendidikan Ilmu Komputer B - 2021</strong></li>
+                <li><strong>Sistem Informasi A - 2022</strong></li>
+            </ul>
+            <p class="mb-0">Gunakan huruf kapital untuk singkatan jurusan jika perlu, dan tambahkan tahun angkatan untuk mempermudah identifikasi kelas.</p>
+        </div>
     </div>
-  </div>
 </div>
-
-
 
     <!-- FORM UTAMA -->
     <form method="POST" action="{{ route('simpan.mahasiswa') }}">
 
-
-
         @csrf
         <input type="hidden" name="mahasiswa" id="mahasiswaJSON">
-
-
 
         <!-- Info Kelas -->
         <div class="mb-3 d-flex">
@@ -157,8 +175,8 @@ input::placeholder {
         </div>
 
         <!-- Tombol Import CSV -->
-        <div class="mb-3">
-    <label class="form-label">Import dari CSV:</label>
+    <div class="mb-3">
+        <label class="form-label">Import dari CSV:</label>
     <div class="input-group">
         <input type="file" id="csvFile" accept=".csv" class="form-control form-control-m rounded-start">
         <!-- <button type="button" class="btn btn-success" onclick="handleCSVImport()">Import CSV</button> -->
@@ -175,22 +193,18 @@ input::placeholder {
 </div>
 
 
-
         <!-- Tabel Input Mahasiswa -->
         <table class="custom-table" id="dynamicTable">
             <thead class="table-dark">
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Email</th>
+                    <th>Asal Sekolah</th>
                     <th>Jalur Masuk</th>
-                    <th>Akademik</th>
-                    <th>Ekonomi</th>
-                    <th>Endurance</th>
-                    <th>Sekolah</th>
-                    <th>Ortu</th>
-                    <th>Pola</th>
-                    <th>Adaptasi</th>
+                    <th>Akademik dan Endurance</th>
+                    <th>Latar Belakang</th>
+                    <th>Pola Belajar</th>
+                    <th>Perkuliahan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -198,7 +212,7 @@ input::placeholder {
                 <tr>
                     <td>1</td>
                     <td><input type="text" name="mahasiswa[0][nama]"                    class="form-control"></td>
-                    <td><input type="email" name="mahasiswa[0][email]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][asal_sekolah]" class="form-control"></td>
                     <td>
                         <select name="mahasiswa[0][jalur_masuk]" class="form-control">
                             <option value="">Pilih Jalur</option>
@@ -207,13 +221,10 @@ input::placeholder {
                             <option value="Mandiri UPI">Mandiri UPI</option>
                         </select>
                     </td>
-                    <td><input type="text" name="mahasiswa[0][kesiapan_akademik]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][kesiapan_ekonomi]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][endurance_cita_cita]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][profil_sekolah]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][profil_ortu]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][akademik_endurance]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][latar_belakang]" class="form-control"></td>
                     <td><input type="text" name="mahasiswa[0][pola_belajar]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][adaptasi]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][perkuliahan]" class="form-control"></td>
                     <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
                 </tr>
             </tbody>
@@ -257,33 +268,33 @@ document.addEventListener('DOMContentLoaded', function () {
         reader.onload = function (e) {
             const text = e.target.result;
             const rows = text.trim().split('\n').map(r => r.split(','));
-            const dataRows = rows.slice(0);
+            const dataRows = rows.slice(0); // Ambil semua baris
             const tableBody = document.querySelector('#dynamicTable tbody');
             tableBody.innerHTML = '';
 
             dataRows.forEach((cols, index) => {
-                if (cols.length < 10) return;
+                if (cols.length < 7) return;
+
+                // Hapus tanda kutip dari setiap elemen data
+                const cleanedCols = cols.map(col => col.replace(/"/g, ''));
 
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
                     <td>${index + 1}</td>
-                    <td><input type="text" name="mahasiswa[${index}][nama]" class="form-control" value="${cols[0]}"></td>
-                    <td><input type="email" name="mahasiswa[${index}][email]" class="form-control" value="${cols[1]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][nama]" class="form-control" value="${cleanedCols[0]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][asal_sekolah]" class="form-control" value="${cleanedCols[1]}"></td>
                     <td>
                         <select name="mahasiswa[${index}][jalur_masuk]" class="form-control">
-                            <option value="SNBP" ${cols[2] === 'SNBP' ? 'selected' : ''}>SNBP</option>
-                            <option value="SNBT" ${cols[2] === 'SNBT' ? 'selected' : ''}>SNBT</option>
-                            <option value="Mandiri UPI" ${cols[2] === 'Mandiri UPI' ? 'selected' : ''}>Mandiri UPI</option>
-                            <option value="Mandiri" ${cols[2] === 'Mandiri' ? 'selected' : ''}>Mandiri</option>
+                            <option value="SNBP" ${cleanedCols[2] === 'SNBP' ? 'selected' : ''}>SNBP</option>
+                            <option value="SNBT" ${cleanedCols[2] === 'SNBT' ? 'selected' : ''}>SNBT</option>
+                            <option value="Mandiri UPI" ${cleanedCols[2] === 'Mandiri UPI' ? 'selected' : ''}>Mandiri UPI</option>
+                            <option value="Mandiri" ${cleanedCols[2] === 'Mandiri' ? 'selected' : ''}>Mandiri</option>
                         </select>
                     </td>
-                    <td><input type="text" name="mahasiswa[${index}][kesiapan_akademik]" class="form-control" value="${cols[3]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][kesiapan_ekonomi]" class="form-control" value="${cols[4]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][endurance_cita_cita]" class="form-control" value="${cols[5]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][profil_sekolah]" class="form-control" value="${cols[6]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][profil_ortu]" class="form-control" value="${cols[7]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][pola_belajar]" class="form-control" value="${cols[8]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][adaptasi]" class="form-control" value="${cols[9]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][akademik_endurance]" class="form-control" value="${cleanedCols[3]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][latar_belakang]" class="form-control" value="${cleanedCols[4]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][pola_belajar]" class="form-control" value="${cleanedCols[5]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][perkuliahan]" class="form-control" value="${cleanedCols[6]}"></td>
                     <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
                 `;
                 tableBody.appendChild(newRow);
@@ -336,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function () {
         newRow.innerHTML = `
             <td>${rowCount}</td>
             <td><input type="text" name="mahasiswa[${rowCount}][nama]" class="form-control"></td>
-            <td><input type="email" name="mahasiswa[${rowCount}][email]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][asal_sekolah]" class="form-control"></td>
             <td>
                 <select name="mahasiswa[${rowCount}][jalur_masuk]" class="form-control">
                     <option value="">Pilih Jalur</option>
@@ -345,13 +356,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     <option value="Mandiri UPI">Mandiri UPI</option>
                 </select>
             </td>
-            <td><input type="text" name="mahasiswa[${rowCount}][kesiapan_akademik]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][kesiapan_ekonomi]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][endurance_cita_cita]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][profil_sekolah]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][profil_ortu]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][akademik_endurance]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][latar_belakang]" class="form-control"></td>
             <td><input type="text" name="mahasiswa[${rowCount}][pola_belajar]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][adaptasi]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][perkuliahan]" class="form-control"></td>
             <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
         `;
         table.appendChild(newRow);
@@ -400,15 +408,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const name = input.name;
         if (name.includes('[nama]')) rowData.nama = value;
-        else if (name.includes('[email]')) rowData.email = value;
+        else if (name.includes('[asal_sekolah]')) rowData.sekolah = value;
         else if (name.includes('[jalur_masuk]')) rowData.jalur = value;
-        else if (name.includes('[kesiapan_akademik]')) rowData.akademik = value;
-        else if (name.includes('[kesiapan_ekonomi]')) rowData.ekonomi = value;
-        else if (name.includes('[endurance_cita_cita]')) rowData.endurance = value;
-        else if (name.includes('[profil_sekolah]')) rowData.sekolah = value;
-        else if (name.includes('[profil_ortu]')) rowData.ortu = value;
+        else if (name.includes('[akademik_endurance]')) rowData.akademik = value;
+        else if (name.includes('[latar_belakang]')) rowData.latar = value;
         else if (name.includes('[pola_belajar]')) rowData.pola = value;
-        else if (name.includes('[adaptasi]')) rowData.adaptasi = value;
+        else if (name.includes('[perkuliahan]')) rowData.kuliah = value;
     });
 
     // Jika semua kolom kosong, skip aja
@@ -437,15 +442,25 @@ data.push(rowData);
 //     const namaKelas = document.getElementById('nama_kelas')?.value || '-';
 // const kodeMK = document.getElementById('kode_mata_kuliah')?.value || '-';
 
+//Scrool saat Klik save 
+setTimeout(() => {
+    const summary = document.getElementById('summaryContainer');
+    if (summary) {
+        const offset = summary.offsetTop - 80; // 100px margin biar ga ketutupan header
+        window.scrollTo({
+            top: offset,
+            behavior: 'smooth'
+        });
+    }
+}, 500);
     let summaryHTML = `
-     <div class="card mt-4 p-4 shadow-sm" style="background-color: #f8f9fa;">
+     <div class="card mt-4 p-4 shadow-sm" style="background-color: #ffffff; border-0;">
     <h4 class="mb-2 fw-bold" style="color: #0E1F4D;">Ringkasan Data</h4>
         <p class="mb-4 text-muted" style="font-size: 14px;">
         Berikut ringkasan data yang telah Anda input. Silakan cek kembali sebelum menekan tombol <strong>Generate</strong>.
         </p>
     <div class="row mb-3">
-    <div class="col-md-6">
-        <strong>Nama Kelas:</strong> ${namaKelas}
+    <div class="col-md-6">        <strong>Nama Kelas:</strong> ${namaKelas}
     </div>
     <div class="col-md-6">
         <strong>Kode Mata Kuliah:</strong> ${kodeMK}
@@ -454,15 +469,14 @@ data.push(rowData);
 
 
         <table class="custom-table"><thead><tr>
-        <th>Nama</th><th>Email</th><th>Jalur</th><th>Akademik</th><th>Ekonomi</th><th>Endurance</th>
-        <th>Sekolah</th><th>Ortu</th><th>Pola</th><th>Adaptasi</th>
+        <th>Nama</th><th>Asal Sekolah</th><th>Jalur</th><th>Akademik</th><th>Latar Belakang</th><th>Pola Belajar</th>
+        <th>Perkuliahan</th>
         </tr></thead><tbody>`;
 
     data.forEach(item => {
         summaryHTML += `<tr>
-            <td>${item.nama}</td><td>${item.email}</td><td>${item.jalur}</td><td>${item.akademik}</td>
-            <td>${item.ekonomi}</td><td>${item.endurance}</td><td>${item.sekolah}</td>
-            <td>${item.ortu}</td><td>${item.pola}</td><td>${item.adaptasi}</td>
+            <td>${item.nama}</td><td>${item.sekolah}</td><td>${item.jalur}</td><td>${item.akademik}</td>
+            <td>${item.latar}</td><td>${item.pola}</td><td>${item.kuliah}</td>
         </tr>`;
     });
 
@@ -473,17 +487,13 @@ data.push(rowData);
     // Simpan data ke input hidden
     document.getElementById('mahasiswaData').value = JSON.stringify(data);
 
+    //Scroll kebawah after klik button save
+    setTimeout(() => {
+        document.getElementById('summaryContainer')?.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
 
 });
     }
-
-
-
-
-
-
-
-
 
 
 
@@ -545,7 +555,7 @@ if (generateBtn) {
   });
 
   collapseEl.addEventListener('hide.bs.collapse', function () {
-    toggleIcon.textContent = '📘'; // Saat tertutup
+    toggleIcon.textContent = '🔽'; // Saat tertutup
   });
 </script>
 

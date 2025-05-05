@@ -15,9 +15,6 @@ class DataMahasiswaController extends Controller
         return "Generate berhasil!";
     }
 
-
-
-
     public function simpan(Request $request)
 {
     \Log::info('Nama Kelas:', [$request->nama_kelas]);
@@ -48,21 +45,21 @@ class DataMahasiswaController extends Controller
         $mahasiswaBaru = DataMahasiswa::create([
             'kelas_id' => $kelas->id,
             'nama_lengkap' => $data['nama'],
-            'email' => $data['email'],
+            'asal_sekolah' => $data['asal_sekolah'],
             'jalur_masuk' => $data['jalur_masuk'],
-            'kesiapan_akademik' => $data['kesiapan_akademik'],
-            'kesiapan_ekonomi' => $data['kesiapan_ekonomi'],
-            'endurance_cita_cita' => $data['endurance_cita_cita'],
-            'profil_sekolah' => $data['profil_sekolah'],
-            'profil_ortu' => $data['profil_ortu'],
+            'akademik_endurance' => $data['akademik_endurance'],
+            'latar_belakang' => $data['latar_belakang'],
             'pola_belajar' => $data['pola_belajar'],
-            'kemampuan_adaptasi' => $data['adaptasi'],
+            'perkuliahan' => $data['perkuliahan'],
         ]);
 
         \Log::info('Berhasil simpan mahasiswa:', $mahasiswaBaru->toArray());
     }
 
-    return redirect()->route('dashboard.dosen')->with('success', 'Data berhasil disimpan.');
+     // 3. Redirect ke halaman hasil rekomendasi kelas yang baru disimpan
+     return redirect()->route('hasil.rekomendasi', ['id' => $kelas->id]);
+
+    // return redirect()->route('dashboard.dosen')->with('success', 'Data berhasil disimpan.');
 }
 
 

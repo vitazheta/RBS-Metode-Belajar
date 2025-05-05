@@ -3,11 +3,33 @@
 @section('content')
 
 <style>
+    html, body {
+        height: 100%; /* Pastikan tinggi halaman mencakup seluruh layar */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
     body {
         font-family: 'Poppins', sans-serif;
         padding-top: 80px; /* Sesuaikan dengan tinggi navbar */
         background-color: #EBEDF4;
     }
+
+    .container {
+        flex: 1; /* Membuat konten utama fleksibel untuk mengisi ruang */
+        font-family: Poppins, sans-serif;
+    }
+
+    footer {
+        background-color: #0E1F4D; /* Warna latar belakang footer */
+        color: #ffffff; /* Warna teks footer */
+        text-align: left;
+        padding: 20px 0;
+        margin-top: auto; /* Dorong footer ke bawah */
+    }
+
     .siluet {
         right: 10px;
         bottom: 10px;
@@ -15,90 +37,187 @@
         opacity: 0.2;
         transform: rotate(-15deg); /* Membuat ikon miring */
     }
-    .btn-custom {
-    background-color: #FF6B6B !important; /* Merah muda */
-    border: none;
-    color: white;
+
+    .btn-outline-primary {
+        background-color: #0E1F4D; /* Warna latar belakang default */
+        color: white; /* Warna teks default */
+        border: 2px solid #0E1F4D; /* Warna border default */
+        transition: all 0.3s ease; /* Animasi transisi */
+        font-size: 20px;
     }
+
+    .btn-outline-primary:hover {
+        background-color: transparent; /* Warna latar belakang saat hover */
+        color: #0E1F4D; /* Warna teks saat hover */
+        border-color: #0E1F4D; /* Warna border saat hover */
+        font-weight: bold;
+    }
+
+    .btn-outline-primary:focus {
+        outline: none; /* Hilangkan outline default */
+        box-shadow: none; /* Hilangkan efek shadow */
+    }
+
+    .btn-custom{
+        background-color: #F37AB0; /* Warna saat hover */
+        color: #ffffff; /* Warna teks saat hover */
+        border: 2px solid #F37AB0; /* Warna border default */
+        transition: all 0.3s ease; /* Animasi transisi */
+        font-size: 20px;
+    }
+
+    .btn-custom:hover {
+        background-color: transparent; /* Warna saat hover */
+        color: #F37AB0; /* Warna teks saat hover */
+        border-color: #F37AB0; /* Warna border saat hover */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Animasi transisi */
+        font-weight: bold;
+    }
+
+    .dashboard-title {
+        font-size: 40px;
+        font-weight: bold;
+        color: #0E1F4D;
+        position: relative;
+    }
+
+    .dashboard-title span {
+        display: block;
+        margin-top: 4px;
+        height: 4px;
+        width: 100%;
+        background-color: #84A7CF;
+    }
+
+    .dashboard-description {
+        color: #6c757d; /* Warna teks */
+        font-size: 20px; /* Ukuran font */
+        margin-bottom: 0; /* Margin bawah */
+    }
+
+    .upper-card-body {
+        color: #0E1F4D;
+        padding: 20px;
+    }
+
+    .mb-3 {
+        color: #0E1F4D;
+    }
+
+    .row {
+        margin-bottom: 20px; /* Jarak antar baris */
+}
+
+    .fixed-size-card {
+        width: 350px; /* Lebar tetap */
+        height: 170px; /* Tinggi tetap */
+        display: flex;
+        align-items: left;
+        justify-content: left;
+        text-align: left;
+    }
+
 </style>
 
 <div class="container py-0"> <!-- Ubah dari py-5 ke py-3 -->
-<h2 class="mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
-    Dashboard Dosen
-<span class="d-block mt-1" style="height: 4px; width: 100%; background-color: #84A7CF;"></span>
-</h2>
-<p class="text-muted fs-5">Halo, <strong> {{ucwords($dosen->nama)}}!</strong> Berikut daftar kelas yang Anda ampu.</p>
-
-<!-- Section Tambah Kelas (pindah ke atas) -->
-<div class="card shadow-sm p-4 mb-5 position-relative" style="border: none; background-color: #ffffff;">
-    <div class="card-body">
-        <div>
-            <h5 class="fw-bold mb-2">Ingin menambahkan kelas?</h5>
-            <p class="text-muted mb-3">Klik tombol di bawah ini untuk menambahkan kelas baru ke sistem.</p>
-            <!-- Tombol Tambah Kelas -->
-            <a href="{{ url('/dynamic-table') }}" class="btn text-white btn-lg px-2 py-1" style="background-color: #F37AB0; font-size: 0.8rem; padding: 6px 12px;">
-            <i class="fas fa-plus me-2"></i> Tambah Kelas
-            </a>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="dashboard-title">
+            Dashboard Dosen
+            <span></span>
+        </h2>
     </div>
 
-    <!-- Gambar kecil kanan dalam -->
-    <img src="{{ asset('images/img-dashboard.png') }}" alt="Icon Tambah Kelas"
-        style="position: absolute; right: 50px; bottom: 20px; height: 150px;">
+    <!-- Flexbox untuk teks dan tombol -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <p class="dashboard-description">
+            Halo, <strong>{{ ucwords($dosen->nama) }}</strong>! Berikut daftar kelas yang Anda ampu.
+        </p>
+        <!-- Tombol Google Form -->
+        <a href="https://docs.google.com/forms/d/1jyMeVSMu5pf2gimqhcDrlytd96g7kdgesi_dwY9QCR4/edit" target="_blank" 
+            class="btn btn-outline-primary" 
+            style="font-size: 0.8rem; padding: 6px 12px;">
+            <i class="fas fa-external-link-alt me-1"></i>Buat Template Formulir Disini
+        </a>
+    </div>
+
+    <!-- Section Tambah Kelas -->
+    <div class="row g-6">
+    <div class="card shadow-sm p-4 mb-5 position-relative" style="border: none; background-color: #ffffff;">
+        <div class="upper-card-body">
+            <div>
+                <h5 class="fw-bold mb-2">Olah Data Mahasiswa Anda Untuk Mendapatkan Rekomendasi Pembelajaran</h5>
+                <p class="text-muted mb-3">Klik tombol di bawah ini untuk mengolah data mahasiswa</p>
+                <!-- Tombol Tambah Kelas -->
+                <a href="{{ url('/upload-excel') }}" 
+                    class="btn btn-custom" 
+                    style="font-size: 0.8rem; padding: 6px 12px;">
+                    <i class="fas fa-plus me-2"></i> Upload Data Formulir
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Gambar kecil kanan dalam -->
+        <img src="{{ asset('images/img-dashboard.png') }}" alt="Icon Tambah Kelas"
+            style="position: absolute; right: 50px; bottom: 20px; height: 150px;">
+    </div>
+</div>
 </div>
 
-    <div class="row g-6">
-        <!-- Kotak Jumlah Kelas -->
-        <div class="col-md-4">
-            <div class="card shadow-sm text-white mb-3 position-relative"
-            style="background-color: #84A7CF; border: none;">
-                <div class="card-body">
-                    <h5 class="card-title">Jumlah Kelas</h5>
-                    <p class="card-text display-4">{{ $jumlah_kelas }}</p>
-                    <i class="fas fa-school position-absolute siluet"></i>
-                </div>
+<div class="row d-flex align-items-stretch">
+    <!-- Kolom Kiri: Kotak Jumlah Kelas -->
+    <div class="col-md-4 d-flex flex-column gap-3">
+        <div class="mb-3">
+            <h3 class="fw-bold" style="font-size: 28px;">Data Total Kelas</h3>
+            <p class="text-muted">Berikut adalah data total kelas dan mahasiswa yang Anda ampu.</p>
+        </div>
+        <div class="card shadow-sm text-white position-relative fixed-size-card" style="background-color: #84A7CF; border: none;">
+            <div class="card-body">
+                <h5 class="card-title">Jumlah Kelas</h5>
+                <p class="card-text display-4">{{ $jumlah_kelas }}</p>
+                <i class="fas fa-school position-absolute siluet"></i>
             </div>
         </div>
-
-        <!-- Kotak Total Mahasiswa -->
-        <div class="col-md-4">
-            <div class="card shadow-sm text-white mb-3 position-relative"
-            style="background-color: #84A7CF; border: none;">
-                <div class="card-body">
-                    <h5 class="card-title">Total Mahasiswa</h5>
-                    <p class="card-text display-4">{{ $total_mahasiswa }}</p>
-                    <i class="fas fa-user-graduate position-absolute siluet"></i>
-                </div>
+        <div class="card shadow-sm text-white position-relative fixed-size-card" style="background-color: #84A7CF; border: none;">
+            <div class="card-body">
+                <h5 class="card-title">Total Mahasiswa</h5>
+                <p class="card-text display-4">{{ $total_mahasiswa }}</p>
+                <i class="fas fa-user-graduate position-absolute siluet"></i>
             </div>
         </div>
-
-        <!-- Kotak Metode Dominan -->
-        <div class="col-md-4">
-            <div class="card shadow-sm text-white mb-3 position-relative"
-            style="background-color: #84A7CF; border: none;">
-                <div class="card-body">
-                    <h5 class="card-title">Metode Dominan</h5>
-                    <p class="card-text display-4">{{ $metode_dominan }}</p>
-                    <i class="fas fa-chalkboard-teacher position-absolute siluet"></i>
-                </div>
+        <div class="card shadow-sm text-white position-relative fixed-size-card" style="background-color: #84A7CF; border: none;">
+            <div class="card-body">
+                <h5 class="card-title">Jalur Masuk Dominan</h5>
+                <p class="card-text display-4">{{ $jalur_masuk_dominan ?? 'Tidak Ada' }}</p>
+                <i class="fas fa-chart-pie position-absolute siluet"></i>
             </div>
         </div>
     </div>
 
+    <!-- Garis Pemisah -->
+    <div class="col-md-1 d-flex justify-content-center">
+        <div style="width: 2px; background-color: #D4D4D4; height: 100%;"></div>
+    </div>
 
-    <!-- Daftar Kelas -->
-    <div class="row g-6">
-        @foreach ($kelas as $index => $k)
-        <div class="col-md-4">
-            <div class="card shadow-sm mb-4" style="border: none; background-color: #ffffff;">
-                <div class="card-body text-center">
-                    <h5 class="card-title">{{ $k->nama_kelas }}</h5>
-                    <canvas id="chart-{{ $index }}" width="200" height="200"></canvas>
-                    <p class="mt-2">Persentase Gaya Belajar</p>
+    <!-- Kolom Kanan: Kotak Diagram -->
+    <div class="col-md-7 d-flex flex-column gap-3">
+        <div class="mb-3">
+            <h3 class="fw-bold" style="font-size: 28px;">Persentase Aspek Penunjang Rekomendasi</h3>
+            <p class="text-muted">Diagram berikut menunjukkan persentase aspek penunjang rekomendasi untuk setiap kelas.</p>
+        </div>
+        <div class="row">
+            @foreach ($kelas as $index => $k)
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100" style="border: none; background-color: #ffffff;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ $k->nama_kelas }}</h5>
+                        <canvas id="chart-{{ $index }}" width="200" height="200"></canvas>
+                        <p class="mt-2">Kode Mata Kuliah: {{ $k->kode_mata_kuliah }}</p>
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
 </div>
 
@@ -107,81 +226,53 @@
 @section('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-    @foreach ($kelas as $index => $k)
-    var ctx = document.getElementById("chart-{{ $index }}");
+        @foreach ($kelas as $index => $k)
+        var ctx = document.getElementById("chart-{{ $index }}");
 
-    if (ctx) {
-        var chart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["Visual", "Auditori", "Kinestetik"],
-                datasets: [{
-                    data: [{{ $k->persen_visual }}, {{ $k->persen_auditori }}, {{ $k->persen_kinestetik }}],
-                    backgroundColor: [
-    "#1E2E45", // Biru tua untuk Visual
-    "#748DAC", // Biru muda untuk Auditori
-    "#E0E1DC"  // Cream untuk Kinestetik
-]
-,
-                    hoverOffset: 10 // Efek animasi saat hover
-                }]
-            },
-            options: {
-                responsive: true,
-                cutout: "70%",
-                plugins: {
-                    legend: { display: false }
+        if (ctx) {
+            var chart = new Chart(ctx, {
+                type: 'pie', // Ganti dari 'doughnut' ke 'pie'
+                data: {
+                    labels: ["Akademik dan Endurance", "Latar Belakang", "Pola Belajar", "Perkuliahan"],
+                    datasets: [{
+                        data: [
+                            {{ $k->persen_akademik ?? 0 }},
+                            {{ $k->persen_latar_belakang ?? 0 }},
+                            {{ $k->persen_pola_belajar ?? 0 }},
+                            {{ $k->persen_perkuliahan ?? 0 }}
+                        ],
+                        backgroundColor: [
+                            "#1E2E45", // Biru tua untuk Akademik dan Endurance
+                            "#748DAC", // Biru muda untuk Latar Belakang
+                            "#E0E1DC", // Cream untuk Pola Belajar
+                            "#F37AB0"  // Merah muda untuk Perkuliahan
+                        ],
+                        hoverOffset: 10 // Efek animasi saat hover
+                    }]
                 },
-                animation: {
-                    animateRotate: true, // Animasi rotasi saat muncul
-                    animateScale: true  // Animasi pembesaran saat muncul
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                let value = tooltipItem.raw;
-                                return value + "%"; // Menampilkan persen di tooltip
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true }, // Tampilkan legenda
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    let value = tooltipItem.raw;
+                                    return value + "%"; // Menampilkan persen di tooltip
+                                }
                             }
                         }
+                    },
+                    animation: {
+                        animateRotate: true, // Animasi rotasi saat muncul
+                        animateScale: true  // Animasi pembesaran saat muncul
                     }
                 }
-            }
-        });
+            });
 
-        // Tambahkan teks di tengah
-        Chart.register({
-    id: 'centerText',
-    beforeDraw: function(chart) {
-        var width = chart.width,
-            height = chart.height,
-            ctx = chart.ctx;
-
-        ctx.save();
-        ctx.font = "bold 20px Poppins, sans-serif"; // Lebih besar & tebal
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-
-        let data = chart.data.datasets[0].data;
-        let labels = chart.data.labels;
-
-        let maxIndex = data.indexOf(Math.max(...data));
-        let dominantMethod = labels[maxIndex]; // Gaya belajar dominan
-
-        // Posisi teks di tengah
-        var textX = width / 2;
-        var textY = height / 2;
-
-        ctx.fillText(dominantMethod, textX, textY);
-        ctx.restore();
-    }
-});
-
-
-
-        chart.update(); // Update chart setelah menambahkan teks tengah
-    }
-    @endforeach
-});
+            chart.update(); // Update chart setelah konfigurasi
+        }
+        @endforeach
+    });
 </script>
 @endsection

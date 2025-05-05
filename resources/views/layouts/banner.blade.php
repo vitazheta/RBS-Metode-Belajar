@@ -1,5 +1,5 @@
 <!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <!-- Banner Section -->
 <section id="banner" class="position-relative">
@@ -7,16 +7,16 @@
     <div id="backgroundCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel1.png') }}');"></div>
+                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel1-white.png') }}');"></div>
             </div>
             <div class="carousel-item">
-                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel2.png') }}');"></div>
+                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel2-white.png') }}');"></div>
             </div>
             <div class="carousel-item">
-                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel3.png') }}');"></div>
+                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel3-white.png') }}');"></div>
             </div>
                 <div class="carousel-item">
-            <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel4.png') }}');"></div>
+            <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel4-white.png') }}');"></div>
             </div>
         </div>
     </div>
@@ -26,10 +26,10 @@
             <div class="row align-items-center">
                 <!-- Teks Animasi -->
                 <div class="col-lg-6 text-center text-lg-start">
-                    <img src="{{ asset('images/textlogo.png') }}" alt="Gambar Baru" class="img-fluid text-logo">
+                    <img src="{{ asset('images/textlogo-navy.png') }}" alt="Gambar Baru" class="img-fluid text-logo">
                     <h1 id="animatedText" class="fw-bold"></h1>
                     <p class="text-muted">Sistem kami membantu mahasiswa menemukan gaya belajar terbaik berdasarkan analisis data.</p>
-                    <a href="#" class="btn btn-primary mt-3">Pelajari Lebih Lanjut</a>
+                    <a href="{{ route('pelajari') }}" class="btn btn-primary mt-3">Pelajari Lebih Lanjut</a>
                 </div>
                 <!-- Gambar Produk -->
                 <div class="col-lg-6 text-center">
@@ -38,6 +38,11 @@
             </div>
         </div>
     </div>
+</section>
+
+<!-- Divider Section -->
+<section id="divider" class="divider-section text-center py-5">
+    <h2 class="text-white">"Optimalkan Gaya Belajar Mahasiswa dengan Teknologi Modern"</h2>
 </section>
 
 <!-- Tambahkan CSS -->
@@ -77,7 +82,7 @@
     z-index: 2;
     width: 100%;
     height: 100vh;
-    background: rgba(14, 31, 77, 0.7); /* semi-transparent navy overlay */
+    /*background: rgba(14, 31, 77, 0.7); /* semi-transparent navy overlay */
     }
 
 
@@ -98,26 +103,40 @@
 
     /* Gaya untuk teks animasi */
     #animatedText {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 64px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 56px;
         font-weight: bold;
-        color: var(--text-color); /* Navy */
+        line-height: 72px;
+        color: #0E1F4D;
+    }
+
+    .carousel-overlay p {
+        font-size: 14px;
+        line-height: 20px;
+        color: #0E1F4D;
+        font-family: 'Poppins', sans-serif;
     }
 
     .text-muted {
-        color: var(--text-color) !important;
+        color: #0E1F4D !important;
     }
 
     .btn-primary {
         background-color: var(--accent-color);
         border-color: var(--accent-color);
         color: var(--text-color);
+        font-size: 14px;
+        line-height: 20px;
+        font-family: 'Poppins', sans-serif;
     }
 
     .btn-primary:hover {
         background-color: var(--text-color);
         border-color: var(--text-color);
         color: var(--primary-color);
+        font-size: 14px;
+        line-height: 20px;
+        font-family: 'Poppins', sans-serif;
     }
 
     /* Animasi Logo */
@@ -130,6 +149,56 @@
     .floating {
         /* animation: float 3s ease-in-out infinite; */
         animation: float 2s linear infinite;
+    }
+
+    .divider-section {
+        background: linear-gradient(135deg, #0E1F4D 0%, #3F5694 30%, #000D30 100%); /* Gradasi dengan efek pantulan */
+        color: #ffffff; /* Warna teks */
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        letter-spacing: 1px;
+        margin: 0;
+        padding: 50px 0;
+        position: relative;
+        overflow: hidden;
+        opacity: 0; /* Awalnya tidak terlihat */
+        transform: translateY(50px); /* Awalnya bergeser ke bawah */
+        transition: all 1s ease-in-out; /* Animasi transisi */
+    }
+
+    .divider-section.animate {
+        opacity: 1; /* Muncul */
+        transform: translateY(0); /* Kembali ke posisi semula */
+    }
+
+    .divider-section h2 {
+        margin: 0;
+        animation: fadeInUp 4s ease-in; /* Animasi saat muncul */
+        font-size: 20px;
+    }
+
+    /* Animasi Fade In Up */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 2.0s ease-in-out;
+    }
+
+    .animate-on-scroll.animate {
+        opacity: 1;
+        transform: translateY(0);
     }
 </style>
 
@@ -171,4 +240,24 @@
     }
 
     document.addEventListener("DOMContentLoaded", typeEffect);
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("animate");
+                    }
+                });
+            },
+            { threshold: 0.5 } // Elemen terlihat 50% sebelum animasi dimulai
+        );
+
+        const divider = document.querySelector("#divider");
+        if (divider) {
+            observer.observe(divider);
+        }
+    });
 </script>

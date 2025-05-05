@@ -8,12 +8,31 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DynamicTableController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\RekomendasiMetodeController;
+use App\Http\Controllers\HasilRekomendasiController;
+use Dflydev\DotAccessData\Data;
+use App\Http\Controllers\InfoController;
+
+
 
 /*
 |--------------------------------------------------------------------------|
 | Web Routes                                                               |
 |--------------------------------------------------------------------------|
 */
+//Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
+
+//Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
+
+
+Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
+
+//Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'namaFunction']);
+
+Route::get('/tutorial', [InfoController::class, 'showTutorial'])->name('tutorial');
+
+Route::get('/pelajari', function () {
+    return view('info.pelajari');
+})->name('pelajari');
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +43,9 @@ Route::get('/', function () {
 Route::middleware(['auth:dosen'])->group(function () {
     Route::get('/dynamic-table', [DynamicTableController::class, 'index'])->name('dynamic.table');
     Route::get('/dashboard-dosen', [DashboardDosenController::class, 'dashboard'])->name('dashboard.dosen');
+    Route::get('/hasil-rekomendasi/{id}', [HasilRekomendasiController::class, 'show'])->name('hasil.rekomendasi');
+    Route::get('/daftar-kelas', [KelasController::class, 'index'])->name('kelas.index');
+
 });
 
 Route::post('/import', [ImportController::class, 'processImport'])->name('import.process');
@@ -56,7 +78,7 @@ Route::post('/kelas/store', [KelasController::class, 'generate'])->name('kelas.s
 
 Route::post('/kelas/generate', [KelasController::class, 'generate'])->name('kelas.generate');
 
-Route::post('/import-csv', [MahasiswaController::class, 'importCSV'])->name('import.process');
+//Route::post('/import-csv', [MahasiswaController::class, 'importCSV'])->name('import.process');
 
 Route::post('/generate-data', [KelasController::class, 'generateData'])->name('kelas.generateData');
 
@@ -71,11 +93,27 @@ Route::post('/simpan-mahasiswa', [DataMahasiswaController::class, 'simpan'])->na
 
 Route::post('/import-csv', [DataMahasiswaController::class, 'import'])->name('import.csv');
 
-
+Route::get('/hasil-rekomendasi/{id}', [HasilRekomendasiController::class, 'show'])->name('hasil.rekomendasi');
 //Route daftar kelas
-//Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
-//Route::get('/kelas/{id}', [KelasController::class, 'show'])->name('kelas.show');
+
+use App\Http\Controllers\FileUploadController;
+
+// Rute untuk menampilkan halaman upload file
+Route::get('/upload-excel', [FileUploadController::class, 'showUploadForm'])->name('upload.xlsx');
+
+// Rute untuk memproses upload file
+Route::post('/upload-excel', [FileUploadController::class, 'processUpload'])->name('upload.xlsx.process');
+Route::get('/download-csv', [FileUploadController::class, 'downloadCsv'])->name('download.csv');
+Route::get('/export-success', function () {
+    return view('export-success');
+})->name('export.success');
+
+
+
 
 //Route rekomendasi metode belajar
 //Route::get('/rekomendasi', [RekomendasiMetodeController::class, 'index'])->name('rekomendasi.metode');
 
+// Route::get('/info', function () {
+//     return view('info');
+// });
