@@ -41,21 +41,15 @@
     .btn-outline-primary {
         background-color: #0E1F4D; /* Warna latar belakang default */
         color: white; /* Warna teks default */
-        border: 2px solid #0E1F4D; /* Warna border default */
         transition: all 0.3s ease; /* Animasi transisi */
         font-size: 20px;
+        border: none;
     }
 
     .btn-outline-primary:hover {
-        background-color: transparent; /* Warna latar belakang saat hover */
-        color: #0E1F4D; /* Warna teks saat hover */
-        border-color: #0E1F4D; /* Warna border saat hover */
-        font-weight: bold;
-    }
-
-    .btn-outline-primary:focus {
-        outline: none; /* Hilangkan outline default */
-        box-shadow: none; /* Hilangkan efek shadow */
+        background-color: #70788F; /* Warna latar belakang saat hover */
+        color: #FFFFFF; /* Warna teks saat hover */
+        border: none;
     }
 
     .btn-custom{
@@ -67,11 +61,9 @@
     }
 
     .btn-custom:hover {
-        background-color: transparent; /* Warna saat hover */
-        color: #F37AB0; /* Warna teks saat hover */
-        border-color: #F37AB0; /* Warna border saat hover */
+        background-color: #E2A6C1; /* Warna saat hover */
+        color: #FFFFFF; /* Warna teks saat hover */
         transition: background-color 0.3s ease, color 0.3s ease; /* Animasi transisi */
-        font-weight: bold;
     }
 
     .dashboard-title {
@@ -95,6 +87,11 @@
         margin-bottom: 0; /* Margin bawah */
     }
 
+    .card-tambah {
+        background-color: #FFFFFF;
+        border-radius: 5px;;/* Warna latar belakang */
+    }
+
     .upper-card-body {
         color: #0E1F4D;
         padding: 20px;
@@ -107,6 +104,11 @@
     .row {
         margin-bottom: 20px; /* Jarak antar baris */
 }
+    .card-diagram {
+        padding: 10px;
+        padding-top: 20px;
+        background-color: #ffffff; /* Warna latar belakang */
+    }
 
     .fixed-size-card {
         width: 350px; /* Lebar tetap */
@@ -117,6 +119,58 @@
         text-align: left;
     }
 
+    /* Dark Theme */
+    body.dark-theme {
+        background-color: #1B1B1B;
+    }
+
+    body.dark-theme footer {
+        background-color: #162449; /* Warna latar belakang footer */
+    }
+
+    body.dark-theme .btn-outline-primary {
+        background-color: #162449; /* Warna latar belakang default */
+        color: #ffffff /* Warna teks default */
+    }
+
+    body.dark-theme .btn-outline-primary:hover {
+        background-color: #777F95; /* Warna latar belakang saat hover */
+        color: #ffffff; /* Warna teks saat hover */
+        border: none;
+    }
+
+    body.dark-theme .btn-custom {
+        background-color: #F481B4;
+    }
+
+    body.dark-theme .dashboard-title {
+        color: #FFFFFF;
+    }
+
+    body.dark-theme .dashboard-description {
+        color: #CFD3D6; /* Warna teks */
+    }
+
+    body.dark-theme .mb-3 {
+        color: #FFFFFF;
+    }
+
+    body.dark-theme .card-tambah {
+        background-color: #2D2D2D; /* Warna latar belakang */
+    }
+
+    body.dark-theme .upper-card-body {
+        color: #ffffff;
+        padding: 20px;
+    }
+
+    body.dark-theme .upper-card-body p {
+        color: #ffffff;
+    }
+
+    body.dark-theme .card-diagram {
+        background-color: #2D2D2D; /* Warna latar belakang */
+    }
 </style>
 
 <div class="container py-0"> <!-- Ubah dari py-5 ke py-3 -->
@@ -142,11 +196,11 @@
 
     <!-- Section Tambah Kelas -->
     <div class="row g-6">
-    <div class="card shadow-sm p-4 mb-5 position-relative" style="border: none; background-color: #ffffff;">
+    <div class="card-tambah shadow-sm p-4 mb-5 position-relative">
         <div class="upper-card-body">
             <div>
                 <h5 class="fw-bold mb-2">Olah Data Mahasiswa Anda Untuk Mendapatkan Rekomendasi Pembelajaran</h5>
-                <p class="text-muted mb-3">Klik tombol di bawah ini untuk mengolah data mahasiswa</p>
+                <p class="text-klik mb-2">Klik tombol di bawah ini untuk mengolah data mahasiswa</p>
                 <!-- Tombol Tambah Kelas -->
                 <a href="{{ url('/upload-excel') }}" 
                     class="btn btn-custom" 
@@ -169,7 +223,7 @@
     <div class="col-md-4 d-flex flex-column gap-3">
         <div class="mb-3">
             <h3 class="fw-bold" style="font-size: 28px;">Data Total Kelas</h3>
-            <p class="text-muted">Berikut adalah data total kelas dan mahasiswa yang Anda ampu.</p>
+            <p class="textdesc-desc-data">Berikut adalah data total kelas dan mahasiswa yang Anda ampu.</p>
         </div>
         <div class="card shadow-sm text-white position-relative fixed-size-card" style="background-color: #84A7CF; border: none;">
             <div class="card-body">
@@ -203,12 +257,12 @@
     <div class="col-md-7 d-flex flex-column gap-3">
         <div class="mb-3">
             <h3 class="fw-bold" style="font-size: 28px;">Persentase Aspek Penunjang Rekomendasi</h3>
-            <p class="text-muted">Diagram berikut menunjukkan persentase aspek penunjang rekomendasi untuk setiap kelas.</p>
+            <p class="text-desc-presentase">Diagram berikut menunjukkan persentase aspek penunjang rekomendasi untuk setiap kelas.</p>
         </div>
         <div class="row">
             @foreach ($kelas as $index => $k)
             <div class="col-md-6 mb-4">
-                <div class="card shadow-sm h-100" style="border: none; background-color: #ffffff;">
+                <div class="card-diagram shadow-sm h-100">
                     <div class="card-body text-center">
                         <h5 class="card-title">{{ $k->nama_kelas }}</h5>
                         <canvas id="chart-{{ $index }}" width="200" height="200"></canvas>
@@ -247,6 +301,7 @@
                             "#E0E1DC", // Cream untuk Pola Belajar
                             "#F37AB0"  // Merah muda untuk Perkuliahan
                         ],
+                        borderWidth: 0, // Hilangkan border
                         hoverOffset: 10 // Efek animasi saat hover
                     }]
                 },

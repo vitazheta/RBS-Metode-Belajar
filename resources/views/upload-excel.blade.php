@@ -5,6 +5,53 @@
 @section('content')
 
 <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #EBEDF4;
+    }
+
+    .container{
+        margin-bottom: 50px;
+        color: #0E1F4D;
+    }
+
+    .card-collapse {
+        background-color: #FFFFFF;
+        color: #0E1F4D;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    input[type="file"] {
+        background-color: #ffffff; /* Ubah latar belakang menjadi #2D2D2D */
+        color: #000000; /* Ubah warna teks menjadi putih */
+        padding: 6px 12px; /* Sesuaikan padding */
+        border-radius: 4px; /* Tambahkan border radius */
+    }
+
+    input[type="file"]::file-selector-button {
+        background-color: #ffffff; /* Ubah latar belakang tombol */
+        color: #000000; /* Ubah warna teks tombol */
+        padding: 6px 12px; /* Sesuaikan padding tombol */
+        border-radius: 4px; /* Tambahkan border radius pada tombol */
+        cursor: pointer; /* Ubah kursor menjadi pointer */
+    }
+
+    .form-control {
+        background-color: #ffffff; /* Perbaikan dari 'backround-color' */
+        color: #000000; /* Tambahkan warna teks agar kontras */
+    }
+
+    .form-control:focus {
+        background-color: #ffffff; /* Perbaikan dari 'backround-color' */
+        color: #000000; /* Tambahkan warna teks agar kontras */
+    }
+
+    .form-control:not(:placeholder-shown) {
+        background-color: #ffffff; /* Ubah latar belakang menjadi #2D2D2D */
+        color: #000000; /* Pastikan teks tetap terlihat dengan warna putih */
+    }
+
     .custom-table {
         border-collapse: collapse;
         width: 100%;
@@ -15,7 +62,7 @@
     }
 
     .custom-table thead {
-        background-color: #0e1e4b;
+        background-color: #0E1F4D;
         color: white;
     }
 
@@ -30,13 +77,16 @@
         background-color: #f0f4fa;
     }
 
-    .custom-table tbody tr:hover {
-        background-color: #e6f0fa;
-        transition: all 0.2s ease-in-out;
+    .custom-table tbody .text-belom-ada {
+        color: #6C757D;
+    }
+
+    .table-title {
+        color: #0E1F4D;
     }
 
     .btn-upload {
-        background-color: #0e1e4b; /* Warna latar belakang */
+        background-color: #0E1F4D; /* Warna latar belakang */
         color: white; /* Warna teks */
         border: none; /* Hilangkan border */
         padding: 8px 16px; /* Jarak dalam tombol */
@@ -46,13 +96,13 @@
     }
 
     .btn-upload:hover {
-        background-color: #355c99; /* Warna latar belakang saat hover */
-        color: white; /* Warna teks tetap putih */
+        background-color: #70788F; /* Warna latar belakang saat hover */
+        color: #FFFFFF;
     }
 
     .btn-export {
-        background-color: #f2c84b; /* Warna hijau */
-        color: black; /* Warna teks */
+        background-color: #F37AB0; /* Warna hijau */
+        color: white; /* Warna teks */
         border: none; /* Hilangkan border */
         padding: 8px 16px; /* Jarak dalam tombol */
         border-radius: 6px; /* Lengkungan tombol */
@@ -61,15 +111,105 @@
     }
 
     .btn-export:hover {
-        background-color: #d4ac30; /* Warna hijau gelap saat hover */
-        color: black; /* Warna teks tetap putih */
+        background-color: #E2A6C1; /* Warna latar belakang saat hover */
+        color: #FFFFFF;
+    }
+
+    #toggleBtn {
+        color: #0E1F4D; /* Warna default */
+        margin-top: 0px;
+        margin-bottom: 8px;
+        transition: color 0.3s ease; /* Animasi transisi */
+    }
+
+    #toggleBtn:hover {
+        color: #70788F; /* Warna saat hover */
+    }
+
+    body.dark-theme {
+        background-color: #1B1B1B; /* Warna latar belakang gelap */
+    }
+
+    body.dark-theme .container {
+        color: #FFFFFF; /* Warna teks gelap */
+    }
+
+    body.dark-theme #toggleBtn {
+        color: #FFFFFF; /* Warna default */
+        margin-top: 0px;
+        margin-bottom: 8px;
+        transition: color 0.3s ease; /* Animasi transisi */
+    }
+
+    body.dark-theme #toggleBtn:hover {
+        color: #777F95; /* Warna saat hover */
+    }
+
+    body.dark-theme .card-collapse {
+        background-color: #2D2D2D;
+        color: #FFFFFF;
+    }
+
+    body.dark-theme input[type="file"] {
+        background-color: #2D2D2D; /* Ubah latar belakang menjadi #2D2D2D */
+        color: #FFFFFF; /* Ubah warna teks menjadi putih */
+        border: 1px solid #444444; /* Tambahkan border agar lebih terlihat */
+        padding: 6px 12px; /* Sesuaikan padding */
+        border-radius: 4px; /* Tambahkan border radius */
+    }
+
+    body.dark-theme input[type="file"]::file-selector-button {
+        background-color: #2D2D2D; /* Ubah latar belakang tombol */
+        color: #FFFFFF; /* Ubah warna teks tombol */
+        border: 1px solid #444444; /* Tambahkan border pada tombol */
+        padding: 6px 12px; /* Sesuaikan padding tombol */
+        border-radius: 4px; /* Tambahkan border radius pada tombol */
+        cursor: pointer; /* Ubah kursor menjadi pointer */
+    }
+
+    body.dark-theme .form-control {
+        background-color: #2D2D2D; /* Perbaikan dari 'backround-color' */
+        color: #FFFFFF; /* Tambahkan warna teks agar kontras */
+        border: none;
+    }
+
+    body.dark-theme .form-control:focus {
+        background-color: #2D2D2D; /* Perbaikan dari 'backround-color' */
+        color: #FFFFFF; /* Tambahkan warna teks agar kontras */
+    }
+
+    body.dark-theme .form-control:not(:placeholder-shown) {
+        background-color: #2D2D2D; /* Ubah latar belakang menjadi #2D2D2D */
+        color: #ffffff; /* Pastikan teks tetap terlihat dengan warna putih */
+    }
+
+    body.dark-theme .table-title {
+        color: #FFFFFF;
+    }
+
+    body.dark-theme .custom-table tbody {
+        background-color: #2D2D2D;
+        color: white;
+    }
+
+    body.dark-theme .custom-table tbody .text-belom-ada {
+        color: #CFD3D6;
+    }
+
+    body.dark-theme .custom-table tbody tr:nth-child(even) {
+        background-color: #1B1B1B;
+    }
+
+    body.dark-theme .btn-upload:hover {
+        background-color: #70788F; /* Warna latar belakang saat hover */
+        color: #FFFFFF;
     }
 </style>
 
 <div class="container" style="padding-top: 70px;">
-    <h2 class="mb-2 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
+    <h2 class="mb-2 fw-bold position-relative d-inline-block">
         Pengolahan Data Mahasiswa
-        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
+        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
 
     <!-- Tombol Toggle -->
@@ -79,14 +219,13 @@
             data-bs-target="#tutorialPengisian"
             aria-expanded="false"
             aria-controls="tutorialPengisian"
-            id="toggleBtn"
-            style="color: #0e1e4b; margin-top: 0px; margin-bottom: 8px;">
-        <span id="toggleIcon">📘</span> &nbsp; Lihat panduan pengisian
+            id="toggleBtn">
+        <span id="toggleIcon">🔽</span> &nbsp; Lihat panduan pengisian
     </button>
 
     <!-- Konten Collapse -->
     <div class="collapse mt-2" id="tutorialPengisian">
-        <div class="card border-0 shadow-sm" style="background-color: #fdf9ed; font-size: 0.9rem; color: #0e1e4b; margin-bottom: 10px;">
+        <div class="card-collapse border-0 shadow-sm" style="font-size: 0.9rem; margin-bottom: 10px;">
             <div class="card-body">
                 <p class="mb-1">Pastikan file Excel yang Anda unggah memiliki format berikut:</p>
                 <ul class="mb-1 ps-3">
@@ -119,9 +258,9 @@
     </form>
 
     <!-- TABEL DATA -->
-    <h2 class="mt-3 mb-3 fw-bold position-relative d-inline-block" style="color: #0E1F4D; font-size: 1.25rem;"> <!-- Tambahkan margin atas dan bawah -->
+    <h2 class="table-title mt-3 mb-3 fw-bold position-relative d-inline-block" style="font-size: 1.25rem;"> <!-- Tambahkan margin atas dan bawah -->
         Data Yang Telah Diolah
-        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #ffffff;"></span>
+        <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
     <table class="custom-table">
         <thead>
@@ -150,7 +289,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="7" class="text-muted">Belum ada data. Silakan unggah file Excel untuk memulai pengolahan data.</td>
+                    <td colspan="7" class="text-belom-ada">Belum ada data. Silakan unggah file Excel untuk memulai pengolahan data.</td>
                 </tr>
             @endif
         </tbody>
@@ -172,7 +311,7 @@
         });
 
         collapseEl.addEventListener('hide.bs.collapse', function () {
-            toggleIcon.textContent = '📘'; // Saat tertutup
+            toggleIcon.textContent = '🔽'; // Saat tertutup
         });
 
         const exportCsvBtn = document.getElementById('exportCsvBtn');

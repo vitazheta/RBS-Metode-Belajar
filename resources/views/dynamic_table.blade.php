@@ -1,3 +1,28 @@
+<head>
+<link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
+
+    <title>Tambah Kelas</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Font Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #EBEDF4;
+        }
+    </style>
+</head>
+
 @extends('layouts.app')
 
 @section('content')
@@ -13,44 +38,70 @@ body {
 
 #addRowBtn {
     background-color: #F37AB0;
-    border-color: #F37AB0;
     color: #FFFFFF; /* teks gelap biar kontras */
+    border: none;
 }
 
 #addRowBtn:hover {
-    background-color: transparent;
-    border-color: #F37AB0;
-    color: #F37AB0;
+    background-color: #E2A6C1;
+    color: #FFFFFF;
+    border: none;
 }
 
 #saveBtn {
     background-color: #0E1F4D;
-    border-color: #0E1F4D;
     color: white;
+    border: none;
 }
 
 #saveBtn:hover {
-    background-color: transparent;
-    border-color: #0E1F4D;
-    color: #0E1F4D;
+    background-color: #70788F;
+    color: #FFFFFF;
+    border: none;
 }
 
 #generateBtn {
     background-color: #0E1F4D;
-    border-color: #0E1F4D;
     color: white;
+    border: none;
 }
 
 #generateBtn:hover {
-    background-color: transparent;
-    border-color: #0E1F4D;
-    color: #0E1F4D;
+    background-color: #70788F;
+    color: #ffffff;
+    border: none;
 }
 
 input::placeholder {
     font-weight: 300;
     color: #888;
     font-style: italic;
+}
+
+.card-body-form {
+    background-color: #ffffff;
+    color: #0E1F4D;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+input[type="file"] {
+    background-color: #ffffff; /* Ubah latar belakang menjadi #2D2D2D */
+    color: #000000; /* Ubah warna teks menjadi putih */
+    padding: 6px 12px; /* Sesuaikan padding */
+    border-radius: 4px; /* Tambahkan border radius */
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #ffffff; /* Ubah latar belakang tombol */
+    color: #000000; /* Ubah warna teks tombol */
+    padding: 6px 12px; /* Sesuaikan padding tombol */
+    border-radius: 4px; /* Tambahkan border radius pada tombol */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+}
+
+input[type="file"]::file-selector-button:hover {
+    color: #000000; 
 }
 
 .custom-table {
@@ -78,9 +129,23 @@ input::placeholder {
     background-color: #ffffff;
 }
 
-.custom-table tbody tr:hover {
-    background-color: #ffffff;
-    transition: all 0.2s ease-in-out;
+label[for="nama_kelas"]::after {
+    color: #000000; /* Ubah warna teks menjadi putih */
+}
+
+.form-control {
+    background-color: #ffffff; /* Perbaikan dari 'backround-color' */
+    color: #000000; /* Tambahkan warna teks agar kontras */
+}
+
+.form-control:focus {
+    background-color: #ffffff; /* Perbaikan dari 'backround-color' */
+    color: #000000; /* Tambahkan warna teks agar kontras */
+}
+
+.form-control:not(:placeholder-shown) {
+    background-color: #ffffff; /* Ubah latar belakang menjadi #2D2D2D */
+    color: #000000; /* Pastikan teks tetap terlihat dengan warna putih */
 }
 
 .custom-table .btn-delete {
@@ -93,7 +158,7 @@ input::placeholder {
 }
 
 .custom-table .btn-delete:hover {
-    background-color: #F37AB0;
+    background-color: #E2A6C1;
 }
 
 #dynamicTable {
@@ -104,7 +169,6 @@ input::placeholder {
 #dynamicTable th,
 #dynamicTable td {
     padding: 12px 6px; /* Sesuaikan jarak dalam sel */
-
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
@@ -114,20 +178,106 @@ input::placeholder {
     margin-bottom: 100px; /* Tambahkan ruang kosong sebelum footer */
 }
 
+#toggleBtn {
+        color: #0E1F4D; /* Warna default */
+        margin-top: 0px;
+        margin-bottom: 8px;
+        transition: color 0.3s ease; /* Animasi transisi */
+}
+
 #toggleBtn:hover {
-    text-decoration: underline !important; /* Gunakan !important untuk memaksa aturan ini */
+    color: #70788F; /* Gunakan !important untuk memaksa aturan ini */
     cursor: pointer;
 }
 
 .btn-link:hover {
-    text-decoration: underline !important;
+    color: #70788F; !important;
 }
 
+/* Dark Theme */
+body.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-theme .container h2 {
+    color: #ffffff;
+}
+
+body.dark-theme #toggleBtn {
+        color: #FFFFFF; /* Warna default */
+}
+
+body.dark-theme .card-body-form {
+    background-color: #2D2D2D;
+    color: #FFFFFF;
+}
+
+body.dark-theme .custom-table tbody {
+    color: #FFFFFF
+}
+
+body.dark-theme .custom-table tbody {
+    color: #FFFFFF
+}
+
+body.dark-theme .custom-table tbody tr:nth-child(even) {
+    background-color: #1B1B1B;
+}
+
+body.dark-theme .form-control {
+    background-color: #2D2D2D; /* Perbaikan dari 'backround-color' */
+    color: #FFFFFF; /* Tambahkan warna teks agar kontras */
+    border: none;
+}
+
+body.dark-theme .form-control:focus {
+    background-color: #2D2D2D; /* Perbaikan dari 'backround-color' */
+    color: #FFFFFF; /* Tambahkan warna teks agar kontras */
+}
+
+body.dark-theme .form-control:not(:placeholder-shown) {
+    background-color: #2D2D2D; /* Ubah latar belakang menjadi #2D2D2D */
+    color: #ffffff; /* Pastikan teks tetap terlihat dengan warna putih */
+}
+
+body.dark-theme input[type="file"] {
+    background-color: #2D2D2D; /* Ubah latar belakang menjadi #2D2D2D */
+    color: #FFFFFF; /* Ubah warna teks menjadi putih */
+    border: 1px solid #444444; /* Tambahkan border agar lebih terlihat */
+    padding: 6px 12px; /* Sesuaikan padding */
+    border-radius: 4px; /* Tambahkan border radius */
+}
+
+body.dark-theme input[type="file"]::file-selector-button {
+    background-color: #2D2D2D; /* Ubah latar belakang tombol */
+    color: #FFFFFF; /* Ubah warna teks tombol */
+    border: 1px solid #444444; /* Tambahkan border pada tombol */
+    padding: 6px 12px; /* Sesuaikan padding tombol */
+    border-radius: 4px; /* Tambahkan border radius pada tombol */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+}
+
+body.dark-theme input[type="file"]::file-selector-button:hover {
+    color: #000000; 
+}
+
+body.dark-theme #toggleBtn {
+        color: #FFFFFF; /* Warna default */
+        margin-top: 0px;
+        margin-bottom: 8px;
+        transition: color 0.3s ease; /* Animasi transisi */
+}
+
+body.dark-theme #toggleBtn:hover {
+    color: #777F95; /* Gunakan !important untuk memaksa aturan ini */
+    cursor: pointer;
+}
 </style>
 
 
 <div class="container content-wrapper" style="padding-top: 70px;">
-    <h2 class="mb-2 fw-bold position-relative d-inline-block" style="color: #0E1F4D;">
+    <h2 class="mb-2 fw-bold position-relative d-inline-block">
         Data Kelas
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
@@ -137,15 +287,14 @@ input::placeholder {
         data-bs-toggle="collapse"
         data-bs-target="#tutorialPengisian"
         aria-expanded="false"
-        aria-controls="tutorialPengisian"
-        style="color: #0E1F4D; margin-top: 0px; margin-bottom: 8px;">
+        aria-controls="tutorialPengisian">
     <span id="toggleIcon">🔽</span> &nbsp; Lihat panduan pengisian
 </button>
 
 <!-- Konten Collapse -->
 <div class="collapse mt-2" id="tutorialPengisian">
-    <div class="card border-0 shadow-sm" style="background-color: #ffffff; font-size: 14px; color: #0E1F4D; margin-bottom: 10px;">
-        <div class="card-body">
+    <div class="card border-0 shadow-sm" style="font-size: 14px; margin-bottom: 10px;">
+        <div class="card-body-form">
             Masukkan nama kelas sesuai format penamaan institusi. Contoh:
             <ul class="mb-1 ps-3">
                 <li><strong>Pendidikan Ilmu Komputer B - 2021</strong></li>
@@ -211,7 +360,7 @@ input::placeholder {
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td><input type="text" name="mahasiswa[0][nama]"                    class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][nama]" class="form-control"></td>
                     <td><input type="text" name="mahasiswa[0][asal_sekolah]" class="form-control"></td>
                     <td>
                         <select name="mahasiswa[0][jalur_masuk]" class="form-control">

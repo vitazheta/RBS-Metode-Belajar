@@ -1,22 +1,33 @@
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <!-- Banner Section -->
 <section id="banner" class="position-relative">
     <!-- Carousel Background -->
     <div id="backgroundCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel1-white.png') }}');"></div>
+                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel1-raw.png') }}');"></div>
+                <!-- Overlay putih -->
+                <div class="carousel-overlay-color"></div>
             </div>
             <div class="carousel-item">
-                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel2-white.png') }}');"></div>
+                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel2-raw.png') }}');"></div>
+                <!-- Overlay putih -->
+                <div class="carousel-overlay-color"></div>
             </div>
             <div class="carousel-item">
-                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel3-white.png') }}');"></div>
+                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel3-raw.png') }}');"></div>
+                <!-- Overlay putih -->
+                <div class="carousel-overlay-color"></div>
             </div>
-                <div class="carousel-item">
-            <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel4-white.png') }}');"></div>
+            <div class="carousel-item">
+                <div class="carousel-bg" style="background-image: url('{{ asset('images/carousel4-raw.png') }}');"></div>
+                <!-- Overlay putih -->
+                <div class="carousel-overlay-color"></div>
             </div>
         </div>
     </div>
@@ -47,6 +58,10 @@
 
 <!-- Tambahkan CSS -->
 <style>
+.banner {
+    margin-top: none;
+}
+
     .img-banner {
     max-width: 80%; /* Ubah ukuran sesuai kebutuhan, misal 80% dari parent */
     height: auto; /* Menjaga proporsi gambar */
@@ -85,6 +100,15 @@
     /*background: rgba(14, 31, 77, 0.7); /* semi-transparent navy overlay */
     }
 
+    .carousel-overlay-color {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8); /* Warna putih dengan transparansi 70% */
+        z-index: 1; /* Pastikan overlay berada di atas gambar */
+    }
 
     /* Warna sesuai color palette */
     :root {
@@ -123,20 +147,20 @@
 
     .btn-primary {
         background-color: var(--accent-color);
-        border-color: var(--accent-color);
         color: var(--text-color);
         font-size: 14px;
         line-height: 20px;
         font-family: 'Poppins', sans-serif;
+        border: none;
     }
 
     .btn-primary:hover {
-        background-color: var(--text-color);
-        border-color: var(--text-color);
-        color: var(--primary-color);
+        background-color: #E2A6C1;
+        color: var(--text-color);
         font-size: 14px;
         line-height: 20px;
         font-family: 'Poppins', sans-serif;
+        border: none;
     }
 
     /* Animasi Logo */
@@ -200,6 +224,50 @@
         opacity: 1;
         transform: translateY(0);
     }
+
+    /* Dark Theme */
+    body.dark-theme {
+        color: #FFFFFF;
+    }
+
+    body.dark-theme .carousel-overlay-color {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(27, 27, 27, 0.9); /* Warna putih dengan transparansi 70% */
+        z-index: 1; /* Pastikan overlay berada di atas gambar */
+    }
+
+    body.dark-theme #animatedText {
+        font-family: 'Poppins', sans-serif;
+        font-size: 56px;
+        font-weight: bold;
+        line-height: 72px;
+        color: #FFFFFF;
+    }
+
+    body.dark-theme .carousel-overlay p {
+        font-size: 14px;
+        line-height: 20px;
+        color: #FFFFFF;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body.dark-theme .text-muted {
+        color: #FFFFFF !important;
+    }
+
+    body.dark-theme .btn-primary:hover {
+        background-color: #E2A6C1;
+        color: var(--text-color);
+        font-size: 14px;
+        line-height: 20px;
+        font-family: 'Poppins', sans-serif;
+        border: none;
+    }
+
 </style>
 
 <!-- Tambahkan Animasi JS -->
@@ -241,6 +309,9 @@
 
     document.addEventListener("DOMContentLoaded", typeEffect);
 </script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

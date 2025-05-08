@@ -128,5 +128,12 @@ public function index()
     return $this->mahasiswa()->count(); // Menghitung jumlah mahasiswa yang terhubung dengan kelas ini
 }
 
+public function destroy($id)
+{
+    $kelas = Kelas::findOrFail($id); // Cari kelas berdasarkan ID
+    $kelas->delete(); // Hapus kelas dari database
+
+    return response()->json(['success' => 'Kelas berhasil dihapus.']);
+}
 
 }

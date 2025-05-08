@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+    <title>EdVise</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -33,7 +33,7 @@ body {
 }
 
 .about-section {
-    background: linear-gradient(180deg, #0E1F4D, #000D30); /* Gradasi dari atas ke bawah */
+    background: linear-gradient(180deg, #111F43, #000D30); /* Gradasi dari atas ke bawah */
     padding: 100px 0;
 }
 
@@ -82,20 +82,35 @@ body {
 
 .btn-primary {
     background-color: var(--accent-color);
-    border-color: var(--accent-color);
     color: var(--text-color);
     font-size: 14px;
     line-height: 20px;
     font-family: 'Poppins', sans-serif;
+    border: none;
 }
 
 .btn-primary:hover {
-    background-color: var(--text-color);
-    border-color: var(--text-color);
-    color: var(--primary-color);
+    background-color: #E2A6C1;
+    color: var(--text-color);
     font-size: 14px;
     line-height: 20px;
     font-family: 'Poppins', sans-serif;
+    border: none;
+}
+
+/* Dark Theme */
+
+body.dark-theme {
+    background-color: #1B1B1B;
+}
+
+body.dark-theme .about-section {
+    background: linear-gradient(180deg, #162449, #0B1531); /* Gradasi dari atas ke bawah */
+}
+
+body.dark-theme .btn-primary {
+    background-color: #F481B4;
+    color: #ffffff;
 }
 
 /*biar responsif*/

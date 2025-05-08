@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us - Rekomendasi Gaya Belajar</title> -->
-  <style>
+
+<body>
+<style>
     * {
       box-sizing: border-box;
     }
@@ -60,11 +62,25 @@
       margin-bottom: 20px;
     }
 
+    .section.dark-theme h2 {
+      color: #000000;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
     .section p {
       max-width: 800px;
       margin: 10px auto 40px;
       line-height: 1.6;
       font-size: 1rem;
+    }
+
+    .section.dark-theme p {
+      max-width: 800px;
+      margin: 10px auto 40px;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: #ffffff;
     }
 
     .features {
@@ -117,6 +133,10 @@
       color: #0E1F4D;
     }
 
+    .feature-item.dark-theme p {
+      color: #ffffff;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .header-wrapper h1 {
@@ -127,6 +147,25 @@
       .feature-item {
         width: 90%;
       }
+    }
+
+    /* Dark Theme */
+    body.dark-theme {
+        background-color: #1B1B1B;
+        color: #BCCAD7;
+    }
+
+    body.dark-theme .icon-circle {
+        background-color: #162449;
+        color: black;
+    }
+
+    body.dark-theme .feature-item h4 {
+        color: #ffffff;
+    }
+
+    body.dark-theme .feature-item p {
+        color: #ffffff;
     }
     
   </style>
@@ -161,8 +200,30 @@
       </div>
     </div>
   </section>
+</body>
 
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.getElementById("darkModeToggle");
+        const body = document.body;
 
+        // Cek jika dark mode sudah diaktifkan sebelumnya
+        if (localStorage.getItem("dark-theme") === "enabled") {
+            body.classList.add("dark-theme");
+            toggle.checked = true;
+        }
+
+        toggle.addEventListener("change", function () {
+            if (this.checked) {
+                body.classList.add("dark-theme");
+                localStorage.setItem("dark-theme", "enabled");
+            } else {
+                body.classList.remove("dark-theme");
+                localStorage.setItem("dark-theme", "disabled");
+            }
+        });
+    });
+</script>
 
 
