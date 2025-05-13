@@ -7,12 +7,18 @@
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
 
 
         <!--<title>Sistem Rekomendasi Gaya Belajar Adaptif</title>
 
         <--Styles -->
         <style>
+        body.dark-theme {
+            background-color: #1F1F20;
+            color: #BCCAD7;
+        }
+        
         header {
             background-color: #ffffff
             height: auto;
@@ -66,6 +72,15 @@
             /* padding-right: 10px;
             max-width: 600px; 
             margin-left: 500px; */
+        }
+
+        /* Dark theme */
+        body.dark-theme header h1 {
+            color: #FFFFFF;
+        }
+
+        body.dark-theme header p {
+            color: #FFFFFF;
         }
 
         </style>

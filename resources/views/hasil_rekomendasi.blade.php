@@ -1,3 +1,28 @@
+<head>
+<link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
+
+    <title>Hasil Rekomendasi</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Font Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #EBEDF4;
+        }
+    </style>
+</head>
+
 @extends('layouts.app')
 
 @section('title', 'Hasil Rekomendasi Gaya Belajar')
@@ -10,6 +35,7 @@
         padding-top: 0 !important; /* Menghilangkan padding-top saat print */
         min-height: calc(100vh - 100px); /* Pastikan konten utama memenuhi layar */
         margin-bottom: 100px;
+        margin-top: 0px;
     }
 }
 
@@ -30,6 +56,10 @@
 
     .card-hasil-rekomendasi {
         margin-bottom: 100px; /* Tambahkan jarak sebelum footer */
+    }
+
+    .container {
+    color: #0E1F4D;
     }
 
     body {
@@ -57,6 +87,88 @@
     margin-top: 20px; /* Jarak antara tabel dan section hasil rekomendasi */
 }
 
+.card-body {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+
+.card-hasil {
+    background-color: #ffffff; /* Warna latar belakang */
+    color: #000000; /* Warna teks */
+    border-radius: 10px; /* Membuat sudut membulat */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Menambahkan shadow */
+}
+
+.table-aspek {
+    margin-bottom: 20px;
+}
+
+.table-aspek .table-light {
+    background-color: #EBEDF4;
+    border-color: #6C757D;
+    color: #000000;
+    text-align: center;
+}
+
+.table-aspek .kolom-aspek {
+    border-radius: 5px; /* Membuat sudut membulat */
+    overflow: hidden; /* Memastikan konten tidak keluar dari sudut */
+    border-color: #6C757D;
+    color: #000000;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: #1B1B1B;
+}
+
+body.dark-theme .container {
+    color: #ffffff;
+}
+
+body.dark-theme .card-first-body {
+    color: #ffffff;
+}
+
+body.dark-theme .card-body {
+    background-color: #2D2D2D;
+    color: #ffffff;
+    border: none;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+body.dark-theme .text-center-table {
+    background-color:  #162449;
+    color: #ffffff;
+}
+
+body.dark-theme .card-hasil {
+    background-color: #2D2D2D;
+    color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme .table-aspek {
+    background-color: #2D2D2D;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+body.dark-theme .table-aspek .table-light {
+    background-color: #1B1B1B;
+    color: #ffffff;
+}
+
+body.dark-theme .table-aspek .kolom-aspek {
+    background-color: #1B1B1B;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
 </style>
 
 <div class="pdf-header" style="display: none; padding: 20px; border-bottom: 2px solid #000; margin-bottom: 20px;">
@@ -71,19 +183,18 @@
 
 
 <div class="container" style="padding-top: 0px;">
-    <h2 class="mb-2 fw-bold position-relative d-inline-block no-print" style="color: #0E1F4D; padding-top: 70px;">
+    <h2 class="mb-2 fw-bold position-relative d-inline-block no-print" style="padding-top: 70px;">
         Hasil Rekomendasi Gaya Belajar Mahasiswa
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
 
     {{-- Informasi Kelas --}}
     <div class="card mb-2" style="border: none; background: none;">
-        <div class="card-body">
+        <div class="card-first-body">
             <h5 class="card-title"><strong>📘 Informasi Kelas</strong></h5>
             <p>Nama Kelas:
             <span class="badge fs-6" style="background-color: #84A7CF;">{{ $kelas->nama_kelas }}</span>
             </p>
-
             <p>Kode Mata Kuliah:
                 <span class="badge fs-6" style="background-color: #F37AB0;">{{ $kelas->kode_mata_kuliah }}</span>
             </p>
@@ -100,12 +211,11 @@
 
 
     {{-- Tambahkan canvas di atas tabel --}}
-<div class="card shadow-sm mb-4">
-    <div class="card-header text-white" style="background-color: #0E1F4D;">
+<div class="card shadow-sm mb-4" style="border: none;">
+    <div class="card-header text-white" style="background-color: #0E1F4D; border: 0px;">
         <h5 class="mb-0">Distribusi Gaya Belajar Mahasiswa</h5>
     </div>
     <div class="card-body">
-    
         <div class="row">
             <div class="col-md-4">
                 <canvas id="chartSNBP"></canvas>
@@ -123,7 +233,7 @@
     <div class="container-rekomendasi">
         <div class="table-responsive rounded shadow-sm">
             <table class="table table-bordered table-striped align-middle">
-                <thead class="table-dark text-center">
+                <thead class="text-center-table" style="background-color: #162449;">
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
@@ -156,17 +266,17 @@
             </table>
         </div>
 
-        <div class="card p-4 mt-3 shadow-sm card-hasil-rekomendasi">
+        <div class="card-hasil p-4 mt-3 shadow-sm card-hasil-rekomendasi">
             <p>Berdasarkan data inputan di kelas <strong>{{ $kelas->nama_kelas }}</strong>, berikut ringkasan rekomendasi pembelajaran yang dapat kami berikan:</p>
             
-            <table class="table table-bordered">
+            <table class="table-aspek table-bordered">
                 <thead class="table-light">
                     <tr>
                         <th>Aspek</th>
                         <th>Alasan</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="kolom-aspek">
                     <tr>
                         <td>Akademik dan Endurance</td>
                         <td>{{ $alasan['akademik_endurance'] }}</td>
@@ -241,12 +351,19 @@
         const element = document.querySelector(".container");
         const noPrintEls = document.querySelectorAll(".no-print");
         const pdfHeader = document.querySelector(".pdf-header");
+        const body = document.body; // Ambil elemen body
+        const isDarkTheme = body.classList.contains("dark-theme"); // Cek apakah dark theme aktif
 
         // Tampilkan header khusus PDF
         pdfHeader.style.display = "block";
 
         // Sembunyikan elemen-elemen no-print
         noPrintEls.forEach(el => el.style.visibility = "hidden");
+
+        // Hapus class dark-theme sementara
+        if (isDarkTheme) {
+            body.classList.remove("dark-theme");
+        }
 
         // Jeda untuk memastikan perubahan DOM diterapkan
         setTimeout(() => {
@@ -278,6 +395,11 @@
                 // Balikin tampilan seperti semula
                 noPrintEls.forEach(el => el.style.visibility = "visible");
                 pdfHeader.style.display = "none";
+
+                // Tambahkan kembali class dark-theme jika sebelumnya aktif
+                if (isDarkTheme) {
+                    body.classList.add("dark-theme");
+                }
             });
         }, 500); // cukup 500ms, kalau lambat baru naikin ke 1000ms
     });

@@ -1,15 +1,16 @@
 <!-- filepath: c:\Users\ASUS\RekomendasiBelajar\resources\views\layouts\footer.blade.php -->
-<footer class="py-4">
+<footer class="outer-container">
     <div class="container-footer">
         <div class="row">
             <!-- Kolom 1: Tentang -->
-            <div class="col-md-4">
-                <h5>Tentang Kami</h5>
+            <div class="col-md-6">
+                <img src="{{ asset('images/logo kecil.png') }}" alt="Logo" style="height: 20px; margin-bottom: 10px;">
+                <h5>Tentang kami</h5>
                 <p>EdVise adalah platform pembelajaran cerdas yang membantu pendidik memahami gaya belajar siswa secara personal.</p>
             </div>
 
             <!-- Kolom 2: Navigasi -->
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <h5>Navigasi</h5>
                 <ul class="list-unstyled">
                     <li><a href="{{ url('/') }}" class="text-white text-decoration-none">Home</a></li>
@@ -30,18 +31,18 @@
                 </div>
             </div>
         </div>
-
-        <div class="text-center mt-4">
+    </div>
+    <div class="copyright text-center mt-4">
             <p class="mb-0">&copy; 2025 EdVise. All rights reserved.</p>
-        </div>
     </div>
 </footer>
 
 <style>
 footer {
-    background-color: #0E1F4D; /* Warna latar belakang footer */
+    background-color: #111F43; /* Warna latar belakang footer */
     color: #ffffff; /* Warna teks */
     font-family: Poppins, sans-serif;
+    padding-top: 15px;
 }
 
 footer a {
@@ -70,5 +71,13 @@ footer a:hover {
 footer .col-md-4 {
     padding-left: 15px; /* Tambahkan ruang di sisi kiri */
     padding-right: 25px; /* Tambahkan ruang di sisi kanan */
+}
+
+.copyright {
+    background-color: #F37AB0;
+    color: #FFFFFF;
+    padding: 10px;
+    max-width: 100%;
+    max-height: max-content;
 }
 </style>

@@ -63,8 +63,7 @@
     .btn-log {
         background-color: #F37AB0; /* Warna latar belakang */
         color: #ffffff; /* Warna teks */
-        border: none; /* Hilangkan border */
-        border-radius: 50px; /* Membuat tombol berbentuk lingkaran */
+        border-radius: 7px; /* Membuat tombol berbentuk lingkaran */
         padding: 10px 20px; /* Menambahkan padding untuk ukuran tombol */
         font-size: 14px; /* Ukuran teks */
         text-align: center; /* Pusatkan teks */
@@ -73,16 +72,15 @@
     }
 
     .btn-log:hover {
-        background-color: transparent !important; /* Warna latar belakang saat hover */
-        color: #F37AB0 !important; /* Warna teks saat hover */
-        border: 2px solid #F37AB0; /* Tambahkan border saat hover */
+        background-color: #E2A6C1 !important; /* Warna latar belakang saat hover */
+        color: #ffffff !important; /* Warna teks saat hover */
         text-decoration: none; /* Pastikan underline tetap hilang saat hover */
         transition: all 0.3s ease; /* Animasi transisi */
     }
 
     /* Navbar Styling */
     .navbar-custom {
-        background: linear-gradient(135deg, #0E1F4D 0%, #3F5694 30%, #000D30 100%); /* Gradasi dengan efek pantulan */
+        background: linear-gradient(135deg, #111F43 0%, #3F5694 30%, #000D30 100%); /* Gradasi dengan efek pantulan */
         border-radius: 0 0 10px 10px; /* Rounded hanya di bagian bawah */
         padding: 10px 20px;
         position: fixed;  /* Menempel di layar */
@@ -92,6 +90,54 @@
         height: 60px;
         z-index: 1000;  /* Agar tetap di atas elemen lain */
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk efek elegan */
+    }
+
+    /* Default Light Theme */
+    body {
+        background-color: #EBEDF4;
+        color: #0E1F4D;
+    }
+
+    .navbar-custom {
+        background: linear-gradient(135deg, #0E1F4D 0%, #3F5694 30%, #000D30 100%);
+    }
+
+    .btn-nav {
+        color: #FFFFFF;
+    }
+
+    .btn-log {
+        background-color: #F37AB0;
+        color: #FFFFFF;
+    }
+
+    /* Dark Theme */
+    body.dark-theme {
+        background-color: #1B1B1B;
+        color: #BCCAD7;
+    }
+
+    .navbar-custom.dark-theme {
+        background: linear-gradient(135deg, #162449 0%, #90B0D4 30%, #0B1531 100%);
+    }
+
+    .btn-nav.dark-theme {
+        color: #000000;
+    }
+
+    .btn-log.dark-theme {
+        background-color: #F481B4;
+        color: #000000;
+    }
+
+    .btn-log.dark-theme:hover {
+        background-color: #E5AFC7;
+        color: #000000;
+    }
+
+    .form-check-label .bi-moon {
+        font-size: 18px; /* Sesuaikan ukuran ikon */
+        cursor: pointer; /* Ubah kursor menjadi pointer */
     }
 </style>
 
@@ -161,6 +207,35 @@
                     </li>
                 @endauth
             </ul>
+            <div class="form-check form-switch ms-3">
+                <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                <label class="form-check-label" for="darkModeToggle">
+                    <i class="bi bi-moon text-white"></i>
+                </label>
+            </div>
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.getElementById("darkModeToggle");
+        const body = document.body;
+
+        // Cek jika dark mode sudah diaktifkan sebelumnya
+        if (localStorage.getItem("dark-theme") === "enabled") {
+            body.classList.add("dark-theme");
+            toggle.checked = true;
+        }
+
+        toggle.addEventListener("change", function () {
+            if (this.checked) {
+                body.classList.add("dark-theme");
+                localStorage.setItem("dark-theme", "enabled");
+            } else {
+                body.classList.remove("dark-theme");
+                localStorage.setItem("dark-theme", "disabled");
+            }
+        });
+    });
+</script>

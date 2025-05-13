@@ -117,3 +117,5 @@ Route::get('/export-success', function () {
 // Route::get('/info', function () {
 //     return view('info');
 // });
+
+Route::delete('/kelas/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');

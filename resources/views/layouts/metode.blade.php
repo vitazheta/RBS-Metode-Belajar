@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Metode Pembelajaran</title> -->
   <style>
+    body.dark-theme {
+      background-color: #1B1B1B;
+      color: #BCCAD7;
+    }
 
     .container {
       padding: 40px;
@@ -78,14 +82,14 @@
     .card-title {
       font-size: 20px;
       font-weight: bold;
-      color: #ffff;
+      color: #ffffff;
       margin-bottom: 8px;
       padding: 10px;
     }
 
     .card-desc {
       font-size: 14px;
-      color: #ffff;
+      color: #ffffff;
       padding: 10px;
       /* text-align: center; */
     }
@@ -94,7 +98,7 @@
       position: absolute;
       top: 45%;
       transform: translateY(-50%);
-      background-color:#F37AB0;
+      background-color: #F37AB0;
       color: white;
       border: none;
       border-radius: 50%;
@@ -108,7 +112,7 @@
     }
 
     .nav-button:hover {
-      background-color:  #84A7CF;
+      background-color:  #E2A6C1;
     }
 
     .nav-button:active {
@@ -123,6 +127,27 @@
       right: -20px;
     }
 
+    /* Dark Theme */
+    body.dark-theme .container h2 {
+      color: #FFFFFF;
+    }
+
+    body.dark-theme .section-title {
+      color: #FFFFFF;
+    }
+
+    body.dark-theme .card {
+      background-color: #1B1B1B;
+    }
+
+    body.dark-theme .card-content {
+      background: linear-gradient(180deg, #162449, #0B1531);
+    }
+
+    body.dark-theme .nav-buton {
+      background-color: #F481B4;
+    }
+
   </style>
 
   <div class="container">
@@ -130,7 +155,7 @@
     <div class="slider-container">
     <div class="slider-wrapper">
       <div class="slider" id="slider">
-      <div class="card">
+        <div class="card">
           <div class="card-content">
             <div class="card-title">Problem Based Learning</div>
             <div class="card-desc"> Pendekatan pembelajaran yang fokus pada penyelesaian masalah autentik kompleks 
