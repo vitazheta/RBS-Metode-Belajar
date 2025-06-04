@@ -67,21 +67,21 @@ class HasilRekomendasiController extends Controller
 
         // Gunakan nama aspek yang baru
         if ($aspekNamaSingkat === 'akademik') { // UBAH dari 'akademik_total' / 'akademik_endurance'
-            if ($nilai <= 2) return 'RENDAH';
-            if ($nilai <= 3) return 'SEDANG';
-            return 'TINGGI'; // Ingat masalah dengan nilai > 3 jika maxnya 3
+            if ($nilai <= 2) return 'Rendah';
+            if ($nilai <= 3) return 'Sedang';
+            return 'Tinggi'; // Ingat masalah dengan nilai > 3 jika maxnya 3
         } else if ($aspekNamaSingkat === 'sekolah') { // UBAH dari 'sekolah_total' / 'latar_belakang'
-            if ($nilai <= 2) return 'KURANG MENDUKUNG';
-            if ($nilai <= 3) return 'MENDUKUNG';
-            return 'SANGAT MENDUKUNG';
+            if ($nilai <= 2) return 'Kurang Mendukung';
+            if ($nilai <= 3) return 'Mendukung';
+            return 'Sangat Mendukung';
         } else if ($aspekNamaSingkat === 'ekonomi') { // UBAH dari 'ekonomi_total' / 'pola_belajar'
-            if ($nilai <= 2) return 'KURANG MENCUKUPI';
-            if ($nilai <= 3) return 'MENCUKUPI';
-            return 'SANGAT MENCUKUPI';
+            if ($nilai <= 2) return 'Kurang Mencukupi';
+            if ($nilai <= 3) return 'Mencukupi';
+            return 'Sangat Mencukupi';
         } else if ($aspekNamaSingkat === 'perkuliahan') { // TETAP SAMA
-            if ($nilai <= 2) return 'KURANG BAIK';
-            if ($nilai <= 3) return 'BAIK';
-            return 'SANGAT BAIK';
+            if ($nilai <= 2) return 'Kurang Baik';
+            if ($nilai <= 3) return 'Baik';
+            return 'Sangat Baik';
         }
         return (string) $nilai;
     }
