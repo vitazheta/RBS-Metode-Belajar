@@ -3,16 +3,12 @@
 
     <title>Hasil Rekomendasi</title>
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Google Font Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
 
     <style>
@@ -118,6 +114,12 @@
     color: #000000;
 }
 
+.text-center-table {
+    background-color:  #162449;
+    color: #ffffff;
+    text-align: center; /* Tambahkan baris ini untuk Nama asal sekolah jalur masuk akademik sekolah rata tengah*/
+}
+
 /* Dark Theme */
 body.dark-theme {
     background-color: #1B1B1B;
@@ -140,8 +142,9 @@ body.dark-theme .card-body {
 }
 
 body.dark-theme .text-center-table {
-    background-color:  #162449;
+    background-color:  #162449;
     color: #ffffff;
+    text-align: center;
 }
 
 body.dark-theme .card-hasil {
@@ -239,9 +242,9 @@ body.dark-theme .table-aspek .kolom-aspek {
                         <th>Nama</th>
                         <th>Asal Sekolah</th>
                         <th>Jalur Masuk</th>
-                        <th>Akademik dan Endurance</th>
-                        <th>Latar Belakang</th>
-                        <th>Pola Belajar</th>
+                        <th>Akademik</th>
+                        <th>Sekolah</th>
+                        <th>Ekonomi</th>
                         <th>Perkuliahan</th>
                     </tr>
                 </thead>
@@ -252,10 +255,14 @@ body.dark-theme .table-aspek .kolom-aspek {
                             <td>{{ $mhs->nama_lengkap }}</td>
                             <td>{{ $mhs->asal_sekolah}}</td>
                             <td class="text-center">{{ $mhs->jalur_masuk }}</td>
-                            <td class="text-center">{{ $mhs->akademik_endurance }}</td>
-                            <td class="text-center">{{ $mhs->latar_belakang }}</td>
-                            <td class="text-center">{{ $mhs->pola_belajar }}</td>
-                            <td class="text-center">{{ $mhs->perkuliahan}}</td>
+                            {{-- Akademik (menggunakan atribut _text baru dari controller) --}}
+                            <td class="text-center">{{ $mhs->akademik_text }}</td>
+                            {{-- Sekolah (menggunakan atribut _text baru dari controller) --}}
+                            <td class="text-center">{{ $mhs->sekolah_text }}</td>
+                            {{-- Ekonomi (menggunakan atribut _text baru dari controller) --}}
+                            <td class="text-center">{{ $mhs->ekonomi_text }}</td>
+                            {{-- Perkuliahan (menggunakan atribut _text baru dari controller) --}}
+                            <td class="text-center">{{ $mhs->perkuliahan_text }}</td>
                         </tr>
                     @empty
                         <tr>
@@ -265,42 +272,44 @@ body.dark-theme .table-aspek .kolom-aspek {
                 </tbody>
             </table>
         </div>
-
         <div class="card-hasil p-4 mt-3 shadow-sm card-hasil-rekomendasi">
-            <p>Berdasarkan data inputan di kelas <strong>{{ $kelas->nama_kelas }}</strong>, berikut ringkasan rekomendasi pembelajaran yang dapat kami berikan:</p>
-            
-            <table class="table-aspek table-bordered">
-                <thead class="table-light">
-                    <tr>
-                        <th>Aspek</th>
-                        <th>Alasan</th>
-                    </tr>
-                </thead>
-                <tbody class="kolom-aspek">
-                    <tr>
-                        <td>Akademik dan Endurance</td>
-                        <td>{{ $alasan['akademik_endurance'] }}</td>
-                    </tr>
-                    <tr>
-                        <td>Latar Belakang</td>
-                        <td>{{ $alasan['latar_belakang'] }}</td>
-                    </tr>
-                    <tr>
-                        <td>Pola Belajar</td>
-                        <td>{{ $alasan['pola_belajar'] }}</td>
-                    </tr>
-                    <tr>
-                        <td>Perkuliahan</td>
-                        <td>{{ $alasan['perkuliahan'] }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        
-            <p>Dengan demikian pembelajaran terbaik yang direkomendasikan adalah <strong>{{ $rekomendasi['akademik_endurance'] }}</strong> 
-            dengan tetap memperhatikan <strong>{{ $rekomendasi['latar_belakang'] }}</strong>, 
-            <strong>{{ $rekomendasi['pola_belajar'] }}</strong>, 
-            serta <strong>{{ $rekomendasi['perkuliahan'] }}</strong>.</p>
-        </div>
+    <p>Berdasarkan data inputan di kelas <strong>{{ $kelas->nama_kelas }}</strong>, berikut ringkasan rekomendasi pembelajaran yang dapat kami berikan:</p>
+
+    <table class="table-aspek table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Aspek</th>
+                <th>Alasan</th>
+            </tr>
+        </thead>
+        <tbody class="kolom-aspek">
+            <tr>
+                <td>Akademik</td> {{-- Label tampilan --}}
+                <td>{{ $alasan['akademik'] }}</td> {{-- UBAH key di sini --}}
+            </tr>
+            <tr>
+                <td>Sekolah</td> {{-- Label tampilan --}}
+                <td>{{ $alasan['sekolah'] }}</td> {{-- UBAH key di sini --}}
+            </tr>
+            <tr>
+                <td>Ekonomi</td> {{-- Label tampilan --}}
+                <td>{{ $alasan['ekonomi'] }}</td> {{-- UBAH key di sini --}}
+            </tr>
+            <tr>
+                <td>Perkuliahan</td> {{-- Label tampilan --}}
+                <td>{{ $alasan['perkuliahan'] }}</td> {{-- UBAH key di sini --}}
+            </tr>
+        </tbody>
+    </table>
+
+    <p>Dengan demikian pembelajaran terbaik yang direkomendasikan adalah <strong>{{ $rekomendasi['akademik'] }}</strong>
+    dengan tetap memperhatikan <strong>{{ $rekomendasi['sekolah'] }}</strong>,
+    <strong>{{ $rekomendasi['ekonomi'] }}</strong>,
+    serta <strong>{{ $rekomendasi['perkuliahan'] }}</strong>.</p>
+</div>
+
+
+
     </div>
 </div>
 
@@ -309,6 +318,30 @@ body.dark-theme .table-aspek .kolom-aspek {
 
 <script>
     const chartData = @json($chartData);
+
+    // Fungsi translateValue TIDAK LAGI DIGUNAKAN UNTUK TABEL KARENA SUDAH DI PHP,
+    // tapi tetap ada di sini jika Anda butuh untuk logika frontend lain di masa depan.
+    const translateValue = (aspect, value) => {
+        value = parseFloat(value);
+        if (aspect === 'akademik') {
+            if (value <= 2) return 'RENDAH';
+            if (value <= 3) return 'SEDANG';
+            return 'TINGGI'; // Ini akan terjangkau jika nilai > 3, sesuaikan jika 3 sudah dianggap TINGGI
+        } else if (aspect === 'sekolah') {
+            if (value <= 2) return 'KURANG MENDUKUNG';
+            if (value <= 3) return 'MENDUKUNG';
+            return 'SANGAT MENDUKUNG';
+        } else if (aspect === 'ekonomi') {
+            if (value <= 2) return 'KURANG MENCUKUPI';
+            if (value <= 3) return 'MENCUKUPI';
+            return 'SANGAT MENCUKUPI';
+        } else if (aspect === 'perkuliahan') {
+            if (value <= 2) return 'KURANG BAIK';
+            if (value <= 3) return 'BAIK';
+            return 'SANGAT BAIK';
+        }
+        return value;
+    };
 
     const createChart = (ctxId, label, data) => {
         const ctx = document.getElementById(ctxId).getContext('2d');
@@ -319,10 +352,10 @@ body.dark-theme .table-aspek .kolom-aspek {
                 datasets: [{
                     label: label,
                     data: [
-                        data.akademik_endurance,
-                        data.latar_belakang,
-                        data.pola_belajar,
-                        data.perkuliahan
+                        data.akademik_total,
+                        data.sekolah_total,
+                        data.ekonomi_total,
+                        data.perkuliahan_total
                     ],
                     backgroundColor: ['#0E1F4D', '#27548A', '#578FCA', '#D4EBF8']
                 }]
@@ -351,8 +384,8 @@ body.dark-theme .table-aspek .kolom-aspek {
         const element = document.querySelector(".container");
         const noPrintEls = document.querySelectorAll(".no-print");
         const pdfHeader = document.querySelector(".pdf-header");
-        const body = document.body; // Ambil elemen body
-        const isDarkTheme = body.classList.contains("dark-theme"); // Cek apakah dark theme aktif
+        const body = document.body;
+        const isDarkTheme = body.classList.contains("dark-theme");
 
         // Tampilkan header khusus PDF
         pdfHeader.style.display = "block";
@@ -365,7 +398,6 @@ body.dark-theme .table-aspek .kolom-aspek {
             body.classList.remove("dark-theme");
         }
 
-        // Jeda untuk memastikan perubahan DOM diterapkan
         setTimeout(() => {
             html2canvas(element, { scale: 2 }).then(canvas => {
                 const imgData = canvas.toDataURL("image/png");
@@ -401,7 +433,7 @@ body.dark-theme .table-aspek .kolom-aspek {
                     body.classList.add("dark-theme");
                 }
             });
-        }, 500); // cukup 500ms, kalau lambat baru naikin ke 1000ms
+        }, 500);
     });
 </script>
 

@@ -12,27 +12,39 @@ class HasilRekomendasiController extends Controller
     {
         // Ambil data kelas berdasarkan id
         $kelas = Kelas::with('mahasiswa')->findOrFail($id);
-    
+
         // Cek apakah dosen yang login adalah pemilik kelas ini
         if ($kelas->dosen_id !== auth()->id()) {
             abort(403, 'Anda tidak punya akses ke halaman ini.');
         }
-    
+
         // Ambil semua data mahasiswa di kelas tersebut
-        $mahasiswa = DataMahasiswa::where('kelas_id', $kelas->id)->get();
-    
-        // Persiapkan data untuk chart berdasarkan jalur masuk
+        $mahasiswa = $kelas->mahasiswa;
+
+
+        // --- Perubahan Penting di Sini: Terjemahkan nilai numerik menjadi teks ---
+        // Kita akan menambahkan atribut baru (misal: akademik_text) ke setiap objek mahasiswa
+        $mahasiswa->each(function ($mhs) {
+            // Panggil fungsi pembantu untuk setiap aspek
+            $mhs->akademik_text = $this->getKategoriText('akademik', $mhs->akademik_total);
+            $mhs->sekolah_text = $this->getKategoriText('sekolah', $mhs->sekolah_total);
+            $mhs->ekonomi_text = $this->getKategoriText('ekonomi', $mhs->ekonomi_total);
+            $mhs->perkuliahan_text = $this->getKategoriText('perkuliahan', $mhs->perkuliahan_total);
+        });
+        // --- Akhir Perubahan Penting ---
+
+        // Persiapkan data untuk chart berdasarkan jalur masuk (ini sudah benar)
         $jalurMasuk = ['SNBP', 'SNBT', 'Mandiri'];
         $chartData = [];
-    
+
         foreach ($jalurMasuk as $jalur) {
             $data = $mahasiswa->where('jalur_masuk', $jalur);
-    
+
             $chartData[$jalur] = [
-                'akademik_endurance' => $data->avg('akademik_endurance') ?? 0,
-                'latar_belakang' => $data->avg('latar_belakang') ?? 0,
-                'pola_belajar' => $data->avg('pola_belajar') ?? 0,
-                'perkuliahan' => $data->avg('perkuliahan') ?? 0,
+                'akademik_total' => $data->avg('akademik_total') ?? 0,
+                'sekolah_total' => $data->avg('sekolah_total') ?? 0,
+                'ekonomi_total' => $data->avg('ekonomi_total') ?? 0,
+                'perkuliahan_total' => $data->avg('perkuliahan_total') ?? 0,
             ];
         }
 
@@ -43,28 +55,70 @@ class HasilRekomendasiController extends Controller
         return view('hasil_rekomendasi', [
             'kelas' => $kelas,
             'chartData' => $chartData,
-            'rekomendasi' => $rekomendasi['rekomendasi'], // Rekomendasi untuk setiap aspek
-            'alasan' => $rekomendasi['alasan'], // Alasan untuk setiap aspek
+            'rekomendasi' => $rekomendasi['rekomendasi'],
+            'alasan' => $rekomendasi['alasan'],
         ]);
     }
-    
+
+    // --- UBAH DI SINI: getKategoriText menggunakan nama aspek yang baru ---
+    private function getKategoriText($aspekNamaSingkat, $nilai) // Nama parameter diubah agar lebih jelas
+    {
+        $nilai = (float) $nilai;
+
+        // Gunakan nama aspek yang baru
+        if ($aspekNamaSingkat === 'akademik') { // UBAH dari 'akademik_total' / 'akademik_endurance'
+            if ($nilai <= 2) return 'RENDAH';
+            if ($nilai <= 3) return 'SEDANG';
+            return 'TINGGI'; // Ingat masalah dengan nilai > 3 jika maxnya 3
+        } else if ($aspekNamaSingkat === 'sekolah') { // UBAH dari 'sekolah_total' / 'latar_belakang'
+            if ($nilai <= 2) return 'KURANG MENDUKUNG';
+            if ($nilai <= 3) return 'MENDUKUNG';
+            return 'SANGAT MENDUKUNG';
+        } else if ($aspekNamaSingkat === 'ekonomi') { // UBAH dari 'ekonomi_total' / 'pola_belajar'
+            if ($nilai <= 2) return 'KURANG MENCUKUPI';
+            if ($nilai <= 3) return 'MENCUKUPI';
+            return 'SANGAT MENCUKUPI';
+        } else if ($aspekNamaSingkat === 'perkuliahan') { // TETAP SAMA
+            if ($nilai <= 2) return 'KURANG BAIK';
+            if ($nilai <= 3) return 'BAIK';
+            return 'SANGAT BAIK';
+        }
+        return (string) $nilai;
+    }
+    // --- AKHIR UBAH ---
+
+
     // MEMBUAT RULE REKOMENDASI BELAJAR
     public function rekomendasiBelajar($data)
     {
         $rekomendasi = [];
         $alasan = [];
 
-        $aspekList = ['akademik_endurance', 'latar_belakang', 'pola_belajar', 'perkuliahan'];
+        // --- UBAH DI SINI: $aspekList sekarang sesuai nama aspek yang baru ---
+        $aspekList = ['akademik', 'sekolah', 'ekonomi', 'perkuliahan'];
+        // --- AKHIR UBAH ---
 
         foreach ($aspekList as $aspek) {
-            $snbp = $data['SNBP'][$aspek] ?? 0;
-            $snbt = $data['SNBT'][$aspek] ?? 0;
-            $mandiri = $data['Mandiri'][$aspek] ?? 0;
+            // Data di $data masih menggunakan key _total, jadi kita butuh mapping
+            // Hapus fungsi getOriginalAspectKey jika Anda menggunakan pendekatan ini
+            $originalAspectKey = '';
+            switch ($aspek) {
+                case 'akademik': $originalAspectKey = 'akademik_total'; break;
+                case 'sekolah': $originalAspectKey = 'sekolah_total'; break;
+                case 'ekonomi': $originalAspectKey = 'ekonomi_total'; break;
+                case 'perkuliahan': $originalAspectKey = 'perkuliahan_total'; break;
+                default: $originalAspectKey = $aspek; // Fallback
+            }
+
+            $snbp = $data['SNBP'][$originalAspectKey] ?? 0;
+            $snbt = $data['SNBT'][$originalAspectKey] ?? 0;
+            $mandiri = $data['Mandiri'][$originalAspectKey] ?? 0;
+
 
             $kategori = function ($nilai) {
                 if ($nilai <= 2) return 'rendah';
                 if ($nilai <= 3) return 'sedang';
-                return 'tinggi';
+                return 'tinggi'; // Masih perlu perhatian untuk skala 0-3
             };
 
             $kat_snbp = $kategori($snbp);
@@ -73,42 +127,45 @@ class HasilRekomendasiController extends Controller
 
             $key = "$kat_snbp-$kat_snbt-$kat_mandiri";
 
-            // Pilih rule set dan alasan berdasarkan aspek
+            // --- UBAH DI SINI: case di switch statement agar sesuai dengan $aspekList yang baru ---
             switch ($aspek) {
-                case 'akademik_endurance':
-                    $ruleSet = $this->getRuleSetAkademik();
-                    $alasanSet = $this->getAlasanAkademik();
+                case 'akademik': // UBAH ke nama aspek yang baru
+                    $ruleSet = $this->getRuleSetAkademik(); // Memanggil fungsi dengan nama lama
+                    $alasanSet = $this->getAlasanAkademik(); // Memanggil fungsi dengan nama lama
                     break;
-                case 'latar_belakang':
-                    $ruleSet = $this->getRuleSetLatarBelakang();
-                    $alasanSet = $this->getAlasanLatarBelakang();
+                case 'sekolah': // UBAH ke nama aspek yang baru
+                    $ruleSet = $this->getRuleSetSekolah(); // Memanggil fungsi dengan nama lama
+                    $alasanSet = $this->getAlasanSekolah(); // Memanggil fungsi dengan nama lama
                     break;
-                case 'pola_belajar':
-                    $ruleSet = $this->getRuleSetPolaBelajar();
-                    $alasanSet = $this->getAlasanPolaBelajar();
+                case 'ekonomi': // UBAH ke nama aspek yang baru
+                    $ruleSet = $this->getRuleSetEkonomi(); // Memanggil fungsi dengan nama lama
+                    $alasanSet = $this->getAlasanEkonomi(); // Memanggil fungsi dengan nama lama
                     break;
-                case 'perkuliahan':
-                    $ruleSet = $this->getRuleSetProsesKuliah();
-                    $alasanSet = $this->getAlasanProsesKuliah();
+                case 'perkuliahan': // UBAH ke nama aspek yang baru
+                    $ruleSet = $this->getRuleSetPerkuliahan(); // Memanggil fungsi dengan nama lama
+                    $alasanSet = $this->getAlasanPerkuliahan(); // Memanggil fungsi dengan nama lama
                     break;
                 default:
                     $ruleSet = [];
                     $alasanSet = [];
                     break;
             }
+            // --- AKHIR UBAH ---
 
-            // Ambil rekomendasi dan alasan berdasarkan key
+            // --- PENTING: Key rekomendasi dan alasan juga menggunakan nama aspek baru ---
             $rekomendasi[$aspek] = $ruleSet[$key] ?? 'Gunakan pendekatan adaptif sesuai kondisi kelas.';
             $alasan[$aspek] = $alasanSet[$key] ?? 'Alasan belum tersedia untuk kategori ini.';
         }
 
-        // Tampilkan rekomendasi dan alasan
         return ['rekomendasi' => $rekomendasi, 'alasan' => $alasan];
     }
 
-    // ini rule nya masih ngaco sih sebenernya, harus diperbaiki lagi euy
-    // Fungsi untuk mendapatkan rule set akademik
-    private function getRuleSetAkademik()
+    // --- UBAH NAMA FUNGSI-FUNGSI getRuleSetX / getAlasanX di bawah ini ---
+    // Pastikan Anda mengubah nama fungsi secara fisik di file Anda!
+    // Contoh: getRuleSetAkademikEndurance() menjadi getRuleSetAkademik()
+    // Konten di dalamnya (array rules) TETAP SAMA seperti yang sudah ada sebelumnya.
+
+    private function getRuleSetAkademik() // Perbarui nama fungsi ini
     {
         return [
             'rendah-rendah-rendah' => 'strategi penguatan konsep dasar secara perlahan dan intensif',
@@ -141,7 +198,7 @@ class HasilRekomendasiController extends Controller
         ];
     }
 
-    private function getAlasanAkademik()
+    private function getAlasanAkademik() // Perbarui nama fungsi ini
     {
         return [
             'rendah-rendah-rendah' => 'rata-rata mahasiswa SNBP, SNBT, dan Mandiri masih memerlukan bimbingan akademik yang lebih dalam',
@@ -174,8 +231,7 @@ class HasilRekomendasiController extends Controller
         ];
     }
 
-    // Fungsi untuk mendapatkan rule set latar belakang
-    private function getRuleSetLatarBelakang()
+    private function getRuleSetSekolah() // Perbarui nama fungsi ini
     {
         return [
             'rendah-rendah-rendah' => 'penggunaan media pembelajaran gratis dan fleksibel',
@@ -208,7 +264,7 @@ class HasilRekomendasiController extends Controller
         ];
     }
 
-    private function getAlasanLatarBelakang()
+    private function getAlasanSekolah() // Perbarui nama fungsi ini
     {
         return [
             'rendah-rendah-rendah' => 'Mahasiswa dari jalur SNBP, SNBT, dan Mandiri memiliki latar belakang yang kurang mendukung: berasal dari sekolah dengan fasilitas terbatas, orang tua berpendidikan rendah, dan kondisi ekonomi lemah.',
@@ -242,8 +298,7 @@ class HasilRekomendasiController extends Controller
         ];
     }
 
-    // Fungsi untuk mendapatkan rule set pola belajar
-    private function getRuleSetPolaBelajar()
+    private function getRuleSetEkonomi() // Perbarui nama fungsi ini
     {
         return [
             'rendah-rendah-rendah' => 'buat rutinitas belajar dengan penjadwalan',
@@ -276,7 +331,7 @@ class HasilRekomendasiController extends Controller
         ];
     }
 
-    private function getAlasanPolaBelajar()
+    private function getAlasanEkonomi() // Perbarui nama fungsi ini
     {
         return [
             'rendah-rendah-rendah' => 'Mahasiswa SNBP, SNBT, dan Mandiri cenderung punya gaya belajar yang santai dan tidak terlalu terikat jadwal. Belajar dilakukan saat dibutuhkan saja.',
@@ -311,7 +366,7 @@ class HasilRekomendasiController extends Controller
     }
 
     // Fungsi untuk mendapatkan rule set proses kuliah
-    private function getRuleSetProsesKuliah()
+    private function getRuleSetPerkuliahan() // Perbarui nama fungsi ini
     {
         return [
             'rendah-rendah-rendah' => 'berikan struktur kuliah yang jelas dan runtut',
@@ -344,7 +399,7 @@ class HasilRekomendasiController extends Controller
         ];
     }
 
-    private function getAlasanProsesKuliah()
+    private function getAlasanPerkuliahan() // Perbarui nama fungsi ini
     {
         return [
             'rendah-rendah-rendah' => 'Mahasiswa SNBP, SNBT, dan Mandiri cenderung kurang aktif di kelas maupun organisasi, adaptasi masih terbatas, dan UKT menjadi beban yang cukup berat.',
@@ -364,7 +419,7 @@ class HasilRekomendasiController extends Controller
             'sedang-sedang-tinggi' => 'SNBP dan SNBT cukup aktif, mahasiswa Mandiri sangat adaptif dan aktif di berbagai lini kampus.',
             'sedang-tinggi-rendah' => 'SNBP cukup aktif, SNBT sangat aktif dan adaptif, Mandiri belum terlalu aktif karena faktor ekonomi.',
             'sedang-tinggi-sedang' => 'SNBP cukup aktif, SNBT sangat aktif dan adaptif, Mandiri juga cukup baik meski masih terbatas.',
-            'sedang-tinggi-tinggi' => 'SNBP cukup aktif, SNBT dan Mandiri sangat menonjol di kelas dan organisasi kampus.',
+            'sedang-tinggi-tinggi' => 'SNBP dan SNBT sangat menonjol di kelas dan organisasi kampus.',
             'tinggi-rendah-rendah' => 'SNBP sangat aktif dan adaptif, SNBT dan Mandiri belum terlalu terlibat dan menghadapi kendala adaptasi.',
             'tinggi-rendah-sedang' => 'SNBP sangat adaptif, SNBT belum aktif, Mandiri cukup mampu menyesuaikan diri.',
             'tinggi-rendah-tinggi' => 'SNBP dan Mandiri sangat aktif dan percaya diri, SNBT masih menghadapi tantangan adaptasi.',
@@ -374,8 +429,6 @@ class HasilRekomendasiController extends Controller
             'tinggi-tinggi-rendah' => 'SNBP dan SNBT sangat aktif, Mandiri masih tertinggal dalam keterlibatan kampus.',
             'tinggi-tinggi-sedang' => 'SNBP dan SNBT sangat adaptif dan aktif, Mandiri cukup mengikuti meski belum terlalu menonjol.',
             'tinggi-tinggi-tinggi' => 'Mahasiswa dari ketiga jalur sangat aktif di kelas, organisasi, cepat beradaptasi, dan UKT tidak menghambat pengalaman kuliah mereka.',
-
         ];
     }
-
 }

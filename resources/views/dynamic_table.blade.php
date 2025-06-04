@@ -101,7 +101,7 @@ input[type="file"]::file-selector-button {
 }
 
 input[type="file"]::file-selector-button:hover {
-    color: #000000; 
+    color: #000000;
 }
 
 .custom-table {
@@ -259,7 +259,7 @@ body.dark-theme input[type="file"]::file-selector-button {
 }
 
 body.dark-theme input[type="file"]::file-selector-button:hover {
-    color: #000000; 
+    color: #000000;
 }
 
 body.dark-theme #toggleBtn {
@@ -350,9 +350,9 @@ body.dark-theme #toggleBtn:hover {
                     <th>Nama</th>
                     <th>Asal Sekolah</th>
                     <th>Jalur Masuk</th>
-                    <th>Akademik dan Endurance</th>
-                    <th>Latar Belakang</th>
-                    <th>Pola Belajar</th>
+                    <th>Akademik</th>
+                    <th>Sekolah</th>
+                    <th>Ekonomi</th>
                     <th>Perkuliahan</th>
                     <th>Aksi</th>
                 </tr>
@@ -360,20 +360,20 @@ body.dark-theme #toggleBtn:hover {
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td><input type="text" name="mahasiswa[0][nama]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][nama_lengkap]" class="form-control"></td>
                     <td><input type="text" name="mahasiswa[0][asal_sekolah]" class="form-control"></td>
                     <td>
                         <select name="mahasiswa[0][jalur_masuk]" class="form-control">
                             <option value="">Pilih Jalur</option>
                             <option value="SNBP">SNBP</option>
                             <option value="SNBT">SNBT</option>
-                            <option value="Mandiri UPI">Mandiri UPI</option>
+                            <option value="Mandiri">Mandiri</option>
                         </select>
                     </td>
-                    <td><input type="text" name="mahasiswa[0][akademik_endurance]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][latar_belakang]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][pola_belajar]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][perkuliahan]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][akademik_total]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][sekolah_total]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][ekonomi_total]" class="form-control"></td>
+                    <td><input type="text" name="mahasiswa[0][perkuliahan_total]" class="form-control"></td>
                     <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
                 </tr>
             </tbody>
@@ -430,20 +430,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
                     <td>${index + 1}</td>
-                    <td><input type="text" name="mahasiswa[${index}][nama]" class="form-control" value="${cleanedCols[0]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][nama_lengkap]" class="form-control" value="${cleanedCols[0]}"></td>
                     <td><input type="text" name="mahasiswa[${index}][asal_sekolah]" class="form-control" value="${cleanedCols[1]}"></td>
                     <td>
                         <select name="mahasiswa[${index}][jalur_masuk]" class="form-control">
                             <option value="SNBP" ${cleanedCols[2] === 'SNBP' ? 'selected' : ''}>SNBP</option>
                             <option value="SNBT" ${cleanedCols[2] === 'SNBT' ? 'selected' : ''}>SNBT</option>
-                            <option value="Mandiri UPI" ${cleanedCols[2] === 'Mandiri UPI' ? 'selected' : ''}>Mandiri UPI</option>
                             <option value="Mandiri" ${cleanedCols[2] === 'Mandiri' ? 'selected' : ''}>Mandiri</option>
                         </select>
                     </td>
-                    <td><input type="text" name="mahasiswa[${index}][akademik_endurance]" class="form-control" value="${cleanedCols[3]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][latar_belakang]" class="form-control" value="${cleanedCols[4]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][pola_belajar]" class="form-control" value="${cleanedCols[5]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][perkuliahan]" class="form-control" value="${cleanedCols[6]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][akademik_total]" class="form-control" value="${cleanedCols[3]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][sekolah_total]" class="form-control" value="${cleanedCols[4]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][ekonomi_total]" class="form-control" value="${cleanedCols[5]}"></td>
+                    <td><input type="text" name="mahasiswa[${index}][perkuliahan_total]" class="form-control" value="${cleanedCols[6]}"></td>
                     <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
                 `;
                 tableBody.appendChild(newRow);
@@ -495,20 +494,20 @@ document.addEventListener('DOMContentLoaded', function () {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
             <td>${rowCount}</td>
-            <td><input type="text" name="mahasiswa[${rowCount}][nama]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][nama_lengkap]" class="form-control"></td>
             <td><input type="text" name="mahasiswa[${rowCount}][asal_sekolah]" class="form-control"></td>
             <td>
                 <select name="mahasiswa[${rowCount}][jalur_masuk]" class="form-control">
                     <option value="">Pilih Jalur</option>
                     <option value="SNBP">SNBP</option>
                     <option value="SNBT">SNBT</option>
-                    <option value="Mandiri UPI">Mandiri UPI</option>
+                    <option value="Mandiri">Mandiri</option>
                 </select>
             </td>
-            <td><input type="text" name="mahasiswa[${rowCount}][akademik_endurance]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][latar_belakang]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][pola_belajar]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][perkuliahan]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][akademik_total]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][sekolah_total]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][ekonomi_total]" class="form-control"></td>
+            <td><input type="text" name="mahasiswa[${rowCount}][perkuliahan_total]" class="form-control"></td>
             <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
         `;
         table.appendChild(newRow);
@@ -556,13 +555,13 @@ document.addEventListener('DOMContentLoaded', function () {
         else emptyCount++;
 
         const name = input.name;
-        if (name.includes('[nama]')) rowData.nama = value;
+        if (name.includes('[nama_lengkap]')) rowData.nama = value;
         else if (name.includes('[asal_sekolah]')) rowData.sekolah = value;
         else if (name.includes('[jalur_masuk]')) rowData.jalur = value;
-        else if (name.includes('[akademik_endurance]')) rowData.akademik = value;
-        else if (name.includes('[latar_belakang]')) rowData.latar = value;
-        else if (name.includes('[pola_belajar]')) rowData.pola = value;
-        else if (name.includes('[perkuliahan]')) rowData.kuliah = value;
+        else if (name.includes('[akademik_total]')) rowData.akademik = value;
+        else if (name.includes('[sekolah_total]')) rowData.latar = value;
+        else if (name.includes('[ekonomi_total]')) rowData.pola = value;
+        else if (name.includes('[perkuliahan_total]')) rowData.kuliah = value;
     });
 
     // Jika semua kolom kosong, skip aja
@@ -591,7 +590,7 @@ data.push(rowData);
 //     const namaKelas = document.getElementById('nama_kelas')?.value || '-';
 // const kodeMK = document.getElementById('kode_mata_kuliah')?.value || '-';
 
-//Scrool saat Klik save 
+//Scrool saat Klik save
 setTimeout(() => {
     const summary = document.getElementById('summaryContainer');
     if (summary) {
