@@ -232,10 +232,7 @@
                     <li><strong>Nama</strong>: Nama lengkap mahasiswa</li>
                     <li><strong>Asal Sekolah</strong>: Sekolah asal mahasiswa</li>
                     <li><strong>Jalur Masuk</strong>: Jalur masuk (SNBP, SNBT, Mandiri)</li>
-                    <li><strong>Pertanyaan untuk section Akademik an Endurance</strong>: 10 kolom</li>
-                    <li><strong>Pertanyaan untuk section Latar Belakang</strong>: 10 kolom</li>
-                    <li><strong>Pertanyaan untuk section Pola Belajar</strong>: 10 kolom</li>
-                    <li><strong>Pertanyaan untuk section Perkuliahan</strong>: 10 kolom</li>
+                    <li><strong>Pertanyaan untuk section Akademik, Profil Sekolah, Kesiapan Ekonomi, dan Proses Kuliah Tiap Jalur</strong></li>
                 </ul>
                 <p class="mb-0">Gunakan template Excel yang sesuai untuk menghindari kesalahan pengolahan data.</p>
             </div>
@@ -268,9 +265,9 @@
                 <th>Nama</th>
                 <th>Asal Sekolah</th>
                 <th>Jalur Masuk</th>
-                <th>Akademik Endurance</th>
-                <th>Latar Belakang</th>
-                <th>Pola Belajar</th>
+                <th>Akademik</th>
+                <th>Profil Sekolah</th>
+                <th>Kesiapan Ekonomi</th>
                 <th>Perkuliahan</th>
             </tr>
         </thead>
@@ -281,9 +278,9 @@
                         <td>{{ $data['nama'] }}</td>
                         <td>{{ $data['asal_sekolah'] }}</td>
                         <td>{{ $data['jalur_masuk'] }}</td>
-                        <td>{{ $data['akademik_endurance'] }}</td>
-                        <td>{{ $data['latar_belakang'] }}</td>
-                        <td>{{ $data['pola_belajar'] }}</td>
+                        <td>{{ $data['akademik'] }}</td>
+                        <td>{{ $data['sekolah'] }}</td>
+                        <td>{{ $data['ekonomi'] }}</td>
                         <td>{{ $data['perkuliahan'] }}</td>
                     </tr>
                 @endforeach
