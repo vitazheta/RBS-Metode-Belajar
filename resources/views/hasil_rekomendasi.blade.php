@@ -227,7 +227,7 @@ body.dark-theme .table-aspek .kolom-aspek {
                 <canvas id="chartSNBT"></canvas>
             </div>
             <div class="col-md-4">
-                <canvas id="chartMandiri"></canvas>
+                <canvas id="chartMANDIRI"></canvas>
             </div>
         </div>
     </div>
@@ -373,7 +373,7 @@ body.dark-theme .table-aspek .kolom-aspek {
     };
     createChart('chartSNBP', 'Mahasiswa SNBP', chartData.SNBP);
     createChart('chartSNBT', 'Mahasiswa SNBT', chartData.SNBT);
-    createChart('chartMandiri', 'Mahasiswa Mandiri', chartData.Mandiri);
+    createChart('chartMANDIRI', 'Mahasiswa MANDIRI', chartData.MANDIRI);
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>

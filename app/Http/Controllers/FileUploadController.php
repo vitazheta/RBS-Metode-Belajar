@@ -450,10 +450,40 @@ class FileUploadController extends Controller
             ];
         }
 
-        // Kirim ke view (atau session, sesuai kebutuhan)
+      // Simpan ke session & cache
         session(['processedData' => $processedData]);
         session(['columns' => ['nama', 'asal_sekolah', 'jalur_masuk', 'akademik', 'sekolah', 'ekonomi', 'perkuliahan']]);
+        Cache::put('processedData', $processedData, now()->addMinutes(30));
 
         return redirect()->route('upload.xlsx')->with('success', 'File berhasil diproses.');
+    }
+
+    // Export CSV
+    public function downloadCsv()
+    {
+        $data = session('processedData') ?? Cache::get('processedData');
+        if (!$data) {
+            return response('Tidak ada data untuk diexport', 404);
+        }
+
+        $columns = session('columns') ?? array_keys($data[0]);
+        $filename = 'processed_data.csv';
+
+        $response = new StreamedResponse(function () use ($data, $columns) {
+            $handle = fopen('php://output', 'w');
+            fputcsv($handle, $columns);
+            foreach ($data as $row) {
+                $csvRow = [];
+                foreach ($columns as $col) {
+                    $csvRow[] = $row[$col] ?? '';
+                }
+                fputcsv($handle, $csvRow);
+            }
+            fclose($handle);
+        });
+
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment; filename="'.$filename.'"');
+        return $response;
     }
 }
