@@ -190,6 +190,7 @@
 
     {{-- Tambahkan canvas di atas tabel --}}
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div class="card shadow-sm mb-4" style="border: none;">
         <div class="card-header text-white" style="background-color: #0E1F4D; border: 0px;">
             <h5 class="mb-0">Distribusi Profil Mahasiswa Berdasarkan Jalur Masuk</h5> {{-- Judul chart diubah --}}
@@ -206,6 +207,8 @@
                     <canvas id="chartMandiri"></canvas>
                 </div>
 =======
+=======
+>>>>>>> 73add10ac76ff5c31a46af09578070abd5478755
 <div class="card shadow-sm mb-4" style="border: none;">
     <div class="card-header text-white" style="background-color: #0E1F4D; border: 0px;">
         <h5 class="mb-0">Distribusi Gaya Belajar Mahasiswa</h5>
@@ -219,11 +222,16 @@
                 <canvas id="chartSNBT"></canvas>
             </div>
             <div class="col-md-4">
+<<<<<<< HEAD
                 <canvas id="chartMANDIRI"></canvas>
 >>>>>>> ba2edf1 (route export csv + ubah nama mandiri)
+=======
+                <canvas id="chartMandiri"></canvas>
+>>>>>>> 73add10ac76ff5c31a46af09578070abd5478755
             </div>
         </div>
     </div>
+</div>
 
     <div class="container-rekomendasi">
         <div class="table-responsive rounded shadow-sm">
@@ -416,6 +424,7 @@
     createChart('chartSNBP', 'Mahasiswa SNBP', chartData.SNBP);
     createChart('chartSNBT', 'Mahasiswa SNBT', chartData.SNBT);
     createChart('chartMANDIRI', 'Mahasiswa MANDIRI', chartData.MANDIRI);
+
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
