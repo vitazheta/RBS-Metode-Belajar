@@ -189,6 +189,7 @@
 
 
     {{-- Tambahkan canvas di atas tabel --}}
+<<<<<<< HEAD
     <div class="card shadow-sm mb-4" style="border: none;">
         <div class="card-header text-white" style="background-color: #0E1F4D; border: 0px;">
             <h5 class="mb-0">Distribusi Profil Mahasiswa Berdasarkan Jalur Masuk</h5> {{-- Judul chart diubah --}}
@@ -204,6 +205,22 @@
                 <div class="col-md-4">
                     <canvas id="chartMandiri"></canvas>
                 </div>
+=======
+<div class="card shadow-sm mb-4" style="border: none;">
+    <div class="card-header text-white" style="background-color: #0E1F4D; border: 0px;">
+        <h5 class="mb-0">Distribusi Gaya Belajar Mahasiswa</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <canvas id="chartSNBP"></canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="chartSNBT"></canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="chartMANDIRI"></canvas>
+>>>>>>> ba2edf1 (route export csv + ubah nama mandiri)
             </div>
         </div>
     </div>
@@ -396,17 +413,9 @@
             }
         });
     };
-
-    // Panggil fungsi untuk setiap chart jika data tersedia
-    if (chartData.SNBP && Object.keys(chartData.SNBP).length > 0) {
-        createChart('chartSNBP', 'Rata-rata Profil SNBP', chartData.SNBP);
-    }
-    if (chartData.SNBT && Object.keys(chartData.SNBT).length > 0) {
-        createChart('chartSNBT', 'Rata-rata Profil SNBT', chartData.SNBT);
-    }
-    if (chartData.Mandiri && Object.keys(chartData.Mandiri).length > 0) {
-        createChart('chartMandiri', 'Rata-rata Profil Mandiri', chartData.Mandiri);
-    }
+    createChart('chartSNBP', 'Mahasiswa SNBP', chartData.SNBP);
+    createChart('chartSNBT', 'Mahasiswa SNBT', chartData.SNBT);
+    createChart('chartMANDIRI', 'Mahasiswa MANDIRI', chartData.MANDIRI);
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>

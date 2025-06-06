@@ -367,7 +367,7 @@ body.dark-theme #toggleBtn:hover {
                             <option value="">Pilih Jalur</option>
                             <option value="SNBP">SNBP</option>
                             <option value="SNBT">SNBT</option>
-                            <option value="Mandiri">Mandiri</option>
+                            <option value="MANDIRI">MANDIRI</option>
                         </select>
                     </td>
                     <td><input type="text" name="mahasiswa[0][akademik_total]" class="form-control"></td>
@@ -436,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <select name="mahasiswa[${index}][jalur_masuk]" class="form-control">
                             <option value="SNBP" ${cleanedCols[2] === 'SNBP' ? 'selected' : ''}>SNBP</option>
                             <option value="SNBT" ${cleanedCols[2] === 'SNBT' ? 'selected' : ''}>SNBT</option>
-                            <option value="Mandiri" ${cleanedCols[2] === 'Mandiri' ? 'selected' : ''}>Mandiri</option>
+                            <option value="MANDIRI" ${cleanedCols[2] === 'MANDIRI' ? 'selected' : ''}>MANDIRI</option>
                         </select>
                     </td>
                     <td><input type="text" name="mahasiswa[${index}][akademik_total]" class="form-control" value="${cleanedCols[3]}"></td>
@@ -501,7 +501,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <option value="">Pilih Jalur</option>
                     <option value="SNBP">SNBP</option>
                     <option value="SNBT">SNBT</option>
-                    <option value="Mandiri">Mandiri</option>
+                    <option value="MANDIRI">MANDIRI</option>
                 </select>
             </td>
             <td><input type="text" name="mahasiswa[${rowCount}][akademik_total]" class="form-control"></td>
