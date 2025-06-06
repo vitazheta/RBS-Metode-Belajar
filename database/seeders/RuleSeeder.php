@@ -10,25 +10,51 @@ class RuleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * Metode ini akan dipanggil saat Anda menjalankan db:seed
      */
     public function run(): void
     {
-        // (Opsional) Hapus data lama jika Anda ingin memulai dari nol setiap kali seeder dijalankan
+        // Opsional: Hapus semua aturan yang ada sebelumnya jika Anda ingin memulai dari nol
+        // Ini sangat direkomendasikan saat Anda mengisi data dummy untuk pengujian
         Rule::truncate();
 
-        $rulesData = [
-            // Contoh aturan yang sudah kita diskusikan (LENGKAPI SEMUA ATURAN ANDA DI SINI)
-            ['jalur_masuk' => 'SNBO', 'akademik' => 'SEDANG', 'sekolah' => 'MENDUKUNG', 'ekonomi' => 'MENCUKUPI', 'perkuliahan' => 'KURANG BAIK', 'rekomendasi' => 'Penjelasan mendalam disertai contoh langsung dari dosen'],
-            ['jalur_masuk' => 'SNBT', 'akademik' => 'TINGGI', 'sekolah' => 'SANGAT MENDUKUNG', 'ekonomi' => 'MENCUKUPI', 'perkuliahan' => 'BAIK', 'rekomendasi' => 'Sediakan materi ringkasan, berikan tugas mencatat atau membuat jurnal belajar'],
-            // ... tambahkan semua aturan Anda di sini
-            ['jalur_masuk' => 'SNBT', 'akademik' => 'RENDAH', 'sekolah' => 'MENDUKUNG', 'ekonomi' => 'MENCUKUPI', 'perkuliahan' => 'BAIK', 'rekomendasi' => 'Menggunakan video pembelajaran dan diskusi kelompok aktif'],
-            ['jalur_masuk' => 'SNBT', 'akademik' => 'RENDAH', 'sekolah' => 'Kurang Mendukung', 'ekonomi' => 'MENCUKUPI', 'perkuliahan' => 'BAIK', 'rekomendasi' => 'Menggunakan video pembelajaran dan diskusi kelompok aktif'],
-            // ... dan seterusnya untuk SNBT dan Mandiri
-        ];
+        // Definisi kategori untuk setiap aspek
+        // Pastikan casing (huruf kapital/kecil) SAMA PERSIS dengan output getKategoriText Anda
+        $jalurMasukCategories = ['SNBP', 'SNBT', 'Mandiri'];
+        $akademikCategories = ['Rendah', 'Sedang', 'Tinggi'];
+        $sekolahCategories = ['Kurang Mendukung', 'Mendukung', 'Sangat Mendukung'];
+        $ekonomiCategories = ['Kurang Mencukupi', 'Mencukupi', 'Sangat Mencukupi'];
+        $perkuliahanCategories = ['Kurang Baik', 'Baik', 'Sangat Baik'];
 
-        foreach ($rulesData as $rule) {
-            Rule::create($rule); // Ini akan menyimpan setiap aturan ke database
+        $allRules = [];
+        $ruleNumber = 1;
+
+        // Loop untuk menghasilkan semua kombinasi aturan
+        foreach ($jalurMasukCategories as $jalurMasuk) {
+            foreach ($akademikCategories as $akademik) {
+                foreach ($sekolahCategories as $sekolah) {
+                    foreach ($ekonomiCategories as $ekonomi) {
+                        foreach ($perkuliahanCategories as $perkuliahan) {
+                            $allRules[] = [
+                                'jalur_masuk' => $jalurMasuk,
+                                'akademik' => $akademik,
+                                'sekolah' => $sekolah,
+                                'ekonomi' => $ekonomi,
+                                'perkuliahan' => $perkuliahan,
+                                'rekomendasi' => 'Rekomendasi Umum ' . $ruleNumber, // Teks rekomendasi dummy
+                                // created_at dan updated_at akan diisi otomatis oleh Eloquent
+                            ];
+                            $ruleNumber++;
+                        }
+                    }
+                }
+            }
         }
+
+        // Masukkan semua aturan ke database
+        foreach ($allRules as $ruleData) {
+            Rule::create($ruleData);
+        }
+
+        $this->command->info('Total ' . count($allRules) . ' aturan rekomendasi dummy berhasil di-seed.');
     }
 }
