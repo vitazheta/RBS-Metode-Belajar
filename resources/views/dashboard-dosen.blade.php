@@ -186,12 +186,6 @@
         <p class="dashboard-description">
             Halo, <strong>{{ ucwords($dosen->nama) }}</strong>! Berikut daftar kelas yang Anda ampu.
         </p>
-        <!-- Tombol Google Form -->
-        <a href="https://docs.google.com/forms/d/1jyMeVSMu5pf2gimqhcDrlytd96g7kdgesi_dwY9QCR4/edit" target="_blank" 
-            class="btn btn-outline-primary" 
-            style="font-size: 0.8rem; padding: 6px 12px;">
-            <i class="fas fa-external-link-alt me-1"></i>Buat Template Formulir Disini
-        </a>
     </div>
 
     <!-- Section Tambah Kelas -->
@@ -199,14 +193,14 @@
     <div class="card-tambah shadow-sm p-4 mb-5 position-relative">
         <div class="upper-card-body">
             <div>
-                <h5 class="fw-bold mb-2">Olah Data Mahasiswa Anda Untuk Mendapatkan Rekomendasi Pembelajaran</h5>
-                <p class="text-klik mb-2">Klik tombol di bawah ini untuk mengolah data mahasiswa</p>
-                <!-- Tombol Tambah Kelas -->
-                <a href="{{ url('/upload-excel') }}" 
-                    class="btn btn-custom" 
-                    style="font-size: 0.8rem; padding: 6px 12px;">
-                    <i class="fas fa-plus me-2"></i> Upload Data Formulir
-                </a>
+                <h5 class="fw-bold mt-1 mb-2">Olah Data Mahasiswa Anda Untuk Mendapatkan Rekomendasi Pembelajaran</h5>
+                <p class="text-klik mb-3">Klik tombol di bawah ini untuk mengakses template form data mahasiswa</p>
+            <!-- Tombol Google Form -->
+            <a href="https://docs.google.com/forms/d/1jyMeVSMu5pf2gimqhcDrlytd96g7kdgesi_dwY9QCR4/edit" target="_blank" 
+                class="btn btn-custom" 
+                style="font-size: 0.8rem; padding: 6px 12px;">
+                <i class="fas fa-external-link-alt me-1"></i>Buat Template Formulir Disini
+            </a>
 
             </div>
         </div>

@@ -11,9 +11,13 @@ use Illuminate\Support\Facades\Log;
 class FileUploadController extends Controller
 {
     // Menampilkan halaman upload file
-    public function showUploadForm()
+    public function showUploadForm(Request $request)
     {
-        return view ('upload-excel');
+        // Hapus session hanya jika BUKAN dari upload Excel
+        if (!$request->has('from_upload')) {
+        session()->forget(['processedData', 'nama_kelas', 'kode_mata_kuliah']);
+    }
+        return view ('dynamic_table');
     }
 
     // Memproses file yang diunggah
@@ -35,7 +39,7 @@ class FileUploadController extends Controller
 
         // Pastikan ada data
         if (empty($rows) || count($rows) < 2) {
-            return redirect()->route('upload.xlsx')->with('error', 'File tidak memiliki data yang valid.');
+            return redirect()->route('simpan.mahasiswa')->with('error', 'File tidak memiliki data yang valid.');
         }
 
         // Ambil header (baris pertama)
@@ -43,9 +47,9 @@ class FileUploadController extends Controller
 
         // Hapus kolom pertama dari setiap baris (mulai dari baris kedua)
         foreach ($rows as &$row) {
-            array_shift($row);
+            array_shift($row); // menghapus kolom pertama
         }
-        unset($row); // break reference
+        unset($row);
 
         // Sekarang $rows hanya berisi data mulai dari baris kedua dan kolom kedua
 
@@ -414,9 +418,8 @@ class FileUploadController extends Controller
 
         $processedData = [];
         foreach ($rows as $rowIdx => $row) {
-            $jalur = strtolower(trim($row[2] ?? '')); // Pastikan index sesuai file kamu
-
-            // Cari data hasil per mahasiswa (pastikan urutan array hasil sama dengan $rows)
+            // Pastikan urutan kolom: 0=nama, 1=asal_sekolah, 2=jalur_masuk
+            $jalur = strtolower(trim($row[2] ?? ''));
             $akademik = null;
             $sekolah = null;
             $ekonomi = null;
@@ -437,8 +440,8 @@ class FileUploadController extends Controller
                 $sekolah = $hasilSekolahMandiri[$rowIdx]['rata_profil'] ?? null;
                 $ekonomi = $hasilEkonomiMandiri[$rowIdx]['rata_ekonomi'] ?? null;
                 $perkuliahan = $hasilProsesPerkuliahan[$rowIdx]['rata_proses_perkuliahan'] ?? null;
-            }
-
+            }  
+            
             $processedData[] = [
                 'nama' => $row[0] ?? '',
                 'asal_sekolah' => $row[1] ?? '',
@@ -450,40 +453,22 @@ class FileUploadController extends Controller
             ];
         }
 
-      // Simpan ke session & cache
-        session(['processedData' => $processedData]);
-        session(['columns' => ['nama', 'asal_sekolah', 'jalur_masuk', 'akademik', 'sekolah', 'ekonomi', 'perkuliahan']]);
-        Cache::put('processedData', $processedData, now()->addMinutes(30));
+        // Cek hasil jika masih error
+        // dd($processedData);
 
-        return redirect()->route('upload.xlsx')->with('success', 'File berhasil diproses.');
+        session([
+            'processedData' => $processedData,
+            'nama_kelas' => $request->nama_kelas,
+            'kode_mata_kuliah' => $request->kode_mata_kuliah,
+        ]);
+
+        return redirect()->route('dynamic.table', ['from_upload' => 1]);
     }
 
-    // Export CSV
-    public function downloadCsv()
-    {
-        $data = session('processedData') ?? Cache::get('processedData');
-        if (!$data) {
-            return response('Tidak ada data untuk diexport', 404);
-        }
-
-        $columns = session('columns') ?? array_keys($data[0]);
-        $filename = 'processed_data.csv';
-
-        $response = new StreamedResponse(function () use ($data, $columns) {
-            $handle = fopen('php://output', 'w');
-            fputcsv($handle, $columns);
-            foreach ($data as $row) {
-                $csvRow = [];
-                foreach ($columns as $col) {
-                    $csvRow[] = $row[$col] ?? '';
-                }
-                fputcsv($handle, $csvRow);
-            }
-            fclose($handle);
-        });
-
-        $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="'.$filename.'"');
-        return $response;
-    }
+    public function index()
+{
+    // Hapus session data hasil upload Excel
+    session()->forget(['processedData', 'nama_kelas', 'kode_mata_kuliah']);
+    return view('dynamic_table');
+}
 }

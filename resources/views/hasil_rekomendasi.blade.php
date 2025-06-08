@@ -189,11 +189,10 @@
 
 
     {{-- Tambahkan canvas di atas tabel --}}
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <div class="card shadow-sm mb-4" style="border: none;">
         <div class="card-header text-white" style="background-color: #0E1F4D; border: 0px;">
-            <h5 class="mb-0">Distribusi Profil Mahasiswa Berdasarkan Jalur Masuk</h5> {{-- Judul chart diubah --}}
+            <h5 class="mb-0">Distribusi Diagram Strategi Belajar</h5> {{-- Judul chart diubah --}}
         </div>
         <div class="card-body">
             <div class="row">
@@ -204,34 +203,11 @@
                     <canvas id="chartSNBT"></canvas>
                 </div>
                 <div class="col-md-4">
-                    <canvas id="chartMandiri"></canvas>
+                    <canvas id="chartMANDIRI"></canvas>
                 </div>
-=======
-=======
->>>>>>> 73add10ac76ff5c31a46af09578070abd5478755
-<div class="card shadow-sm mb-4" style="border: none;">
-    <div class="card-header text-white" style="background-color: #0E1F4D; border: 0px;">
-        <h5 class="mb-0">Distribusi Gaya Belajar Mahasiswa</h5>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-4">
-                <canvas id="chartSNBP"></canvas>
-            </div>
-            <div class="col-md-4">
-                <canvas id="chartSNBT"></canvas>
-            </div>
-            <div class="col-md-4">
-<<<<<<< HEAD
-                <canvas id="chartMANDIRI"></canvas>
->>>>>>> ba2edf1 (route export csv + ubah nama mandiri)
-=======
-                <canvas id="chartMandiri"></canvas>
->>>>>>> 73add10ac76ff5c31a46af09578070abd5478755
             </div>
         </div>
     </div>
-</div>
 
     <div class="container-rekomendasi">
         <div class="table-responsive rounded shadow-sm">
@@ -352,11 +328,18 @@
                    @endif
                @endif
            </div>
+           <div class="text-end mt-4 mb-5">
+                <button id="cekCollabBtn" class="btn btn-primary fw-bold" style="background-color: #0E1F4D; border: none;">
+                    <i class="fas fa-users me-2"></i>
+                    CEK KESESUAIAN REKOMENDASI DENGAN KEBUTUHAN COLLABORATIVE DI DUNIA KERJA
+                </button>
+            </div>
        </div>
         {{-- AKHIR BAGIAN BARU UNTUK REKOMENDASI KELAS & SOROTAN JALUR --}}
-
     </div>
 </div>
+
+
 
 @push('scripts')
 {{-- Perbaikan: cdn.jsdelivr1.com menjadi cdn.jsdelivr.net --}}
