@@ -13,6 +13,8 @@ use Dflydev\DotAccessData\Data;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\DataMahasiswaController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 
 
@@ -21,6 +23,12 @@ use App\Http\Controllers\DataMahasiswaController;
 | Web Routes                                                               |
 |--------------------------------------------------------------------------|
 */
+
+// Rute untuk Lupa Password (Password Reset Routes)
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari');
 

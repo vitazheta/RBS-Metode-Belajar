@@ -196,8 +196,8 @@
                 <h5 class="fw-bold mt-1 mb-2">Olah Data Mahasiswa Anda Untuk Mendapatkan Rekomendasi Pembelajaran</h5>
                 <p class="text-klik mb-3">Klik tombol di bawah ini untuk mengakses template form data mahasiswa</p>
             <!-- Tombol Google Form -->
-            <a href="https://docs.google.com/forms/d/1jyMeVSMu5pf2gimqhcDrlytd96g7kdgesi_dwY9QCR4/edit" target="_blank" 
-                class="btn btn-custom" 
+            <a href="https://docs.google.com/forms/d" target="_blank"
+                class="btn btn-custom"
                 style="font-size: 0.8rem; padding: 6px 12px;">
                 <i class="fas fa-external-link-alt me-1"></i>Buat Template Formulir Disini
             </a>
