@@ -6,7 +6,7 @@
             <div class="col-md-6">
                 <img src="{{ asset('images/logo kecil.png') }}" alt="Logo" style="height: 20px; margin-bottom: 10px;">
                 <h5>Tentang kami</h5>
-                <p>EdVise adalah platform pembelajaran cerdas yang membantu pendidik memahami gaya belajar siswa secara personal.</p>
+                <p>EdVise adalah platform pembelajaran cerdas yang membantu pendidik memahami gaya belajar mahasiswa secara personal.</p>
             </div>
 
             <!-- Kolom 2: Navigasi -->
