@@ -121,7 +121,7 @@
     }
 
     .banner {
-        background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color)); 
+        background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
         min-height: 100vh;
     }
 

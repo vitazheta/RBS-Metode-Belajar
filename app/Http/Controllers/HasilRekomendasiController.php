@@ -15,8 +15,8 @@ class HasilRekomendasiController extends Controller
         $kelas = Kelas::with('mahasiswa')->findOrFail($id);
 
         // Cek otorisasi
-        if ($kelas->dosen_id !== auth()->id()) {
-            abort(403, 'Anda tidak punya akses ke halaman ini.');
+        if ((int)$kelas->dosen_id !== auth()->id()) { // <<< Tambahkan (int) di sini
+        abort(403, 'Anda tidak punya akses ke halaman ini.');
         }
 
         $students = $kelas->mahasiswa;
