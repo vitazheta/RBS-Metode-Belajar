@@ -62,7 +62,7 @@
         <input type="password" name="password" class="form-control" placeholder="Password" required>
     </div>
     <div class="text-center">
-        <a href="{{ route('password.request') }}" class="text-decoration-none text-muted">Lupa kata sandi anda?</a>
+        <a href="{{ route('password.request') }}" class="text-decoration-none text-muted">Lupa kata sandi Anda?</a>
     </div>
     <div class="text-center mt-3">
         <button type="submit" class="btn text-white w-100 rounded-pill py-2"
