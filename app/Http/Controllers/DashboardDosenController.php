@@ -50,19 +50,19 @@ class DashboardDosenController extends Controller
             $total_mahasiswa_kelas = $k->mahasiswa->count();
 
             $k->persen_akademik = $total_mahasiswa_kelas > 0
-                ? round($k->mahasiswa->avg('akademik_endurance'), 2)
+                ? round($k->mahasiswa->avg('akademik_total'), 2)
                 : 0;
 
             $k->persen_latar_belakang = $total_mahasiswa_kelas > 0
-                ? round($k->mahasiswa->avg('latar_belakang'), 2)
+                ? round($k->mahasiswa->avg('sekolah_total'), 2)
                 : 0;
 
             $k->persen_pola_belajar = $total_mahasiswa_kelas > 0
-                ? round($k->mahasiswa->avg('pola_belajar'), 2)
+                ? round($k->mahasiswa->avg('ekonomi_total'), 2)
                 : 0;
 
             $k->persen_perkuliahan = $total_mahasiswa_kelas > 0
-                ? round($k->mahasiswa->avg('perkuliahan'), 2)
+                ? round($k->mahasiswa->avg('perkuliahan_total'), 2)
                 : 0;
 
             return $k;

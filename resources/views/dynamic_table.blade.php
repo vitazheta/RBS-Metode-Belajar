@@ -273,14 +273,25 @@ body.dark-theme #toggleBtn:hover {
     color: #777F95; /* Gunakan !important untuk memaksa aturan ini */
     cursor: pointer;
 }
+
+.btn-upload-excel {
+    background-color: #0E1F4D !important;
+    color: #fff !important;
+    border: none !important;
+}
+.btn-upload-excel:hover {
+    background-color: #70788F !important;
+    color: #fff !important;
+}
 </style>
 
-
+@section('content')
 <div class="container content-wrapper" style="padding-top: 70px;">
     <h2 class="mb-2 fw-bold position-relative d-inline-block">
         Data Kelas
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
+
 <!-- Tombol Toggle -->
 <button id="toggleBtn" class="btn btn-link p-0 text-decoration-none small d-flex align-items-center"
         type="button"
@@ -305,13 +316,22 @@ body.dark-theme #toggleBtn:hover {
     </div>
 </div>
 
-    <!-- FORM UTAMA -->
-    <form method="POST" action="{{ route('simpan.mahasiswa') }}">
-
+       <!-- Form Upload Excel -->
+    <form method="POST" action="{{ route('upload.xlsx.process') }}" enctype="multipart/form-data" class="mb-4">
         @csrf
-        <input type="hidden" name="mahasiswa" id="mahasiswaJSON">
 
-        <!-- Info Kelas -->
+        <div class="mb-3">
+            <label class="form-label">Import dari Excel:</label>
+            <div class="input-group">
+                <input type="file" name="file" accept=".xlsx,.xls" class="form-control" required>
+                <button type="submit" class="btn btn-upload-excel">Upload</button>            
+            </div>
+        </div>
+    </form>
+
+    <!-- Form Dynamic Table -->
+    <form method="POST" action="{{ route('simpan.mahasiswa') }}" id="formKelas">
+        @csrf
         <div class="mb-3 d-flex">
             <div class="w-50 me-3">
                 <label>Nama Kelas:</label>
@@ -323,285 +343,151 @@ body.dark-theme #toggleBtn:hover {
             </div>
         </div>
 
-        <!-- Tombol Import CSV -->
-    <div class="mb-3">
-        <label class="form-label">Import dari CSV:</label>
-    <div class="input-group">
-        <input type="file" id="csvFile" accept=".csv" class="form-control form-control-m rounded-start">
-        <!-- <button type="button" class="btn btn-success" onclick="handleCSVImport()">Import CSV</button> -->
-    </div>
-
-    <!-- Tombol Import CSV (Estetik dan Minimalis) -->
-<!-- <div class="mb-3">
-    <div class="input-group">
-        <input type="file" id="csvFile" accept=".csv" class="form-control form-control-sm border-end-0 rounded-start">
-        <button type="button" class="btn btn-success btn-sm" onclick="handleCSVImport()">Import</button>
-    </div>
-</div> -->
-
-</div>
-
-
-        <!-- Tabel Input Mahasiswa -->
         <table class="custom-table" id="dynamicTable">
             <thead class="table-dark">
                 <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Asal Sekolah</th>
-                    <th>Jalur Masuk</th>
-                    <th>Akademik dan Endurance</th>
-                    <th>Latar Belakang</th>
-                    <th>Pola Belajar</th>
-                    <th>Perkuliahan</th>
-                    <th>Aksi</th>
+                <th style="width: 60px;">No</th>
+                <th style="width: 260px;">Nama Lengkap</th>
+                <th style="width: 260px;">Asal Sekolah</th>
+                <th>Jalur Masuk</th>
+                <th>Akademik</th>
+                <th>Sekolah</th>
+                <th>Ekonomi</th>
+                <th>Perkuliahan</th>
+                <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><input type="text" name="mahasiswa[0][nama]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][asal_sekolah]" class="form-control"></td>
-                    <td>
-                        <select name="mahasiswa[0][jalur_masuk]" class="form-control">
-                            <option value="">Pilih Jalur</option>
-                            <option value="SNBP">SNBP</option>
-                            <option value="SNBT">SNBT</option>
-                            <option value="Mandiri UPI">Mandiri UPI</option>
-                        </select>
-                    </td>
-                    <td><input type="text" name="mahasiswa[0][akademik_endurance]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][latar_belakang]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][pola_belajar]" class="form-control"></td>
-                    <td><input type="text" name="mahasiswa[0][perkuliahan]" class="form-control"></td>
-                    <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
-                </tr>
+                @if(session('processedData') && is_array(session('processedData')))
+                    @foreach(session('processedData') as $i => $data)
+                        <tr>
+                            <td>{{ $i + 1 }}</td>
+                            <td><input type="text" name="mahasiswa[{{ $i }}][nama]" class="form-control" value="{{ $data['nama'] ?? '' }}"></td>
+                            <td><input type="text" name="mahasiswa[{{ $i }}][asal_sekolah]" class="form-control" value="{{ $data['asal_sekolah'] ?? '' }}"></td>
+                            <td>
+                                <select name="mahasiswa[{{ $i }}][jalur_masuk]" class="form-control">
+                                    <option value="SNBP" {{ ($data['jalur_masuk'] ?? '')=='SNBP'?'selected':'' }}>SNBP</option>
+                                    <option value="SNBT" {{ ($data['jalur_masuk'] ?? '')=='SNBT'?'selected':'' }}>SNBT</option>
+                                    <option value="MANDIRI" {{ ($data['jalur_masuk'] ?? '')=='MANDIRI'?'selected':'' }}>MANDIRI</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="mahasiswa[{{ $i }}][akademik]" class="form-control" value="{{ $data['akademik'] ?? '' }}"></td>
+                            <td><input type="text" name="mahasiswa[{{ $i }}][sekolah]" class="form-control" value="{{ $data['sekolah'] ?? '' }}"></td>
+                            <td><input type="text" name="mahasiswa[{{ $i }}][ekonomi]" class="form-control" value="{{ $data['ekonomi'] ?? '' }}"></td>
+                            <td><input type="text" name="mahasiswa[{{ $i }}][perkuliahan]" class="form-control" value="{{ $data['perkuliahan'] ?? '' }}"></td>
+                            <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" name="mahasiswa[0][nama]" class="form-control"></td>
+                        <td><input type="text" name="mahasiswa[0][asal_sekolah]" class="form-control"></td>
+                        <td>
+                            <select name="mahasiswa[0][jalur_masuk]" class="form-control">
+                                <option value="">Pilih Jalur</option>
+                                <option value="SNBP">SNBP</option>
+                                <option value="SNBT">SNBT</option>
+                                <option value="MANDIRI">MANDIRI</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="mahasiswa[0][akademik]" class="form-control"></td>
+                        <td><input type="text" name="mahasiswa[0][sekolah]" class="form-control"></td>
+                        <td><input type="text" name="mahasiswa[0][ekonomi]" class="form-control"></td>
+                        <td><input type="text" name="mahasiswa[0][perkuliahan]" class="form-control"></td>
+                        <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+                    </tr>
+                @endif
             </tbody>
         </table>
-
-        <!-- Tombol Simpan -->
         <div class="d-flex gap-2 mt-3">
-        <button type="button" id="addRowBtn" class="btn btn-success ms-2">Tambah Baris</button>
-        <button type="button" class="btn btn-primary" id="saveBtn">Simpan Data Kelas</button>
+            <button type="button" id="addRowBtn" class="btn btn-success ms-2">Tambah Baris</button>
+            <button type="button" class="btn btn-primary" id="saveBtn">Simpan Data Kelas</button>
         </div>
-
-
-        <!-- Ringkasan -->
         <div id="summaryContainer" class="mt-4"></div>
-        <!-- <div id="summaryContainer" class="mt-4"></div> -->
-
         <button type="submit" id="generateBtn" class="btn btn-success d-none mt-3 mb-3">Generate</button>
-
-
-
     </form>
 </div>
+@endsection
 
+@section('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('addRowBtn')?.addEventListener('click', addRow);
+// Tambah baris baru
+function addRow() {
+    const table = document.querySelector('#dynamicTable tbody');
+    const rowCount = table.rows.length;
+    let newRow = `<tr>
+        <td>${rowCount + 1}</td>
+        <td><input type="text" name="mahasiswa[${rowCount}][nama]" class="form-control"></td>
+        <td><input type="text" name="mahasiswa[${rowCount}][asal_sekolah]" class="form-control"></td>
+        <td>
+            <select name="mahasiswa[${rowCount}][jalur_masuk]" class="form-control">
+                <option value="">Pilih Jalur</option>
+                <option value="SNBP">SNBP</option>
+                <option value="SNBT">SNBT</option>
+                <option value="MANDIRI">MANDIRI</option>
+            </select>
+        </td>
+        <td><input type="text" name="mahasiswa[${rowCount}][akademik]" class="form-control"></td>
+        <td><input type="text" name="mahasiswa[${rowCount}][sekolah]" class="form-control"></td>
+        <td><input type="text" name="mahasiswa[${rowCount}][ekonomi]" class="form-control"></td>
+        <td><input type="text" name="mahasiswa[${rowCount}][perkuliahan]" class="form-control"></td>
+        <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+    </tr>`;
+    table.insertAdjacentHTML('beforeend', newRow);
+    updateRowNumbers();
+}
+function removeRow(button) {
+    button.closest('tr').remove();
+    updateRowNumbers();
+}
+function updateRowNumbers() {
+    const rows = document.querySelectorAll('#dynamicTable tbody tr');
+    rows.forEach((row, index) => {
+        row.cells[0].textContent = index + 1;
+    });
+}
+document.getElementById('addRowBtn')?.addEventListener('click', addRow);
 
-    const csrfToken = '{{ csrf_token() }}';
-
-    // ================= CSV IMPORT ===================
-    function handleCSVImport() {
-        const fileInput = document.getElementById('csvFile');
-        const file = fileInput.files[0];
-
-        if (!file) {
-            alert("Pilih file CSV terlebih dahulu.");
-            return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const text = e.target.result;
-            const rows = text.trim().split('\n').map(r => r.split(','));
-            const dataRows = rows.slice(0); // Ambil semua baris
-            const tableBody = document.querySelector('#dynamicTable tbody');
-            tableBody.innerHTML = '';
-
-            dataRows.forEach((cols, index) => {
-                if (cols.length < 7) return;
-
-                // Hapus tanda kutip dari setiap elemen data
-                const cleanedCols = cols.map(col => col.replace(/"/g, ''));
-
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td><input type="text" name="mahasiswa[${index}][nama]" class="form-control" value="${cleanedCols[0]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][asal_sekolah]" class="form-control" value="${cleanedCols[1]}"></td>
-                    <td>
-                        <select name="mahasiswa[${index}][jalur_masuk]" class="form-control">
-                            <option value="SNBP" ${cleanedCols[2] === 'SNBP' ? 'selected' : ''}>SNBP</option>
-                            <option value="SNBT" ${cleanedCols[2] === 'SNBT' ? 'selected' : ''}>SNBT</option>
-                            <option value="Mandiri UPI" ${cleanedCols[2] === 'Mandiri UPI' ? 'selected' : ''}>Mandiri UPI</option>
-                            <option value="Mandiri" ${cleanedCols[2] === 'Mandiri' ? 'selected' : ''}>Mandiri</option>
-                        </select>
-                    </td>
-                    <td><input type="text" name="mahasiswa[${index}][akademik_endurance]" class="form-control" value="${cleanedCols[3]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][latar_belakang]" class="form-control" value="${cleanedCols[4]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][pola_belajar]" class="form-control" value="${cleanedCols[5]}"></td>
-                    <td><input type="text" name="mahasiswa[${index}][perkuliahan]" class="form-control" value="${cleanedCols[6]}"></td>
-                    <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
-                `;
-                tableBody.appendChild(newRow);
-            });
-
-            setAutoAddTrigger();
-        };
-
-        reader.readAsText(file);
+// Simpan Data Kelas (tampilkan ringkasan & tombol generate)
+document.getElementById('saveBtn')?.addEventListener('click', function () {
+    const namaKelas = document.querySelector('input[name="nama_kelas"]').value.trim();
+    const kodeMK = document.querySelector('input[name="kode_mata_kuliah"]').value.trim();
+    if (!namaKelas || !kodeMK) {
+        alert("Nama Kelas dan Kode Mata Kuliah wajib diisi sebelum menyimpan data.");
+        return;
     }
-
-    document.getElementById('csvFile')?.addEventListener('change', handleCSVImport);
-
-    // Trigger paksa untuk import CSV
-    function triggerImport() {
-        const fileInput = document.getElementById('csvFile');
-        const event = new Event('change');
-        fileInput.dispatchEvent(event);
-    }
-
-    // ============= Auto Tambah Baris ===============
-    function autoAddRowIfNeeded() {
-        const rows = document.querySelectorAll('#dynamicTable tbody tr');
-        const lastRow = rows[rows.length - 1];
-        const inputs = lastRow.querySelectorAll('input, select');
-
-        let filled = false;
-        inputs.forEach(input => {
-            if (input.value.trim() !== '') filled = true;
-        });
-
-        if (filled) addRow();
-    }
-
-    function setAutoAddTrigger() {
-        const lastRow = document.querySelector('#dynamicTable tbody tr:last-child');
-        if (!lastRow) return;
-
-        const inputs = lastRow.querySelectorAll('input, select');
-        inputs.forEach(input => {
-            input.removeEventListener('input', autoAddRowIfNeeded);
-            input.addEventListener('input', autoAddRowIfNeeded);
-        });
-    }
-
-    function addRow() {
-        const table = document.querySelector('#dynamicTable tbody');
-        const rowCount = table.rows.length + 1;
-        const newRow = document.createElement('tr');
-        newRow.innerHTML = `
-            <td>${rowCount}</td>
-            <td><input type="text" name="mahasiswa[${rowCount}][nama]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][asal_sekolah]" class="form-control"></td>
-            <td>
-                <select name="mahasiswa[${rowCount}][jalur_masuk]" class="form-control">
-                    <option value="">Pilih Jalur</option>
-                    <option value="SNBP">SNBP</option>
-                    <option value="SNBT">SNBT</option>
-                    <option value="Mandiri UPI">Mandiri UPI</option>
-                </select>
-            </td>
-            <td><input type="text" name="mahasiswa[${rowCount}][akademik_endurance]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][latar_belakang]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][pola_belajar]" class="form-control"></td>
-            <td><input type="text" name="mahasiswa[${rowCount}][perkuliahan]" class="form-control"></td>
-            <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
-        `;
-        table.appendChild(newRow);
-        updateRowNumbers();
-        setAutoAddTrigger();
-    }
-
-
-
-    function updateRowNumbers() {
-        const rows = document.querySelectorAll('#dynamicTable tbody tr');
-        rows.forEach((row, index) => {
-            row.cells[0].textContent = index + 1;
-        });
-    }
-
-    setAutoAddTrigger(); // jalankan saat awal
-
-    // ============ Save & Ringkasan ============
-    const saveBtn = document.getElementById('saveBtn');
-    if (saveBtn) {
-        saveBtn.addEventListener('click', function () {
-
-            const namaKelas = document.querySelector('input[name="nama_kelas"]').value.trim();
-        const kodeMK = document.querySelector('input[name="kode_mata_kuliah"]').value.trim();
-
-        if (!namaKelas || !kodeMK) {
-            alert("Nama Kelas dan Kode Mata Kuliah wajib diisi sebelum menyimpan data.");
-            return;
-        }
-
     const rows = document.querySelectorAll('#dynamicTable tbody tr');
     const data = [];
-    let valid = true; // Flag untuk cek validitas
-
+    let valid = true;
     rows.forEach((row, index) => {
-    const inputs = row.querySelectorAll('input, select');
-    const rowData = {};
-    let filledCount = 0;
-    let emptyCount = 0;
-
-    inputs.forEach(input => {
-        const value = input.value.trim();
-        if (value !== '') filledCount++;
-        else emptyCount++;
-
-        const name = input.name;
-        if (name.includes('[nama]')) rowData.nama = value;
-        else if (name.includes('[asal_sekolah]')) rowData.sekolah = value;
-        else if (name.includes('[jalur_masuk]')) rowData.jalur = value;
-        else if (name.includes('[akademik_endurance]')) rowData.akademik = value;
-        else if (name.includes('[latar_belakang]')) rowData.latar = value;
-        else if (name.includes('[pola_belajar]')) rowData.pola = value;
-        else if (name.includes('[perkuliahan]')) rowData.kuliah = value;
-    });
-
-    // Jika semua kolom kosong, skip aja
-if (filledCount === 0) return;
-
-// Kalau sebagian isi sebagian kosong, tolak
-if (filledCount > 0 && emptyCount > 0) {
-    alert(`Baris ke-${index + 1} belum lengkap. Silakan lengkapi semua kolom sebelum menyimpan.`);
-    valid = false;
-    return;
-}
-data.push(rowData);
-// Kalau semua kolom terisi, baru push ke array
-// if (filledCount > 0 && emptyCount === 0) {
-//     data.push(rowData);
-// }
-
-});
-
-
-    // Kalau ada baris yang gak valid, hentikan proses
-    if (!valid) return;
-
-    document.getElementById('mahasiswaJSON').value = JSON.stringify(data);
-
-//     const namaKelas = document.getElementById('nama_kelas')?.value || '-';
-// const kodeMK = document.getElementById('kode_mata_kuliah')?.value || '-';
-
-//Scrool saat Klik save 
-setTimeout(() => {
-    const summary = document.getElementById('summaryContainer');
-    if (summary) {
-        const offset = summary.offsetTop - 80; // 100px margin biar ga ketutupan header
-        window.scrollTo({
-            top: offset,
-            behavior: 'smooth'
+        const inputs = row.querySelectorAll('input, select');
+        const rowData = {};
+        let filledCount = 0;
+        let emptyCount = 0;
+        inputs.forEach(input => {
+            const value = input.value.trim();
+            if (value !== '') filledCount++;
+            else emptyCount++;
+            const name = input.name;
+            if (name.includes('[nama]')) rowData.nama = value;
+            else if (name.includes('[asal_sekolah]')) rowData.asal_sekolah = value;
+            else if (name.includes('[jalur_masuk]')) rowData.jalur_masuk = value;
+            else if (name.includes('[akademik]')) rowData.akademik = value;
+            else if (name.includes('[sekolah]')) rowData.sekolah = value;
+            else if (name.includes('[ekonomi]')) rowData.ekonomi = value;
+            else if (name.includes('[perkuliahan]')) rowData.perkuliahan = value;
         });
-    }
-}, 500);
+        if (filledCount === 0) return;
+        if (filledCount > 0 && emptyCount > 0) {
+            alert(`Baris ke-${index + 1} belum lengkap. Silakan lengkapi semua kolom sebelum menyimpan.`);
+            valid = false;
+            return;
+        }
+        data.push(rowData);
+    });
+    if (!valid) return;
+    // Ringkasan
     let summaryHTML = `
      <div class="card mt-4 p-4 shadow-sm" style="background-color: #ffffff; border-0;">
     <h4 class="mb-2 fw-bold" style="color: #0E1F4D;">Ringkasan Data</h4>
@@ -615,98 +501,26 @@ setTimeout(() => {
         <strong>Kode Mata Kuliah:</strong> ${kodeMK}
     </div>
 </div>
-
-
         <table class="custom-table"><thead><tr>
-        <th>Nama</th><th>Asal Sekolah</th><th>Jalur</th><th>Akademik</th><th>Latar Belakang</th><th>Pola Belajar</th>
-        <th>Perkuliahan</th>
+        <th>Nama</th><th>Asal Sekolah</th><th>Jalur</th><th>Akademik</th><th>Sekolah</th><th>Ekonomi</th><th>Perkuliahan</th>
         </tr></thead><tbody>`;
-
     data.forEach(item => {
         summaryHTML += `<tr>
-            <td>${item.nama}</td><td>${item.sekolah}</td><td>${item.jalur}</td><td>${item.akademik}</td>
-            <td>${item.latar}</td><td>${item.pola}</td><td>${item.kuliah}</td>
+            <td>${item.nama}</td><td>${item.asal_sekolah}</td><td>${item.jalur_masuk}</td><td>${item.akademik}</td>
+            <td>${item.sekolah}</td><td>${item.ekonomi}</td><td>${item.perkuliahan}</td>
         </tr>`;
     });
-
     summaryHTML += `</tbody></table>`;
     document.getElementById('summaryContainer').innerHTML = summaryHTML;
     document.getElementById('generateBtn')?.classList.remove('d-none');
-
-    // Simpan data ke input hidden
-    document.getElementById('mahasiswaData').value = JSON.stringify(data);
-
-    //Scroll kebawah after klik button save
     setTimeout(() => {
         document.getElementById('summaryContainer')?.scrollIntoView({ behavior: 'smooth' });
     }, 300);
-
-});
-    }
-
-
-
-    // =========== Generate Button ============
-    const generateBtn = document.getElementById('generateBtn');
-if (generateBtn) {
-    generateBtn.addEventListener('click', function (e) {
-        // e.preventDefault();
-
-        const namaKelas = document.querySelector('input[name="nama_kelas"]').value;
-        const kodeMatkul = document.querySelector('input[name="kode_mata_kuliah"]').value;
-
-        const mahasiswa = [];
-        const rows = document.querySelectorAll('#dynamicTable tbody tr');
-        rows.forEach((row) => {
-            const inputs = row.querySelectorAll('input, select');
-            const data = {};
-            inputs.forEach(input => {
-                const keyMatch = input.name.match(/\[(.*?)\]/);
-                if (keyMatch && keyMatch[1]) {
-                    data[keyMatch[1]] = input.value;
-                }
-            });
-            mahasiswa.push(data);
-        });
-
-        document.querySelector('input[name="nama_kelas"]').value = namaKelas;
-        document.querySelector('input[name="kode_mata_kuliah"]').value = kodeMatkul;
-        document.getElementById('mahasiswaJSON').value = JSON.stringify(mahasiswa);
-
-        generateBtn.closest('form').submit();
-    });
-    }
-
 });
 
-
-
+// Generate (submit form)
+document.getElementById('generateBtn')?.addEventListener('click', function () {
+    document.getElementById('formKelas').submit();
+});
 </script>
-
-
-<script>
-     function removeRow(button) {
-        button.closest('tr').remove();
-        updateRowNumbers();
-        setAutoAddTrigger();
-    }
-    </script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-  const collapseEl = document.getElementById('tutorialPengisian');
-  const toggleIcon = document.getElementById('toggleIcon');
-
-  collapseEl.addEventListener('show.bs.collapse', function () {
-    toggleIcon.textContent = '🔼'; // Saat terbuka
-  });
-
-  collapseEl.addEventListener('hide.bs.collapse', function () {
-    toggleIcon.textContent = '🔽'; // Saat tertutup
-  });
-</script>
-
-
 @endsection
