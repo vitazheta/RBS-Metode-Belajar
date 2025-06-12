@@ -119,7 +119,7 @@
         <div class="step mb-5">
             <h3>4. Anda Berhasil Masuk</h3>
             <p>Setelah masuk, klik tombol Download Template Google Form untuk mendapatkan template kuesioner yang akan dibagikan kepada mahasiswa.</p>
-            <img src="{{ asset('images/tutorial/step4.png') }}" class="img-fluid rounded shadow-sm" alt="Step 4">
+            <img src="{{ asset('images/tutorial/step21.png') }}" class="img-fluid rounded shadow-sm" alt="Step 4">
         </div>
         <div class="step mb-5">
             <h3>5. Pada halaman Google Form</h3>
@@ -140,35 +140,31 @@
         </div>
         <div class="step mb-5">
             <h3>9. Setelah file berhasil diunduh</h3>
-            <p>Kembali ke website dan klik tombol Olah Data.</p>
-            <img src="{{ asset('images/tutorial/step9.png') }}" class="img-fluid rounded shadow-sm" alt="Step 9">
+            <p>Kembali ke website dan klik toggle Tambah Kelas Olah Data.</p>
+            <img src="{{ asset('images/tutorial/step22.png') }}" class="img-fluid rounded shadow-sm" alt="Step 9">
         </div>
         <div class="step mb-5">
             <h3>10. Unggah file .xlsx yang telah Anda unduh sebelumnya.</h3>
-            <img src="{{ asset('images/tutorial/step10.png') }}" class="img-fluid rounded shadow-sm" alt="Step 10">
+            <img src="{{ asset('images/tutorial/step23.png') }}" class="img-fluid rounded shadow-sm" alt="Step 10">
         </div>
         <div class="step mb-5">
-            <h3>11. Klik tombol Export ke CSV untuk memproses data.</h3>
-            <img src="{{ asset('images/tutorial/step11.png') }}" class="img-fluid rounded shadow-sm" alt="Step 11">
+            <h3>11. Input Nama Kelas dan Kode Mata Kuliah</h3>
+            <p>Setelah proses unggah selesai, silakan isi Nama Kelas dan Kode Mata Kuliah</p>
+            <img src="{{ asset('images/tutorial/step25.png') }}" class="img-fluid rounded shadow-sm" alt="Step 12">
         </div>
         <div class="step mb-5">
-            <h3>12. Setelah data diproses</h3>
-            <p>Klik tombol Tambahkan data kelas setelah mengunduh CSV.</p>
-            <img src="{{ asset('images/tutorial/step12.png') }}" class="img-fluid rounded shadow-sm" alt="Step 12">
+            <h3>12. Klik tombol Simpan Data untuk menyimpan informasi kelas.</h3>
+            <p>Gulir ke bawah untuk menemukan tombol Simpan Data</p>
+            <img src="{{ asset('images/tutorial/step26.png') }}" class="img-fluid rounded shadow-sm" alt="Step 14">
         </div>
         <div class="step mb-5">
-            <h3>13. Isi data yang diperlukan untuk menambah kelas.</h3>
-            <p>Masukkan Nama Kelas, Kode Mata Kuliah, dan unggah file CSV yang sudah dimiliki.</p>
-            <img src="{{ asset('images/tutorial/step13.png') }}" class="img-fluid rounded shadow-sm" alt="Step 13">
+            <h3>13. Ringkasan Data Kelas.</h3>
+            <p>Silakan cek keseuaian data kelas Anda, pada proses ini Anda masih dapat mengubah atau menghapus data kelas pada tabel sebelumnya.</p>
+            <img src="{{ asset('images/tutorial/step27.png') }}" class="img-fluid rounded shadow-sm" alt="Step 14">
         </div>
         <div class="step mb-5">
-            <h3>14. Klik tombol Simpan Data untuk menyimpan informasi kelas.</h3>
-            <p>
-            <img src="{{ asset('images/tutorial/step14.png') }}" class="img-fluid rounded shadow-sm" alt="Step 14">
-        </div>
-        <div class="step mb-5">
-            <h3>15. Klik tombol Generate untuk memulai proses analisis.</h3>
-            <img src="{{ asset('images/tutorial/step15.png') }}" class="img-fluid rounded shadow-sm" alt="Step 15">
+            <h3>14. Klik tombol Generate untuk memulai proses analisis.</h3>
+            <img src="{{ asset('images/tutorial/step28.png') }}" class="img-fluid rounded shadow-sm" alt="Step 15">
         </div>
         <div class="step mb-5">
             <h3>16. Hasil rekomendasi akan ditampilkan secara otomatis di halaman.</h3>
