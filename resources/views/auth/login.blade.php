@@ -33,15 +33,15 @@
     <div class="card" style="
     position: relative;
     z-index: 10;
-    width: 800px; 
+    width: 800px;
     border: none; /* Menghilangkan border */
-    border-radius: 30px; 
+    border-radius: 30px;
     overflow: visible;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow halus */">
         <div class="row g-0">
             <!-- Bagian Form Login -->
             <div class="col-md-6 bg-white p-5" style="
-            border-radius: 20px; 
+            border-radius: 20px;
             border-top-right-radius: 0px;  /* Sudut kanan atas melengkung */
             border-bottom-right-radius: 0px; /* Sudut kanan bawah melengkung */">
                 <h2 class="fw-bold text-center">Sign in</h2>
@@ -62,10 +62,10 @@
         <input type="password" name="password" class="form-control" placeholder="Password" required>
     </div>
     <div class="text-center">
-        <a href="#" class="text-decoration-none text-muted">Lupa kata sandi anda?</a>
+        <a href="{{ route('password.request') }}" class="text-decoration-none text-muted">Lupa kata sandi Anda?</a>
     </div>
     <div class="text-center mt-3">
-        <button type="submit" class="btn text-white w-100 rounded-pill py-2" 
+        <button type="submit" class="btn text-white w-100 rounded-pill py-2"
                 style="background-color: #0E1F4D; transition: all 0.3s ease;"
                 onmouseover="this.style.backgroundColor='#70788F';"
                 onmouseout="this.style.backgroundColor='#0E1F4D';">
@@ -77,15 +77,15 @@
             </div>
 
             <!-- Bagian Info dan Sign Up -->
-            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white text-center p-5" 
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white text-center p-5"
             style="
-            background-color: #0E1F4D; 
-            border-radius: 20px; 
+            background-color: #0E1F4D;
+            border-radius: 20px;
             border-top-left-radius: 0;  /* Sudut kiri atas tetap tajam */
             border-bottom-left-radius: 0;  /* Sudut kiri bawah tetap tajam */
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow halus */">
                 <h2 class="fw-bold">
-                <span style="color: white;">Halo,</span> 
+                <span style="color: white;">Halo,</span>
                 <span style="color: #F37AB0;">Dosen!</span>
                 </h2>
                 <p>Daftarkan diri Anda dan segera mulai gunakan website ini</p>

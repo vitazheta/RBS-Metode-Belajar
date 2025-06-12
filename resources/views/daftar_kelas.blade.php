@@ -42,7 +42,7 @@
     }
 
     .daftar-kelas-title {
-        font-size: 40px;
+        /* font-size: 40px; */
         font-weight: bold;
         color: #0E1F4D;
         position: relative;
@@ -139,7 +139,7 @@
             <span></span>
         </h2>
         <p class="desc-daftar-kelas">
-            Halaman ini menampilkan daftar kelas yang telah Anda buat. 
+            Halaman ini menampilkan daftar kelas yang telah Anda buat.
         </p>
     </div>
 

@@ -1,128 +1,95 @@
-<!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
 <style>
-    /* Warna Hover dan Aktif */
+    /* ========== GAYA UMUM NAVBAR ========== */
+    .navbar-custom {
+        background: linear-gradient(135deg, #111F43 0%, #3F5694 30%, #000D30 100%);
+        border-radius: 0 0 10px 10px;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand img {
+        height: 40px;
+    }
+
+    /* ========== GAYA ITEM NAVIGASI (.btn-nav) ========== */
     .btn-nav {
-        padding: 20px 25px; /* Mengurangi padding agar jarak lebih rapat */
-        border-radius: 20px;
         color: white;
         text-decoration: none;
-        transition: background 0.3s ease;
         font-family: Poppins, sans-serif;
         font-size: 14px;
+        position: relative;
+        padding: 10px 15px;
+        display: inline-block;
+        transition: color 0.3s ease;
+        overflow: hidden;
     }
 
     .btn-nav:hover {
-        background-color: transparent !important; /* Hilangkan background */
-        color: #84A7CF !important; /* Warna teks saat hover */
-        text-decoration: none; /* Hilangkan garis bawah default */
-        position: relative; /* Untuk pseudo-element */
+        background-color: transparent !important;
+        color: #84A7CF !important;
+        text-decoration: none;
     }
 
-    /* Hover Effect */
-    .btn-nav:hover::after {
-        content: ''; /* Tambahkan elemen kosong */
-        position: absolute;
-        left: 0;
-        bottom: 0; /* Garis muncul tepat di bawah navbar */
-        width: 100%; /* Panjang garis sesuai tombol */
-        height: 2px; /* Ketebalan garis */
-        background-color: #84A7CF; /* Warna garis saat hover */
-        /* transition: width 0.3s ease;  Animasi garis */
+    .btn-nav.active {
+        color: #ffffff !important;
     }
 
-    /* Default State */
+    /* Efek Garis Bawah ::after */
     .btn-nav::after {
         content: '';
         position: absolute;
         left: 0;
-        bottom: 0; /* Garis muncul tepat di bawah navbar */
-        width: 0; /* Garis tidak terlihat saat tidak di-hover */
+        bottom: 0;
+        width: 0;
         height: 2px;
-        background-color: #84A7CF; /* Warna garis */
-        /* transition: width 0.3s ease;  Animasi garis */
-    }
-
-    .btn-nav.active {
-        color: #ffffff !important; /* Warna teks saat aktif */
-        position: relative;
+        background-color: #84A7CF;
+        transition: width 0.3s ease;
     }
 
     .btn-nav.active::after {
-        content: ''; /* Tambahkan elemen kosong */
-        position: absolute;
-        left: 0;
-        bottom: 0; /* Garis muncul tepat di bawah navbar */
-        width: 100%; /* Panjang garis sesuai tombol */
-        height: 2px; /* Ketebalan garis */
-        background-color: #ffffff; /* Warna garis saat aktif */
+        width: 100%;
+        background-color: #ffffff;
     }
 
-    /* button login & logout */
+    /* ========== GAYA TOMBOL LOGIN/LOGOUT (.btn-log) ========== */
     .btn-log {
-        background-color: #F37AB0; /* Warna latar belakang */
-        color: #ffffff; /* Warna teks */
-        border-radius: 7px; /* Membuat tombol berbentuk lingkaran */
-        padding: 10px 20px; /* Menambahkan padding untuk ukuran tombol */
-        font-size: 14px; /* Ukuran teks */
-        text-align: center; /* Pusatkan teks */
-        text-decoration: none; /* Hilangkan underline */
-        transition: all 0.3s ease; /* Animasi transisi */
+        background-color: #F37AB0;
+        color: #ffffff;
+        border-radius: 7px;
+        padding: 10px 20px;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        display: inline-block;
     }
 
     .btn-log:hover {
-        background-color: #E2A6C1 !important; /* Warna latar belakang saat hover */
-        color: #ffffff !important; /* Warna teks saat hover */
-        text-decoration: none; /* Pastikan underline tetap hilang saat hover */
-        transition: all 0.3s ease; /* Animasi transisi */
+        background-color: #E2A6C1 !important;
+        color: #ffffff !important;
     }
 
-    /* Navbar Styling */
-    .navbar-custom {
-        background: linear-gradient(135deg, #111F43 0%, #3F5694 30%, #000D30 100%); /* Gradasi dengan efek pantulan */
-        border-radius: 0 0 10px 10px; /* Rounded hanya di bagian bawah */
-        padding: 10px 20px;
-        position: fixed;  /* Menempel di layar */
-        top: 0;  /* Melekat di bagian atas */
-        left: 0;  /* Mulai dari sisi kiri */
-        width: 100%;  /* Lebar penuh */
-        height: 60px;
-        z-index: 1000;  /* Agar tetap di atas elemen lain */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk efek elegan */
+    /* Pastikan btn-log tidak punya garis bawah ::after */
+    .btn-log::after {
+        content: none !important;
+        display: none !important;
     }
 
-    /* Default Light Theme */
-    body {
-        background-color: #EBEDF4;
-        color: #0E1F4D;
-    }
-
-    .navbar-custom {
-        background: linear-gradient(135deg, #0E1F4D 0%, #3F5694 30%, #000D30 100%);
-    }
-
-    .btn-nav {
-        color: #FFFFFF;
-    }
-
-    .btn-log {
-        background-color: #F37AB0;
-        color: #FFFFFF;
-    }
-
-    /* Dark Theme */
-    body.dark-theme {
-        background-color: #1B1B1B;
-        color: #BCCAD7;
-    }
-
-    .navbar-custom.dark-theme {
-        background: linear-gradient(135deg, #162449 0%, #90B0D4 30%, #0B1531 100%);
-    }
-
+    /* ========== DARK MODE (hanya untuk elemen NAVBARD) ========== */
+    /* Hapus definisi body.dark-theme dari sini, karena sudah di app.blade.php */
+    /* .navbar-custom.dark-theme { */
+    /* background: linear-gradient(135deg, #162449 0%, #90B0D4 30%, #0B1531 100%); */
+    /* } */
+    /* Jika Anda ingin navbar juga berubah di dark theme, pindahkan aturan ini ke app.blade.php atau pastikan ia di-load setelah app.blade.php */
     .btn-nav.dark-theme {
-        color: #000000;
+        color: #000000; /* ini mungkin perlu diatur ulang agar kontras dengan navbar gelap */
     }
 
     .btn-log.dark-theme {
@@ -136,28 +103,97 @@
     }
 
     .form-check-label .bi-moon {
-        font-size: 18px; /* Sesuaikan ukuran ikon */
-        cursor: pointer; /* Ubah kursor menjadi pointer */
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    /* ========== DESKTOP STYLES (min-width: 992px) ========== */
+    @media (min-width: 992px) {
+        .navbar-nav .nav-item {
+            padding: 0;
+            margin-right: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-nav .nav-item:last-child {
+            margin-right: 0;
+        }
+
+        .btn-nav:hover::after {
+            width: 100%;
+        }
+
+        .navbar-nav + .form-check.form-switch {
+            margin-left: 1rem !important;
+        }
+    }
+
+    /* ========== MOBILE STYLES (max-width: 991.98px) ========== */
+    @media (max-width: 991.98px) {
+        .navbar-toggler {
+            order: 2;
+        }
+        .navbar-collapse {
+            padding: 10px 0;
+        }
+        .navbar-nav {
+            flex-direction: column;
+            gap: 0;
+            margin-left: 0 !important;
+            width: 100%;
+        }
+
+        .navbar-nav .nav-item {
+            width: 100%;
+            text-align: center;
+            padding: 8px 0;
+            margin-right: 0;
+        }
+
+        .btn-nav::after,
+        .btn-nav.active::after {
+            content: none;
+            display: none;
+        }
+
+        .btn-nav.active {
+            background-color: #3F5694;
+            border-radius: 5px;
+            color: #FFFFFF !important;
+        }
+
+        .navbar-nav .btn-log {
+            margin: 10px auto;
+            width: 80%;
+            max-width: 200px;
+        }
+        .btn-log.active {
+            background-color: #F37AB0 !important;
+            color: #FFFFFF !important;
+        }
+
+        .navbar-nav + .form-check.form-switch {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
     }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid">
-        <!-- Logo -->
         <a class="navbar-brand" href="{{ url('/#banner') }}">
             <img src="{{ asset('images/logontext.png') }}" alt="Logo" style="height: 40px;">
         </a>
 
-        <!-- Toggle Button for Mobile -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto text-center gap-2">
-                <!-- Menampilkan link Home dan Info untuk pengunjung yang belum login -->
-                @guest
+            <ul class="navbar-nav ms-auto text-center"> @guest
                     <li class="nav-item">
                         <a class="btn-nav {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">
                             Home
@@ -175,7 +211,6 @@
                     </li>
                 @endguest
 
-                <!-- Menampilkan link Dashboard, Tambah Kelas, dan Logout untuk pengguna yang sudah login -->
                 @auth
                     <li class="nav-item">
                         <a class="btn-nav {{ request()->is('dashboard-dosen') ? 'active' : '' }}" href="{{ route('dashboard.dosen') }}">
@@ -192,7 +227,7 @@
                             Tambah Kelas
                         </a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a class="btn-nav {{ request()->is('pelajari') ? 'active' : '' }}" href="{{ route('pelajari') }}">
                             Info
                         </a>
@@ -218,24 +253,24 @@
 </nav>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggle = document.getElementById("darkModeToggle");
-        const body = document.body;
+    // Script dark mode sudah di app.blade.php, ini duplikasi
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     const toggle = document.getElementById("darkModeToggle");
+    //     const body = document.body;
 
-        // Cek jika dark mode sudah diaktifkan sebelumnya
-        if (localStorage.getItem("dark-theme") === "enabled") {
-            body.classList.add("dark-theme");
-            toggle.checked = true;
-        }
+    //     if (localStorage.getItem("dark-theme") === "enabled") {
+    //         body.classList.add("dark-theme");
+    //         toggle.checked = true;
+    //     }
 
-        toggle.addEventListener("change", function () {
-            if (this.checked) {
-                body.classList.add("dark-theme");
-                localStorage.setItem("dark-theme", "enabled");
-            } else {
-                body.classList.remove("dark-theme");
-                localStorage.setItem("dark-theme", "disabled");
-            }
-        });
-    });
+    //     toggle.addEventListener("change", function () {
+    //         if (this.checked) {
+    //             body.classList.add("dark-theme");
+    //             localStorage.setItem("dark-theme", "enabled");
+    //         } else {
+    //             body.classList.remove("dark-theme");
+    //             localStorage.setItem("dark-theme", "disabled");
+    //         }
+    //     });
+    // });
 </script>
