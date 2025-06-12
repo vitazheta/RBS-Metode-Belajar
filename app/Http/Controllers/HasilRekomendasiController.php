@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\Rule;
@@ -16,6 +15,12 @@ class HasilRekomendasiController extends Controller
         $students = $kelas->mahasiswa;
         $jalurList = ['SNBP', 'SNBT', 'MANDIRI'];
 
+        // Cek otorisasi
+        if ((int)$kelas->dosen_id !== auth()->id()) { // <<< Tambahkan (int) di sini
+        abort(403, 'Anda tidak punya akses ke halaman ini.');
+        }
+
+        $students = $kelas->mahasiswa;
         // Jika tidak ada mahasiswa
         if ($students->isEmpty()) {
             return view('hasil_rekomendasi', [
