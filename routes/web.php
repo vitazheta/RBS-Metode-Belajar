@@ -93,3 +93,6 @@ Route::middleware(['auth:dosen'])->group(function () {
 
 Route::get('/dynamic-table', [DynamicTableController::class, 'index'])->name('dynamic.table');
 Route::get('/dynamic-table', [FileUploadController::class, 'showUploadForm'])->name('dynamic.table');
+
+
+Route::get('/cek-kolaborasi/{id}', [HasilRekomendasiController::class, 'cekKolaborasi'])->name('cek.kolaborasi');

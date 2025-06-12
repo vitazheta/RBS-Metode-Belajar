@@ -1,4 +1,3 @@
-
 <head>
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
 
@@ -140,12 +139,25 @@
             color: #ffffff;
             margin-bottom: 10px;
         }
+        btn .btn-kolaborasi {
+            background-color: #0E1F4D;
+            color:rgb(63, 71, 224);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        btn .btn-kolaborasi:hover {
+            background-color: #162449;
+            color: #ffffff;
+        }
     </style>
 </head>
 
+{{-- resources/views/hasil_rekomendasi.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Hasil Rekomendasi Pembelajaran Kelas') {{-- Judul section diperbarui --}}
+@section('title', 'Hasil Rekomendasi Pembelajaran Kelas')
 
 @section('content')
 
@@ -159,10 +171,9 @@
     </div>
 </div>
 
-
 <div class="container" style="padding-top: 0px;">
     <h2 class="mb-2 fw-bold position-relative d-inline-block no-print" style="padding-top: 70px;">
-        Hasil Rekomendasi Pembelajaran Kelas {{-- Judul utama halaman diperbarui --}}
+        Hasil Rekomendasi Pembelajaran Kelas 
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
 
@@ -187,12 +198,10 @@
         </div>
     </div>
 
-
-    {{-- Tambahkan canvas di atas tabel --}}
-
+    {{-- Chart --}}
     <div class="card shadow-sm mb-4" style="border: none;">
         <div class="card-header text-white" style="background-color: #0E1F4D; border: 0px;">
-            <h5 class="mb-0">Distribusi Diagram Strategi Belajar</h5> {{-- Judul chart diubah --}}
+            <h5 class="mb-0">Distribusi Diagram Strategi Belajar</h5>
         </div>
         <div class="card-body">
             <div class="row">
@@ -209,10 +218,11 @@
         </div>
     </div>
 
+    {{-- Tabel Mahasiswa --}}
     <div class="container-rekomendasi">
         <div class="table-responsive rounded shadow-sm">
             <table class="table table-bordered table-striped align-middle">
-                <thead class="text-center-table" >
+                <thead class="text-center-table">
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
@@ -225,12 +235,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- Menggunakan $students dari controller yang sudah ada atribut _text nya --}}
                     @forelse ($students as $index => $mhs)
                         <tr>
                             <td class="text-center">{{ $index + 1 }}</td>
                             <td>{{ $mhs->nama_lengkap }}</td>
-                            <td>{{ $mhs->asal_sekolah}}</td>
+                            <td>{{ $mhs->asal_sekolah }}</td>
                             <td class="text-center">{{ $mhs->jalur_masuk }}</td>
                             <td class="text-center">{{ $mhs->akademik_text }}</td>
                             <td class="text-center">{{ $mhs->sekolah_text }}</td>
@@ -246,130 +255,217 @@
             </table>
         </div>
 
-        {{-- BAGIAN INI TELAH DIGANTI DENGAN OUTPUT REKOMENDASI KELAS & SOROTAN JALUR YANG BARU --}}
-        <div class="mt-4 card shadow-sm card-hasil-rekomendasi">
-           <div class="card-header text-white bg-custom-header" >
-               <h5 class="mb-0"><i class="fas fa-graduation-cap me-2" ></i> Rekomendasi Pembelajaran untuk Kelas</h5>
-           </div>
-           <div class="card-body">
-               @if ($students->isEmpty())
-                   <p class="text-muted"><i class="fas fa-info-circle me-2"></i> Tidak ada mahasiswa di kelas ini. Tidak ada rekomendasi yang dapat dibuat.</p>
-               @else
-                   <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-lightbulb me-2"></i> Rekomendasi Utama</h6>
-                   <p>Berdasarkan analisis profil belajar <strong>{{ count($students) }}</strong> mahasiswa di kelas <strong>{{ $kelas->nama_kelas }}</strong>:</p>
-                   <div class="alert alert-info d-flex align-items-center" role="alert">
-                       <i class="fas fa-star me-2"></i>
-                       <div>
-                           Pendekatan pembelajaran yang paling direkomendasikan:
-                           <h4 class="alert-heading mb-0">
-                               <span class="badge bg-warning text-dark">{{ $mainClassRecommendation }}</span>
-                               <small class="text-muted ms-2">({{ number_format($mainClassPercentage, 1) }}% mahasiswa)</small>
-                           </h4>
-                       </div>
-                   </div>
-
-                   <hr class="my-4">
-
-                   <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-chart-bar me-2"></i> Sorotan Rekomendasi per Jalur Masuk</h6>
-                   @if (empty($jalurHighlights))
-                       <p class="text-muted"><i class="fas fa-exclamation-triangle me-2"></i> Tidak ada data sorotan jalur yang tersedia.</p>
-                   @else
-                       <div class="row row-cols-1 row-cols-md-2 g-4">
-                           @foreach ($jalurHighlights as $jalur => $data)
-                               <div class="col">
-                                   <div class="card h-100">
-                                       <div class="card-body">
-                                           <h5 class="card-title"><i class="fas fa-road me-2"></i> Jalur {{ $jalur }}</h5>
-                                           @if (!empty($data['recommendation']))
-                                               <p class="card-text">Jumlah mahasiswa: <span class="badge bg-secondary">{{ $data['count'] }}</span></p>
-                                               <p class="card-text">Rekomendasi dominan:
-                                                   <span class="badge bg-success">{{ $data['recommendation'] }}</span>
-                                                   <small class="text-muted ms-1">({{ number_format($data['percentage'], 1) }}%)</small>
-                                               </p>
-                                               @if ($data['recommendation'] == $mainClassRecommendation)
-                                                   <p class="card-text text-info small"><i class="fas fa-link me-1"></i> Selaras dengan rekomendasi utama kelas.</p>
-                                               @else
-                                                   <p class="card-text text-warning small"><i class="fas fa-exclamation-circle me-1"></i> Berbeda dengan rekomendasi utama kelas.</p>
-                                               @endif
-                                           @else
-                                               <p class="card-text text-muted"><i class="fas fa-question-circle me-2"></i> Tidak ada rekomendasi spesifik untuk jalur ini.</p>
-                                           @endif
-                                       </div>
-                                   </div>
-                               </div>
-                           @endforeach
-                       </div>
-                   @endif
-
-                   <hr class="my-4">
-
-                   <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-bullseye me-2"></i> Kesimpulan untuk Pengajar</h6>
-                   @if ($students->isEmpty())
-                       <p class="text-muted"><i class="fas fa-ban me-2"></i> Tidak ada kesimpulan karena tidak ada data mahasiswa.</p>
-                   @else
-                       <p>Sebagai panduan utama, pertimbangkan untuk mengimplementasikan pendekatan <strong>{{ $mainClassRecommendation }}</strong>.</p>
-                       @if (!empty($jalurHighlights))
-                           <p class="mb-0">Untuk mengakomodasi keberagaman, perhatikan juga rekomendasi spesifik per jalur:</p>
-                           <ul class="list-unstyled">
-                               @php
-                                   $hasAdditionalRecommendations = false;
-                               @endphp
-                               @foreach ($jalurHighlights as $jalur => $data)
-                                   @if (!empty($data['recommendation']) && $data['recommendation'] != $mainClassRecommendation)
-                                       <li><i class="fas fa-arrow-right me-2 text-primary"></i> Jalur {{ $jalur }}: Pertimbangkan pendekatan <span class="fw-bold">{{ $data['recommendation'] }}</span>.</li>
-                                       @php $hasAdditionalRecommendations = true; @endphp
-                                   @endif
-                               @endforeach
-                               @if (!$hasAdditionalRecommendations)
-                                   <li><i class="fas fa-check me-2 text-success"></i> Tidak ada rekomendasi tambahan signifikan per jalur yang berbeda dari rekomendasi utama.</li>
-                               @endif
-                           </ul>
-                       @endif
-                   @endif
-               @endif
-           </div>
-           <div class="text-end mt-4 mb-5">
-                <button id="cekCollabBtn" class="btn btn-primary fw-bold" style="background-color: #0E1F4D; border: none;">
-                    <i class="fas fa-users me-2"></i>
-                    CEK KESESUAIAN REKOMENDASI DENGAN KEBUTUHAN COLLABORATIVE DI DUNIA KERJA
-                </button>
+        {{-- Rekomendasi Utama --}}
+        <div class="mt-4 card shadow-sm card-hasil-rekomendasi" style="height:auto; min-height:unset;">
+            <div class="card-header text-white bg-custom-header">
+            <h5 class="mb-0">
+                <i class="fas fa-graduation-cap me-2"></i> Rekomendasi Pembelajaran untuk Kelas
+            </h5>
             </div>
-       </div>
-        {{-- AKHIR BAGIAN BARU UNTUK REKOMENDASI KELAS & SOROTAN JALUR --}}
+            <div class="card-body">
+                <p>Berdasarkan analisis profil belajar <strong>{{ count($students) }}</strong> mahasiswa di kelas <strong>{{ $kelas->nama_kelas }}</strong> maka dapat diketahui bahwa:</p>
+            <div class="row g-3 align-items-stretch">
+                <div class="col-md-4 d-flex">
+                <div class="alert flex-fill h-100" style="background-color: transparent; color: #000; border: 2px solid #0E1F4D;">
+                    <h6 class="mb-1">
+                    <i class="fas fa-chart-bar me-2"></i> <b>Kondisi Dominan Kelas</b>
+                    </h6>
+                    @if(!empty($KondisiDominan['kondisi']) && $KondisiDominan['kondisi'] != '-')
+                    {!! $KondisiDominan['kondisi'] !!}
+                    @else
+                    <span class="text-dark">Belum ada data kondisi dominan.</span>
+                    @endif
+                </div>
+                </div>
+                <div class="col-md-8 d-flex">
+                <div class="alert flex-fill h-100" style="background-color: #0E1F4D; color: #fff; border: 2px solid #0E1F4D;">
+                    <h6 class="mb-1">
+                    <i class="fas fa-lightbulb me-2"></i> <b>Rekomendasi Utama</b>
+                    </h6>
+                    @if(!empty($KondisiDominan['rekomendasi']) && $KondisiDominan['rekomendasi'] != '-')
+                    {!! $KondisiDominan['rekomendasi'] !!}
+                    <br>
+                    @else
+                    <span class="text-light">Belum ada rekomendasi utama.</span>
+                    @endif
+                </div>
+                </div>
+            </div>
+            {{-- Tambahan: Sorotan per Jalur Masuk --}}
+            <h6 class="card-subtitle mb-10 mt-2" style="margin-top: 20px; margin-bottom: 8px; color: #000; font-weight: bold;">
+                <i class="fas fa-chart-bar me-2"></i> Sorotan Rekomendasi per Jalur Masuk
+            </h6>
+            <div class="row g-3 mt-3">
+                {{-- Sorotan SNBP --}}
+                <div class="col-md-4 d-flex">
+                    <div class="card flex-fill shadow-sm">
+                        <div class="card-header text-white" style="background-color: #27548A;">
+                            <i class="fas fa-user-graduate me-2"></i> Sorotan SNBP
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-2">
+                                <span class="badge bg-primary">
+                                    Jumlah Mahasiswa: {{ $students->where('jalur_masuk', 'SNBP')->count() }}
+                                </span>
+                            </p>
+
+                            {{-- Persentase kecocokan rekomendasi SNBP --}}
+                            @if(!empty($persentaseKecocokanJalur['SNBP']))
+                                <div class="mt-3">
+                                    <h6 class="fw mb-1">Persentase Kecocokan:</h6>
+                                    <div>
+                                        <ul class="mb-1">
+                                            @foreach($persentaseKecocokanJalur['SNBP']['pendekatan'] as $kataKunci => $persen)
+                                                <li>
+                                                    <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur SNBP
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <ul>
+                                            @foreach($persentaseKecocokanJalur['SNBP']['evaluasi'] as $kataKunci => $persen)
+                                                <li>
+                                                    <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur SNBP
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                {{-- Sorotan SNBT --}}
+                <div class="col-md-4 d-flex">
+                    <div class="card flex-fill shadow-sm">
+                        <div class="card-header text-white" style="background-color: #578FCA;">
+                            <i class="fas fa-user-graduate me-2"></i> Sorotan SNBT
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-2">
+                                <span class="badge bg-info text-dark">
+                                    Jumlah Mahasiswa: {{ $students->where('jalur_masuk', 'SNBT')->count() }}
+                                </span>
+                            </p>
+
+                            @if(!empty($persentaseKecocokanJalur['SNBT']))
+                                <div class="mt-3">
+                                    <h6 class="fw mb-1">Persentase Kecocokan:</h6>
+                                    <div>
+                                        <ul class="mb-1">
+                                            @foreach($persentaseKecocokanJalur['SNBT']['pendekatan'] as $kataKunci => $persen)
+                                                <li>
+                                                    <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur SNBT
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <ul>
+                                            @foreach($persentaseKecocokanJalur['SNBT']['evaluasi'] as $kataKunci => $persen)
+                                                <li>
+                                                    <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur SNBT
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                {{-- Sorotan Mandiri --}}
+                <div class="col-md-4 d-flex">
+                    <div class="card flex-fill shadow-sm">
+                        <div class="card-header text-white" style="background-color: #F37AB0;">
+                            <i class="fas fa-user-graduate me-2"></i> Sorotan Mandiri
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-2">
+                                <span class="badge" style="background-color: #F37AB0; color: #fff;">
+                                    Jumlah Mahasiswa: {{ $students->where('jalur_masuk', 'MANDIRI')->count() }}
+                                </span>
+                            </p>
+
+                            @if(!empty($persentaseKecocokanJalur['MANDIRI']))
+                                <div class="mt-3">
+                                    <h6 class="fw mb-1">Persentase Kecocokan:</h6>
+                                    <div>
+                                        <ul class="mb-1">
+                                            @foreach($persentaseKecocokanJalur['MANDIRI']['pendekatan'] as $kataKunci => $persen)
+                                                <li>
+                                                    <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur Mandiri
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <ul>
+                                            @foreach($persentaseKecocokanJalur['MANDIRI']['evaluasi'] as $kataKunci => $persen)
+                                                <li>
+                                                    <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur Mandiri
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+                <div class="d-flex justify-content-center mt-2 mb-2">
+                    <button id="btnKolaborasi" class="btn btn-kolaborasi" style="font-size: 1rem;">
+                        <i class="fas fa-users"></i> Cek Kebutuhan Kolaborasi
+                    </button>
+                </div>
+
+                <div class="row g-3 align-items-stretch mt-2" id="hasilKolaborasi" style="display: none;">
+                    <div class="col-md-12 d-flex px-4">
+                        <div class="alert flex-fill h-100" style="background-color: #f8f9fa; color: #0E1F4D; border: 2px solid #0E1F4D; border-radius: 10px; font-size: 1rem;">
+                            <h5 class="mb-2 fw-bold" style="font-size: 1.25rem;">
+                                <i class="fas fa-users me-2"></i> Hasil Analisis Kebutuhan Kolaborasi Kelas
+                            </h5>
+                            @if(!empty($hasilKolaborasi))
+                                <div class="mb-2" style="font-size: 1rem;">
+                                    {!! $hasilKolaborasi !!}
+                                </div>
+                            @else
+                                <span class="text-muted" style="font-size: 1rem;">Belum ada data hasil kolaborasi.</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
     </div>
-</div>
 
-
+ 
 
 @push('scripts')
 {{-- Perbaikan: cdn.jsdelivr1.com menjadi cdn.jsdelivr.net --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    // Pastikan variabel chartData dikirimkan dari Controller dengan benar
     const chartData = @json($chartData);
 
-    // Fungsi translateValue di JS TIDAK LAGI DIGUNAKAN UNTUK TABEL KARENA SUDAH DI PHP.
-    // Ini tetap ada di sini jika Anda butuh untuk logika frontend lain di masa depan.
-    // Namun, pastikan ini konsisten jika digunakan.
     const translateValue = (aspect, value) => {
         value = parseFloat(value);
         if (aspect === 'akademik') {
-            if (value <= 2) return 'Rendah'; // Sesuaikan casing
-            if (value <= 3) return 'Sedang'; // Sesuaikan casing
-            return 'Tinggi';                 // Sesuaikan casing
+            if (value <= 2.5) return 'Perlu Penguatan';
+            if (value <= 4) return 'Siap';
+            return 'Siap'; // Nilai di atas 4 tetap 'Siap'
         } else if (aspect === 'sekolah') {
-            if (value <= 2) return 'Kurang Mendukung'; // Sesuaikan casing
-            if (value <= 3) return 'Mendukung';      // Sesuaikan casing
-            return 'Sangat Mendukung';             // Sesuaikan casing
+            if (value <= 2.5) return 'Kurang Mendukung';
+            if (value <= 4) return 'Mendukung';
+            return 'Mendukung';
         } else if (aspect === 'ekonomi') {
-            if (value <= 2) return 'Kurang Mencukupi'; // Sesuaikan casing
-            if (value <= 3) return 'Mencukupi';      // Sesuaikan casing
-            return 'Sangat Mencukupi';             // Sesuaikan casing
+            if (value <= 2.5) return 'Kurang Mencukupi';
+            if (value <= 4) return 'Mencukupi';
+            return 'Mencukupi';
         } else if (aspect === 'perkuliahan') {
-            if (value <= 2) return 'Kurang Baik'; // Sesuaikan casing
-            if (value <= 3) return 'Baik';      // Sesuaikan casing
-            return 'Sangat Baik';             // Sesuaikan casing
+            if (value <= 2.5) return 'Kurang Baik';
+            if (value <= 4) return 'Baik';
+            return 'Baik';
         }
         return value;
     };
@@ -461,6 +557,13 @@
             });
         }, 500);
     });
+</script>
+
+<script>
+    document.getElementById('btnKolaborasi').onclick = function() {
+        document.getElementById('hasilKolaborasi').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('hasilKolaborasi').style.display = 'block';
+    };
 </script>
 
 @endpush
