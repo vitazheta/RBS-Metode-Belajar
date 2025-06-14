@@ -19,8 +19,7 @@
         color: #ffffff;
         border: 2px solid #F37AB0;
         transition: all 0.3s ease;
-        font-size: 0.8rem; /* Ukuran font standar yang tidak terlalu besar */
-        padding: 8px 12px; /* Padding standar untuk desktop */
+        font-size: 20px;
     }
     .btn-custom:hover {
         background-color: #E2A6C1;
@@ -33,6 +32,8 @@
         font-weight: bold;
         color: #0E1F4D; /* Default light mode color */
         position: relative;
+        /* PERBAIKAN: Tambahkan margin-top untuk jarak dari atas container */
+        /* margin-top: 20px; */
     }
     .dashboard-title span {
         display: block;
@@ -73,27 +74,13 @@
         width: 350px;
         height: 170px;
         display: flex;
-        flex-direction: column; /* Pastikan konten menumpuk vertikal di card */
-        align-items: flex-start; /* Konten rata kiri */
-        justify-content: center; /* Vertikal di tengah */
+        align-items: left;
+        justify-content: left;
         text-align: left;
         background-color: #84A7CF; /* Default light mode color (dipindahkan dari inline style) */
         border: none; /* Dipindahkan dari inline style */
-        padding: 20px; /* Tambahkan padding default */
-    }
-    .fixed-size-card .card-body {
-        padding: 0; /* Hapus padding default card-body jika sudah diatur di parent */
-        width: 100%;
-    }
-    .fixed-size-card h5 {
-        font-size: 1.5rem; /* Ukuran default untuk desktop */
-    }
-    .fixed-size-card p.card-text.display-4 {
-        font-size: 3rem; /* Ukuran default untuk desktop */
-        margin-top: 5px; /* Sedikit jarak */
     }
     .siluet { /* Jika siluet ada di card ini, pastikan warnanya kontras */
-        position: absolute;
         right: 10px;
         bottom: 10px;
         font-size: 80px;
@@ -213,191 +200,12 @@
         color: #FFFFFF !important;
     }
 
-    /* --- RESPONSIVE STYLES --- */
-
-    /* Untuk perangkat yang lebih kecil (misal: smartphone) */
-    @media (max-width: 767.98px) {
-        .container {
-            padding-top: 80px !important; /* Kurangi padding atas di mobile */
-            padding-left: 15px !important; /* Tambah padding samping */
-            padding-right: 15px !important; /* Tambah padding samping */
-        }
-
-        .dashboard-title {
-            font-size: 24px; /* Ukuran font lebih kecil untuk judul utama */
-            text-align: center; /* Rata tengah judul */
-            text-align: center !important;
-            margin-bottom: 15px !important;
-        }
-        .dashboard-title span {
-            margin: 0 auto 4px; /* Rata tengah garis bawah judul */
-        }
-        .dashboard-description {
-            font-size: 14px; /* Ukuran font lebih kecil untuk deskripsi */
-            text-align: center; /* Rata tengah deskripsi */
-            margin-bottom: 20px !important; /* Kurangi margin bawah */
-        }
-
-        .d-flex.justify-content-between.align-items-center.mb-4 {
-            flex-direction: column; /* Tumpuk elemen di bawah satu sama lain */
-            align-items: center; /* Rata tengah item */
-        }
-
-        .card-tambah {
-            padding: 20px !important; /* Sesuaikan padding */
-            text-align: center; /* Rata tengah teks di card */
-            margin-bottom: 30px !important; /* Kurangi margin bawah card */
-        }
-        .card-tambah .upper-card-body {
-            padding: 0; /* Hapus padding agar tidak tumpang tindih */
-        }
-        .card-tambah h5 {
-            font-size: 1.25rem; /* Ukuran judul di card tambah */
-        }
-        .card-tambah p.text-klik {
-            font-size: 0.9rem; /* Ukuran font untuk deskripsi tombol */
-        }
-        .card-tambah .btn-custom {
-            font-size: 0.75rem !important; /* Lebih kecil lagi untuk tombol */
-            padding: 6px 10px !important; /* Sesuaikan padding tombol */
-        }
-        .card-tambah img {
-            position: static !important; /* Hapus posisi absolut */
-            margin-top: 20px; /* Beri jarak dari teks di atasnya */
-            height: 80px !important; /* Kecilkan ukuran gambar drastis */
-            display: block; /* Pastikan gambar berada di baris baru */
-            margin-left: auto; /* Rata tengah gambar */
-            margin-right: auto; /* Rata tengah gambar */
-        }
-
-        .col-md-4 { /* Kolom kiri untuk total data */
-            margin-bottom: 20px; /* Jarak antara kolom kiri dan kanan di mobile */
-        }
-
-        /* Penyesuaian khusus untuk fixed-size-card di mobile */
-        .fixed-size-card {
-            width: 100% !important; /* Lebar penuh di perangkat kecil */
-            height: 120px !important; /* Tinggi lebih ringkas di mobile */
-            padding: 15px !important; /* Kurangi padding di dalam card */
-            flex-direction: row; /* Kembali ke row untuk ikon dan teks */
-            align-items: center; /* Rata tengah vertikal */
-            justify-content: space-between; /* Jarak antar item */
-            text-align: left !important;
-        }
-        .fixed-size-card .card-body {
-            padding: 0 !important;
-            flex-grow: 1; /* Biarkan card-body mengambil ruang yang tersedia */
-        }
-        .fixed-size-card h5 {
-            font-size: 1.1rem !important; /* Lebih kecil untuk judul card */
-            margin-bottom: 0; /* Hapus margin bawah */
-        }
-        .fixed-size-card p.card-text.display-4 {
-            font-size: 2rem !important; /* Lebih kecil untuk angka */
-            line-height: 1.2; /* Kerapatan baris */
-            margin-top: 0;
-        }
-        .fixed-size-card .siluet {
-            position: static !important; /* Ubah dari absolut ke statis */
-            font-size: 40px !important; /* Kecilkan ukuran siluet */
-            opacity: 0.3; /* Sedikit lebih terlihat */
-            transform: none !important; /* Hapus rotasi */
-            margin-left: 10px; /* Jarak dari teks */
-        }
-
-        .divider-line {
-            display: none; /* Sembunyikan garis pemisah di perangkat kecil */
-        }
-
-        /* Sesuaikan margin untuk judul dan deskripsi di kolom kiri */
-        .col-md-4 .mb-3, .col-md-7 .mb-3 {
-            text-align: center;
-            margin-bottom: 15px !important;
-        }
-        .col-md-4 .mb-3 h3, .col-md-7 .mb-3 h3 {
-            font-size: 22px !important; /* Ukuran judul sub-bagian */
-        }
-
-        .textdesc-desc-data,
-        .text-desc-presentase {
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        .card-diagram {
-            padding: 15px !important; /* Sesuaikan padding diagram */
-        }
-        /* Tambahan untuk chart container */
-        .chart-container {
-            height: 180px !important; /* Sesuaikan tinggi container chart di mobile */
-            width: 100% !important;
-            margin-bottom: 10px; /* Jarak antar chart dan teks di bawahnya */
-        }
-        .card-diagram .card-title {
-            font-size: 1.1rem; /* Ukuran judul kelas di diagram */
-        }
-        .card-diagram p {
-            font-size: 0.85rem; /* Ukuran teks kode mata kuliah */
-        }
-    }
-
-    /* Untuk tablet dan layar yang sedikit lebih besar (misal: landscape tablet) */
-    @media (min-width: 768px) and (max-width: 991.98px) {
-        .container {
-            padding-top: 90px !important;
-        }
-        .dashboard-title {
-            font-size: 32px;
-        }
-        .dashboard-description {
-            font-size: 18px;
-        }
-        .card-tambah img {
-            right: 20px; /* Sesuaikan posisi gambar */
-            height: 120px; /* Sesuaikan ukuran gambar */
-        }
-        .fixed-size-card {
-            width: 100% !important; /* Lebar penuh di tablet */
-            height: 150px; /* Sesuaikan tinggi */
-        }
-        .fixed-size-card .siluet {
-            font-size: 70px; /* Sesuaikan ukuran siluet */
-        }
-        .fixed-size-card h5 {
-            font-size: 1.3rem;
-        }
-        .fixed-size-card p.card-text.display-4 {
-            font-size: 2.5rem;
-        }
-
-        .col-md-4 {
-            margin-bottom: 20px; /* Beri jarak antar kolom */
-        }
-        .divider-line {
-            height: 100%; /* Pastikan garis tetap penuh */
-        }
-        .chart-container {
-            height: 250px !important; /* Sesuaikan tinggi container chart di tablet */
-        }
-    }
-
-    /* Untuk desktop atau layar besar */
-    @media (min-width: 992px) {
-        .card-tambah img {
-            right: 50px; /* Posisi default */
-            height: 150px; /* Ukuran default */
-        }
-        .chart-container {
-            height: 200px; /* Tinggi default untuk desktop */
-        }
-    }
-
 </style>
 
 {{-- PERBAIKAN: Bungkus SELURUH konten halaman ini dengan SATU div.container --}}
-<div class="container" style="padding-top: 100px;">
+<div class="container" style="padding-top: 100px;"> {{-- Gunakan pt-4 untuk padding atas dari dalam container --}}
 
-    <h2 class="mb-2 fw-bold position-relative d-inline-block no-print">
+    <h2 class="mb-2 fw-bold position-relative d-inline-block no-print"> {{-- PERBAIKAN: Hapus style="padding-top: 70px;" dari sini --}}
         Dashboard Dosen
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
@@ -415,13 +223,14 @@
                     <h5 class="fw-bold mt-1 mb-2">Olah Data Mahasiswa Anda Untuk Mendapatkan Rekomendasi Pembelajaran</h5>
                     <p class="text-klik mb-3">Klik tombol di bawah ini untuk mengakses template form data mahasiswa</p>
                     <a href="https://docs.google.com/forms/d/1pT-I0OIaEgM6VIgy6kMPkOAHIIi-kejayblKL6NZbFc/edit" target="_blank"
-                        class="btn btn-custom">
+                        class="btn btn-custom"
+                        style="font-size: 0.8rem; padding: 6px 12px;">
                         <i class="fas fa-external-link-alt me-1"></i>Buat Template Formulir Disini
-                    </a>
+                    </i></a>
                 </div>
             </div>
             <img src="{{ asset('images/img-dashboard.png') }}" alt="Icon Tambah Kelas"
-                class="img-fluid" style="position: absolute; right: 50px; bottom: 20px; height: 150px;">
+                style="position: absolute; right: 50px; bottom: 20px; height: 150px;">
         </div>
     </div>
 
@@ -435,22 +244,22 @@
                 <div class="card-body">
                     <h5 class="card-title">Jumlah Kelas</h5>
                     <p class="card-text display-4">{{ $jumlah_kelas }}</p>
+                    <i class="fas fa-school position-absolute siluet"></i>
                 </div>
-                <i class="fas fa-school position-absolute siluet"></i>
             </div>
             <div class="card shadow-sm text-white position-relative fixed-size-card">
                 <div class="card-body">
                     <h5 class="card-title">Total Mahasiswa</h5>
                     <p class="card-text display-4">{{ $total_mahasiswa }}</p>
+                    <i class="fas fa-user-graduate position-absolute siluet"></i>
                 </div>
-                <i class="fas fa-user-graduate position-absolute siluet"></i>
             </div>
             <div class="card shadow-sm text-white position-relative fixed-size-card">
                 <div class="card-body">
                     <h5 class="card-title">Jalur Masuk Dominan</h5>
                     <p class="card-text display-4">{{ $jalur_masuk_dominan ?? 'Tidak Ada' }}</p>
+                    <i class="fas fa-chart-pie position-absolute siluet"></i>
                 </div>
-                <i class="fas fa-chart-pie position-absolute siluet"></i>
             </div>
         </div>
 
@@ -469,9 +278,7 @@
                     <div class="card-diagram shadow-sm h-100">
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ $k->nama_kelas }}</h5>
-                            <div class="chart-container" style="position: relative; height:200px; width:100%;">
-                                <canvas id="chart-{{ $index }}"></canvas>
-                            </div>
+                            <canvas id="chart-{{ $index }}" width="200" height="200"></canvas>
                             <p class="mt-2">Kode Mata Kuliah: {{ $k->kode_mata_kuliah }}</p>
                         </div>
                     </div>
@@ -481,13 +288,11 @@
         </div>
     </div>
 
-</div>
+</div> {{-- Penutup untuk div.container utama yang baru ditambahkan --}}
 
 @endsection
 
 @section('scripts')
-{{-- PENTING: Pastikan Chart.js di-load. Jika sudah di app.blade.php, ini bisa dihapus --}}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     // Definisikan array global untuk menyimpan semua instance chart
     window.myChartInstances = window.myChartInstances || [];
@@ -512,45 +317,32 @@
                 "#A0A39C",
                 "#E86BB0"
             ],
-            // chartBgColor: isDarkMode ? '#2D2D2D' : '#FFFFFF' // Ini bukan properti Chart.js untuk background canvas
+            chartBgColor: isDarkMode ? '#2D2D2D' : '#FFFFFF' // Warna latar belakang kanvas chart
         };
     }
 
-    // Fungsi untuk memperbarui semua chart yang ada berdasarkan tema
+    // Fungsi untuk memperbarui semua chart yang ada
     window.updateAllChartsBasedOnTheme = function() {
         const isDarkMode = document.body.classList.contains('dark-theme');
         const colors = getChartColors(isDarkMode);
 
         window.myChartInstances.forEach(chart => {
-            if (chart) { // Pastikan chart instance ada
-                // Update options Chart.js
-                chart.options.plugins.legend.labels.color = colors.labelColor;
-                chart.options.plugins.tooltip.backgroundColor = colors.tooltipBgColor;
-                chart.options.plugins.tooltip.borderColor = colors.tooltipBorderColor;
-                chart.options.plugins.tooltip.titleColor = colors.tooltipLabelColor;
-                chart.options.plugins.tooltip.bodyColor = colors.tooltipLabelColor;
+            // Update options Chart.js
+            chart.options.plugins.legend.labels.color = colors.labelColor;
+            chart.options.plugins.tooltip.backgroundColor = colors.tooltipBgColor;
+            chart.options.plugins.tooltip.borderColor = colors.tooltipBorderColor;
+            chart.options.plugins.tooltip.titleColor = colors.tooltipLabelColor;
+            chart.options.plugins.tooltip.bodyColor = colors.tooltipLabelColor;
+            chart.options.backgroundColor = colors.chartBgColor; // Update latar belakang kanvas
 
-                // Update warna segmen
-                chart.data.datasets[0].backgroundColor = isDarkMode ? colors.darkSegmentColors : colors.segmentColors;
+            // Update warna segmen
+            chart.data.datasets[0].backgroundColor = isDarkMode ? colors.darkSegmentColors : colors.segmentColors;
 
-                chart.update(); // Memicu Chart.js untuk menggambar ulang
-            }
+            chart.update(); // Memicu Chart.js untuk menggambar ulang
         });
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        // Pengecekan awal untuk memastikan Chart.js sudah tersedia
-        if (typeof Chart === 'undefined') {
-            console.error('Error: Chart.js library is not loaded. Please ensure it\'s included before this script.');
-            document.querySelectorAll('[id^="chart-"]').forEach(canvas => {
-                const parent = canvas.parentElement;
-                if (parent) {
-                    parent.innerHTML = '<p style="color: red; text-align: center;">Gagal memuat diagram. Pastikan Chart.js sudah di-load.</p>';
-                }
-            });
-            return; // Hentikan eksekusi skrip jika Chart.js belum ada
-        }
-
         @foreach ($kelas as $index => $k)
         var ctx = document.getElementById("chart-{{ $index }}");
 
@@ -559,22 +351,16 @@
             const isDarkModeInitial = document.body.classList.contains('dark-theme');
             const colorsInitial = getChartColors(isDarkModeInitial);
 
-            // Pastikan data persentase adalah angka dan tidak null
-            const akademik = parseFloat("{{ $k->persen_akademik ?? 0 }}");
-            const latarBelakang = parseFloat("{{ $k->persen_latar_belakang ?? 0 }}");
-            const polaBelajar = parseFloat("{{ $k->persen_pola_belajar ?? 0 }}");
-            const perkuliahan = parseFloat("{{ $k->persen_perkuliahan ?? 0 }}");
-
             var chart = new Chart(ctx, {
                 type: 'pie',
                 data: {
                     labels: ["Akademik", "Sekolah", "Ekonomi", "Perkuliahan"],
                     datasets: [{
                         data: [
-                            akademik,
-                            latarBelakang,
-                            polaBelajar,
-                            perkuliahan
+                            {{ $k->persen_akademik ?? 0 }},
+                            {{ $k->persen_latar_belakang ?? 0 }},
+                            {{ $k->persen_pola_belajar ?? 0 }},
+                            {{ $k->persen_perkuliahan ?? 0 }}
                         ],
                         backgroundColor: isDarkModeInitial ? colorsInitial.darkSegmentColors : colorsInitial.segmentColors, // Pilih warna awal berdasarkan tema
                         borderWidth: 0,
@@ -583,15 +369,12 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false, /* PENTING: Ini agar chart menyesuaikan ukuran container */
+                    backgroundColor: colorsInitial.chartBgColor, // Latar belakang kanvas chart awal
                     plugins: {
                         legend: {
                             display: true,
                             labels: {
-                                color: colorsInitial.labelColor,
-                                font: {
-                                    size: 14 // Ukuran font legend
-                                }
+                                color: colorsInitial.labelColor
                             }
                         },
                         tooltip: {
@@ -611,35 +394,12 @@
                     animation: {
                         animateRotate: true,
                         animateScale: true
-                    },
+                    }
                 }
             });
             window.myChartInstances.push(chart); // Simpan instance chart ke array global
-        } else {
-            console.warn('Canvas element with ID "chart-{{ $index }}" not found. Skipping chart initialization for this element.');
-            // Ini bisa ditambahkan jika Anda ingin pesan error visual di UI
-            // const errorParent = document.querySelector(`.col-md-6.mb-4:nth-child({{ $index + 1 }}) .card-diagram .card-body`);
-            // if (errorParent) {
-            //     errorParent.innerHTML = '<p style="color: red; text-align: center;">Diagram tidak dapat dimuat.</p>';
-            // }
         }
         @endforeach
-
-        // Listener untuk perubahan tema. Ini penting jika Anda memiliki toggle tema.
-        const themeToggleButton = document.getElementById('theme-toggle-button'); // Ganti dengan ID tombol tema Anda
-        if (themeToggleButton) {
-            themeToggleButton.addEventListener('click', function() {
-                window.updateAllChartsBasedOnTheme();
-            });
-        }
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.attributeName === 'class' && mutation.target === document.body) {
-                    window.updateAllChartsBasedOnTheme();
-                }
-            });
-        });
-        observer.observe(document.body, { attributes: true });
     });
 </script>
 @endsection

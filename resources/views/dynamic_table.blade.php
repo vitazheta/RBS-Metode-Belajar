@@ -179,7 +179,7 @@
 
 </style>
 
-<div class="container content-wrapper" style="padding-top: 70px;">
+<div class="container content-wrapper" style="padding-top: 100px;">
     <h2 class="mb-2 fw-bold position-relative d-inline-block">
         Data Kelas
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>

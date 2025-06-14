@@ -2,8 +2,8 @@
 
 {{-- Bagian <head> khusus untuk halaman welcome jika diperlukan --}}
 @section('head')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    {{-- Contoh: Jika ada CSS atau meta tag yang hanya spesifik untuk halaman welcome ini --}}
+    {{-- <link rel="stylesheet" href="{{ asset('css/welcome-specific.css') }}"> --}}
 @endsection
 
 {{-- Konten utama halaman welcome --}}
@@ -11,86 +11,45 @@
 
     {{-- KONSOLIDASI SEMUA CSS SPESIFIK HALAMAN WELCOME DI SINI --}}
     <style>
-        /* ==================== GLOBAL FONT AND BASE SETTINGS ==================== */
-        html {
-            font-size: 16px; /* Base font size, 1rem = 16px on desktop */
-        }
-
+        /* ==================== GLOBAL DARK MODE SETTINGS UNTUK BODY ==================== */
         body {
-            font-family: 'Poppins', sans-serif;
             /* background-color: #f8f9fa; */
-            color: #0E1F4D; /* Default light mode text color */
-            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+            /* transition: background-color 0.3s ease; Smooth transition */
         }
 
         body.dark-theme {
-            background-color: #121212; /* Dark mode background */
-            color: #ffffff; /* Dark mode text color */
-        }
-
-        /* Reusable font sizes with REM for better scalability */
-        h1, h2, h3, h4, h5, h6 {
-            color: #0E1F4D;
-        }
-
-        body.dark-theme h1,
-        body.dark-theme h2,
-        body.dark-theme h3,
-        body.dark-theme h4,
-        body.dark-theme h5,
-        body.dark-theme h6 {
-            color: #FFFFFF;
-        }
-
-        /* Global text colors for light/dark mode */
-        .text-primary-color {
-            color: #0E1F4D;
-        }
-
-        .dark-theme .text-primary-color {
-            color: #FFFFFF;
-        }
-
-        .text-muted {
-            color: #0E1F4D !important; /* Override Bootstrap's text-muted */
-        }
-
-        .dark-theme .text-muted {
-            color: #FFFFFF !important;
-        }
-
-        /* ==================== GLOBAL DARK MODE SETTINGS ==================== */
-        body.dark-theme {
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #121212; /* Dark mode background for the entire body */
+            color: #ffffff; /* Default text color for dark mode body */
         }
 
         /* ==================== STYLES DARI WELCOME.BLADE.PHP ASLI (HEADER "Kelebihan EdVise") ==================== */
         header {
+            /* background-color: #ffffff; Default light mode background */
             height: auto;
-            margin-bottom: 2.5rem; /* ~40px */
-            padding-top: 3.125rem; /* ~50px */
+            margin-bottom: 40px;
+            padding-top: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
+
         }
 
         header h2 {
             margin: 0;
-            font-size: 2.5rem; /* ~40px */
+            color: #0E1F4D;
+            font-size: 40px;
             font-weight: bold;
-            line-height: 3.5rem; /* ~56px */
-            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+            line-height: 56px;
         }
 
         header p {
-            font-size: 1.25rem; /* ~20px */
-            font-weight: 500; /* medium */
-            max-width: 50rem; /* ~800px */
-            margin: 1.25rem auto 1.875rem; /* ~20px auto 30px */
-            line-height: 1.75rem; /* ~28px */
-            opacity: 0.9;
+            font-size: 20px;
+            font-weight: medium;
+            max-width: 800px;
+            margin: 20px auto 30px;
+            color: #0E1F4D;
+            line-height: 28px;
         }
 
         .overlay { /* overlay selamat datang */
@@ -111,24 +70,26 @@
 
         /* Dark theme for Header */
         body.dark-theme header {
-            background-color: #121212;
+            background-color: #121212; /* Dark mode background for the header, consistent with body */
+            color: #FFFFFF; /* Ensure all text inside header is white */
+        }
+
+        body.dark-theme header h1 {
             color: #FFFFFF;
         }
 
         body.dark-theme header h2 {
             color: #FFFFFF;
-            text-shadow: none;
         }
 
         body.dark-theme header p {
             color: #FFFFFF;
-            opacity: 1;
         }
 
         /* ==================== STYLES DARI LAYOUTS/BANNER.BLADE.PHP ==================== */
         #banner {
             position: relative;
-            padding-top: 4.375rem; /* ~70px */
+            padding-top: 70px;
         }
 
         .img-banner {
@@ -141,7 +102,7 @@
         }
 
         .text-logo {
-            width: 9.375rem; /* ~150px */
+            width: 150px;
             height: auto;
             box-shadow: none !important;
             display: block;
@@ -170,7 +131,7 @@
             position: relative;
             z-index: 2;
             width: 100%;
-            min-height: calc(100vh - 4.375rem); /* ~70px */
+            min-height: calc(100vh - 70px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -178,7 +139,7 @@
 
         .carousel-overlay .container {
             width: 100%;
-            max-width: 75rem; /* ~1200px */
+            max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
             padding-left: var(--bs-gutter-x, .75rem);
@@ -190,6 +151,9 @@
             width: 100%;
             margin-right: calc(var(--bs-gutter-x) * -.5);
             margin-left: calc(var(--bs-gutter-x) * -.5);
+        }
+
+        .carousel-overlay .col-lg-6 {
         }
 
         .carousel-overlay-color {
@@ -218,20 +182,21 @@
 
         #animatedText {
             font-family: 'Poppins', sans-serif;
-            font-size: 3.125rem; /* ~50px */
+            font-size: 50px;
             font-weight: bold;
-            line-height: 3.75rem; /* ~60px */
+            line-height: 60px;
             color: #0E1F4D;
-            margin-bottom: 0.625rem; /* ~10px */
-            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
         }
 
         .carousel-overlay p.text-muted {
-            font-size: 0.875rem; /* ~14px */
-            line-height: 1.25rem; /* ~20px */
-            margin-top: 0;
-            margin-bottom: 0.9375rem; /* ~15px */
-            max-width: 31.25rem; /* ~500px */
+            font-size: 14px;
+            line-height: 20px;
+            color: #0E1F4D !important;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 0px;
+            margin-bottom: 15px;
+            max-width: 500px;
             margin-left: 0;
             margin-right: auto;
         }
@@ -239,30 +204,27 @@
         .btn-primary {
             background-color: var(--accent-color);
             color: var(--text-color);
-            font-size: 0.875rem; /* ~14px */
-            line-height: 1.25rem; /* ~20px */
+            font-size: 14px;
+            line-height: 20px;
             font-family: 'Poppins', sans-serif;
             border: none;
-            padding: 0.75rem 1.5625rem; /* ~12px 25px */
-            border-radius: 0.625rem; /* ~10px */
-            transition: all 0.3s ease;
-            box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1); /* ~0 4px 6px */
         }
 
         .btn-primary:hover {
             background-color: #E2A6C1;
             color: var(--text-color);
-            transform: translateY(-0.1875rem); /* ~-3px */
-            box-shadow: 0 0.375rem 0.625rem rgba(0, 0, 0, 0.15); /* ~0 6px 10px */
+            font-size: 14px;
+            line-height: 20px;
+            font-family: 'Poppins', sans-serif;
+            border: none;
         }
-
         .btn.mt-3 {
-            margin-top: 0 !important;
+            margin-top: 0px !important;
         }
 
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-1.25rem); /* ~-20px */ }
+            50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
         }
 
@@ -272,16 +234,17 @@
 
         .divider-section {
             background: linear-gradient(135deg, #111F43 0%, #3F5694 30%, #000D30 100%);
+            /* color: #ffffff; */
             font-family: 'Poppins', sans-serif;
-            font-size: 0.875rem; /* ~14px */
+            font-size: 14px;
             line-height: 1.5;
-            letter-spacing: 0.0625rem; /* ~1px */
+            letter-spacing: 1px;
             margin: 0;
-            padding: 3.125rem 0; /* ~50px */
+            padding: 50px 0;
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateY(3.125rem); /* ~50px */
+            transform: translateY(50px);
             transition: all 1s ease-in-out;
         }
 
@@ -293,15 +256,14 @@
         .divider-section h2 {
             margin: 0;
             animation: fadeInUp 2s ease-in;
-            font-size: 1.25rem; /* ~20px */
+            font-size: 20px;
             font-weight: normal;
-            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(1.25rem); /* ~20px */
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -311,7 +273,7 @@
 
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(1.25rem); /* ~20px */
+            transform: translateY(20px);
             transition: all 2.0s ease-in-out;
         }
 
@@ -344,20 +306,23 @@
 
         /* ==================== STYLES DARI LAYOUTS/INFO.BLADE.PHP ==================== */
         .section {
-            padding-top: 0;
-            padding-bottom: 3.125rem; /* ~50px */
+            padding-top: 0px;
+            padding-bottom: 50px;
             text-align: center;
-            max-width: 62.5rem; /* ~1000px */
+            max-width: 1000px;
             margin: 0 auto;
+            /* background-color: #ffffff; */
+
         }
 
-        body.dark-theme .section {
-            background-color: #121212;
+        body.dark-theme .section { /* TAMBAHKAN INI */
+            background-color: #121212; /* Warna latar belakang yang sama dengan header dan body dark mode */
         }
 
         .section h2 {
-            font-size: 2rem; /* ~32px */
-            margin-bottom: 1.25rem; /* ~20px */
+            color: #0E1F4D;
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
 
         body.dark-theme .section h2 {
@@ -365,10 +330,11 @@
         }
 
         .section p {
-            max-width: 50rem; /* ~800px */
-            margin: 0.625rem auto 2.5rem; /* ~10px auto 40px */
+            max-width: 800px;
+            margin: 10px auto 40px;
             line-height: 1.6;
-            font-size: 1rem; /* ~16px */
+            font-size: 1rem;
+            color: #0E1F4D;
         }
 
         body.dark-theme .section p {
@@ -380,55 +346,39 @@
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 3.125rem; /* ~50px */
+            gap: 50px;
         }
 
         .feature-item {
-            flex: 1 1 calc(33.333% - 2.125rem); /* ~34px */
-            max-width: 18.75rem; /* ~300px */
-            min-width: 17.5rem; /* ~280px */
-            padding: 1.875rem 1.25rem; /* ~30px 20px */
+            flex: 1 1 calc(33.333% - 34px);
+            max-width: 300px;
+            min-width: 280px;
+            padding: 10px;
             box-sizing: border-box;
-            background-color: #f0f8ff;
-            border-radius: 0.9375rem; /* ~15px */
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); /* ~0 8px 16px */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border: 0.0625rem solid #e0e0e0; /* ~1px */
-        }
-
-        .feature-item:hover {
-            transform: translateY(-0.625rem); /* ~-10px */
-            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2); /* ~0 12px 24px */
-        }
-
-        .feature-item:hover .icon-circle {
-            transform: scale(1.1);
         }
 
         .icon-circle {
-            width: 5rem; /* ~80px */
-            height: 5rem; /* ~80px */
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(45deg, #0E1F4D, #84A7CF);
+            background-color: #0E1F4D;
             color: white;
-            margin: 0 auto 1.25rem; /* ~20px */
-            font-size: 2rem; /* ~32px */
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* ~0 4px 8px */
-            transition: transform 0.3s ease-in-out;
+            margin: 0 auto 10px;
+            font-size: 28px;
         }
 
         body.dark-theme .feature-item .icon-circle {
-            background: linear-gradient(45deg, #F37AB0, #E2A6C1);
+            background-color: #F37AB0;
             color: #FFFFFF;
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
         }
 
         .feature-item h4 {
-            font-size: 1.375rem; /* ~22px */
-            margin-bottom: 0.625rem; /* ~10px */
+            font-size: 20px;
+            color: #0E1F4D;
+            margin-bottom: 8px;
             font-weight: bold;
         }
 
@@ -436,21 +386,10 @@
             color: #FFFFFF;
         }
 
-        body.dark-theme .feature-item {
-            background-color: #1B1B1B;
-            border: 0.0625rem solid #333; /* ~1px */
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); /* ~0 8px 16px */
-        }
-
-        body.dark-theme .feature-item:hover {
-            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.4); /* ~0 12px 24px */
-        }
-
         .section .features .feature-item p {
-            font-size: 1rem; /* ~16px */
-            line-height: 1.75rem; /* ~28px */
-            max-width: none;
-            margin: 0;
+            font-size: 15px;
+            line-height: 28px;
+            color: #0E1F4D;
         }
 
         body.dark-theme .section .features .feature-item p {
@@ -460,12 +399,12 @@
         /* ==================== STYLES DARI LAYOUTS/ABOUT.BLADE.PHP ==================== */
         .about-section {
             background: linear-gradient(180deg, #111F43, #000D30);
-            padding: 6.25rem 0; /* ~100px */
+            padding: 100px 0;
         }
 
         .about-section .container {
             width: 90%;
-            max-width: 75rem; /* ~1200px */
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -474,15 +413,15 @@
             flex-direction: row;
             flex-wrap: wrap;
             align-items: center;
-            gap: 6.25rem; /* ~100px */
+            gap: 100px;
         }
 
         .about-image img {
-            width: 100%; /* Changed from 400% to prevent overflow */
-            height: auto; /* Changed from 300% for proper scaling */
-            max-width: 28.125rem; /* ~450px */
-            border-radius: 0.75rem; /* ~12px */
-            box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1); /* ~0 4px 10px */
+            width: 400%;
+            height: 300%;
+            max-width: 450px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .about-text {
@@ -493,16 +432,16 @@
         .about-text h1 {
             margin: 0;
             color: #ffffff;
-            font-size: 2.5rem; /* ~40px */
+            font-size: 40px;
             font-weight: bold;
-            line-height: 3.5rem; /* ~56px */
+            line-height: 56px;
         }
 
         .about-text p {
-            font-size: 1.25rem; /* ~20px */
+            font-size: 20px;
             color: #ffffff;
-            line-height: 1.75rem; /* ~28px */
-            margin-top: 1.25rem; /* ~20px */
+            line-height: 28px;
+            margin-top: 20px;
         }
 
         /* Dark Theme for About */
@@ -517,31 +456,32 @@
 
         /* ==================== STYLES DARI LAYOUTS/METODE.BLADE.PHP ==================== */
         .container.metode-section {
-            padding: 2.5rem; /* ~40px */
-            max-width: 75rem; /* ~1200px */
+            padding: 40px;
+            max-width: 1200px;
             margin: auto;
         }
 
         .container.metode-section h2 {
-            margin: 1.25rem; /* ~20px */
-            font-size: 2.5rem; /* ~40px */
+            margin: 20;
+            color: #0E1F4D;
+            font-size: 40px;
             font-weight: bold;
-            line-height: 3.5rem; /* ~56px */
+            line-height: 56px;
         }
 
         .metode-section .section-title {
-            margin-top: 5rem; /* ~80px */
-            margin-bottom: 1.25rem; /* ~20px */
+            margin-top: 80px;
+            margin-bottom: 20px;
             text-align: center;
-            font-size: 3rem; /* ~48px */
+            color: #0E1F4D;
+            font-size: 3em;
         }
-
         .slider-container {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffff;
+            color:#ffff;
         }
 
         .slider-wrapper {
@@ -552,13 +492,13 @@
         .slider {
             display: flex;
             transition: transform 0.6s ease-in-out;
-            padding-bottom: 3.125rem; /* ~50px */
+            padding-bottom: 50px;
         }
 
         .card {
             flex: 0 0 33.3333%;
-            padding: 0.625rem; /* ~10px */
-            margin: 1.875rem auto; /* ~30px */
+            padding: 10px;
+            margin: 30px auto 30px;
             transition: transform 0.3s ease;
             border: none;
         }
@@ -569,26 +509,26 @@
 
         .card-content {
             background: linear-gradient(180deg, #0E1F4D, #000D30);
-            border-radius: 0.625rem; /* ~10px */
-            padding: 1.25rem; /* ~20px */
-            height: 15.625rem; /* ~250px */
+            border-radius: 10px;
+            padding: 20px;
+            height: 250px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
         .card-title {
-            font-size: 1.25rem; /* ~20px */
+            font-size: 20px;
             font-weight: bold;
             color: #ffffff;
-            margin-bottom: 0.5rem; /* ~8px */
-            padding: 0.625rem; /* ~10px */
+            margin-bottom: 8px;
+            padding: 10px;
         }
 
         .card-desc {
-            font-size: 0.875rem; /* ~14px */
+            font-size: 14px;
             color: #ffffff;
-            padding: 0.625rem; /* ~10px */
+            padding: 10px;
         }
 
         .nav-button {
@@ -599,15 +539,10 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 2.5rem; /* ~40px */
-            height: 2.5rem; /* ~40px */
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            display: flex; /* Added for centering icon */
-            align-items: center; /* Added for centering icon */
-            justify-content: center; /* Added for centering icon */
-            font-size: 1.25rem; /* Icon size */
-            display: block;
         }
 
         .nav-button:hover {
@@ -619,11 +554,11 @@
         }
 
         .nav-left {
-            left: -1.25rem; /* ~-20px */
+            left: -20px;
         }
 
         .nav-right {
-            right: -1.25rem; /* ~-20px */
+            right: -20px;
         }
 
         /* Dark Theme for Metode */
@@ -647,130 +582,155 @@
             background-color: #F481B4;
         }
 
-        /* ==================== MEDIA QUERIES FOR RESPONSIVENESS ==================== */
+        /* ==================== MOBILE MEDIA QUERIES UNTUK SEMUA SEKSI ==================== */
 
         /* Untuk Tablet dan Ponsel Besar (di bawah breakpoint Bootstrap lg: 991.98px) */
         @media (max-width: 991.98px) {
-            html {
-                font-size: 15px; /* Adjust base font size for tablets */
-            }
-
             /* GLOBAL SECTION SETTINGS */
             .section, .about-section, .container.metode-section {
-                padding-left: 0.9375rem; /* ~15px */
-                padding-right: 0.9375rem; /* ~15px */
+                padding-left: 15px;
+                padding-right: 15px;
             }
 
             /* Kelebihan EdVise Header */
             header {
-                margin-bottom: 1.25rem; /* ~20px */
-                padding-top: 1.875rem; /* ~30px */
-                padding-left: 0.9375rem; /* ~15px */
-                padding-right: 0.9375rem; /* ~15px */
+                margin-bottom: 20px;
+                padding-top: 30px;
+                padding-left: 15px;
+                padding-right: 15px;
             }
-            header h2 {
-                font-size: 2rem; /* ~32px */
-                line-height: 2.5rem; /* ~40px */
+            header h1 {
+                font-size: 32px;
+                line-height: 40px;
             }
             header p {
-                font-size: 1rem; /* ~16px */
-                line-height: 1.5rem; /* ~24px */
-                margin: 0.9375rem auto 1.5625rem; /* ~15px auto 25px */
+                font-size: 16px;
+                line-height: 24px;
+                margin: 15px auto 25px;
             }
 
-            /* Banner Section */
+            /* Banner Section (re-confirming previous adjustments) */
             .carousel-overlay {
+                position: relative;
+                z-index: 2;
+                width: 100%;
                 min-height: auto;
-                padding-top: 3.125rem; /* ~50px */
-                padding-bottom: 3.125rem; /* ~50px */
+                padding-top: 50px;
+                padding-bottom: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
+
             .carousel-bg {
-                height: auto; /* Disesuaikan untuk mobile agar gambar tidak tersembunyi */
-                min-height: 50vh; /* Minimum tinggi agar gambar tetap terlihat */
+                height: 80vh;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
             }
             #banner {
                 height: auto;
                 min-height: unset;
             }
+
             #animatedText {
-                font-size: 2.25rem; /* ~36px */
-                line-height: 2.8125rem; /* ~45px */
+                font-size: 36px;
+                line-height: 45px;
+                margin-bottom: 10px;
             }
             .carousel-overlay p.text-muted {
-                font-size: 0.875rem; /* ~14px */
-                line-height: 1.375rem; /* ~22px */
-                margin-top: 0.3125rem; /* ~5px */
-                margin-bottom: 0.9375rem; /* ~15px */
-                padding: 0 1.25rem; /* ~20px */
+                font-size: 14px;
+                line-height: 22px;
+                margin-top: 5px;
+                margin-bottom: 15px;
+                padding: 0 20px;
                 margin-left: auto;
                 margin-right: auto;
             }
             .text-logo {
-                width: 6.25rem; /* ~100px */
-                margin-bottom: 0.625rem; /* ~10px */
-                margin-left: auto; /* Pusatkan logo di mobile */
+                width: 100px;
+                display: block;
+                margin-left: auto;
                 margin-right: auto;
+                margin-bottom:10px;
             }
             .img-banner {
                 max-width: 60%;
-                margin-top: 1.25rem; /* ~20px */
-                margin-bottom: 1.25rem; /* ~20px */
-                margin-left: auto; /* Pastikan gambar banner terpusat */
+                display: block;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: auto;
                 margin-right: auto;
             }
-            .carousel-overlay .container,
-            .carousel-overlay .row,
-            .carousel-overlay .col-lg-6 {
+            .btn-primary.mt-3 {
+                margin-top: 15px !important;
+            }
+
+            .carousel-overlay .container {
                 padding-left: 0 !important;
                 padding-right: 0 !important;
                 max-width: 100% !important;
                 width: 100% !important;
                 margin-left: auto !important;
                 margin-right: auto !important;
+            }
+
+            .carousel-overlay .row {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                width: 100% !important;
+                justify-content: center !important;
+            }
+
+            .carousel-overlay .col-lg-6 {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                width: 100% !important;
                 text-align: center !important;
             }
 
             .divider-section h2 {
-                margin: 0 1.25rem; /* ~20px */
-                font-size: 0.9375rem; /* ~15px */
+                margin: 0 20px;
+                animation: fadeInUp 2s ease-in;
+                font-size: 15px;
+                font-weight: normal;
             }
-
             /* Info Section */
             .section {
-                padding-top: 1.875rem; /* ~30px */
-                padding-bottom: 1.875rem; /* ~30px */
+                padding-top: 30px;
+                padding-bottom: 30px;
             }
             .section h2 {
-                font-size: 1.5rem; /* ~24px */
-                margin-bottom: 0.9375rem; /* ~15px */
+                font-size: 24px;
+                margin-bottom: 15px;
             }
             .section p {
-                font-size: 0.875rem; /* ~14px */
-                line-height: 1.375rem; /* ~22px */
-                margin: 0.625rem auto 1.25rem; /* ~10px auto 20px */
+                font-size: 14px;
+                line-height: 22px;
+                margin: 10px auto 20px;
             }
             .features {
                 flex-direction: column;
-                gap: 1.25rem; /* ~20px */
+                gap: 20px;
                 align-items: center;
             }
             .feature-item {
                 width: 90%;
-                max-width: 21.875rem; /* ~350px */
-                padding: 1.875rem 1.25rem; /* ~30px 20px */
+                max-width: 350px;
+                padding: 15px;
                 flex: unset;
             }
             .feature-item h4 {
-                font-size: 1.125rem; /* ~18px */
+                font-size: 18px;
             }
 
             /* About Section */
             .about-section {
-                padding: 3.125rem 0; /* ~50px */
+                padding: 50px 0;
             }
             .about-content {
                 flex-direction: column;
-                gap: 1.875rem; /* ~30px */
+                gap: 30px;
                 text-align: center;
             }
             .about-image {
@@ -780,286 +740,257 @@
                 align-items: center;
             }
             .about-image img {
-                max-width: 18.75rem; /* ~300px */
+                width: 100%;
+                height: auto;
+                max-width: 300px;
                 margin: 0 auto;
             }
             .about-text {
-                padding: 0 0.625rem; /* ~10px */
+                padding: 0 10px;
             }
             .about-text h1 {
-                font-size: 2rem; /* ~32px */
-                line-height: 2.5rem; /* ~40px */
+                font-size: 32px;
+                line-height: 40px;
             }
             .about-text p {
-                font-size: 1rem; /* ~16px */
-                line-height: 1.5rem; /* ~24px */
-                margin-top: 0.9375rem; /* ~15px */
-                margin-bottom: 1.5625rem; /* ~25px */
+                font-size: 16px;
+                line-height: 24px;
+                margin-top: 15px;
+                margin-bottom: 25px;
             }
 
             /* Metode Section */
             .container.metode-section {
-                padding: 1.875rem 0.9375rem; /* ~30px 15px */
+                padding: 30px 15px;
             }
             .container.metode-section h2, .metode-section .section-title {
-                font-size: 1.5rem; /* ~24px */
-                line-height: 2rem; /* ~32px */
-                margin-top: 1.875rem; /* ~30px */
-                margin-bottom: 0.9375rem; /* ~15px */
+                font-size: 24px;
+                line-height: 32px;
+                margin-top: 30px;
+                margin-bottom: 15px;
             }
             .slider {
                 flex-direction: row;
-                padding-bottom: 1.875rem; /* ~30px */
+                padding-bottom: 30px;
                 overflow-x: scroll;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
             }
             .card {
                 flex: 0 0 90%;
-                max-width: 25rem; /* ~400px */
-                margin: 0.9375rem 5%; /* ~15px */
+                max-width: 400px;
+                margin: 15px 5%;
                 padding: 0;
                 scroll-snap-align: center;
             }
             .card-content {
                 height: auto;
-                min-height: 11.25rem; /* ~180px */
-                padding: 0.9375rem; /* ~15px */
+                min-height: 180px;
+                padding: 15px;
             }
             .card-title {
-                font-size: 1.125rem; /* ~18px */
-                margin-bottom: 0.3125rem; /* ~5px */
+                font-size: 18px;
+                margin-bottom: 5px;
             }
             .card-desc {
-                font-size: 0.8125rem; /* ~13px */
-                line-height: 1.125rem; /* ~18px */
+                font-size: 13px;
+                line-height: 18px;
                 padding: 0;
             }
             .nav-button {
-                display: none;
-                /* display: block;
+                display: block;
+                position: absolute;
                 top: 50%;
-                background-color: rgba(243, 122, 176, 0.8); */
+                transform: translateY(-50%);
+                z-index: 10;
+                background-color: rgba(243, 122, 176, 0.8);
             }
             .nav-left {
-                left: 0.3125rem; /* ~5px */
+                left: 5px;
             }
             .nav-right {
-                right: 0.3125rem; /* ~5px */
+                right: 5px;
             }
         }
 
         /* Untuk Ponsel Kecil (di bawah breakpoint Bootstrap sm: 767.98px) */
         @media (max-width: 767.98px) {
-            html {
-                font-size: 14px; /* Adjust base font size for smaller phones */
-            }
-
             /* GLOBAL SECTION SETTINGS */
             .section, .about-section, .container.metode-section {
-                padding-left: 0.625rem; /* ~10px */
-                padding-right: 0.625rem; /* ~10px */
+                padding-left: 10px;
+                padding-right: 10px;
             }
 
             /* Kelebihan EdVise Header */
             header {
-                padding-top: 1.25rem; /* ~20px */
-                margin-bottom: 0.9375rem; /* ~15px */
+                padding-top: 20px;
+                margin-bottom: 15px;
             }
-            header h2 {
-                font-size: 1.75rem; /* ~28px */
-                line-height: 2.1875rem; /* ~35px */
+            header h1 {
+                font-size: 28px;
+                line-height: 35px;
             }
             header p {
-                font-size: 0.875rem; /* ~14px */
-                line-height: 1.25rem; /* ~20px */
-                margin: 0.625rem auto 1.25rem; /* ~10px auto 20px */
+                font-size: 14px;
+                line-height: 20px;
+                margin: 10px auto 20px;
             }
 
             /* Banner Section */
             .carousel-overlay {
                 min-height: auto;
-                padding-top: 2.5rem; /* ~40px */
-                padding-bottom: 2.5rem; /* ~40px */
+                padding-top: 40px;
+                padding-bottom: 40px;
             }
             .carousel-bg {
-                height: auto; /* Disesuaikan untuk mobile agar gambar tidak tersembunyi */
-                min-height: 70vh; /* Minimum tinggi agar gambar tetap terlihat */
+                height: 70vh;
             }
             #animatedText {
-                font-size: 1.75rem; /* ~28px */
-                line-height: 2.1875rem; /* ~35px */
-                padding: 0 1.25rem; /* ~20px */
+                font-size: 28px;
+                line-height: 35px;
+                padding: 0 20px;
             }
             .carousel-overlay p.text-muted {
-                font-size: 0.8125rem; /* ~13px */
-                line-height: 1.25rem; /* ~20px */
-                padding: 0 1.25rem; /* ~20px */
+                font-size: 13px;
+                line-height: 20px;
+                padding: 0 20px;
             }
             .text-logo {
-                width: 5rem; /* ~80px */
-                margin-left: auto; /* Pusatkan logo di mobile */
-                margin-right: auto;
+                width: 80px;
             }
             .img-banner {
                 max-width: 70%;
-                margin-left: auto; /* Pastikan gambar banner terpusat */
-                margin-right: auto;
             }
             .btn-primary.mt-3 {
-                margin-top: 0 !important;
+                margin-top: 0px !important;
             }
+
+            /* --- ATURAN BARU / DIPERKUAT UNTUK PEMUSATAN BANNER DI PONSEL KECIL --- */
+            .carousel-overlay .container,
+            .carousel-overlay .row,
+            .carousel-overlay .col-lg-6 {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                width: 100% !important;
+                text-align: center !important;
+            }
+            /* --- AKHIR ATURAN BARU/DIPERKUAT --- */
+        }
 
             /* Info Section */
             .section h2 {
-                font-size: 1.25rem; /* ~20px */
+                font-size: 20px;
             }
             .section p {
-                font-size: 0.8125rem; /* ~13px */
-                line-height: 1.25rem; /* ~20px */
+                font-size: 13px;
+                line-height: 20px;
             }
             .feature-item {
                 width: 95%;
-                padding: 0;
+                padding: 0px;
             }
             .feature-item h4 {
-                font-size: 1rem; /* ~16px */
+                font-size: 16px;
             }
-            .icon-circle {
-                width: 3.75rem; /* ~60px */
-                height: 3.75rem; /* ~60px */
-                font-size: 1.75rem; /* ~28px */
-                margin: 0 auto 0.9375rem; /* ~15px */
-            }
-
 
             /* About Section */
             .about-section {
-                padding: 2.5rem 0; /* ~40px */
+                padding: 40px 0;
             }
             .about-image img {
-                max-width: 15.625rem; /* ~250px */
+                max-width: 250px;
             }
             .about-text h1 {
-                font-size: 1.75rem; /* ~28px */
-                line-height: 2.1875rem; /* ~35px */
+                font-size: 28px;
+                line-height: 35px;
             }
             .about-text p {
-                font-size: 0.875rem; /* ~14px */
-                line-height: 1.25rem; /* ~20px */
+                font-size: 14px;
+                line-height: 20px;
             }
 
             /* Metode Section */
             .container.metode-section h2, .metode-section .section-title {
-                font-size: 1.25rem; /* ~20px */
-                line-height: 1.75rem; /* ~28px */
-                margin-top: 1.25rem; /* ~20px */
-                margin-bottom: 0.625rem; /* ~10px */
+                font-size: 20px;
+                line-height: 28px;
+                margin-top: 20px;
+                margin-bottom: 10px;
             }
             .card {
                 flex: 0 0 95%;
-                margin: 0.625rem 2.5%; /* ~10px */
+                margin: 10px 2.5%;
                 padding: 0;
             }
             .card-content {
-                min-height: 10rem; /* ~160px */
-                padding: 0.625rem; /* ~10px */
+                min-height: 160px;
+                padding: 10px;
             }
             .card-title {
-                font-size: 1rem; /* ~16px */
+                font-size: 16px;
             }
             .card-desc {
-                font-size: 0.75rem; /* ~12px */
-                line-height: 1rem; /* ~16px */
+                font-size: 12px;
+                line-height: 16px;
                 padding: 0;
             }
             .nav-button {
-                /* width: 2.1875rem;
-                height: 2.1875rem;
-                font-size: 1.125rem; */
-                display: none;
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
             }
-            .nav-left { left: 0; }
-            .nav-right { right: 0; }
+            .nav-left { left: 0px; }
+            .nav-right { right: 0px; }
         }
 
         /* Untuk Ponsel Sangat Kecil (misalnya iPhone 5/SE, dll.) */
         @media (max-width: 575.98px) {
-            html {
-                font-size: 13px; /* Further adjust base font size for very small screens */
-            }
-
             /* GLOBAL SECTION SETTINGS */
             .section, .about-section, .container.metode-section {
-                padding-left: 0.3125rem; /* ~5px */
-                padding-right: 0.3125rem; /* ~5px */
+                padding-left: 5px;
+                padding-right: 5px;
             }
 
             /* Header */
-            header { padding-top: 0.9375rem; /* ~15px */ margin-bottom: 0.625rem; /* ~10px */ }
-            header h2 { font-size: 1.5rem; /* ~24px */ line-height: 1.875rem; /* ~30px */ }
-            header p { font-size: 0.75rem; /* ~12px */ line-height: 1.125rem; /* ~18px */ padding: 0 0.3125rem; /* ~5px */ margin: 0.3125rem auto 0.625rem; /* ~5px auto 10px */ }
-
-            .feature-item {
-                padding: 0.5rem; /* ~8px */
-            }
-            .feature-item h4 {
-                font-size: 0.875rem; /* ~14px */
-                margin-bottom: 0.3125rem; /* ~5px */
-            }
-            .section .features .feature-item p {
-                font-size: 0.6875rem; /* ~11px */
-                line-height: 1rem; /* ~16px */
-                margin-top: 0.125rem; /* ~2px */
-            }
-            .icon-circle {
-                width: 2.8125rem; /* ~45px */
-                height: 2.8125rem; /* ~45px */
-                font-size: 1.125rem; /* ~18px */
-                margin: 0 auto 0.5rem; /* ~8px */
-            }
+            header { padding-top: 15px; margin-bottom: 10px; }
+            header h1 { font-size: 24px; line-height: 30px; }
+            header p { font-size: 12px; line-height: 18px; padding: 0 5px; }
 
             /* Banner Section */
-            #animatedText { font-size: 1.5rem; /* ~24px */ line-height: 1.875rem; /* ~30px */ }
-            .carousel-overlay p.text-muted { font-size: 0.75rem; /* ~12px */ line-height: 1.125rem; /* ~18px */ padding: 0 0.3125rem; /* ~5px */ }
+            #animatedText { font-size: 24px; line-height: 30px; }
+            .carousel-overlay p.text-muted { font-size: 12px; line-height: 18px; padding: 0 5px; }
 
             .btn-primary.mt-3 {
-                margin-top: 0 !important;
+                margin-top: 0px !important;
             }
             .carousel-overlay {
                 min-height: auto;
-                padding-top: 1.875rem; /* ~30px */
-                padding-bottom: 1.875rem; /* ~30px */
+                padding-top: 30px;
+                padding-bottom: 30px;
             }
             .carousel-bg {
-                height: 100%;
+                height:100%;
             }
 
             /* Info Section */
-            .section h2 { font-size: 1.125rem; /* ~18px */ }
-            .section p { font-size: 0.6875rem; /* ~11px */ }
+            .section h2 { font-size: 18px; }
+            .section p { font-size: 11px; }
 
             /* About Section */
-            .about-section { padding: 1.875rem 0; /* ~30px */ }
-            .about-image img {
-                max-width: 12.5rem; /* ~200px */
-            }
-            .about-text h1 { font-size: 1.5rem; /* ~24px */ line-height: 1.875rem; /* ~30px */ }
-            .about-text p { font-size: 0.75rem; /* ~12px */ line-height: 1.125rem; /* ~18px */ }
+            .about-section { padding: 30px 0; }
+            .about-text h1 { font-size: 24px; line-height: 30px; }
+            .about-text p { font-size: 12px; line-height: 18px; }
 
             /* Metode Section */
-            .container.metode-section h2, .metode-section .section-title { font-size: 1.125rem; /* ~18px */ line-height: 1.5rem; /* ~24px */ }
+            .container.metode-section h2, .metode-section .section-title { font-size: 18px; line-height: 24px; }
             .card {
                 flex: 0 0 98%;
-                margin: 0.3125rem 1%; /* ~5px */
+                margin: 5px 1%;
             }
-            .card-content { min-height: 8.75rem; /* ~140px */ }
-            .card-title { font-size: 0.875rem; /* ~14px */ }
-            .card-desc { font-size: 0.6875rem; /* ~11px */ }
-            .nav-button {
-                /* Sembunyikan tombol di layar ponsel sangat kecil */
-                display: none;
-            }
+            .card-content { min-height: 140px; }
+            .card-title { font-size: 14px; }
+            .card-desc { font-size: 11px; }
         }
     </style>
 
@@ -1107,7 +1038,7 @@
     </section>
 
     <header> {{-- Ini adalah header untuk "Kelebihan EdVise" --}}
-        <!-- <div class="overlay"></div> -->
+        <div class="overlay"></div>
         <div class="content">
             <h2>Kelebihan EdVise</h2>
             <p>EdVise membantu dosen memahami kebutuhan belajar mahasiswa dengan cepat dan tepat, sehingga proses mengajar jadi lebih efektif dan terarah.</p>
@@ -1116,20 +1047,20 @@
 
     <section class="section">
         <div class="features">
-            <div class="feature-item animate-on-scroll"> {{-- Tambahkan class animate-on-scroll --}}
-            <div class="icon-circle"><i class="fas fa-lightbulb"></i></div>
+            <div class="feature-item">
+                <div class="icon-circle">💡</div>
                 <h4>Personalisasi</h4>
                 <p>Mendeteksi gaya belajar siswa dan memberikan saran yang sesuai.</p>
             </div>
-            <div class="feature-item animate-on-scroll">
-            <div class="icon-circle"><i class="fas fa-chart-line"></i></div>
+            <div class="feature-item">
+                <div class="icon-circle">📊</div>
                 <h4>Analisis Cerdas</h4>
                 <p>Algoritma pembelajaran untuk hasil rekomendasi yang akurat.</p>
             </div>
-            <div class="feature-item animate-on-scroll">
-            <div class="icon-circle"><i class="fas fa-handshake"></i></div>
+            <div class="feature-item">
+                <div class="icon-circle">🤝</div>
                 <h4>Dukungan Guru</h4>
-                <p>Platform yang mudah digunakan dalam pengajaran.</p>
+                <p>Platform yang mudah digunakan dan terintegrasi dalam pengajaran.</p>
             </div>
         </div>
     </section>
@@ -1176,7 +1107,7 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="card-title">Collaborative Learning</div>
-                            <div class="card-desc">Pembelajaran yang mengutamakan kerja kelompok untuk mengembangkan keterampilan komunikasi, kepemimpinan, serta kemampuan sosial.</div>
+                            <div class="card-desc">Pembelajaran yang mengutamakan kerja kelompok untuk  mengembangkan keterampilan komunikasi, kepemimpinan, serta kemampuan sosial.</div>
                         </div>
                     </div>
                     <div class="card">
@@ -1281,17 +1212,18 @@
         let currentSlide = 0;
         const slider = document.getElementById("slider");
         const totalCards = document.querySelectorAll(".card").length;
-        let currentVisibleCards;
+        const visibleCards = 3; // Default for desktop
+        let currentVisibleCards = visibleCards; // Use a variable to adjust for mobile
 
         // Function to update visibleCards based on screen size
         function updateVisibleCards() {
-            // Updated breakpoints for visible cards
-            if (window.innerWidth <= 991.98) { // For tablets and all phones
+            if (window.innerWidth <= 767.98) { // Small mobile
                 currentVisibleCards = 1;
-            } else { // Desktop
-                currentVisibleCards = 3;
+            } else if (window.innerWidth <= 991.98) { // Tablet and larger mobile
+                currentVisibleCards = 1; // Still 1 for larger mobile view
+            } else {
+                currentVisibleCards = 3; // Desktop
             }
-
             // Recalculate maxSlide based on currentVisibleCards
             const maxSlide = totalCards - currentVisibleCards;
             // Ensure currentSlide doesn't exceed new maxSlide
@@ -1305,31 +1237,26 @@
 
         function scrollSlider(direction) {
             updateVisibleCards(); // Update visible cards before scrolling
+            const maxSlide = totalCards - currentVisibleCards;
 
-            // Only attempt to scroll if on desktop (where buttons are visible)
-            if (currentVisibleCards > 1) { // Only allow scrolling with buttons if more than 1 card is visible (i.e., desktop view)
-                const maxSlide = totalCards - currentVisibleCards;
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide > maxSlide) currentSlide = maxSlide;
 
-                currentSlide += direction;
-                if (currentSlide < 0) currentSlide = 0;
-                if (currentSlide > maxSlide) currentSlide = maxSlide;
-
-                const translateX = -(100 / currentVisibleCards) * currentSlide;
-                if (slider) {
-                    slider.style.transform = `translateX(${translateX}%)`;
-                }
+            const translateX = -(100 / currentVisibleCards) * currentSlide; // Use currentVisibleCards
+            if (slider) {
+                slider.style.transform = `translateX(${translateX}%)`;
             }
-
 
             const navLeftButton = document.querySelector(".nav-left");
             const navRightButton = document.querySelector(".nav-right");
 
-            // Only show buttons if there are more cards than visible cards AND it's a desktop view
+            // Only show buttons if there's more than one visible card or enough cards to scroll
             if (navLeftButton) {
-                navLeftButton.style.display = (totalCards <= currentVisibleCards || currentSlide === 0 || currentVisibleCards === 1) ? "none" : "block";
+                navLeftButton.style.display = (currentVisibleCards >= totalCards || currentSlide === 0) ? "none" : "block";
             }
             if (navRightButton) {
-                navRightButton.style.display = (totalCards <= currentVisibleCards || currentSlide === maxSlide || currentVisibleCards === 1) ? "none" : "block";
+                navRightButton.style.display = (currentVisibleCards >= totalCards || currentSlide === maxSlide) ? "none" : "block";
             }
         }
 
