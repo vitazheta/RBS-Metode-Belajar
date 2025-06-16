@@ -171,30 +171,34 @@
     </div>
 </div>
 
-<div class="container" style="padding-top: 0px;">
+<div class="container" style="padding-top: 50px;">
     <h2 class="mb-2 fw-bold position-relative d-inline-block no-print" style="padding-top: 70px;">
         Hasil Rekomendasi Pembelajaran Kelas 
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
 
     {{-- Informasi Kelas --}}
-    <div class="card mb-2" style="border: none; background: none;">
+    <div style="margin-top: 20px;"></div> <!-- Tambahkan jarak ekstra -->
+    <div class="card mb-3" style="border: none; background: none;">
         <div class="card-first-body ">
             <h5 class="card-title"><strong>📘 Informasi Kelas</strong></h5>
-            <p>Nama Kelas:
-                <span class="badge fs-6" style="background-color: #84A7CF;">{{ $kelas->nama_kelas }}</span>
-            </p>
-            <p>Kode Mata Kuliah:
-                <span class="badge fs-6" style="background-color: #F37AB0;">{{ $kelas->kode_mata_kuliah }}</span>
-            </p>
-            <p>Dosen Pengampu:
-                <span class="badge fs-6" style="background-color: #84A7CF;">{{ auth()->user()->nama }}</span>
-            </p>
-            <div class="text-end mb-1">
-                <button id="exportPDF" class="btn btn-danger no-print">
-                    <i class="bi bi-file-earmark-pdf"></i> Export as PDF
-                </button>
+            <div class="mb-3">
+            <span>Nama Kelas:</span>
+            <span class="badge fs-6 ms-2" style="background-color: #84A7CF;">{{ $kelas->nama_kelas }}</span>
             </div>
+            <div class="mb-3">
+            <span>Kode Mata Kuliah:</span>
+            <span class="badge fs-6 ms-2" style="background-color: #F37AB0;">{{ $kelas->kode_mata_kuliah }}</span>
+            </div>
+            <div class="mb-2">
+            <span>Dosen Pengampu:</span>
+            <span class="badge fs-6 ms-2" style="background-color: #84A7CF;">{{ auth()->user()->nama }}</span>
+            </div>
+<div class="text-end mb-1">
+    <a href="{{ route('hasil-rekomendasi.exportPdf', $kelas->id) }}" target="_blank" class="btn btn-danger no-print">
+        <i class="bi bi-file-earmark-pdf"></i> Export as PDF
+    </a>
+</div>
         </div>
     </div>
 
@@ -259,52 +263,54 @@
         <div class="mt-4 card shadow-sm card-hasil-rekomendasi" style="height:auto; min-height:unset;">
             <div class="card-header text-white bg-custom-header">
             <h5 class="mb-0">
-                <i class="fas fa-graduation-cap me-2"></i> Rekomendasi Pembelajaran untuk Kelas
+                Rekomendasi Pembelajaran untuk Kelas
             </h5>
             </div>
             <div class="card-body">
                 <p>Berdasarkan analisis profil belajar <strong>{{ count($students) }}</strong> mahasiswa di kelas <strong>{{ $kelas->nama_kelas }}</strong> maka dapat diketahui bahwa:</p>
-            <div class="row g-3 align-items-stretch">
+            <div class="row g-3 align-items-stretch" style="margin-top: -18px;">
                 <div class="col-md-4 d-flex">
-                <div class="alert flex-fill h-100" style="background-color: transparent; color: #000; border: 2px solid #0E1F4D;">
-                    <h6 class="mb-1">
-                    <i class="fas fa-chart-bar me-2"></i> <b>Kondisi Dominan Kelas</b>
+                <div class="alert flex-fill" style="background-color: transparent; color: #000; border: 1px solid #0E1F4D;">
+                    <h6 class="mb-3">
+                        <i class="fas fa-chart-bar me-2"></i> <b>Kondisi Dominan Kelas</b>
                     </h6>
                     @if(!empty($KondisiDominan['kondisi']) && $KondisiDominan['kondisi'] != '-')
-                    {!! $KondisiDominan['kondisi'] !!}
+                        {!! $KondisiDominan['kondisi'] !!}
                     @else
-                    <span class="text-dark">Belum ada data kondisi dominan.</span>
+                        <span class="text-dark">Belum ada data kondisi dominan.</span>
                     @endif
                 </div>
                 </div>
                 <div class="col-md-8 d-flex">
-                <div class="alert flex-fill h-100" style="background-color: #0E1F4D; color: #fff; border: 2px solid #0E1F4D;">
-                    <h6 class="mb-1">
+                <div class="alert flex-fill" style="background-color:rgb(201, 239, 241); color: #000;">
+                    <h6 class="mb-3" style="color: #000;">
                     <i class="fas fa-lightbulb me-2"></i> <b>Rekomendasi Utama</b>
                     </h6>
                     @if(!empty($KondisiDominan['rekomendasi']) && $KondisiDominan['rekomendasi'] != '-')
-                    {!! $KondisiDominan['rekomendasi'] !!}
-                    <br>
+                        {!! $KondisiDominan['rekomendasi'] !!}
                     @else
-                    <span class="text-light">Belum ada rekomendasi utama.</span>
+                        <span class="text-dark">Belum ada rekomendasi utama.</span>
                     @endif
                 </div>
                 </div>
             </div>
             {{-- Tambahan: Sorotan per Jalur Masuk --}}
-            <h6 class="card-subtitle mb-10 mt-2" style="margin-top: 20px; margin-bottom: 8px; color: #000; font-weight: bold;">
-                <i class="fas fa-chart-bar me-2"></i> Sorotan Rekomendasi per Jalur Masuk
-            </h6>
-            <div class="row g-3 mt-3">
+            <div class="row g-3 mt-1" style="margin-bottom: 40px !important;"> {{-- Ubah margin-top agar lebih jauh --}}
+                <div class="col-12">
+                    <h6 class="card-subtitle" style="margin-top: -10px; margin-bottom: 12px; color: #000; font-weight: bold;">
+                        <i class="fas fa-chart-bar me-2"></i> Sorotan Rekomendasi per Jalur Masuk
+                    </h6>
+                </div>
+
                 {{-- Sorotan SNBP --}}
-                <div class="col-md-4 d-flex">
+                <div class="col-md-4 d-flex" style="margin-top: 5px; margin-bottom: 5px;">
                     <div class="card flex-fill shadow-sm">
                         <div class="card-header text-white" style="background-color: #27548A;">
                             <i class="fas fa-user-graduate me-2"></i> Sorotan SNBP
                         </div>
                         <div class="card-body">
                             <p class="mb-2">
-                                <span class="badge bg-primary">
+                                <span class="badge" style="background-color: #27548A; color: #fff;">
                                     Jumlah Mahasiswa: {{ $students->where('jalur_masuk', 'SNBP')->count() }}
                                 </span>
                             </p>
@@ -335,14 +341,14 @@
                     </div>
                 </div>
                 {{-- Sorotan SNBT --}}
-                <div class="col-md-4 d-flex">
+                <div class="col-md-4 d-flex" style="margin-top: 5px; margin-bottom: 5px;">
                     <div class="card flex-fill shadow-sm">
                         <div class="card-header text-white" style="background-color: #578FCA;">
                             <i class="fas fa-user-graduate me-2"></i> Sorotan SNBT
                         </div>
                         <div class="card-body">
                             <p class="mb-2">
-                                <span class="badge bg-info text-dark">
+                                <span class="badge" style="background-color: #578FCA; color: #fff;">
                                     Jumlah Mahasiswa: {{ $students->where('jalur_masuk', 'SNBT')->count() }}
                                 </span>
                             </p>
@@ -372,7 +378,7 @@
                     </div>
                 </div>
                 {{-- Sorotan Mandiri --}}
-                <div class="col-md-4 d-flex">
+                <div class="col-md-4 d-flex" style="margin-top: 5px; margin-bottom: 5px;">
                     <div class="card flex-fill shadow-sm">
                         <div class="card-header text-white" style="background-color: #F37AB0;">
                             <i class="fas fa-user-graduate me-2"></i> Sorotan Mandiri
@@ -408,10 +414,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            </div>
-                <div class="d-flex justify-content-center mt-2 mb-2">
+                <div class="d-flex justify-content-center no-print" style="margin-bottom: 20px;">
                     <button id="btnKolaborasi" class="btn btn-kolaborasi" style="font-size: 1rem;">
                         <i class="fas fa-users"></i> Cek Kebutuhan Kolaborasi
                     </button>
@@ -419,20 +423,43 @@
 
                 <div class="row g-3 align-items-stretch mt-2" id="hasilKolaborasi" style="display: none;">
                     <div class="col-md-12 d-flex px-4">
-                        <div class="alert flex-fill h-100" style="background-color: #f8f9fa; color: #0E1F4D; border: 2px solid #0E1F4D; border-radius: 10px; font-size: 1rem;">
+                        <div class="alert flex-fill" style="background-color: #f8f9fa; color: #0E1F4D; border: 2px solid #0E1F4D; border-radius: 10px; font-size: 1rem;">
                             <h5 class="mb-2 fw-bold" style="font-size: 1.25rem;">
-                                <i class="fas fa-users me-2"></i> Hasil Analisis Kebutuhan Kolaborasi Kelas
+                                <i class="fas fa-users me-2"></i> Analisis Kebutuhan Kolaborasi
                             </h5>
-                            @if(!empty($hasilKolaborasi))
-                                <div class="mb-2" style="font-size: 1rem;">
-                                    {!! $hasilKolaborasi !!}
+                            @php
+                                $rekom = strip_tags($KondisiDominan['rekomendasi'] ?? '');
+                            @endphp
+                            @if(stripos($rekom, 'diskusi kelompok aktif') !== false)
+                                <div class="mb-2 mt-3" style="font-size: 1rem;">
+                                    Berdasarkan hasil generate pembelajaran adaptif sesuai dengan karakteristik mahasiswa, kelas <strong>{{ $kelas->nama_kelas }}</strong> memiliki strategi yang mencakup diskusi kelompok aktif. Oleh karena itu, upaya penguatan kolaborasi dapat difokuskan pada peningkatan kualitas interaksi, pertukaran ide, serta kemampuan menyelesaikan masalah secara tim. Berikut beberapa strategi lanjutan yang bisa diterapkan:
                                 </div>
+                                @if(!empty($hasilKolaborasi))
+                                    <div class="mb-2" style="font-size: 1rem;">
+                                        {!! $hasilKolaborasi !!}
+                                    </div>
+                                @endif
                             @else
-                                <span class="text-muted" style="font-size: 1rem;">Belum ada data hasil kolaborasi.</span>
+                                <div class="mb-2" style="font-size: 1rem;">
+                                    Berdasarkan hasil generate pembelajaran adaptif, dapat diketahui bahwa kelas <strong>{{ $kelas->nama_kelas }}</strong> belum mencakup diskusi kelompok aktif dalam strategi yang diterapkan. Untuk itu, diperlukan langkah tambahan yang bertujuan membangun keterampilan kolaboratif mahasiswa secara bertahap dan kontekstual. Berikut adalah strategi yang dapat diterapkan untuk membentuk kemampuan kolaborasi yang lebih baik:
+                                </div>
+                                @if(!empty($hasilKolaborasi))
+                                    <div class="mb-2" style="font-size: 1rem;">
+                                        {!! $hasilKolaborasi !!}
+                                    </div>
+                                @endif
                             @endif
                         </div>
                     </div>
                 </div>
+
+
+            </div>
+
+            </div>
+
+
+                
             </div>
 
             

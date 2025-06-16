@@ -131,12 +131,14 @@ Route::middleware(['auth:dosen'])->group(function () {
 // Route POST yang tidak dalam middleware 'auth:dosen' jika memang untuk publik
 Route::post('/import-csv', [DataMahasiswaController::class, 'import'])->name('import.csv'); // Ini juga muncul di dalam middleware group di atas, duplikasi!
 
+Route::get('/hasil-rekomendasi/{id}/export-pdf', [HasilRekomendasiController::class, 'exportPdf'])->name('hasil-rekomendasi.exportPdf');
+
+
 
 // REKOMENDASI PENTING UNTUK MENGHINDARI DUPLIKASI DAN KONFLIK RUTE DI MASA DEPAN:
 // Satukan semua rute yang terkait ke dalam satu group middleware jika aksesnya sama.
 // Hapus semua definisi rute yang duplikat.
 // Contoh struktur yang lebih bersih:
-
 /*
 Route::middleware(['auth:dosen'])->group(function () {
     // Dashboard
