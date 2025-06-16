@@ -1091,7 +1091,7 @@
                     <div class="col-lg-6 text-center text-lg-start">
                         <img id="eivLogoBanner" src="{{ asset('images/textlogo-navy.png') }}" alt="Gambar Baru" class="img-fluid text-logo">
                         <h1 id="animatedText" class="fw-bold"></h1>
-                        <p class="text-muted">Sistem kami membantu mahasiswa menemukan gaya belajar terbaik berdasarkan analisis data.</p>
+                        <p class="text-muted">Sistem kami membantu dosen menemukan gaya belajar terbaik untuk mahasiswa berdasarkan analisis data.</p>
                         <a href="{{ route('pelajari') }}" class="btn btn-primary mt-3">Pelajari Lebih Lanjut</a>
                     </div>
                     <div class="col-lg-6 text-center">
@@ -1103,7 +1103,7 @@
     </section>
 
     <section id="divider" class="divider-section text-center py-5">
-        <h2 class="text-white">"Optimalkan Gaya Belajar Mahasiswa dengan Teknologi Modern"</h2>
+        <h2 class="text-white">"Optimalkan Pembelajaran Mahasiswa dengan Teknologi Modern"</h2>
     </section>
 
     <header> {{-- Ini adalah header untuk "Kelebihan EdVise" --}}
@@ -1119,7 +1119,7 @@
             <div class="feature-item animate-on-scroll"> {{-- Tambahkan class animate-on-scroll --}}
             <div class="icon-circle"><i class="fas fa-lightbulb"></i></div>
                 <h4>Personalisasi</h4>
-                <p>Mendeteksi gaya belajar siswa dan memberikan saran yang sesuai.</p>
+                <p>Mendeteksi pembelajaran mahasiswa dan memberikan saran yang sesuai.</p>
             </div>
             <div class="feature-item animate-on-scroll">
             <div class="icon-circle"><i class="fas fa-chart-line"></i></div>
@@ -1128,7 +1128,7 @@
             </div>
             <div class="feature-item animate-on-scroll">
             <div class="icon-circle"><i class="fas fa-handshake"></i></div>
-                <h4>Dukungan Guru</h4>
+                <h4>Dukungan Dosen</h4>
                 <p>Platform yang mudah digunakan dalam pengajaran.</p>
             </div>
         </div>
@@ -1142,7 +1142,7 @@
                 </div>
                 <div class="about-text">
                     <h1>Tentang Kami</h1>
-                    <p>EdVise adalah platform pembelajaran cerdas yang membantu pendidik memahami gaya belajar siswa secara personal. Kami menggabungkan data, teknologi, dan insight pendidikan untuk memberikan rekomendasi pengajaran yang tepat sasaran.</p>
+                    <p>EdVise adalah platform pembelajaran cerdas yang membantu pendidik memahami pembelajaran mahasiswa secara personal. Kami menggabungkan data, teknologi, dan insight pendidikan untuk memberikan rekomendasi pengajaran yang tepat sasaran.</p>
                     <a href="{{ route('pelajari') }}" class="btn btn-primary mt-3">Pelajari Lebih Lanjut</a>
                 </div>
             </div>
@@ -1150,45 +1150,32 @@
     </section>
 
     <div class="container metode-section">
-        <h2 class="section-title">Macam-Macam Metode Pembelajaran</h2>
+        <h2 class="section-title">Collaborative Peroamnce Skills</h2>
         <div class="slider-container">
             <div class="slider-wrapper">
                 <div class="slider" id="slider">
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-title">Problem Based Learning</div>
-                            <div class="card-desc"> Pendekatan pembelajaran yang fokus pada penyelesaian masalah autentik kompleks
-                                untuk mengembangkan berpikir kritis, analisis, dan pemecahan masalah secara mendalam. </div>
+                            <div class="card-title">Sharing Ideas</div>
+                            <div class="card-desc"> Kemampuan untuk mengemukakan pendapat, gagasan, atau solusi kepada anggota tim secara terbuka dan jelas. Skill ini mencerminkan keberanian dalam berkontribusi dan membantu memperkaya diskusi kelompok dengan berbagai sudut pandang. </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-title">Project Based Learning</div>
-                            <div class="card-desc">Pembelajaran berbasis proyek nyata yang memperkuat pemahaman konsep sekaligus melatih kerja tim, perencanaan, manajemen waktu, dan kreativitas.</div>
+                            <div class="card-title">Negotiating Ideas</div>
+                            <div class="card-desc">Keterampilan dalam mendiskusikan dan menyesuaikan berbagai ide yang muncul untuk mencapai kesepakatan bersama. Ini melibatkan kemampuan berargumen secara logis, mendengarkan pendapat orang lain, dan mencari jalan tengah demi tujuan tim.</div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-title">Case-Based Learning</div>
-                            <div class="card-desc">Pembelajaran berbasis kasus menggunakan situasi nyata atau simulasi yang dianalisis secara mendalam untuk melatih berpikir analitis dan pengambilan keputusan.</div>
+                            <div class="card-title">Maintaining Communication</div>
+                            <div class="card-desc">Kemampuan menjaga komunikasi tetap terbuka, jelas, dan terarah selama proses kolaborasi. Ini mencakup mendengarkan secara aktif, memberi umpan balik yang konstruktif, serta menjaga suasana diskusi agar tetap positif dan produktif.</div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-content">
-                            <div class="card-title">Collaborative Learning</div>
-                            <div class="card-desc">Pembelajaran yang mengutamakan kerja kelompok untuk mengembangkan keterampilan komunikasi, kepemimpinan, serta kemampuan sosial.</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-title">Flipped Classroom</div>
-                            <div class="card-desc">Metode yang mengharuskan belajar mandiri sebelum kelas, sehingga waktu tatap muka digunakan untuk diskusi, praktik, dan tugas bersama.</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-title">Experiential Learning</div>
-                            <div class="card-desc">Pembelajaran berbasis pengalaman langsung melalui praktik, simulasi, atau magang untuk mengembangkan kompetensi teknis dan sikap profesional.</div>
+                            <div class="card-title">Regulating Problem Solving</div>
+                            <div class="card-desc">Keterampilan mengatur proses pemecahan masalah secara bersama-sama, termasuk membagi tugas, memantau kemajuan, dan menyesuaikan strategi saat menghadapi hambatan. Ini menunjukkan kemampuan tim dalam bekerja secara terorganisir dan adaptif.</div>
                         </div>
                     </div>
                 </div>

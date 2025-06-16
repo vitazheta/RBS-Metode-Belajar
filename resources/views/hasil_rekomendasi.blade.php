@@ -136,7 +136,7 @@
         .analisis-kebutuhan {
             background-color: #f8f9fa;
             color: #0E1F4D;
-            margin: 50px;
+            margin-left: 20px;
             border-radius: 5px;
             padding: 24px 24px !important;
         }
