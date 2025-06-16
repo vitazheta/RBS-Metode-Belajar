@@ -91,11 +91,49 @@
             border-color: #6C757D;
             color: #000000;
         }
-        .text-center-table {
+        .text-center-table-header {
             background-color: #0E1F4D;
             color: #ffffff;
             text-align: center;
         }
+
+        .highlight-card {
+            background-color: #f8f9fa;
+            border-left: 6px solid;
+            padding: 20px;
+            border-radius: 12px;
+            width: 100%;
+        }
+
+        .border-snbp {
+            border-left-color: #0E1F4D !important;
+        }
+
+        .border-snbt {
+            border-left-color: #27548A !important;
+        }
+
+        .border-mandiri {
+            border-left-color: #578FCA !important;
+        }
+
+        .border-kondisi {
+            border-left-color: #F481B4 !important;
+        }
+
+        btn .btn-kolaborasi {
+            background-color: #0E1F4D;
+            color:rgb(63, 71, 224);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        btn .btn-kolaborasi:hover {
+            background-color: #162449;
+            color: #ffffff;
+        }
+
         /* Dark Theme */
         body.dark-theme {
             background-color: #1B1B1B;
@@ -139,17 +177,29 @@
             color: #ffffff;
             margin-bottom: 10px;
         }
-        btn .btn-kolaborasi {
-            background-color: #0E1F4D;
-            color:rgb(63, 71, 224);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        btn .btn-kolaborasi:hover {
-            background-color: #162449;
+
+        body.dark-theme .highlight-card {
+            background-color: #373737;
             color: #ffffff;
+        }
+        
+        body.dark-theme .card-body-highlight {
+            background-color: #373737;
+            color: #ffffff;
+        }
+
+        body.dark-theme .card-subtitle {
+            color: #ffffff !important;
+        }
+
+        body.dark-theme #btnKolaborasi .kolaborasi-text,
+        body.dark-theme #btnKolaborasi .kolaborasi-icon {
+            color: #FFFFFF !important;
+        }
+
+        body.dark-theme #btnKolaborasi:hover .kolaborasi-text,
+        body.dark-theme #btnKolaborasi:hover .kolaborasi-icon {
+            color: #777F95 !important;
         }
     </style>
 </head>
@@ -204,10 +254,10 @@
 
     {{-- Chart --}}
     <div class="card shadow-sm mb-4" style="border: none;">
-        <div class="card-header text-white" style="background-color: #0E1F4D; border: 0px;">
+        <div class="card-header text-white" style="background-color: #0E1F4D; border: 0px; padding: 16px 24px;">
             <h5 class="mb-0">Distribusi Diagram Strategi Belajar</h5>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="padding: 16px 24px;">
             <div class="row">
                 <div class="col-md-4">
                     <canvas id="chartSNBP"></canvas>
@@ -224,9 +274,12 @@
 
     {{-- Tabel Mahasiswa --}}
     <div class="container-rekomendasi">
+        <div class="card-header text-white" style="background-color: #0E1F4D; border-radius: 5px 5px 0px 0px; padding: 16px 24px;">
+            <h5 class="mb-0">Data Kelas</h5>
+        </div>
         <div class="table-responsive rounded shadow-sm">
             <table class="table table-bordered table-striped align-middle">
-                <thead class="text-center-table">
+                <thead class="text-center-table-header">
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
@@ -260,19 +313,19 @@
         </div>
 
         {{-- Rekomendasi Utama --}}
-        <div class="mt-4 card shadow-sm card-hasil-rekomendasi" style="height:auto; min-height:unset;">
-            <div class="card-header text-white bg-custom-header">
+        <div class="mt-4 card shadow-sm card-hasil-rekomendasi" style="height:auto; min-height:unset; border: none;">
+            <div class="card-header text-white bg-custom-header" style="padding: 16px 24px;">
             <h5 class="mb-0">
                 Rekomendasi Pembelajaran untuk Kelas
             </h5>
             </div>
-            <div class="card-body">
+            <div class="card-body px-4" style="padding-left: 24px; padding-right: 24px; padding-top: 24px">
                 <p>Berdasarkan analisis profil belajar <strong>{{ count($students) }}</strong> mahasiswa di kelas <strong>{{ $kelas->nama_kelas }}</strong> maka dapat diketahui bahwa:</p>
             <div class="row g-3 align-items-stretch" style="margin-top: -18px;">
                 <div class="col-md-4 d-flex">
-                <div class="alert flex-fill" style="background-color: transparent; color: #000; border: 1px solid #0E1F4D;">
+                <div class="highlight-card border-4 border-kondisi">
                     <h6 class="mb-3">
-                        <i class="fas fa-chart-bar me-2"></i> <b>Kondisi Dominan Kelas</b>
+                        <i class="fas fa-chart-bar me-2" style="color: #F481B4;"></i> <b>Kondisi Dominan Kelas</b>
                     </h6>
                     @if(!empty($KondisiDominan['kondisi']) && $KondisiDominan['kondisi'] != '-')
                         {!! $KondisiDominan['kondisi'] !!}
@@ -282,7 +335,7 @@
                 </div>
                 </div>
                 <div class="col-md-8 d-flex">
-                <div class="alert flex-fill" style="background-color:rgb(201, 239, 241); color: #000;">
+                <div class="alert flex-fill" style="background-color: #D4EBF8; color: #000; margin-bottom: 0;">
                     <h6 class="mb-3" style="color: #000;">
                     <i class="fas fa-lightbulb me-2"></i> <b>Rekomendasi Utama</b>
                     </h6>
@@ -295,7 +348,7 @@
                 </div>
             </div>
             {{-- Tambahan: Sorotan per Jalur Masuk --}}
-            <div class="row g-3 mt-1" style="margin-bottom: 40px !important;"> {{-- Ubah margin-top agar lebih jauh --}}
+            <div class="row g-3 mt-1" style="margin: 40px 0px !important;"> {{-- Ubah margin-top agar lebih jauh --}}
                 <div class="col-12">
                     <h6 class="card-subtitle" style="margin-top: -10px; margin-bottom: 12px; color: #000; font-weight: bold;">
                         <i class="fas fa-chart-bar me-2"></i> Sorotan Rekomendasi per Jalur Masuk
@@ -304,13 +357,11 @@
 
                 {{-- Sorotan SNBP --}}
                 <div class="col-md-4 d-flex" style="margin-top: 5px; margin-bottom: 5px;">
-                    <div class="card flex-fill shadow-sm">
-                        <div class="card-header text-white" style="background-color: #27548A;">
-                            <i class="fas fa-user-graduate me-2"></i> Sorotan SNBP
-                        </div>
-                        <div class="card-body">
+                    <div class="highlight-card border-4 border-snbp">
+                        <div class="card-body-highlight">
+                            <div class="fw-semibold mb-3"><i class="bi bi-person-badge-fill" style="color: #0E1F4D;"></i> Sorotan SNBP</div>
                             <p class="mb-2">
-                                <span class="badge" style="background-color: #27548A; color: #fff;">
+                                <span class="badge" style="background-color: #0E1F4D; color: #fff;">
                                     Jumlah Mahasiswa: {{ $students->where('jalur_masuk', 'SNBP')->count() }}
                                 </span>
                             </p>
@@ -342,13 +393,11 @@
                 </div>
                 {{-- Sorotan SNBT --}}
                 <div class="col-md-4 d-flex" style="margin-top: 5px; margin-bottom: 5px;">
-                    <div class="card flex-fill shadow-sm">
-                        <div class="card-header text-white" style="background-color: #578FCA;">
-                            <i class="fas fa-user-graduate me-2"></i> Sorotan SNBT
-                        </div>
-                        <div class="card-body">
+                    <div class="highlight-card border-4 border-snbt">
+                        <div class="card-body-highlight">
+                            <div class="fw-semibold mb-3"><i class="bi bi-person-badge-fill" style="color: #27548A;"></i> Sorotan SNBT</div></span>
                             <p class="mb-2">
-                                <span class="badge" style="background-color: #578FCA; color: #fff;">
+                                <span class="badge" style="background-color: #27548A; color: #fff;">
                                     Jumlah Mahasiswa: {{ $students->where('jalur_masuk', 'SNBT')->count() }}
                                 </span>
                             </p>
@@ -379,13 +428,11 @@
                 </div>
                 {{-- Sorotan Mandiri --}}
                 <div class="col-md-4 d-flex" style="margin-top: 5px; margin-bottom: 5px;">
-                    <div class="card flex-fill shadow-sm">
-                        <div class="card-header text-white" style="background-color: #F37AB0;">
-                            <i class="fas fa-user-graduate me-2"></i> Sorotan Mandiri
-                        </div>
-                        <div class="card-body">
+                    <div class="highlight-card border-4 border-mandiri">
+                        <div class="card-body-highlight">
+                            <div class="fw-semibold mb-3"><i class="bi bi-person-badge-fill" style="color: #578FCA;"></i> Sorotan MANDIRI</div>
                             <p class="mb-2">
-                                <span class="badge" style="background-color: #F37AB0; color: #fff;">
+                                <span class="badge" style="background-color: #578FCA; color: #fff;">
                                     Jumlah Mahasiswa: {{ $students->where('jalur_masuk', 'MANDIRI')->count() }}
                                 </span>
                             </p>
@@ -416,14 +463,29 @@
                 </div>
 
                 <div class="d-flex justify-content-center no-print" style="margin-bottom: 20px;">
-                    <button id="btnKolaborasi" class="btn btn-kolaborasi" style="font-size: 1rem;">
-                        <i class="fas fa-users"></i> Cek Kebutuhan Kolaborasi
+                    <button id="btnKolaborasi" class="btn btn-kolaborasi" style="font-size: 1rem; border: none;">
+                        <i class="fas fa-users kolaborasi-icon"></i> 
+                        <span class="kolaborasi-text">Cek Kebutuhan Kolaborasi</span>
                     </button>
                 </div>
+                <style>
+                    #btnKolaborasi .kolaborasi-text,
+                    #btnKolaborasi .kolaborasi-icon {
+                        transition: color 0.2s;
+                    }
+                    #btnKolaborasi:hover .kolaborasi-text,
+                    #btnKolaborasi:hover .kolaborasi-icon {
+                        color: #6C757D !important;
+                    }
+                    #btnKolaborasi:hover {
+                        border: none !important;
+                    }
 
-                <div class="row g-3 align-items-stretch mt-2" id="hasilKolaborasi" style="display: none;">
+                </style>
+
+                <div class="row g-3 align-items-stretch mt-2 shadow-sm" id="hasilKolaborasi" style="display: none; background-color: #f8f9fa;  ">
                     <div class="col-md-12 d-flex px-4">
-                        <div class="alert flex-fill" style="background-color: #f8f9fa; color: #0E1F4D; border: 2px solid #0E1F4D; border-radius: 10px; font-size: 1rem;">
+                        <div class="alert flex-fill" style="background-color: #f8f9fa; color: #0E1F4D; border-radius: 10px; font-size: 1rem;">
                             <h5 class="mb-2 fw-bold" style="font-size: 1.25rem;">
                                 <i class="fas fa-users me-2"></i> Analisis Kebutuhan Kolaborasi
                             </h5>
