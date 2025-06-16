@@ -131,7 +131,14 @@
         }
         btn .btn-kolaborasi:hover {
             background-color: #162449;
-            color: #ffffff;
+            c
+        }
+        .analisis-kebutuhan {
+            background-color: #f8f9fa;
+            color: #0E1F4D;
+            margin: 50px;
+            border-radius: 5px;
+            padding: 24px 24px !important;
         }
 
         /* Dark Theme */
@@ -201,6 +208,16 @@
         body.dark-theme #btnKolaborasi:hover .kolaborasi-icon {
             color: #777F95 !important;
         }
+
+        body.dark-theme .analisis-kebutuhan {
+            background-color: #373737; 
+            color: #FFFFFF;
+        }
+
+        body.dark-theme .analisis-kebutuhan3 {
+            color: #FFFFFF;
+        }
+
     </style>
 </head>
 
@@ -483,9 +500,7 @@
 
                 </style>
 
-                <div class="row g-3 align-items-stretch mt-2 shadow-sm" id="hasilKolaborasi" style="display: none; background-color: #f8f9fa;  ">
-                    <div class="col-md-12 d-flex px-4">
-                        <div class="alert flex-fill" style="background-color: #f8f9fa; color: #0E1F4D; border-radius: 10px; font-size: 1rem;">
+                <div class="analisis-kebutuhan row g-1 align-items-stretch shadow-sm" id="hasilKolaborasi">
                             <h5 class="mb-2 fw-bold" style="font-size: 1.25rem;">
                                 <i class="fas fa-users me-2"></i> Analisis Kebutuhan Kolaborasi
                             </h5>
