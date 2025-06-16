@@ -1,20 +1,192 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="card" style="
-    position: relative;
-    z-index: 10;
-    width: 800px;
-    border: none; /* Menghilangkan border */
-    border-radius: 30px;
-    overflow: visible;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow halus */">
+
+<style>
+    /*
+    PENTING:
+    - Semua CSS GLOBAL (seperti untuk html, body, dan semua aturan body.dark-theme)
+      serta CSS untuk NAVBAR dan FOOTER harus berada di app.blade.php.
+    - DI SINI HANYA ADA CSS YANG SPESIFIK UNTUK ELEMEN-ELEMEN DI HALAMAN FORGOT PASSWORD INI.
+    */
+
+    /* Default body styles (should ideally be in app.blade.php) */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #EBEDF4; /* Light mode default */
+    }
+
+    /* DARK MODE for body (must be defined in app.blade.php) */
+    body.dark-theme {
+        background-color: #1A1A1A; /* Example dark background */
+    }
+
+    /* Add padding to the container to prevent collision with the navbar */
+    .container.auth-container {
+        padding-top: 80px; /* Adjust this value based on your navbar's height */
+        padding-bottom: 20px; /* Add some padding at the bottom as well */
+        min-height: 100vh;
+        display: flex; /* Ensure flex properties are applied */
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* General card styling for auth pages */
+    .card-auth {
+        position: relative;
+        z-index: 10;
+        width: 800px;
+        border: none;
+        border-radius: 30px;
+        overflow: hidden; /* Changed from visible to hidden for perfect border-radius */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .forgot-form-section { /* Class for the forgot password form part (left side in desktop) */
+        background-color: #FFFFFF; /* Default light mode background */
+        border-radius: 20px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Keep shadow for this section if needed */
+    }
+
+    .info-forgot-section { /* Class for the info/welcome part (right side in desktop) */
+        background-color: #0E1F4D; /* Default light mode background */
+        border-radius: 20px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Keep shadow for this section if needed */
+        color: #FFFFFF; /* Default light mode text color for this section */
+    }
+
+    /* Perbaikan: Atur warna teks deskripsi di bagian kanan secara spesifik (forgot) */
+    .info-forgot-section p {
+        color: rgba(255, 255, 255, 0.8); /* Agak transparan tapi masih putih di light mode */
+        margin-bottom: 25px; /* Tambah sedikit margin bawah */
+        font-size: 0.95rem; /* Sedikit lebih kecil untuk deskripsi */
+    }
+
+    /* Alert styles (ensure they work in both themes) */
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border-color: #c3e6cb;
+    }
+    body.dark-theme .alert-success {
+        background-color: #38674b !important;
+        color: #c3e6cb !important;
+        border-color: #28a745 !important;
+    }
+
+    /* DARK THEME STYLES (KHUSUS UNTUK HALAMAN FORGOT PASSWORD INI) */
+    body.dark-theme .card-auth {
+        /* Adjust shadow or border in dark mode if needed */
+    }
+
+    /* Dark theme for the form section (left side) */
+    body.dark-theme .forgot-form-section {
+        background-color: #2D2D2D !important; /* Form background in dark mode */
+        color: #E0E0E0; /* Text color in form in dark mode */
+    }
+    body.dark-theme .forgot-form-section h2,
+    body.dark-theme .forgot-form-section p,
+    body.dark-theme .forgot-form-section .invalid-feedback {
+        color: #E0E0E0 !important; /* Ensure text in form is visible in dark mode */
+    }
+    body.dark-theme .forgot-form-section .form-control {
+        background-color: #3A3A3A; /* Input field background in dark mode */
+        border-color: #555555; /* Input field border in dark mode */
+        color: #E0E0E0; /* Input text color in dark mode */
+    }
+    body.dark-theme .forgot-form-section .form-control::placeholder {
+        color: #A0A0A0; /* Placeholder color in dark mode */
+    }
+    body.dark-theme .forgot-form-section .btn {
+        background-color: #162449 !important; /* Send link button in dark mode (adjust if different) */
+        color: #FFFFFF !important;
+    }
+    body.dark-theme .forgot-form-section .btn:hover {
+        background-color: #0E1F4D !important; /* Hover state for Send link button */
+    }
+
+    /* Dark theme for the info/welcome section (right side) */
+    body.dark-theme .info-forgot-section {
+        background-color: #162449 !important; /* Dark mode background */
+        color: #FFFFFF !important; /* Main text color */
+    }
+    /* Kunci perbaikan: Warna teks deskripsi di bagian kanan untuk dark mode */
+    body.dark-theme .info-forgot-section p {
+        color: #CFD3D6 !important; /* Lighter color for visibility in dark mode */
+    }
+    body.dark-theme .info-forgot-section .btn-outline-light {
+        color: #FFFFFF !important;
+        border-color: #FFFFFF !important;
+    }
+    body.dark-theme .info-forgot-section .btn-outline-light:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: #FFFFFF !important;
+    }
+
+
+    /* --- RESPONSIVE STYLES --- */
+    @media (max-width: 767.98px) {
+        .container.auth-container {
+            padding: 20px 15px; /* Add vertical and horizontal padding on mobile */
+            padding-top: 80px; /* Ensure padding-top is still applied on mobile */
+        }
+        .card-auth {
+            width: 100% !important; /* Take full width */
+            border-radius: 15px !important; /* Reduce overall border-radius */
+            flex-direction: column; /* Stack sections top-bottom */
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Smaller shadow */
+        }
+        .forgot-form-section,
+        .info-forgot-section {
+            width: 100% !important;
+            border-radius: 15px !important; /* Rounded corners on all sides */
+            padding: 30px 20px !important; /* Adjust padding */
+        }
+        /* Special handling for stacked sections */
+        .forgot-form-section {
+            border-bottom-left-radius: 0px !important; /* To make it seamlessly stack with the bottom part */
+            border-bottom-right-radius: 0px !important;
+        }
+        .info-forgot-section {
+            border-top-left-radius: 0px !important; /* To make it seamlessly stack with the top part */
+            border-top-right-radius: 0px !important;
+            margin-top: -1px; /* To prevent a 1px gap due to border-radius */
+        }
+
+        .forgot-form-section h2,
+        .info-forgot-section h2 {
+            font-size: 1.8rem; /* Smaller heading */
+            margin-bottom: 10px; /* Reduce bottom margin */
+        }
+        .forgot-form-section p,
+        .info-forgot-section p {
+            font-size: 0.85rem; /* Smaller description */
+            margin-bottom: 20px; /* Adjust bottom margin */
+        }
+        .forgot-form-section .mb-3 {
+            margin-bottom: 15px !important; /* Reduce margin between form fields */
+        }
+        .forgot-form-section .btn {
+            font-size: 0.9rem; /* Smaller button size */
+            padding: 8px 15px !important;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        .card-auth {
+            width: 90% !important;
+        }
+    }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center auth-container"> {{-- Add auth-container class for padding --}}
+    <div class="card card-auth"> {{-- Use .card-auth class --}}
         <div class="row g-0">
-            <div class="col-md-6 bg-white p-5" style="
-            border-radius: 20px;
-            border-top-right-radius: 0px;
-            border-bottom-right-radius: 0px;">
+            <div class="col-md-6 p-5 forgot-form-section"> {{-- Add forgot-form-section --}}
                 <h2 class="fw-bold text-center">Lupa Kata Sandi</h2>
                 <p class="text-center">Masukkan email Anda untuk menerima link reset</p>
 
@@ -35,23 +207,14 @@
                         @enderror
                     </div>
                     <div class="text-center mt-3">
-                        <button type="submit" class="btn text-white w-100 rounded-pill py-2"
-                                style="background-color: #0E1F4D; transition: all 0.3s ease;"
-                                onmouseover="this.style.backgroundColor='#70788F';"
-                                onmouseout="this.style.backgroundColor='#0E1F4D';">
+                        <button type="submit" class="btn text-white w-100 rounded-pill py-2">
                                 {{ __('Send Password Reset Link') }}
                         </button>
                     </div>
                 </form>
             </div>
 
-            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white text-center p-5"
-            style="
-            background-color: #0E1F4D;
-            border-radius: 20px;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center p-5 info-forgot-section"> {{-- Add info-forgot-section and remove text-white --}}
                 <h2 class="fw-bold">
                 <span style="color: white;">Halo,</span>
                 <span style="color: #F37AB0;">Dosen!</span>
