@@ -1,214 +1,266 @@
+<head>
+<link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
+
+    <title>Tambah Kelas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
+
+    <style>
+        /* Hapus definisi body di sini karena sudah di app.blade.php */
+        /* body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #EBEDF4;
+        } */
+    </style>
+</head>
+
 @extends('layouts.app')
 
 @section('content')
-{{-- Ini adalah blok <style> KHUSUS untuk halaman dynamic_table.blade.php --}}
-{{-- Jangan meletakkan CSS GLOBAL (html, body, navbar, footer) di sini karena sudah di app.blade.php --}}
 <style>
-    /* CSS Umum Halaman Ini (Light Mode Default) */
-    .container h2 {
-        color: #0E1F4D; /* Warna Navy untuk Data Kelas di light theme */
-    }
+/* Hapus definisi html, body di sini, karena sudah di app.blade.php */
+/* html, body {
+    height: 100%;
+    background-color: #EBEDF4;
+    font-family: Poppins, sans-serif;
+} */
 
-    #addRowBtn { background-color: #F37AB0; color: #FFFFFF; border: none; }
-    #addRowBtn:hover { background-color: #E2A6C1; color: #FFFFFF; border: none; }
-    #saveBtn { background-color: #0E1F4D; color: white; border: none; }
-    #saveBtn:hover { background-color: #70788F; color: #FFFFFF; border: none; }
-    #generateBtn { background-color: #0E1F4D; color: white; border: none; }
-    #generateBtn:hover { background-color: #70788F; color: #ffffff; border: none; }
+/* Warna Data Kelas untuk Light Theme - Ini TETAP di sini */
+.container h2 {
+    color: #0E1F4D; /* Warna Navy untuk Data Kelas di light theme */
+}
 
-    input::placeholder { font-weight: 300; color: #888; font-style: italic; }
+#addRowBtn {
+    background-color: #F37AB0;
+    color: #FFFFFF;
+    border: none;
+}
 
-    .card-body-form {
-        background-color: #ffffff;
-        color: #0E1F4D;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
+#addRowBtn:hover {
+    background-color: #E2A6C1;
+    color: #FFFFFF;
+    border: none;
+}
 
-    input[type="file"] { background-color: #ffffff; color: #000000; padding: 6px 12px; border-radius: 4px; }
-    input[type="file"]::file-selector-button { background-color: #ffffff; color: #000000; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
-    input[type="file"]::file-selector-button:hover { color: #000000; }
+#saveBtn {
+    background-color: #0E1F4D;
+    color: white;
+    border: none;
+}
 
-    .custom-table {
-        border-collapse: collapse;
-        width: 100%;
-        font-size: 14px;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-    .custom-table thead { background-color: #0E1F4D; color: white; }
-    .custom-table th, .custom-table td { padding: 12px 15px; text-align: center; vertical-align: middle; }
-    .custom-table tbody tr:nth-child(even) { background-color: #ffffff; }
-    .custom-table tbody tr:nth-child(odd) { background-color: #f8f9fa; }
+#saveBtn:hover {
+    background-color: #70788F;
+    color: #FFFFFF;
+    border: none;
+}
 
-    label[for="nama_kelas"]::after { color: #000000; }
-    .form-control { background-color: #ffffff; color: #000000; }
-    .form-control:focus { background-color: #ffffff; color: #000000; }
-    .form-control:not(:placeholder-shown) { background-color: #ffffff; color: #000000; }
+#generateBtn {
+    background-color: #0E1F4D;
+    color: white;
+    border: none;
+}
 
-    .custom-table .btn-delete { background-color: #F37AB0; border: none; color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; }
-    .custom-table .btn-delete:hover { background-color: #E2A6C1; }
+#generateBtn:hover {
+    background-color: #70788F;
+    color: #ffffff;
+    border: none;
+}
 
-    #dynamicTable { table-layout: fixed; width: 100%; }
-    #dynamicTable th, #dynamicTable td { padding: 12px 6px; word-wrap: break-word; overflow-wrap: break-word; }
+input::placeholder {
+    font-weight: 300;
+    color: #888;
+    font-style: italic;
+}
 
-    .content-wrapper { min-height: calc(100vh - 100px); margin-bottom: 100px; background-color: transparent; }
-    .container.content-wrapper { background-color: transparent; box-shadow: none; }
+/* KEMBALIKAN background putih dan box-shadow untuk card-body-form */
+.card-body-form {
+    background-color: #ffffff;
+    color: #0E1F4D;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
 
-    #toggleBtn { color: #0E1F4D; margin-top: 0px; margin-bottom: 8px; transition: color 0.3s ease; }
-    #toggleBtn:hover { color: #70788F; cursor: pointer; }
-    .btn-link:hover { color: #70788F; !important; }
+input[type="file"] {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
 
-    .btn-upload-excel { background-color: #0E1F4D !important; color: #fff !important; border: none !important; }
-    .btn-upload-excel:hover { background-color: #70788F !important; color: #fff !important; }
+input[type="file"]::file-selector-button {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+    color: #000000;
+}
+
+/* KEMBALIKAN background putih dan box-shadow untuk custom-table */
+.custom-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.custom-table thead {
+    background-color: #0E1F4D;
+    color: white;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 12px 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* KEMBALIKAN background putih untuk baris tabel */
+.custom-table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa; /* Opsional: sedikit abu-abu untuk baris ganjil jika ingin stripe */
+}
 
 
-    /* Kelas baru untuk kartu ringkasan data */
-    .summary-card {
-        background-color: #ffffff; /* Default light mode */
-        border: none;
-    }
+label[for="nama_kelas"]::after {
+    color: #000000;
+}
+
+.form-control {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.form-control:focus {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.form-control:not(:placeholder-shown) {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.custom-table .btn-delete {
+    background-color: #F37AB0;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.custom-table .btn-delete:hover {
+    background-color: #E2A6C1;
+}
+
+#dynamicTable {
+    table-layout: fixed;
+    width: 100%;
+}
+
+#dynamicTable th,
+#dynamicTable td {
+    padding: 12px 6px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Pastikan content-wrapper dan container.content-wrapper transparan */
+/* Ini penting agar background body abu-abu terlihat di samping kartu putih */
+.content-wrapper {
+    min-height: calc(100vh - 100px);
+    margin-bottom: 100px;
+    background-color: transparent; /* Pastikan ini transparent */
+}
+
+.container.content-wrapper {
+    background-color: transparent; /* Pastikan ini transparent */
+    box-shadow: none; /* Pastikan tidak ada box-shadow di sini */
+}
 
 
-    /* --- DARK THEME STYLES (KHUSUS UNTUK KOMPONEN DI HALAMAN INI) --- */
-    body.dark-theme .container h2 {
-        color: #FFFFFF; /* Judul "Data Kelas" di dark mode */
-    }
-    body.dark-theme #toggleBtn {
-        color: #CFD3D6; /* Link "Lihat panduan pengisian" di dark mode */
-    }
-    body.dark-theme .form-label {
-        color: #CFD3D6; /* Label form di dark mode */
-    }
-    body.dark-theme .card-body-form {
-        background-color: #2D2D2D; /* Latar belakang form di dark mode */
-        color: #FFFFFF; /* Teks di form di dark mode */
-    }
-    body.dark-theme .card-body-form p {
-        color: #CFD3D6; /* Paragraf di form di dark mode */
-    }
-    body.dark-theme .form-control {
-        background-color: #3A3A3A; /* Input field di dark mode */
-        color: #FFFFFF;
-        border-color: #555555; /* Border input di dark mode */
-    }
-    body.dark-theme .form-control:focus {
-        background-color: #3A3A3A;
-        color: #FFFFFF;
-        border-color: #888888;
-    }
-    body.dark-theme .form-control::placeholder {
-        color: #A0A0A0; /* Placeholder di dark mode */
-    }
-    body.dark-theme input[type="file"] {
-        background-color: #3A3A3A;
-        color: #FFFFFF;
-        border: 1px solid #555555;
-    }
-    body.dark-theme input[type="file"]::file-selector-button {
-        background-color: #3A3A3A;
-        color: #FFFFFF;
-        border: 1px solid #555555;
-    }
-    body.dark-theme input[type="file"]::file-selector-button:hover {
-        color: #CFD3D6;
-    }
-    body.dark-theme .custom-table {
-        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05); /* Shadow di dark mode */
-    }
-    body.dark-theme .custom-table thead {
-        background-color: #1A202C; /* Header tabel di dark mode */
-        color: #FFFFFF;
-    }
-    body.dark-theme .custom-table th,
-    body.dark-theme .custom-table td {
-        color: #CFD3D6; /* Teks tabel di dark mode */
-    }
-    body.dark-theme .custom-table tbody tr:nth-child(even) {
-        background-color: #2D2D2D; /* Baris genap tabel di dark mode */
-    }
-    body.dark-theme .custom-table tbody tr:nth-child(odd) {
-        background-color: #3A3A3A; /* Baris ganjil tabel di dark mode */
-    }
-    body.dark-theme .custom-table .btn-delete {
-        background-color: #F481B4; /* Tombol hapus tabel di dark mode */
-    }
-    body.dark-theme .custom-table .btn-delete:hover {
-        background-color: #E5AFC7;
-    }
-    body.dark-theme #saveBtn,
-    body.dark-theme #generateBtn {
-        background-color: #162449 !important; /* Tombol simpan/generate di dark mode */
-        color: #FFFFFF !important;
-    }
-    body.dark-theme #saveBtn:hover,
-    body.dark-theme #generateBtn:hover {
-        background-color: #777F95 !important;
-    }
-    body.dark-theme #addRowBtn {
-        background-color: #F481B4 !important; /* Tombol tambah baris di dark mode */
-        color: #FFFFFF !important;
-    }
-    body.dark-theme #addRowBtn:hover {
-        background-color: #E5AFC7 !important;
-    }
-    body.dark-theme .btn-upload-excel {
-        background-color: #162449 !important;
-        color: #FFFFFF !important;
-    }
-    body.dark-theme .btn-upload-excel:hover {
-        background-color: #777F95 !important;
-    }
+#toggleBtn {
+    color: #0E1F4D;
+    margin-top: 0px;
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+}
 
-    /* DARK MODE untuk Ringkasan Data Card */
-    body.dark-theme .summary-card {
-        background-color: #2D2D2D; /* Latar belakang kartu ringkasan gelap */
-        /* Anda bisa menghapus 'color: #FFFFFF;' di sini jika ada, karena akan spesifik di bawah */
-    }
-    body.dark-theme .summary-card h4 {
-        color: #FFFFFF !important; /* PERBAIKAN: Gunakan !important untuk judul H4 */
-    }
-    body.dark-theme .summary-card p {
-        color: #CFD3D6 !important; /* PERBAIKAN: Gunakan !important untuk paragraf */
-    }
-    body.dark-theme .summary-card strong {
-        color: #FFFFFF !important; /* PERBAIKAN: Gunakan !important untuk teks bold */
-    }
+#toggleBtn:hover {
+    color: #70788F;
+    cursor: pointer;
+}
 
+.btn-link:hover {
+    color: #70788F; !important;
+}
+
+/* Hapus semua definisi dark-theme dari sini, karena sudah di app.blade.php */
+/* body.dark-theme { ... } */
+/* body.dark-theme .container h2 { ... } */
+/* ... semua dark-theme rules dari sini ke bawah harus dihapus ... */
+
+/* Hanya sisakan CSS yang khusus untuk view ini di light theme */
+
+.btn-upload-excel {
+    background-color: #0E1F4D !important;
+    color: #fff !important;
+    border: none !important;
+}
+.btn-upload-excel:hover {
+    background-color: #70788F !important;
+    color: #fff !important;
+}
 </style>
 
-<div class="container content-wrapper" style="padding-top: 100px;">
+@section('content')
+<div class="container content-wrapper" style="padding-top: 70px;">
     <h2 class="mb-2 fw-bold position-relative d-inline-block">
         Data Kelas
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
 
-    <button id="toggleBtn" class="btn btn-link p-0 text-decoration-none small d-flex align-items-center"
+<button id="toggleBtn" class="btn btn-link p-0 text-decoration-none small d-flex align-items-center"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#tutorialPengisian"
         aria-expanded="false"
         aria-controls="tutorialPengisian">
-        <span id="toggleIcon">🔽</span> &nbsp; Lihat panduan pengisian
-    </button>
+    <span id="toggleIcon">🔽</span> &nbsp; Lihat panduan pengisian
+</button>
 
-    <div class="collapse mt-2" id="tutorialPengisian">
-        <div class="card border-0 shadow-sm" style="font-size: 14px; margin-bottom: 10px;">
-            <div class="card-body-form">
-                Masukkan nama kelas sesuai format penamaan institusi. Contoh:
-                <ul class="mb-1 ps-3">
-                    <li><strong>Pendidikan Ilmu Komputer B - 2021</strong></li>
-                    <li><strong>Sistem Informasi A - 2022</strong></li>
-                </ul>
-                <p class="mb-0">Gunakan huruf kapital untuk singkatan jurusan jika perlu, dan tambahkan tahun angkatan untuk mempermudah identifikasi kelas.</p>
-            </div>
+<div class="collapse mt-2" id="tutorialPengisian">
+    <div class="card border-0 shadow-sm" style="font-size: 14px; margin-bottom: 10px;">
+        <div class="card-body-form">
+            Masukkan nama kelas sesuai format penamaan institusi. Contoh:
+            <ul class="mb-1 ps-3">
+                <li><strong>Pendidikan Ilmu Komputer B - 2021</strong></li>
+                <li><strong>Sistem Informasi A - 2022</strong></li>
+            </ul>
+            <p class="mb-0">Gunakan huruf kapital untuk singkatan jurusan jika perlu, dan tambahkan tahun angkatan untuk mempermudah identifikasi kelas.</p>
         </div>
     </div>
+</div>
 
-    <form method="POST" action="{{ route('upload.xlsx.process') }}" enctype="multipart/form-data" class="mb-4">
+        <form method="POST" action="{{ route('upload.xlsx.process') }}" enctype="multipart/form-data" class="mb-4">
         @csrf
+
         <div class="mb-3">
             <label class="form-label">Import dari Excel:</label>
             <div class="input-group">
@@ -234,15 +286,15 @@
         <table class="custom-table" id="dynamicTable">
             <thead class="table-dark">
                 <tr>
-                    <th style="width: 60px;">No</th>
-                    <th style="width: 260px;">Nama Lengkap</th>
-                    <th style="width: 260px;">Asal Sekolah</th>
-                    <th>Jalur Masuk</th>
-                    <th>Akademik</th>
-                    <th>Sekolah</th>
-                    <th>Ekonomi</th>
-                    <th>Perkuliahan</th>
-                    <th>Aksi</th>
+                <th style="width: 60px;">No</th>
+                <th style="width: 260px;">Nama Lengkap</th>
+                <th style="width: 260px;">Asal Sekolah</th>
+                <th>Jalur Masuk</th>
+                <th>Akademik</th>
+                <th>Sekolah</th>
+                <th>Ekonomi</th>
+                <th>Perkuliahan</th>
+                <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -254,7 +306,6 @@
                             <td><input type="text" name="mahasiswa[{{ $i }}][asal_sekolah]" class="form-control" value="{{ $data['asal_sekolah'] ?? '' }}"></td>
                             <td>
                                 <select name="mahasiswa[{{ $i }}][jalur_masuk]" class="form-control">
-                                    <option value="">Pilih Jalur</option>
                                     <option value="SNBP" {{ ($data['jalur_masuk'] ?? '')=='SNBP'?'selected':'' }}>SNBP</option>
                                     <option value="SNBT" {{ ($data['jalur_masuk'] ?? '')=='SNBT'?'selected':'' }}>SNBT</option>
                                     <option value="MANDIRI" {{ ($data['jalur_masuk'] ?? '')=='MANDIRI'?'selected':'' }}>MANDIRI</option>
@@ -428,18 +479,22 @@ document.getElementById('saveBtn')?.addEventListener('click', function () {
             const value = input.value.trim();
             const name = input.name;
 
+            // Lakukan validasi khusus untuk kolom angka
             if (name.includes('[akademik]') || name.includes('[sekolah]') || name.includes('[ekonomi]') || name.includes('[perkuliahan]')) {
+                // Jangan validasi jika kosong, karena sudah ditangani oleh cek kelengkapan baris
                 if (value !== '') {
                     const numberValue = parseFloat(value);
                     if (isNaN(numberValue) || numberValue < 0 || numberValue > 4) {
                         alert(`Kolom ${name.split('[')[2].replace(']', '')} pada baris ke-${index + 1} harus berupa angka (termasuk desimal) antara 0 hingga 4!`);
                         valid = false;
-                        return;
+                        return; // Hentikan validasi untuk baris ini
                     }
                 }
             }
+
             if (value !== '') filledCount++;
             else emptyCount++;
+
             if (name.includes('[nama]')) rowData.nama = value;
             else if (name.includes('[asal_sekolah]')) rowData.asal_sekolah = value;
             else if (name.includes('[jalur_masuk]')) rowData.jalur_masuk = value;
@@ -448,8 +503,10 @@ document.getElementById('saveBtn')?.addEventListener('click', function () {
             else if (name.includes('[ekonomi]')) rowData.ekonomi = value;
             else if (name.includes('[perkuliahan]')) rowData.perkuliahan = value;
         });
-        if (!valid) return;
-        if (filledCount === 0) return;
+
+        if (!valid) return; // Hentikan proses jika ada validasi yang gagal di dalam loop inputs
+
+        if (filledCount === 0) return; // Lewati baris yang kosong seluruhnya
         if (filledCount > 0 && emptyCount > 0) {
             alert(`Baris ke-${index + 1} belum lengkap. Silakan lengkapi semua kolom sebelum menyimpan.`);
             valid = false;
@@ -457,24 +514,25 @@ document.getElementById('saveBtn')?.addEventListener('click', function () {
         }
         data.push(rowData);
     });
-    if (!valid) return;
+    if (!valid) return; // Hentikan jika ada validasi yang gagal di dalam loop rows
 
+    // Ringkasan
     let summaryHTML = `
-        <div class="card mt-4 p-4 shadow-sm summary-card">
-        <h4 class="mb-2 fw-bold" style="color: #0E1F4D;">Ringkasan Data</h4>
-            <p class="mb-4 text-muted" style="font-size: 14px;">
-            Berikut ringkasan data yang telah Anda input. Silakan cek kembali sebelum menekan tombol <strong>Generate</strong>.
-            </p>
-         <div class="row mb-3">
-        <div class="col-md-6">           <strong>Nama Kelas:</strong> <strong>${namaKelas}</strong> {{-- PERBAIKAN: Bungkus dengan <strong> --}}
-        </div>
-        <div class="col-md-6">
-        <strong>Kode Mata Kuliah:</strong> <strong>${kodeMK}</strong> {{-- PERBAIKAN: Bungkus dengan <strong> --}}
-    </div>
-    </div>
-        <table class="custom-table"><thead><tr>
-        <th>Nama</th><th>Asal Sekolah</th><th>Jalur</th><th>Akademik</th><th>Sekolah</th><th>Ekonomi</th><th>Perkuliahan</th>
-        </tr></thead><tbody>`;
+        <div class="card mt-4 p-4 shadow-sm" style="background-color: #ffffff; border-0;">
+      <h4 class="mb-2 fw-bold" style="color: #0E1F4D;">Ringkasan Data</h4>
+          <p class="mb-4 text-muted" style="font-size: 14px;">
+          Berikut ringkasan data yang telah Anda input. Silakan cek kembali sebelum menekan tombol <strong>Generate</strong>.
+          </p>
+      <div class="row mb-3">
+      <div class="col-md-6">          <strong>Nama Kelas:</strong> ${namaKelas}
+      </div>
+      <div class="col-md-6">
+          <strong>Kode Mata Kuliah:</strong> ${kodeMK}
+      </div>
+</div>
+          <table class="custom-table"><thead><tr>
+          <th>Nama</th><th>Asal Sekolah</th><th>Jalur</th><th>Akademik</th><th>Sekolah</th><th>Ekonomi</th><th>Perkuliahan</th>
+          </tr></thead><tbody>`;
     data.forEach(item => {
         summaryHTML += `<tr>
             <td>${item.nama}</td><td>${item.asal_sekolah}</td><td>${item.jalur_masuk}</td><td>${item.akademik}</td>

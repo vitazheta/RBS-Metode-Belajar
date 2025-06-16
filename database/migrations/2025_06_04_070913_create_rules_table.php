@@ -19,7 +19,12 @@ return new class extends Migration
             $table->string('sekolah');     // Untuk 'KURANG MENDUKUNG', 'MENDUKUNG', 'SANGAT MENDUKUNG'
             $table->string('ekonomi');     // Untuk 'KURANG MENCUKUPI', 'MENCUKUPI', 'SANGAT MENCUKUPI'
             $table->string('perkuliahan'); // Untuk 'KURANG BAIK', 'BAIK', 'SANGAT BAIK'
-            $table->text('rekomendasi');   // Kolom untuk menyimpan teks rekomendasi yang panjang
+            $table->text('rek_pendekatan_1');   // Kolom untuk menyimpan teks rekomendasi yang panjang
+            $table->text('rek_pendekatan_2');   // Kolom untuk menyimpan teks rekomendasi yang panjang
+            $table->text('rek_pendekatan_3');   // Kolom untuk menyimpan teks rekomendasi yang panjang
+            $table->text('rek_evaluasi_1');   // Kolom untuk menyimpan teks rekomendasi yang panjang
+            $table->text('rek_evaluasi_2');   // Kolom untuk menyimpan teks rekomendasi yang panjang
+            $table->text('rek_evaluasi_3');   // Kolom untuk menyimpan teks rekomendasi yang panjang
 
             $table->timestamps(); // Membuat kolom 'created_at' dan 'updated_at' secara otomatis
 

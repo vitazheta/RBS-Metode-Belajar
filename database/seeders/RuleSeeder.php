@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Rule; // Pastikan Anda mengimpor Model Rule
+use App\Models\Rule;
 
 class RuleSeeder extends Seeder
 {
@@ -13,48 +12,237 @@ class RuleSeeder extends Seeder
      */
     public function run(): void
     {
-        // Opsional: Hapus semua aturan yang ada sebelumnya jika Anda ingin memulai dari nol
-        // Ini sangat direkomendasikan saat Anda mengisi data dummy untuk pengujian
         Rule::truncate();
 
-        // Definisi kategori untuk setiap aspek
-        // Pastikan casing (huruf kapital/kecil) SAMA PERSIS dengan output getKategoriText Anda
         $jalurMasukCategories = ['SNBP', 'SNBT', 'Mandiri'];
-        $akademikCategories = ['Rendah', 'Sedang', 'Tinggi'];
-        $sekolahCategories = ['Kurang Mendukung', 'Mendukung', 'Sangat Mendukung'];
-        $ekonomiCategories = ['Kurang Mencukupi', 'Mencukupi', 'Sangat Mencukupi'];
-        $perkuliahanCategories = ['Kurang Baik', 'Baik', 'Sangat Baik'];
+        $akademikCategories = ['Perlu Penguatan', 'Siap'];
+        $sekolahCategories = ['Kurang Mendukung', 'Mendukung'];
+        $ekonomiCategories = ['Kurang Mencukupi', 'Mencukupi'];
+        $perkuliahanCategories = ['Kurang Baik', 'Baik'];
 
         $allRules = [];
-        $ruleNumber = 1;
 
-        // Loop untuk menghasilkan semua kombinasi aturan
-        foreach ($jalurMasukCategories as $jalurMasuk) {
+        foreach ($jalurMasukCategories as $jalur) {
             foreach ($akademikCategories as $akademik) {
                 foreach ($sekolahCategories as $sekolah) {
                     foreach ($ekonomiCategories as $ekonomi) {
                         foreach ($perkuliahanCategories as $perkuliahan) {
+                            $rekomendasiPendekatan1 = $rekomendasiPendekatan2 = $rekomendasiPendekatan3 = null;
+                            $rekomendasiEvaluasi1 = $rekomendasiEvaluasi2 = $rekomendasiEvaluasi3 = null;
+
+                            if (//1
+                                $akademik === 'Siap' &&
+                                $sekolah === 'Mendukung' &&
+                                $ekonomi === 'Mencukupi' &&
+                                $perkuliahan === 'Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = 'Penjelasan Mendalam';
+                                $rekomendasiPendekatan3 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi3 = NULL;
+                            } else if (//2
+                                $akademik === 'Siap' &&
+                                $sekolah === 'Mendukung' &&
+                                $ekonomi === 'Mencukupi' &&
+                                $perkuliahan === 'Kurang Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiPendekatan3 = NULL;
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi3 = 'Tugas Ringan Secara Rutin';
+                            } else if (//3
+                                $akademik === 'Siap' &&
+                                $sekolah === 'Mendukung' &&
+                                $ekonomi === 'Kurang Mencukupi' &&
+                                $perkuliahan === 'Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiPendekatan3 = NULL;
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi3 = NULL;
+                            } else if (//4
+                                $akademik === 'Siap' &&
+                                $sekolah === 'Mendukung' &&
+                                $ekonomi === 'Kurang Mencukupi' &&
+                                $perkuliahan === 'Kurang Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiPendekatan3 = NULL;
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi3 = NULL;
+                            } else if (//5
+                                $akademik === 'Siap' &&
+                                $sekolah === 'Kurang Mendukung' &&
+                                $ekonomi === 'Mencukupi' &&
+                                $perkuliahan === 'Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = NULL;
+                                $rekomendasiPendekatan3 = NULL;
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi3 = NULL;
+
+                            } else if (//6
+                                $akademik === 'Siap' &&
+                                $sekolah === 'Kurang Mendukung' &&
+                                $ekonomi === 'Mencukupi' &&
+                                $perkuliahan === 'Kurang Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiPendekatan2 = 'Penjelasan Mendalam';
+                                $rekomendasiPendekatan3 = NULL;
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi3 = NULL;
+                            } else if (//7
+                                $akademik === 'Siap' &&
+                                $sekolah === 'Kurang Mendukung' &&
+                                $ekonomi === 'Kurang Mencukupi' &&
+                                $perkuliahan === 'Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiPendekatan3 = NULL;
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi3 = NULL;
+                            } else if (//8
+                                $akademik === 'Siap' &&
+                                $sekolah === 'Kurang Mendukung' &&
+                                $ekonomi === 'Kurang Mencukupi' &&
+                                $perkuliahan === 'Kurang Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiPendekatan2 = NULL;
+                                $rekomendasiPendekatan3 = NULL;
+                                $rekomendasiEvaluasi1 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi2 = NULL;
+                                $rekomendasiEvaluasi3 = NULL;
+                            } else if (//9
+                                $akademik === 'Perlu Penguatan' &&
+                                $sekolah === 'Mendukung' &&
+                                $ekonomi === 'Mencukupi' &&
+                                $perkuliahan === 'Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiPendekatan3 = NULL;
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = NULL;
+                                $rekomendasiEvaluasi3 = NULL;
+                            } else if (//10
+                                $akademik === 'Perlu Penguatan' &&
+                                $sekolah === 'Mendukung' &&
+                                $ekonomi === 'Mencukupi' &&
+                                $perkuliahan === 'Kurang Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = NULL;
+                                $rekomendasiPendekatan3 = NULL; 
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = NULL;
+                                $rekomendasiEvaluasi3 = NULL;
+                            } else if (
+                                $akademik === 'Perlu Penguatan' &&
+                                $sekolah === 'Mendukung' &&
+                                $ekonomi === 'Kurang Mencukupi' &&
+                                $perkuliahan === 'Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = NULL;
+                                $rekomendasiPendekatan3 = NULL; 
+                                $rekomendasiEvaluasi1 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi2 = NULL;
+                                $rekomendasiEvaluasi3 = NULL;
+                            } else if (
+                                $akademik === 'Perlu Penguatan' &&
+                                $sekolah === 'Mendukung' &&
+                                $ekonomi === 'Kurang Mencukupi' &&
+                                $perkuliahan === 'Kurang Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiPendekatan2 = 'Penjelasan Mendalam';
+                                $rekomendasiPendekatan3 = NULL; 
+                                $rekomendasiEvaluasi1 = 'Tugas Studi Kasus Terstruktur';
+                                $rekomendasiEvaluasi2 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi3 = NULL; 
+                            } else if (
+                                $akademik === 'Perlu Penguatan' &&
+                                $sekolah === 'Kurang Mendukung' &&
+                                $ekonomi === 'Mencukupi' &&
+                                $perkuliahan === 'Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiPendekatan2 = 'Penjelasan Mendalam';
+                                $rekomendasiPendekatan3 = 'Materi Ringkasan';
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi3 = NULL;
+                            } else if (
+                                $akademik === 'Perlu Penguatan' &&
+                                $sekolah === 'Kurang Mendukung' &&
+                                $ekonomi === 'Mencukupi' &&
+                                $perkuliahan === 'Kurang Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = NULL;
+                                $rekomendasiPendekatan3 = NULL; 
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = NULL;
+                                $rekomendasiEvaluasi3 = NULL; 
+                            } else if (
+                                $akademik === 'Perlu Penguatan' &&
+                                $sekolah === 'Kurang Mendukung' &&
+                                $ekonomi === 'Kurang Mencukupi' &&
+                                $perkuliahan === 'Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan2 = NULL;
+                                $rekomendasiPendekatan3 = NULL; 
+                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi2 = NULL;
+                                $rekomendasiEvaluasi3 = NULL; 
+                            } else if (
+                                $akademik === 'Perlu Penguatan' &&
+                                $sekolah === 'Kurang Mendukung' &&
+                                $ekonomi === 'Kurang Mencukupi' &&
+                                $perkuliahan === 'Kurang Baik'
+                            ) {
+                                $rekomendasiPendekatan1 = 'Diskusi Kelompok Aktif';
+                                $rekomendasiPendekatan2 = NULL;
+                                $rekomendasiPendekatan3 = NULL; 
+                                $rekomendasiEvaluasi1 = 'Penilaian Formatif Berupa Kuis';
+                                $rekomendasiEvaluasi2 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi3 = NULL;
+                            }
+
                             $allRules[] = [
-                                'jalur_masuk' => $jalurMasuk,
+                                'jalur_masuk' => $jalur,
                                 'akademik' => $akademik,
                                 'sekolah' => $sekolah,
                                 'ekonomi' => $ekonomi,
                                 'perkuliahan' => $perkuliahan,
-                                'rekomendasi' => 'Rekomendasi Umum ' . $ruleNumber, // Teks rekomendasi dummy
-                                // created_at dan updated_at akan diisi otomatis oleh Eloquent
+                                'rek_pendekatan_1' => $rekomendasiPendekatan1,
+                                'rek_pendekatan_2' => $rekomendasiPendekatan2,
+                                'rek_pendekatan_3' => $rekomendasiPendekatan3,
+                                'rek_evaluasi_1' => $rekomendasiEvaluasi1,
+                                'rek_evaluasi_2' => $rekomendasiEvaluasi2,
+                                'rek_evaluasi_3' => $rekomendasiEvaluasi3,
                             ];
-                            $ruleNumber++;
                         }
                     }
                 }
             }
         }
-
-        // Masukkan semua aturan ke database
-        foreach ($allRules as $ruleData) {
-            Rule::create($ruleData);
-        }
-
-        $this->command->info('Total ' . count($allRules) . ' aturan rekomendasi dummy berhasil di-seed.');
+        Rule::insert($allRules);
     }
 }

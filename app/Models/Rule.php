@@ -14,11 +14,17 @@ class Rule extends Model
 
     // Tentukan kolom yang bisa diisi secara massal
     protected $fillable = [
+        'rulecode',
         'jalur_masuk',
         'akademik',
         'sekolah',
         'ekonomi',
         'perkuliahan',
-        'rekomendasi'
+        'rek_pendekatan_1',
+        'rek_pendekatan_2',
+        'rek_pendekatan_3',
+        'rek_evaluasi_1',
+        'rek_evaluasi_2',
+        'rek_evaluasi_3',
     ];
 }
