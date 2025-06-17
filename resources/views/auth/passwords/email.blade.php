@@ -78,6 +78,16 @@
         border-color: #28a745 !important;
     }
 
+    /* --- KUNCI PERBAIKAN: STYLES UNTUK TOMBOL DI LIGHT MODE --- */
+    .forgot-form-section .btn {
+        background-color: #0E1F4D; /* Warna background tombol di light mode (dark blue) */
+        color: #FFFFFF; /* Warna teks tombol di light mode (white) */
+    }
+    .forgot-form-section .btn:hover {
+        background-color: #0B1638; /* Warna background tombol saat hover di light mode (slightly darker blue) */
+    }
+
+
     /* DARK THEME STYLES (KHUSUS UNTUK HALAMAN FORGOT PASSWORD INI) */
     body.dark-theme .card-auth {
         /* Adjust shadow or border in dark mode if needed */
