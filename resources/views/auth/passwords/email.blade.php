@@ -188,7 +188,7 @@
         <div class="row g-0">
             <div class="col-md-6 p-5 forgot-form-section"> {{-- Add forgot-form-section --}}
                 <h2 class="fw-bold text-center">Lupa Kata Sandi</h2>
-                <p class="text-center">Masukkan email Anda untuk menerima link reset</p>
+                <p class="text-center">Masukkan email Anda untuk menerima tautan atur ulang kata sandi</p>
 
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -208,7 +208,7 @@
                     </div>
                     <div class="text-center mt-3">
                         <button type="submit" class="btn text-white w-100 rounded-pill py-2">
-                                {{ __('Send Password Reset Link') }}
+                                {{ __('Kirim Tautan Atur Ulang Kata Sandi') }}
                         </button>
                     </div>
                 </form>

@@ -82,10 +82,15 @@
             color: #ffffff;
             text-align: center;
         }
+        
+        .table {
+            margin: 0 !important;
+        }
 
         .table th, .table td {
             background-color: #FFFFFF !important;
             color: #000 !important;
+            margin: 0;
         }
 
         .table, .table-bordered, .table th, .table td {
