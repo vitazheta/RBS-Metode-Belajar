@@ -126,7 +126,7 @@
         }
         btn .btn-kolaborasi:hover {
             background-color: #162449;
-            c
+            
         }
         .analisis-kebutuhan {
             background-color: #f8f9fa;
@@ -197,6 +197,30 @@
         body.dark-theme .analisis-kebutuhan3 {
             color: #FFFFFF;
         }
+
+        body.dark-theme .table, 
+        body.dark-theme .table-bordered, 
+        body.dark-theme .table-striped, 
+        body.dark-theme .table th, 
+        body.dark-theme .table td {
+            background-color: #2D2D2D !important;
+            color: #fff !important;
+            border-color: #373737 !important;
+        }
+
+        body.dark-theme .table-striped > tbody > tr:nth-of-type(even) {
+            background-color: #373737 !important;
+        }
+
+        body.dark-theme .text-center-table-header, 
+        body.dark-theme .table thead {
+            background-color: #0E1F4D !important;
+            color: #fff !important;
+        }
+        #hasilKolaborasi {
+        display: none; /* Sembunyikan secara default */
+        scroll-margin-top: 100px
+    }
 
         body.dark-theme .table, 
         body.dark-theme .table-bordered, 
@@ -663,9 +687,18 @@ $rekom = strip_tags($KondisiDominan['rekomendasi'] ?? '');
 </script>
 
 <script>
+
     document.getElementById('btnKolaborasi').onclick = function() {
-        document.getElementById('hasilKolaborasi').scrollIntoView({ behavior: 'smooth' });
-        document.getElementById('hasilKolaborasi').style.display = 'block';
+        const hasilKolaborasiElement = document.getElementById('hasilKolaborasi');
+
+        // 1. Pastikan elemen muncul terlebih dahulu
+        hasilKolaborasiElement.style.display = 'block';
+
+        // 2. Kemudian, gulir ke elemen yang sudah terlihat
+        // Gunakan setTimeout dengan sedikit delay untuk memastikan browser sudah merender elemen
+        setTimeout(() => {
+            hasilKolaborasiElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50); // 
     };
 </script>
 
