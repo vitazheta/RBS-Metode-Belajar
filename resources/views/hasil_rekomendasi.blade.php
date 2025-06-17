@@ -131,7 +131,7 @@
         }
         btn .btn-kolaborasi:hover {
             background-color: #162449;
-            c
+            
         }
         .analisis-kebutuhan {
             background-color: #f8f9fa;
@@ -217,6 +217,11 @@
         body.dark-theme .analisis-kebutuhan3 {
             color: #FFFFFF;
         }
+
+        #hasilKolaborasi {
+        display: none; /* Sembunyikan secara default */
+        scroll-margin-top: 100px
+    }
 
     </style>
 </head>
@@ -664,9 +669,18 @@
 </script>
 
 <script>
+
     document.getElementById('btnKolaborasi').onclick = function() {
-        document.getElementById('hasilKolaborasi').scrollIntoView({ behavior: 'smooth' });
-        document.getElementById('hasilKolaborasi').style.display = 'block';
+        const hasilKolaborasiElement = document.getElementById('hasilKolaborasi');
+
+        // 1. Pastikan elemen muncul terlebih dahulu
+        hasilKolaborasiElement.style.display = 'block';
+
+        // 2. Kemudian, gulir ke elemen yang sudah terlihat
+        // Gunakan setTimeout dengan sedikit delay untuk memastikan browser sudah merender elemen
+        setTimeout(() => {
+            hasilKolaborasiElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50); // 
     };
 </script>
 
