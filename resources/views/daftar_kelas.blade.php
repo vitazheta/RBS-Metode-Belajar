@@ -32,7 +32,7 @@
 
 <style>
     html, body {
-    height: 100%; /* Pastikan tinggi halaman mencakup seluruh layar */
+        height: 100%;
     }
 
     body {
@@ -42,7 +42,6 @@
     }
 
     .daftar-kelas-title {
-        /* font-size: 40px; */
         font-weight: bold;
         color: #0E1F4D;
         position: relative;
@@ -62,56 +61,60 @@
         margin-top: 15px;
     }
 
+    /* Gaya Card Kelas untuk Desktop (default) */
     .card-kelas {
         width: 100%;
         max-width: 100%;
-        height: 120px;
+        height: 120px; /* Pertahankan tinggi tetap untuk desktop */
         margin: 0 auto;
         border: 0px;
-
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Tambahkan sedikit shadow */
+        border-radius: 8px; /* Tambahkan sedikit border-radius */
     }
 
     .card-kelas .card-body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px;
+        padding: 20px; /* Padding default untuk desktop */
     }
 
     .card-body .card-title {
-        font-size: 20px;
+        font-size: 20px; /* Ukuran font default untuk desktop */
         font-weight: bold;
         color: #0E1F4D;
     }
 
+    /* Gaya Tombol untuk Desktop (default) */
     .btn-detail-kelas {
-        background-color: #F37AB0; /* Warna latar belakang */
-        color: #ffffff; /* Warna teks */
-        border: none; /* Hilangkan border */
-        padding: 5px 15px; /* Padding untuk ukuran tombol */
-        font-size: 14px; /* Ukuran teks */
-        border-radius: 5px; /* Membuat sudut tombol sedikit melengkung */
-        transition: all 0.3s ease; /* Animasi transisi */
+        background-color: #F37AB0;
+        color: #ffffff;
+        border: none;
+        padding: 5px 15px;
+        font-size: 14px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
     }
 
     .btn-detail-kelas:hover {
-        background-color: #E2A6C1 !important; /* Warna latar belakang saat hover */
-        color: #FFFFFF !important; /* Warna teks saat hover */
+        background-color: #E2A6C1 !important;
+        color: #FFFFFF !important;
     }
 
     .content-wrapper {
-        min-height: calc(100vh - 100px); /* Pastikan konten utama memenuhi layar */
-        margin-bottom: 100px; /* Tambahkan ruang kosong sebelum footer */
+        min-height: calc(100vh - 100px);
+        margin-bottom: 100px;
     }
 
     .buton-kelas {
         display: flex;
         gap: 10px;
+        /* Di desktop, biarkan pengaturan gap dan flex bawaan dari parent bekerja */
     }
 
     /* Dark Theme */
     body.dark-theme {
-        background-color: #1B1B1B; /* Warna latar belakang gelap */
+        background-color: #1B1B1B;
     }
 
     body.dark-theme .daftar-kelas-title {
@@ -125,10 +128,59 @@
     body.dark-theme .card-kelas {
         color: #ffffff;
         background-color: #2D2D2D;
+        box-shadow: 0 4px 8px rgba(255,255,255,0.05); /* Sesuaikan shadow untuk dark theme */
     }
 
     body.dark-theme .card-body .card-title {
         color: #FFFFFF;
+    }
+
+    /* Media Query untuk Layar Kecil (Mobile) */
+    /* Media Query untuk Layar Kecil (Mobile) */
+    @media (max-width: 767.98px) {
+        .desc-daftar-kelas {
+            font-size: 16px;
+        }
+
+        .card-kelas {
+            height: auto;
+            padding-bottom: 10px;
+        }
+
+        .card-kelas .card-body {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 15px;
+        }
+
+        .card-body .card-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .card-text {
+            font-size: 14px;
+        }
+
+        .d-flex.align-items-start {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .buton-kelas {
+            flex-direction: row; /* Tombol bersebelahan di mobile */
+            width: 100%; /* Tombol memenuhi lebar di mobile */
+            justify-content: flex-end; /* **PERUBAHAN INI: Tombol rata kanan** */
+            gap: 10px; /* Pertahankan gap yang sedikit lebih besar */
+        }
+
+        .btn-detail-kelas,
+        .btn-danger {
+            /* HAPUS flex-grow: 1; DI SINI */
+            font-size: 13px;
+            padding: 8px 12px; /* Sesuaikan padding agar tidak terlalu kecil */
+            width: auto; /* Pastikan lebar tombol tidak memanjang penuh */
+        }
     }
 </style>
 

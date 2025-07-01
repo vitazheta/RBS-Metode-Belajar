@@ -210,7 +210,6 @@
                 <span style="color: #F37AB0;">Dosen!</span>
                 </h2>
                 <p>Silakan buat kata sandi baru yang mudah Anda ingat.</p>
-                {{-- Bisa tambahkan gambar atau teks lain di sini --}}
             </div>
         </div>
     </div>
