@@ -17,7 +17,7 @@
       color: #333;
     } */
 
-    /* HEADER SECTION 
+    /* HEADER SECTION
     .header-wrapper {
       position: relative;
       background: url('{{ asset('images/header.jpg') }}') center/cover no-repeat;
@@ -34,10 +34,10 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(33, 145, 80, 0.7); 
+      background-color: rgba(33, 145, 80, 0.7);
       z-index: 1;
     }
-    
+
     .header-wrapper h1 {
       position: relative;
       z-index: 2;
@@ -53,7 +53,7 @@
       text-align: center;
       max-width: 1000px;
       margin: 0 auto;
-      
+
     }
 
     .section h2 {
@@ -104,7 +104,7 @@
     /*.feature-item:hover {
       transform: translateY(-8px);
       box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-      
+
     }*/
 
     .icon-circle {
@@ -167,12 +167,12 @@
     body.dark-theme .feature-item p {
         color: #ffffff;
     }
-    
+
   </style>
 <!-- </head>
 <body> -->
 
-  <!-- HEADER 
+  <!-- HEADER
   <header class="header-wrapper">
     <h1>About Us</h1>
   </header> -->

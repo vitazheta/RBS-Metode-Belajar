@@ -7,62 +7,34 @@ use App\Models\Kelas;
 use App\Models\DataMahasiswa;
 use Illuminate\Support\Facades\Auth;
 
-
 class DataMahasiswaController extends Controller
 {
-    public function generate(Request $request)
-    {
-        return "Generate berhasil!";
-    }
-
     public function simpan(Request $request)
-{
-    \Log::info('Nama Kelas:', [$request->nama_kelas]);
-    \Log::info('Mahasiswa JSON:', [$request->mahasiswa]);
-    \Log::info('Request diterima:', $request->all());
+    {
+        $mahasiswaArray = $request->mahasiswa ?? [];
+        if (!is_array($mahasiswaArray)) $mahasiswaArray = [];
 
-    // Simpan data kelas
-    $kelas = new Kelas();
-    $kelas->nama_kelas = $request->nama_kelas;
-    $kelas->kode_mata_kuliah = $request->kode_mata_kuliah;
-    $kelas->dosen_id = Auth::guard('dosen')->id();
-    \Log::info('Dosen yang login:', [Auth::guard('dosen')->user()]);
+        $kelas = new Kelas();
+        $kelas->nama_kelas = $request->nama_kelas;
+        $kelas->kode_mata_kuliah = $request->kode_mata_kuliah;
+        $kelas->dosen_id = Auth::guard('dosen')->id();
+        $kelas->save();
 
-    $saved = $kelas->save();
-    \Log::info('Berhasil simpan kelas?', [$saved]);
-    \Log::info('ID kelas:', [$kelas->id]);
+        foreach ($mahasiswaArray as $data) {
+            $nama = $data['nama'] ?? null;
+            if (empty($nama)) continue;
+            DataMahasiswa::create([
+                'kelas_id' => $kelas->id,
+                'nama_lengkap' => $nama,
+                'asal_sekolah' => $data['asal_sekolah'] ?? null,
+                'jalur_masuk' => $data['jalur_masuk'] ?? null,
+                'akademik_total' => $data['akademik'] ?? null,
+                'sekolah_total' => $data['sekolah'] ?? null,
+                'ekonomi_total' => $data['ekonomi'] ?? null,
+                'perkuliahan_total' => $data['perkuliahan'] ?? null,
+            ]);
+        }
 
-
-    // Decode JSON dulu!
-    $mahasiswaArray = $request->mahasiswa;
-
-
-    foreach ($mahasiswaArray as $data) {
-
-       if (!$data['nama']) continue; // Skip data yang tidak lengkap
-        \Log::info('Isi data mahasiswa:', $data);
-
-        $mahasiswaBaru = DataMahasiswa::create([
-            'kelas_id' => $kelas->id,
-            'nama_lengkap' => $data['nama'],
-            'asal_sekolah' => $data['asal_sekolah'],
-            'jalur_masuk' => $data['jalur_masuk'],
-            'akademik_endurance' => $data['akademik_endurance'],
-            'latar_belakang' => $data['latar_belakang'],
-            'pola_belajar' => $data['pola_belajar'],
-            'perkuliahan' => $data['perkuliahan'],
-        ]);
-
-        \Log::info('Berhasil simpan mahasiswa:', $mahasiswaBaru->toArray());
+        return redirect()->route('hasil.rekomendasi', ['id' => $kelas->id]);
     }
-
-     // 3. Redirect ke halaman hasil rekomendasi kelas yang baru disimpan
-     return redirect()->route('hasil.rekomendasi', ['id' => $kelas->id]);
-
-    // return redirect()->route('dashboard.dosen')->with('success', 'Data berhasil disimpan.');
-}
-
-
-
-
 }

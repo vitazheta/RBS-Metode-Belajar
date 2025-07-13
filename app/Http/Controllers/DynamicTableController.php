@@ -7,11 +7,6 @@ use App\Models\Kelas;
 
 class DynamicTableController extends Controller
 {
-    public function index()
-    {
-        return view('dynamic_table');
-    }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -25,6 +20,12 @@ class DynamicTableController extends Controller
             'dosen_id' => auth()->guard('dosen')->user()->id,
         ]);
 
-        return redirect()->back()->with('success', 'Data kelas berhasil disimpan!');
+        return redirect()->route('dynamic.table')->with('success', 'Data kelas berhasil disimpan!');
+    }
+
+    public function index()
+    {
+        session()->forget(['processedData', 'nama_kelas', 'kode_mata_kuliah']);
+        return view('dynamic_table');
     }
 }

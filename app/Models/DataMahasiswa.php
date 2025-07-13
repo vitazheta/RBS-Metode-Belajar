@@ -16,10 +16,10 @@ class DataMahasiswa extends Model
         'nama_lengkap',
         'asal_sekolah',
         'jalur_masuk',
-        'akademik_endurance',
-        'latar_belakang',
-        'pola_belajar',
-        'perkuliahan',
+        'akademik_total',
+        'sekolah_total',
+        'ekonomi_total',
+        'perkuliahan_total',
     ];
 
     public function kelas()
