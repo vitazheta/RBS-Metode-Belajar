@@ -52,8 +52,9 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
+            background-color: #2d2d2d;
         }
+        
         .container-rekomendasi {
             max-width: 100%;
             margin-bottom: 100px;
@@ -76,25 +77,24 @@
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .table-aspek { /* Gaya ini tidak lagi digunakan untuk menampilkan rekomendasi utama/sorotan jalur, tapi tetap ada jika digunakan di tempat lain */
-            margin-bottom: 20px;
-        }
-        .table-aspek .table-light {
-            background-color: #EBEDF4;
-            border-color: #6C757D;
-            color: #000000;
-            text-align: center;
-        }
-        .table-aspek .kolom-aspek {
-            border-radius: 5px;
-            overflow: hidden;
-            border-color: #6C757D;
-            color: #000000;
-        }
         .text-center-table-header {
             background-color: #0E1F4D;
             color: #ffffff;
             text-align: center;
+        }
+        
+        .table {
+            margin: 0 !important;
+        }
+
+        .table th, .table td {
+            background-color: #FFFFFF !important;
+            color: #000 !important;
+            margin: 0;
+        }
+
+        .table, .table-bordered, .table th, .table td {
+            border-color: #EBEDF4 !important;
         }
 
         .highlight-card {
@@ -169,21 +169,6 @@
             border-radius: 5px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
-        body.dark-theme .table-aspek {
-            background-color: #2D2D2D;
-            color: #ffffff;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        body.dark-theme .table-aspek .table-light {
-            background-color: #1B1B1B;
-            color: #ffffff;
-        }
-        body.dark-theme .table-aspek .kolom-aspek {
-            background-color: #1B1B1B;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
 
         body.dark-theme .highlight-card {
             background-color: #373737;
@@ -218,11 +203,49 @@
             color: #FFFFFF;
         }
 
+        body.dark-theme .table, 
+        body.dark-theme .table-bordered, 
+        body.dark-theme .table-striped, 
+        body.dark-theme .table th, 
+        body.dark-theme .table td {
+            background-color: #2D2D2D !important;
+            color: #fff !important;
+            border-color: #373737 !important;
+        }
+
+        body.dark-theme .table-striped > tbody > tr:nth-of-type(even) {
+            background-color: #373737 !important;
+        }
+
+        body.dark-theme .text-center-table-header, 
+        body.dark-theme .table thead {
+            background-color: #0E1F4D !important;
+            color: #fff !important;
+        }
         #hasilKolaborasi {
         display: none; /* Sembunyikan secara default */
         scroll-margin-top: 100px
     }
 
+        body.dark-theme .table, 
+        body.dark-theme .table-bordered, 
+        body.dark-theme .table-striped, 
+        body.dark-theme .table th, 
+        body.dark-theme .table td {
+            background-color: #2D2D2D !important;
+            color: #fff !important;
+            border-color: #373737 !important;
+        }
+
+        body.dark-theme .table-striped > tbody > tr:nth-of-type(even) {
+            background-color: #373737 !important;
+        }
+
+        body.dark-theme .text-center-table-header, 
+        body.dark-theme .table thead {
+            background-color: #0E1F4D !important;
+            color: #fff !important;
+        }
     </style>
 </head>
 
@@ -297,11 +320,11 @@
     {{-- Tabel Mahasiswa --}}
     <div class="container-rekomendasi">
         <div class="card-header text-white" style="background-color: #0E1F4D; border-radius: 5px 5px 0px 0px; padding: 16px 24px;">
-            <h5 class="mb-0">Data Kelas</h5>
+            <h5 class="mb-0">Daftar Mahasiswa</h5>
         </div>
         <div class="table-responsive rounded shadow-sm">
             <table class="table table-bordered table-striped align-middle">
-                <thead class="text-center-table-header">
+                <thead class="text-center-table-header" style="background-color: #373737;">
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
@@ -510,7 +533,7 @@
                                 <i class="fas fa-users me-2"></i> Analisis Kebutuhan Kolaborasi
                             </h5>
                             @php
-                                $rekom = strip_tags($KondisiDominan['rekomendasi'] ?? '');
+$rekom = strip_tags($KondisiDominan['rekomendasi'] ?? '');
                             @endphp
                             @if(stripos($rekom, 'diskusi kelompok aktif') !== false)
                                 <div class="mb-2 mt-3" style="font-size: 1rem;">
