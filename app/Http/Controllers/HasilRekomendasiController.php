@@ -315,7 +315,7 @@ class HasilRekomendasiController extends Controller
         if (stripos($teks, 'diskusi kelompok aktif') !== false) {
             return '
                 <ul>
-                    <li>Minta setiap kelompok menetapkan satu *aturan komunikasi tim* (misalnya: semua ide harus dicatat sebelum dipilih)</li>
+                    <li>Minta setiap kelompok menetapkan aturan tim, dan peran masing-masing anggota dalam kelompok sendiri</li>
                     <li>Berikan pertanyaan pemantik yang mendorong anggota kelompok untuk berbagi dan membandingkan ide mereka sebelum membuat keputusan bersama</li>
                     <li>Berikan waktu refleksi kelompok selama 5 menit di akhir sesi diskusi untuk membicarakan bagaimana mereka bekerja sama dan menyelesaikan perbedaan pendapat</li>
                     <li>Rotasi moderator kelompok tiap pertemuan untuk melatih kepemimpinan dan komunikasi antar anggota</li>
@@ -329,9 +329,8 @@ class HasilRekomendasiController extends Controller
                     <li>Rancang penugasan berbasis masalah yang mendorong interaksi tim: saling bertukar pendapat, negosiasi ide, dan mencari solusi bersama</li>
                     <li>Latih mahasiswa untuk menyampaikan hasil kerjanya secara terbuka, dan dorong rekan satu kelompok untuk memberi tanggapan atau pertanyaan</li>
                     <li>Dosen dapat membimbing dengan mengamati proses diskusi, memberikan arahan saat diperlukan, dan membantu mahasiswa membangun komunikasi yang sehat</li>
-                    <li>Bila diskusi dilakukan di luar kelas, minta laporan proses atau jurnal sebagai alat monitoring keterlibatan anggota</li>
+                    <li>Bila diskusi dilakukan di luar kelas, minta laporan proses atau jurnal sebagai alat monitoring keterlibatan anggota, atau melakukan review atas pekerjaan yang dikerjakan anggota lain</li>
                     <li>Peran dosen sangat penting sebagai fasilitator awal untuk membentuk budaya kolaborasi, dengan memberi ruang terbuka bagi komunikasi, kesepakatan kerja, dan penyelesaian konflik sederhana</li>
-
                 </ul>
             ';
         }

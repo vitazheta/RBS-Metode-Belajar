@@ -151,7 +151,7 @@ class RuleSeeder extends Seeder
                                 $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
                                 $rekomendasiEvaluasi2 = NULL;
                                 $rekomendasiEvaluasi3 = NULL;
-                            } else if (
+                            } else if (//11
                                 $akademik === 'Perlu Penguatan' &&
                                 $sekolah === 'Mendukung' &&
                                 $ekonomi === 'Kurang Mencukupi' &&
@@ -163,7 +163,7 @@ class RuleSeeder extends Seeder
                                 $rekomendasiEvaluasi1 = 'Penilaian Formatif Berupa Kuis';
                                 $rekomendasiEvaluasi2 = NULL;
                                 $rekomendasiEvaluasi3 = NULL;
-                            } else if (
+                            } else if (//12
                                 $akademik === 'Perlu Penguatan' &&
                                 $sekolah === 'Mendukung' &&
                                 $ekonomi === 'Kurang Mencukupi' &&
@@ -175,7 +175,7 @@ class RuleSeeder extends Seeder
                                 $rekomendasiEvaluasi1 = 'Tugas Studi Kasus Terstruktur';
                                 $rekomendasiEvaluasi2 = 'Review Materi dan Tanya Jawab';
                                 $rekomendasiEvaluasi3 = NULL; 
-                            } else if (
+                            } else if (//13
                                 $akademik === 'Perlu Penguatan' &&
                                 $sekolah === 'Kurang Mendukung' &&
                                 $ekonomi === 'Mencukupi' &&
@@ -187,19 +187,19 @@ class RuleSeeder extends Seeder
                                 $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
                                 $rekomendasiEvaluasi2 = 'Penilaian Formatif Berupa Kuis';
                                 $rekomendasiEvaluasi3 = NULL;
-                            } else if (
+                            } else if (//14
                                 $akademik === 'Perlu Penguatan' &&
                                 $sekolah === 'Kurang Mendukung' &&
                                 $ekonomi === 'Mencukupi' &&
                                 $perkuliahan === 'Kurang Baik'
                             ) {
-                                $rekomendasiPendekatan1 = 'Materi Ringkasan';
+                                $rekomendasiPendekatan1 = 'Mentoring dan Sesi Konsultasi';
                                 $rekomendasiPendekatan2 = NULL;
                                 $rekomendasiPendekatan3 = NULL; 
-                                $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
+                                $rekomendasiEvaluasi1 = 'Penilaian Formatif Berupa Kuis';
                                 $rekomendasiEvaluasi2 = NULL;
                                 $rekomendasiEvaluasi3 = NULL; 
-                            } else if (
+                            } else if (//15
                                 $akademik === 'Perlu Penguatan' &&
                                 $sekolah === 'Kurang Mendukung' &&
                                 $ekonomi === 'Kurang Mencukupi' &&
@@ -211,7 +211,7 @@ class RuleSeeder extends Seeder
                                 $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
                                 $rekomendasiEvaluasi2 = NULL;
                                 $rekomendasiEvaluasi3 = NULL; 
-                            } else if (
+                            } else if (//16
                                 $akademik === 'Perlu Penguatan' &&
                                 $sekolah === 'Kurang Mendukung' &&
                                 $ekonomi === 'Kurang Mencukupi' &&
