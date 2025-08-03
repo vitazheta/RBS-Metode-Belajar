@@ -13,12 +13,10 @@ class HasilRekomendasiController extends Controller
     public function show($id)
     {
         $kelas = Kelas::with('mahasiswa')->findOrFail($id);
-        $students = $kelas->mahasiswa;
-        $jalurList = ['SNBP', 'SNBT', 'MANDIRI'];
 
-        // Cek otorisasi
-        if ((int)$kelas->dosen_id !== auth()->id()) { // <<< Tambahkan (int) di sini
-        abort(403, 'Anda tidak punya akses ke halaman ini.');
+        // Cek apakah dosen yang login adalah pemilik kelas ini
+        if ($kelas->dosen_id !== auth()->id()) {
+            abort(403, 'Anda tidak punya akses ke halaman ini.');
         }
 
         $students = $kelas->mahasiswa;
@@ -190,14 +188,10 @@ class HasilRekomendasiController extends Controller
             ];
         }
 
-        $hasilKolaborasi = $this->hasilKolaborasi($kalimat['rekomendasi']);
+        // Panggil fungsi rekomendasiBelajar
+        $rekomendasi = $this->rekomendasiBelajar($chartData);
 
-        // Hitung persentase kombinasi dominan
-        $PersentaseRekomendasi = 0;
-        if (!empty($kombinasiCount) && !empty($dominantKombinasiJson) && count($students) > 0) {
-            $PersentaseRekomendasi = round(($kombinasiCount[$dominantKombinasiJson] / count($students)) * 100, 2);
-        }
-
+        // Tampilkan view hasil rekomendasi
         return view('hasil_rekomendasi', [
             'kelas' => $kelas,
             'students' => $students,
@@ -208,14 +202,13 @@ class HasilRekomendasiController extends Controller
             ],
             'PersentaseRekomendasi' => $PersentaseRekomendasi,
             'chartData' => $chartData,
-            'jumlahPerJalur' => $jumlahPerJalur,
-            'persentaseKecocokanJalur' => $persentaseKecocokanJalur,
-            'hasilKolaborasi' => $hasilKolaborasi,
+            'rekomendasi' => $rekomendasi['rekomendasi'], // Rekomendasi untuk setiap aspek
+            'alasan' => $rekomendasi['alasan'], // Alasan untuk setiap aspek
         ]);
     }
 
-    // Fungsi generate kalimat kondisi & rekomendasi
-    private function generateKalimatRekomendasi($kombinasi, $rule)
+    // MEMBUAT RULE REKOMENDASI BELAJAR
+    public function rekomendasiBelajar($data)
     {
         if (!$kombinasi || !$rule) {
             return [
@@ -539,4 +532,5 @@ class HasilRekomendasiController extends Controller
             'hasilKolaborasi' => $hasilKolaborasi,
         ])->download('hasilrekomendasi.pdf');
     }
+
 }
