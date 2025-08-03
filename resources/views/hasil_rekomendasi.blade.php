@@ -131,7 +131,7 @@
         }
         btn .btn-kolaborasi:hover {
             background-color: #162449;
-            
+
         }
         .analisis-kebutuhan {
             background-color: #f8f9fa;
@@ -174,7 +174,7 @@
             background-color: #373737;
             color: #ffffff;
         }
-        
+
         body.dark-theme .card-body-highlight {
             background-color: #373737;
             color: #ffffff;
@@ -195,7 +195,7 @@
         }
 
         body.dark-theme .analisis-kebutuhan {
-            background-color: #373737; 
+            background-color: #373737;
             color: #FFFFFF;
         }
 
@@ -268,7 +268,7 @@
 
 <div class="container" style="padding-top: 50px;">
     <h2 class="mb-2 fw-bold position-relative d-inline-block no-print" style="padding-top: 70px;">
-        Hasil Rekomendasi Pembelajaran Kelas 
+        Hasil Rekomendasi Pembelajaran Kelas
         <span class="d-block mt-1" style="height: 3px; width: 100%; background-color: #84A7CF;"></span>
     </h2>
 
@@ -417,7 +417,7 @@
                                     <h6 class="fw mb-1">Persentase Kecocokan:</h6>
                                     <div>
                                         <ul class="mb-1">
-                                            @foreach($persentaseKecocokanJalur['SNBP']['pendekatan'] as $kataKunci => $persen)
+                                            @foreach($persentaseKecocokanJalur['SNBP']['strategi'] as $kataKunci => $persen)
                                                 <li>
                                                     <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur SNBP
                                                 </li>
@@ -452,7 +452,7 @@
                                     <h6 class="fw mb-1">Persentase Kecocokan:</h6>
                                     <div>
                                         <ul class="mb-1">
-                                            @foreach($persentaseKecocokanJalur['SNBT']['pendekatan'] as $kataKunci => $persen)
+                                            @foreach($persentaseKecocokanJalur['SNBT']['strategi'] as $kataKunci => $persen)
                                                 <li>
                                                     <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur SNBT
                                                 </li>
@@ -487,7 +487,7 @@
                                     <h6 class="fw mb-1">Persentase Kecocokan:</h6>
                                     <div>
                                         <ul class="mb-1">
-                                            @foreach($persentaseKecocokanJalur['MANDIRI']['pendekatan'] as $kataKunci => $persen)
+                                            @foreach($persentaseKecocokanJalur['MANDIRI']['strategi'] as $kataKunci => $persen)
                                                 <li>
                                                     <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur Mandiri
                                                 </li>
@@ -509,7 +509,7 @@
 
                 <div class="d-flex justify-content-center no-print" style="margin-bottom: 20px;">
                     <button id="btnKolaborasi" class="btn btn-kolaborasi" style="font-size: 1rem; border: none;">
-                        <i class="fas fa-users kolaborasi-icon"></i> 
+                        <i class="fas fa-users kolaborasi-icon"></i>
                         <span class="kolaborasi-text">Cek Kebutuhan Kolaborasi</span>
                     </button>
                 </div>
@@ -564,14 +564,14 @@ $rekom = strip_tags($KondisiDominan['rekomendasi'] ?? '');
             </div>
 
 
-                
+
             </div>
 
-            
+
         </div>
     </div>
 
- 
+
 
 @push('scripts')
 {{-- Perbaikan: cdn.jsdelivr1.com menjadi cdn.jsdelivr.net --}}
@@ -703,7 +703,7 @@ $rekom = strip_tags($KondisiDominan['rekomendasi'] ?? '');
         // Gunakan setTimeout dengan sedikit delay untuk memastikan browser sudah merender elemen
         setTimeout(() => {
             hasilKolaborasiElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 50); // 
+        }, 50); //
     };
 </script>
 

@@ -51,8 +51,13 @@
     .custom-table .btn-delete { background-color: #F37AB0; border: none; color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; }
     .custom-table .btn-delete:hover { background-color: #E2A6C1; }
 
+    /* Ini untuk desktop, tidak perlu diubah */
     #dynamicTable { table-layout: fixed; width: 100%; }
     #dynamicTable th, #dynamicTable td { padding: 12px 6px; word-wrap: break-word; overflow-wrap: break-word; }
+    #dynamicTable th:nth-child(1), #dynamicTable td:nth-child(1) { width: 60px; } /* No */
+    #dynamicTable th:nth-child(2), #dynamicTable td:nth-child(2) { width: 260px; } /* Nama Lengkap */
+    #dynamicTable th:nth-child(3), #dynamicTable td:nth-child(3) { width: 260px; } /* Asal Sekolah */
+
 
     .content-wrapper { min-height: calc(100vh - 100px); margin-bottom: 100px; background-color: transparent; }
     .container.content-wrapper { background-color: transparent; box-shadow: none; }
@@ -64,8 +69,6 @@
     .btn-upload-excel { background-color: #0E1F4D !important; color: #fff !important; border: none !important; }
     .btn-upload-excel:hover { background-color: #70788F !important; color: #fff !important; }
 
-
-    /* Kelas baru untuk kartu ringkasan data */
     .summary-card {
         background-color: #ffffff; /* Default light mode */
         border: none;
@@ -74,25 +77,25 @@
 
     /* --- DARK THEME STYLES (KHUSUS UNTUK KOMPONEN DI HALAMAN INI) --- */
     body.dark-theme .container h2 {
-        color: #FFFFFF; /* Judul "Data Kelas" di dark mode */
+        color: #FFFFFF;
     }
     body.dark-theme #toggleBtn {
-        color: #CFD3D6; /* Link "Lihat panduan pengisian" di dark mode */
+        color: #CFD3D6;
     }
     body.dark-theme .form-label {
-        color: #CFD3D6; /* Label form di dark mode */
+        color: #CFD3D6;
     }
     body.dark-theme .card-body-form {
-        background-color: #2D2D2D; /* Latar belakang form di dark mode */
-        color: #FFFFFF; /* Teks di form di dark mode */
+        background-color: #2D2D2D;
+        color: #FFFFFF;
     }
     body.dark-theme .card-body-form p {
-        color: #CFD3D6; /* Paragraf di form di dark mode */
+        color: #CFD3D6;
     }
     body.dark-theme .form-control {
-        background-color: #3A3A3A; /* Input field di dark mode */
+        background-color: #3A3A3A;
         color: #FFFFFF;
-        border-color: #555555; /* Border input di dark mode */
+        border-color: #555555;
     }
     body.dark-theme .form-control:focus {
         background-color: #3A3A3A;
@@ -100,7 +103,7 @@
         border-color: #888888;
     }
     body.dark-theme .form-control::placeholder {
-        color: #A0A0A0; /* Placeholder di dark mode */
+        color: #A0A0A0;
     }
     body.dark-theme input[type="file"] {
         background-color: #3A3A3A;
@@ -116,31 +119,31 @@
         color: #CFD3D6;
     }
     body.dark-theme .custom-table {
-        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05); /* Shadow di dark mode */
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
     }
     body.dark-theme .custom-table thead {
-        background-color: #1A202C; /* Header tabel di dark mode */
+        background-color: #1A202C;
         color: #FFFFFF;
     }
     body.dark-theme .custom-table th,
     body.dark-theme .custom-table td {
-        color: #CFD3D6; /* Teks tabel di dark mode */
+        color: #CFD3D6;
     }
     body.dark-theme .custom-table tbody tr:nth-child(even) {
-        background-color: #2D2D2D; /* Baris genap tabel di dark mode */
+        background-color: #2D2D2D;
     }
     body.dark-theme .custom-table tbody tr:nth-child(odd) {
-        background-color: #3A3A3A; /* Baris ganjil tabel di dark mode */
+        background-color: #3A3A3A;
     }
     body.dark-theme .custom-table .btn-delete {
-        background-color: #F481B4; /* Tombol hapus tabel di dark mode */
+        background-color: #F481B4;
     }
     body.dark-theme .custom-table .btn-delete:hover {
         background-color: #E5AFC7;
     }
     body.dark-theme #saveBtn,
     body.dark-theme #generateBtn {
-        background-color: #162449 !important; /* Tombol simpan/generate di dark mode */
+        background-color: #162449 !important;
         color: #FFFFFF !important;
     }
     body.dark-theme #saveBtn:hover,
@@ -148,7 +151,7 @@
         background-color: #777F95 !important;
     }
     body.dark-theme #addRowBtn {
-        background-color: #F481B4 !important; /* Tombol tambah baris di dark mode */
+        background-color: #F481B4 !important;
         color: #FFFFFF !important;
     }
     body.dark-theme #addRowBtn:hover {
@@ -164,19 +167,129 @@
 
     /* DARK MODE untuk Ringkasan Data Card */
     body.dark-theme .summary-card {
-        background-color: #2D2D2D; /* Latar belakang kartu ringkasan gelap */
-        /* Anda bisa menghapus 'color: #FFFFFF;' di sini jika ada, karena akan spesifik di bawah */
+        background-color: #2D2D2D;
     }
     body.dark-theme .summary-card h4 {
-        color: #FFFFFF !important; /* PERBAIKAN: Gunakan !important untuk judul H4 */
+        color: #FFFFFF !important;
     }
     body.dark-theme .summary-card p {
-        color: #CFD3D6 !important; /* PERBAIKAN: Gunakan !important untuk paragraf */
+        color: #CFD3D6 !important;
     }
     body.dark-theme .summary-card strong {
-        color: #FFFFFF !important; /* PERBAIKAN: Gunakan !important untuk teks bold */
+        color: #FFFFFF !important;
     }
 
+
+    /* Media Query untuk Layar Kecil (Mobile) */
+    @media (max-width: 767.98px) {
+        /* Form input Nama Kelas dan Kode Mata Kuliah */
+        .mb-3.d-flex {
+            flex-direction: column;
+            gap: 15px;
+        }
+        .mb-3.d-flex .w-50 {
+            width: 100% !important;
+            margin-right: 0 !important;
+        }
+
+        /* Container untuk Tabel Responsif */
+        .table-responsive-sm {
+            overflow-x: auto; /* Kunci agar tabel bisa di-scroll horizontal */
+            -webkit-overflow-scrolling: touch; /* Untuk smooth scrolling di iOS */
+            padding-bottom: 15px; /* Beri sedikit ruang agar scrollbar terlihat */
+            border: 1px solid #dee2e6; /* Border pada container tabel */
+            border-radius: 8px; /* Sudut melengkung pada container tabel */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Shadow pada container tabel */
+            margin-bottom: 20px; /* Jarak bawah container tabel */
+        }
+
+        .custom-table {
+            /* Pastikan width total tabel lebih besar dari lebar viewport mobile
+               agar memicu scroll horizontal.
+               Gunakan min-width yang cukup lebar untuk menampung semua kolom. */
+            width: 100%; /* Pastikan tabel mengambil 100% dari wrapper-nya */
+            min-width: 800px; /* **INI PENTING: Minimal lebar tabel agar memicu scroll** */
+            font-size: 13px; /* Sedikit perkecil font untuk tabel di mobile */
+            /* Hapus border-radius dan box-shadow dari .custom-table itu sendiri
+               karena sudah ada di .table-responsive-sm */
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .custom-table th,
+        .custom-table td {
+            /* Pastikan teks tidak pecah baris untuk menjaga lebar kolom */
+            white-space: nowrap;
+            padding: 8px 8px; /* Sesuaikan padding di sel tabel agar tidak terlalu sempit */
+        }
+
+        .custom-table td input.form-control,
+        .custom-table td select.form-control {
+            font-size: 13px; /* Perkecil font untuk input di sel tabel */
+            padding: 5px; /* Kurangi padding input di sel tabel */
+            min-width: 90px; /* Minimal lebar input agar tidak terlalu sempit */
+        }
+
+        /* Penyesuaian lebar kolom spesifik di mobile agar lebih rapi.
+           Ini akan bekerja dengan `min-width` pada `.custom-table`. */
+        #dynamicTable th:nth-child(1), #dynamicTable td:nth-child(1) { width: 50px; } /* No */
+        #dynamicTable th:nth-child(2), #dynamicTable td:nth-child(2) { min-width: 160px; max-width: 200px; } /* Nama Lengkap */
+        #dynamicTable th:nth-child(3), #dynamicTable td:nth-child(3) { min-width: 160px; max-width: 200px; } /* Asal Sekolah */
+        #dynamicTable th:nth-child(4), #dynamicTable td:nth-child(4) { min-width: 120px; } /* Jalur Masuk */
+        #dynamicTable th:nth-child(5), #dynamicTable td:nth-child(5) { min-width: 90px; } /* Akademik */
+        #dynamicTable th:nth-child(6), #dynamicTable td:nth-child(6) { min-width: 90px; } /* Sekolah */
+        #dynamicTable th:nth-child(7), #dynamicTable td:nth-child(7) { min-width: 90px; } /* Ekonomi */
+        #dynamicTable th:nth-child(8), #dynamicTable td:nth-child(8) { min-width: 90px; } /* Perkuliahan */
+        #dynamicTable th:nth-child(9), #dynamicTable td:nth-child(9) { width: 70px; } /* Aksi */
+
+
+        /* Tombol di bawah tabel */
+        .d-flex.gap-2.mt-3 {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+        .d-flex.gap-2.mt-3 button {
+            width: 100%;
+        }
+
+        /* Summary Card */
+        .summary-card {
+            border-radius: 8px; /* Border radius untuk summary card */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Shadow untuk summary card */
+        }
+        .summary-card p {
+            font-size: 13px;
+        }
+        .summary-card .row.mb-3 {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Import Excel Section */
+        .input-group {
+            flex-direction: column;
+            gap: 10px;
+        }
+        .input-group .form-control,
+        .input-group .btn {
+            width: 100%;
+        }
+
+        /* Panduan Pengisian */
+        .collapse .card-body-form {
+            font-size: 13px;
+        }
+
+        /* Dark Theme adjustments for horizontal scroll table */
+        body.dark-theme .table-responsive-sm {
+            border: 1px solid #444; /* Border dark mode */
+            box-shadow: 0 4px 10px rgba(255,255,255,0.05); /* Shadow dark mode */
+        }
+        body.dark-theme .summary-card {
+            box-shadow: 0 4px 10px rgba(255,255,255,0.05);
+        }
+    }
 </style>
 
 <div class="container content-wrapper" style="padding-top: 100px;">
@@ -231,66 +344,70 @@
             </div>
         </div>
 
-        <table class="custom-table" id="dynamicTable">
-            <thead class="table-dark">
-                <tr>
-                    <th style="width: 60px;">No</th>
-                    <th style="width: 260px;">Nama Lengkap</th>
-                    <th style="width: 260px;">Asal Sekolah</th>
-                    <th>Jalur Masuk</th>
-                    <th>Akademik</th>
-                    <th>Sekolah</th>
-                    <th>Ekonomi</th>
-                    <th>Perkuliahan</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if(session('processedData') && is_array(session('processedData')))
-                    @foreach(session('processedData') as $i => $data)
+        {{-- Wrapper ini tetap penting --}}
+        <div class="table-responsive-sm">
+            <table class="custom-table" id="dynamicTable">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width: 60px;">No</th>
+                        <th style="width: 260px;">Nama Lengkap</th>
+                        <th style="width: 260px;">Asal Sekolah</th>
+                        <th>Jalur Masuk</th>
+                        <th>Akademik</th>
+                        <th>Sekolah</th>
+                        <th>Ekonomi</th>
+                        <th>Perkuliahan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(session('processedData') && is_array(session('processedData')))
+                        @foreach(session('processedData') as $i => $data)
+                            <tr>
+                                <td>{{ $i + 1 }}</td>
+                                <td><input type="text" name="mahasiswa[{{ $i }}][nama]" class="form-control" value="{{ $data['nama'] ?? '' }}"></td>
+                                <td><input type="text" name="mahasiswa[{{ $i }}][asal_sekolah]" class="form-control" value="{{ $data['asal_sekolah'] ?? '' }}"></td>
+                                <td>
+                                    <select name="mahasiswa[{{ $i }}][jalur_masuk]" class="form-control">
+                                        <option value="">Pilih Jalur</option>
+                                        <option value="SNBP" {{ ($data['jalur_masuk'] ?? '')=='SNBP'?'selected':'' }}>SNBP</option>
+                                        <option value="SNBT" {{ ($data['jalur_masuk'] ?? '')=='SNBT'?'selected':'' }}>SNBT</option>
+                                        <option value="MANDIRI" {{ ($data['jalur_masuk'] ?? '')=='MANDIRI'?'selected':'' }}>MANDIRI</option>
+                                    </select>
+                                </td>
+                                {{-- KOLOM YANG DIVALIDASI --}}
+                                <td><input type="text" name="mahasiswa[{{ $i }}][akademik]" class="form-control" value="{{ $data['akademik'] ?? '' }}"></td>
+                                <td><input type="text" name="mahasiswa[{{ $i }}][sekolah]" class="form-control" value="{{ $data['sekolah'] ?? '' }}"></td>
+                                <td><input type="text" name="mahasiswa[{{ $i }}][ekonomi]" class="form-control" value="{{ $data['ekonomi'] ?? '' }}"></td>
+                                <td><input type="text" name="mahasiswa[{{ $i }}][perkuliahan]" class="form-control" value="{{ $data['perkuliahan'] ?? '' }}"></td>
+                                <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+                            </tr>
+                        @endforeach
+                    @else
                         <tr>
-                            <td>{{ $i + 1 }}</td>
-                            <td><input type="text" name="mahasiswa[{{ $i }}][nama]" class="form-control" value="{{ $data['nama'] ?? '' }}"></td>
-                            <td><input type="text" name="mahasiswa[{{ $i }}][asal_sekolah]" class="form-control" value="{{ $data['asal_sekolah'] ?? '' }}"></td>
+                            <td>1</td>
+                            <td><input type="text" name="mahasiswa[0][nama]" class="form-control"></td>
+                            <td><input type="text" name="mahasiswa[0][asal_sekolah]" class="form-control"></td>
                             <td>
-                                <select name="mahasiswa[{{ $i }}][jalur_masuk]" class="form-control">
+                                <select name="mahasiswa[0][jalur_masuk]" class="form-control">
                                     <option value="">Pilih Jalur</option>
-                                    <option value="SNBP" {{ ($data['jalur_masuk'] ?? '')=='SNBP'?'selected':'' }}>SNBP</option>
-                                    <option value="SNBT" {{ ($data['jalur_masuk'] ?? '')=='SNBT'?'selected':'' }}>SNBT</option>
-                                    <option value="MANDIRI" {{ ($data['jalur_masuk'] ?? '')=='MANDIRI'?'selected':'' }}>MANDIRI</option>
+                                    <option value="SNBP">SNBP</option>
+                                    <option value="SNBT">SNBT</option>
+                                    <option value="MANDIRI">MANDIRI</option>
                                 </select>
                             </td>
                             {{-- KOLOM YANG DIVALIDASI --}}
-                            <td><input type="text" name="mahasiswa[{{ $i }}][akademik]" class="form-control" value="{{ $data['akademik'] ?? '' }}"></td>
-                            <td><input type="text" name="mahasiswa[{{ $i }}][sekolah]" class="form-control" value="{{ $data['sekolah'] ?? '' }}"></td>
-                            <td><input type="text" name="mahasiswa[{{ $i }}][ekonomi]" class="form-control" value="{{ $data['ekonomi'] ?? '' }}"></td>
-                            <td><input type="text" name="mahasiswa[{{ $i }}][perkuliahan]" class="form-control" value="{{ $data['perkuliahan'] ?? '' }}"></td>
+                            <td><input type="text" name="mahasiswa[0][akademik]" class="form-control"></td>
+                            <td><input type="text" name="mahasiswa[0][sekolah]" class="form-control"></td>
+                            <td><input type="text" name="mahasiswa[0][ekonomi]" class="form-control"></td>
+                            <td><input type="text" name="mahasiswa[0][perkuliahan]" class="form-control"></td>
                             <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
                         </tr>
-                    @endforeach
-                @else
-                    <tr>
-                        <td>1</td>
-                        <td><input type="text" name="mahasiswa[0][nama]" class="form-control"></td>
-                        <td><input type="text" name="mahasiswa[0][asal_sekolah]" class="form-control"></td>
-                        <td>
-                            <select name="mahasiswa[0][jalur_masuk]" class="form-control">
-                                <option value="">Pilih Jalur</option>
-                                <option value="SNBP">SNBP</option>
-                                <option value="SNBT">SNBT</option>
-                                <option value="MANDIRI">MANDIRI</option>
-                            </select>
-                        </td>
-                        {{-- KOLOM YANG DIVALIDASI --}}
-                        <td><input type="text" name="mahasiswa[0][akademik]" class="form-control"></td>
-                        <td><input type="text" name="mahasiswa[0][sekolah]" class="form-control"></td>
-                        <td><input type="text" name="mahasiswa[0][ekonomi]" class="form-control"></td>
-                        <td><input type="text" name="mahasiswa[0][perkuliahan]" class="form-control"></td>
-                        <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
-                    </tr>
-                @endif
-            </tbody>
-        </table>
+                    @endif
+                </tbody>
+            </table>
+        </div> {{-- End of table-responsive-sm wrapper --}}
+
         <div class="d-flex gap-2 mt-3">
             <button type="button" id="addRowBtn" class="btn btn-success ms-2">Tambah Baris</button>
             <button type="button" class="btn btn-primary" id="saveBtn">Simpan Data Kelas</button>
@@ -324,9 +441,9 @@ function validateNumberInput(inputElement) {
 
     const numberValue = parseFloat(value);
 
-    // Memeriksa apakah nilai input bukan angka valid atau di luar rentang 0-4
-    if (isNaN(numberValue) || numberValue < 0 || numberValue > 4) {
-        alert('Kolom ini hanya bisa diisi angka (termasuk desimal) antara 0 hingga 4!');
+    // Memeriksa apakah nilai input bukan angka valid atau di luar rentang 1-4
+    if (isNaN(numberValue) || numberValue < 1 || numberValue > 4) {
+        alert('Kolom ini hanya bisa diisi angka (termasuk desimal) antara 1 hingga 4!');
         inputElement.value = ''; // Kosongkan kolom jika input tidak valid
         inputElement.focus(); // Mengarahkan fokus kembali ke input yang salah
     }
@@ -403,6 +520,7 @@ function removeRow(button) {
 function updateRowNumbers() {
     const rows = document.querySelectorAll('#dynamicTable tbody tr');
     rows.forEach((row, index) => {
+        // Kolom 'No' tetap ada, jadi update textContent-nya
         row.cells[0].textContent = index + 1;
     });
 }
@@ -465,23 +583,29 @@ document.getElementById('saveBtn')?.addEventListener('click', function () {
             <p class="mb-4 text-muted" style="font-size: 14px;">
             Berikut ringkasan data yang telah Anda input. Silakan cek kembali sebelum menekan tombol <strong>Generate</strong>.
             </p>
-         <div class="row mb-3">
-        <div class="col-md-6">           <strong>Nama Kelas:</strong> <strong>${namaKelas}</strong> {{-- PERBAIKAN: Bungkus dengan <strong> --}}
-        </div>
-        <div class="col-md-6">
-        <strong>Kode Mata Kuliah:</strong> <strong>${kodeMK}</strong> {{-- PERBAIKAN: Bungkus dengan <strong> --}}
+           <div class="row mb-3">
+         <div class="col-md-6">           <strong>Nama Kelas:</strong> <strong>${namaKelas}</strong>
+         </div>
+         <div class="col-md-6">
+         <strong>Kode Mata Kuliah:</strong> <strong>${kodeMK}</strong>
     </div>
     </div>
+        <div class="table-responsive-sm">
         <table class="custom-table"><thead><tr>
         <th>Nama</th><th>Asal Sekolah</th><th>Jalur</th><th>Akademik</th><th>Sekolah</th><th>Ekonomi</th><th>Perkuliahan</th>
         </tr></thead><tbody>`;
     data.forEach(item => {
         summaryHTML += `<tr>
-            <td>${item.nama}</td><td>${item.asal_sekolah}</td><td>${item.jalur_masuk}</td><td>${item.akademik}</td>
-            <td>${item.sekolah}</td><td>${item.ekonomi}</td><td>${item.perkuliahan}</td>
+            <td>${item.nama}</td>
+            <td>${item.asal_sekolah}</td>
+            <td>${item.jalur_masuk}</td>
+            <td>${item.akademik}</td>
+            <td>${item.sekolah}</td>
+            <td>${item.ekonomi}</td>
+            <td>${item.perkuliahan}</td>
         </tr>`;
     });
-    summaryHTML += `</tbody></table>`;
+    summaryHTML += `</tbody></table></div>`; // Tutup table-responsive-sm div
     document.getElementById('summaryContainer').innerHTML = summaryHTML;
     document.getElementById('generateBtn')?.classList.remove('d-none');
     setTimeout(() => {
