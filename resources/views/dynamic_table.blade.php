@@ -441,9 +441,9 @@ function validateNumberInput(inputElement) {
 
     const numberValue = parseFloat(value);
 
-    // Memeriksa apakah nilai input bukan angka valid atau di luar rentang 0-4
-    if (isNaN(numberValue) || numberValue < 0 || numberValue > 4) {
-        alert('Kolom ini hanya bisa diisi angka (termasuk desimal) antara 0 hingga 4!');
+    // Memeriksa apakah nilai input bukan angka valid atau di luar rentang 1-4
+    if (isNaN(numberValue) || numberValue < 1 || numberValue > 4) {
+        alert('Kolom ini hanya bisa diisi angka (termasuk desimal) antara 1 hingga 4!');
         inputElement.value = ''; // Kosongkan kolom jika input tidak valid
         inputElement.focus(); // Mengarahkan fokus kembali ke input yang salah
     }

@@ -87,10 +87,10 @@ class HasilRekomendasiController extends Controller
         // Persentase kecocokan per jalur (kata kunci serupa)
         $persentaseKecocokanJalur = [];
         if ($ruleDominan) {
-            $rekomDominanPendekatan = array_filter([
-                $ruleDominan->rek_pendekatan_1,
-                $ruleDominan->rek_pendekatan_2,
-                $ruleDominan->rek_pendekatan_3,
+            $rekomDominanStrategi = array_filter([
+                $ruleDominan->rek_strategi_1,
+                $ruleDominan->rek_strategi_2,
+                $ruleDominan->rek_strategi_3,
             ]);
             $rekomDominanEvaluasi = array_filter([
                 $ruleDominan->rek_evaluasi_1,
@@ -102,9 +102,9 @@ class HasilRekomendasiController extends Controller
                 $filtered = $students->where('jalur_masuk', $jalur);
                 $total = $filtered->count();
 
-                // Persentase kecocokan pendekatan per kata kunci
-                $persenPendekatan = [];
-                foreach ($rekomDominanPendekatan as $kunci) {
+                // Persentase kecocokan strategi per kata kunci
+                $persenStrategi = [];
+                foreach ($rekomDominanStrategi as $kunci) {
                     $cocok = 0;
                     foreach ($filtered as $mhs) {
                         $ruleMhs = Rule::where([
@@ -114,12 +114,12 @@ class HasilRekomendasiController extends Controller
                             'perkuliahan' => $mhs->perkuliahan_text,
                         ])->first();
                         if ($ruleMhs) {
-                            $mhsPendekatan = array_filter([
-                                $ruleMhs->rek_pendekatan_1,
-                                $ruleMhs->rek_pendekatan_2,
-                                $ruleMhs->rek_pendekatan_3,
+                            $mhsStrategi = array_filter([
+                                $ruleMhs->rek_strategi_1,
+                                $ruleMhs->rek_strategi_2,
+                                $ruleMhs->rek_strategi_3,
                             ]);
-                            foreach ($mhsPendekatan as $mhsKunci) {
+                            foreach ($mhsStrategi as $mhsKunci) {
                                 if (
                                     !empty($kunci) && !empty($mhsKunci) &&
                                     stripos($mhsKunci, $kunci) !== false
@@ -130,7 +130,7 @@ class HasilRekomendasiController extends Controller
                             }
                         }
                     }
-                    $persenPendekatan[$kunci] = $total > 0 ? round(($cocok / $total) * 100, 2) : 0;
+                    $persenStrategi[$kunci] = $total > 0 ? round(($cocok / $total) * 100, 2) : 0;
                 }
 
                 // Persentase kecocokan evaluasi per kata kunci
@@ -165,7 +165,7 @@ class HasilRekomendasiController extends Controller
                 }
 
                 $persentaseKecocokanJalur[$jalur] = [
-                    'pendekatan' => $persenPendekatan,
+                    'strategi' => $persenStrategi,
                     'evaluasi' => $persenEvaluasi,
                 ];
             }
@@ -240,24 +240,24 @@ class HasilRekomendasiController extends Controller
         $kondisi .= "</ul>";
 
         $rekomendasi = "<ul>";
-            if (!empty($rule->rek_pendekatan_1) && strtolower($rule->rek_pendekatan_1) == 'materi ringkasan') { //REKOMENDASI PENDEKATAN MATERI RINGKASAN 1
+            if (!empty($rule->rek_strategi_1) && strtolower($rule->rek_strategi_1) == 'materi ringkasan') { //REKOMENDASI STRATEGI MATERI RINGKASAN 1
                 $rekomendasi .= "<li>Gunakan <b>Materi Ringkasan</b> untuk dapat memberikan gambaran yang jelas dan padat, sehingga mahasiswa dapat lebih mudah memahami arah pembelajaran secara keseluruhan.</li>";
-            } if (!empty($rule->rek_pendekatan_1) && strtolower($rule->rek_pendekatan_1) == 'penjelasan mendalam') {
+            } if (!empty($rule->rek_strategi_1) && strtolower($rule->rek_strategi_1) == 'penjelasan mendalam') {
                 $rekomendasi .= "<li>Pembelajaran difokuskan pada <b>Penjelasan Mendalam</b> untuk memberikan pemahaman komprehensif terhadap konsep, serta mendorong mahasiswa untuk berpikir analitis dan kritis terhadap materi yang dipelajari.</li>";
-            } if (!empty($rule->rek_pendekatan_1) && strtolower($rule->rek_pendekatan_1) == 'diskusi kelompok aktif') {
-                $rekomendasi .= "<li><b>Diskusi Kelompok Aktif</b> direkomendasikan sebagai pendekatan utama karena mampu membangun keterlibatan mahasiswa, meningkatkan interaksi, dan memperkuat pemahaman melalui pertukaran gagasan secara langsung.</li>;";
-            } if (!empty($rule->rek_pendekatan_2) && strtolower($rule->rek_pendekatan_2) == 'materi ringkasan') {
+            } if (!empty($rule->rek_strategi_1) && strtolower($rule->rek_strategi_1) == 'diskusi kelompok aktif') {
+                $rekomendasi .= "<li><b>Diskusi Kelompok Aktif</b> direkomendasikan sebagai strategi utama karena mampu membangun keterlibatan mahasiswa, meningkatkan interaksi, dan memperkuat pemahaman melalui pertukaran gagasan secara langsung.</li>";
+            } if (!empty($rule->rek_strategi_2) && strtolower($rule->rek_strategi_2) == 'materi ringkasan') {
                 $rekomendasi .= "<li>Selain itu, gunakan <b>Materi Ringkasan</b> untuk untuk dapat memberikan gambaran yang jelas dan padat, sehingga mahasiswa dapat lebih mudah memahami arah pembelajaran secara keseluruhan.</li>";
-            } if (!empty($rule->rek_pendekatan_2) && strtolower($rule->rek_pendekatan_2) == 'penjelasan mendalam') {
+            } if (!empty($rule->rek_strategi_2) && strtolower($rule->rek_strategi_2) == 'penjelasan mendalam') {
                 $rekomendasi .= "<li>Selain itu, jelaskan materi dengan <b>Penjelasan Mendalam</b> untuk memberikan pemahaman komprehensif terhadap konsep, serta mendorong mahasiswa untuk berpikir analitis dan kritis terhadap materi yang dipelajari.</li>";
-            } if (!empty($rule->rek_pendekatan_2) && strtolower($rule->rek_pendekatan_2) == 'diskusi kelompok aktif') {
-                $rekomendasi .= "<li>Selain itu, <b>Diskusi Kelompok Aktif</b> juga dapat dilakukan sebagai pendekatan yang mampu membangun keterlibatan mahasiswa, meningkatkan interaksi, dan memperkuat pemahaman melalui pertukaran gagasan secara langsung.</li>";
-            } if (!empty($rule->rek_pendekatan_3) && strtolower($rule->rek_pendekatan_3) == 'materi ringkasan') {
-                $rekomendasi .= "<li>Sebagai pendekatan tambahan, gunakan <b>Materi Ringkasan dalam mendukung pembelajaran yang lebih padat dan mudah dipahami mahasiswa</li>";
-            } if (!empty($rule->rek_pendekatan_3) && strtolower($rule->rek_pendekatan_3) == 'penjelasan mendalam') {
-                $rekomendasi .= "<li>Sebagai pendekatan tambahan gunakan <b>Penjelasan Mendalam</b> untuk memberikan pemahaman komprehensif terhadap konsep, serta mendorong mahasiswa untuk berpikir analitis dan kritis terhadap materi yang dipelajari.</li>";
-            } if (!empty($rule->rek_pendekatan_3) && strtolower($rule->rek_pendekatan_3) == 'diskusi kelompok aktif') {
-                $rekomendasi .= "<li>Untuk memperkuat keterampilan kolaborasi mahasiswa gunakan <b>Diskusi Kelompok Aktif</b> sebagai pendekatan yang mampu membangun keterlibatan mahasiswa, meningkatkan interaksi, dan memperkuat pemahaman melalui pertukaran gagasan secara langsung.</li>";
+            } if (!empty($rule->rek_strategi_2) && strtolower($rule->rek_strategi_2) == 'diskusi kelompok aktif') {
+                $rekomendasi .= "<li>Selain itu, <b>Diskusi Kelompok Aktif</b> juga dapat dilakukan sebagai strategi yang mampu membangun keterlibatan mahasiswa, meningkatkan interaksi, dan memperkuat pemahaman melalui pertukaran gagasan secara langsung.</li>";
+            } if (!empty($rule->rek_strategi_3) && strtolower($rule->rek_strategi_3) == 'materi ringkasan') {
+                $rekomendasi .= "<li>Sebagai strategi tambahan, gunakan <b>Materi Ringkasan dalam mendukung pembelajaran yang lebih padat dan mudah dipahami mahasiswa</li>";
+            } if (!empty($rule->rek_strategi_3) && strtolower($rule->rek_strategi_3) == 'penjelasan mendalam') {
+                $rekomendasi .= "<li>Sebagai strategi tambahan gunakan <b>Penjelasan Mendalam</b> untuk memberikan pemahaman komprehensif terhadap konsep, serta mendorong mahasiswa untuk berpikir analitis dan kritis terhadap materi yang dipelajari.</li>";
+            } if (!empty($rule->rek_strategi_3) && strtolower($rule->rek_strategi_3) == 'diskusi kelompok aktif') {
+                $rekomendasi .= "<li>Untuk memperkuat keterampilan kolaborasi mahasiswa gunakan <b>Diskusi Kelompok Aktif</b> sebagai strategi yang mampu membangun keterlibatan mahasiswa, meningkatkan interaksi, dan memperkuat pemahaman melalui pertukaran gagasan secara langsung.</li>";
             } if (!empty($rule->rek_evaluasi_1) && strtolower($rule->rek_evaluasi_1) == 'review materi dan tanya jawab') {
                 $rekomendasi .= "<li>Selain itu, <b>Review Materi dan Sesi Tanya Jawab</b> direkomendasikan sebagai strategi dalam melakukan evaluasi karena mampu secara langsung mengukur sejauh mana mahasiswa memahami materi sekaligus memberikan ruang klarifikasi atas hal-hal yang belum dipahami. </li>";
             } if (!empty($rule->rek_evaluasi_1) && strtolower($rule->rek_evaluasi_1) == 'penilaian formatif berupa kuis') {
@@ -277,9 +277,9 @@ class HasilRekomendasiController extends Controller
             } if (!empty($rule->rek_evaluasi_3) && strtolower($rule->rek_evaluasi_3) == 'review materi dan tanya jawab') {
                 $rekomendasi .= "<li>Selain itu, <b>Review Materi dan Sesi Tanya Jawab</b> direkomendasikan sebagai strategi dalam melakukan evaluasi karena mampu secara langsung mengukur sejauh mana mahasiswa memahami materi sekaligus memberikan ruang klarifikasi atas hal-hal yang belum dipahami. </li>";
             } if (!empty($rule->rek_evaluasi_3) && strtolower($rule->rek_evaluasi_3) == 'penilaian formatif berupa kuis') {
-                $rekomendasi .= "<li>Selain itu, <b>Penilaian Formatif</b> melalui kuis menjadi strategi evaluasi utama karena dapat mengukur pemahaman mahasiswa secara cepat dan memberi umpan balik instan untuk perbaikan pembelajaran.</li>;";
+                $rekomendasi .= "<li>Selain itu, <b>Penilaian Formatif</b> melalui kuis menjadi strategi evaluasi utama karena dapat mengukur pemahaman mahasiswa secara cepat dan memberi umpan balik instan untuk perbaikan pembelajaran.</li>";
                } if (!empty($rule->rek_evaluasi_3) && strtolower($rule->rek_evaluasi_3) == 'tugas studi kasus terstruktur') {
-                $rekomendasi .= "<li><b>Tugas Studi Kasus Terstruktur</b> direkomendasikan sebagai metode evaluasi untuk mengasah kemampuan berpikir kritis dan penerapan konsep dalam konteks nyata.</li>;";
+                $rekomendasi .= "<li><b>Tugas Studi Kasus Terstruktur</b> direkomendasikan sebagai metode evaluasi untuk mengasah kemampuan berpikir kritis dan penerapan konsep dalam konteks nyata.</li>";
             } if (!empty($rule->rek_evaluasi_3) && strtolower($rule->rek_evaluasi_3) == 'tugas ringan secara rutin') {
                 $rekomendasi .= "<li>Selain itu, <b>Pemberian Tugas Ringan Secara Rutin</b> juga direkomendasikan sebagai bagian dari strategi evaluasi untuk membantu membentuk kebiasaan belajar yang konsisten dan memperkuat pemahaman secara bertahap.</li>";
             }
@@ -413,10 +413,10 @@ class HasilRekomendasiController extends Controller
         // Persentase kecocokan per jalur (kata kunci serupa)
         $persentaseKecocokanJalur = [];
         if ($ruleDominan) {
-            $rekomDominanPendekatan = array_filter([
-                $ruleDominan->rek_pendekatan_1,
-                $ruleDominan->rek_pendekatan_2,
-                $ruleDominan->rek_pendekatan_3,
+            $rekomDominanStrategi = array_filter([
+                $ruleDominan->rek_strategi_1,
+                $ruleDominan->rek_strategi_2,
+                $ruleDominan->rek_strategi_3,
             ]);
             $rekomDominanEvaluasi = array_filter([
                 $ruleDominan->rek_evaluasi_1,
@@ -428,9 +428,9 @@ class HasilRekomendasiController extends Controller
                 $filtered = $students->where('jalur_masuk', $jalur);
                 $total = $filtered->count();
 
-                // Persentase kecocokan pendekatan per kata kunci
-                $persenPendekatan = [];
-                foreach ($rekomDominanPendekatan as $kunci) {
+                // Persentase kecocokan strategi per kata kunci
+                $persenStrategi = [];
+                foreach ($rekomDominanStrategi as $kunci) {
                     $cocok = 0;
                     foreach ($filtered as $mhs) {
                         $ruleMhs = Rule::where([
@@ -440,12 +440,12 @@ class HasilRekomendasiController extends Controller
                             'perkuliahan' => $mhs->perkuliahan_text,
                         ])->first();
                         if ($ruleMhs) {
-                            $mhsPendekatan = array_filter([
-                                $ruleMhs->rek_pendekatan_1,
-                                $ruleMhs->rek_pendekatan_2,
-                                $ruleMhs->rek_pendekatan_3,
+                            $mhsStrategi = array_filter([
+                                $ruleMhs->rek_strategi_1,
+                                $ruleMhs->rek_strategi_2,
+                                $ruleMhs->rek_strategi_3,
                             ]);
-                            foreach ($mhsPendekatan as $mhsKunci) {
+                            foreach ($mhsStrategi as $mhsKunci) {
                                 if (
                                     !empty($kunci) && !empty($mhsKunci) &&
                                     stripos($mhsKunci, $kunci) !== false
@@ -456,7 +456,7 @@ class HasilRekomendasiController extends Controller
                             }
                         }
                     }
-                    $persenPendekatan[$kunci] = $total > 0 ? round(($cocok / $total) * 100, 2) : 0;
+                    $persenStrategi[$kunci] = $total > 0 ? round(($cocok / $total) * 100, 2) : 0;
                 }
 
                 // Persentase kecocokan evaluasi per kata kunci
@@ -491,7 +491,7 @@ class HasilRekomendasiController extends Controller
                 }
 
                 $persentaseKecocokanJalur[$jalur] = [
-                    'pendekatan' => $persenPendekatan,
+                    'strategi' => $persenStrategi,
                     'evaluasi' => $persenEvaluasi,
                 ];
             }
