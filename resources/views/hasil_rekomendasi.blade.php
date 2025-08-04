@@ -417,7 +417,7 @@
                                     <h6 class="fw mb-1">Persentase Kecocokan:</h6>
                                     <div>
                                         <ul class="mb-1">
-                                            @foreach($persentaseKecocokanJalur['SNBP']['pendekatan'] as $kataKunci => $persen)
+                                            @foreach($persentaseKecocokanJalur['SNBP']['strategi'] as $kataKunci => $persen)
                                                 <li>
                                                     <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur SNBP
                                                 </li>
@@ -452,7 +452,7 @@
                                     <h6 class="fw mb-1">Persentase Kecocokan:</h6>
                                     <div>
                                         <ul class="mb-1">
-                                            @foreach($persentaseKecocokanJalur['SNBT']['pendekatan'] as $kataKunci => $persen)
+                                            @foreach($persentaseKecocokanJalur['SNBT']['strategi'] as $kataKunci => $persen)
                                                 <li>
                                                     <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur SNBT
                                                 </li>
@@ -487,7 +487,7 @@
                                     <h6 class="fw mb-1">Persentase Kecocokan:</h6>
                                     <div>
                                         <ul class="mb-1">
-                                            @foreach($persentaseKecocokanJalur['MANDIRI']['pendekatan'] as $kataKunci => $persen)
+                                            @foreach($persentaseKecocokanJalur['MANDIRI']['strategi'] as $kataKunci => $persen)
                                                 <li>
                                                     <b>{{ $kataKunci }}</b>: {{ $persen }}% dari seluruh mahasiswa jalur Mandiri
                                                 </li>
