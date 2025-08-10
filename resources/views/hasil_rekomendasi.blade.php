@@ -13,7 +13,6 @@
             font-family: 'Poppins', sans-serif;
             background-color: #EBEDF4;
         }
-        /* ... (CSS Anda yang lain tetap sama) ... */
         @media print {
             .container {
                 padding-top: 0 !important;

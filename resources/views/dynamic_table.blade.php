@@ -549,8 +549,8 @@ document.getElementById('saveBtn')?.addEventListener('click', function () {
             if (name.includes('[akademik]') || name.includes('[sekolah]') || name.includes('[ekonomi]') || name.includes('[perkuliahan]')) {
                 if (value !== '') {
                     const numberValue = parseFloat(value);
-                    if (isNaN(numberValue) || numberValue < 0 || numberValue > 4) {
-                        alert(`Kolom ${name.split('[')[2].replace(']', '')} pada baris ke-${index + 1} harus berupa angka (termasuk desimal) antara 0 hingga 4!`);
+                    if (isNaN(numberValue) || numberValue < 1 || numberValue > 4) {
+                        alert(`Kolom ${name.split('[')[2].replace(']', '')} pada baris ke-${index + 1} harus berupa angka (termasuk desimal) antara 1 hingga 4!`);
                         valid = false;
                         return;
                     }
