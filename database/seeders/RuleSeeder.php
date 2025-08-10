@@ -29,7 +29,6 @@ class RuleSeeder extends Seeder
                         foreach ($perkuliahanCategories as $perkuliahan) {
                             $rekomendasiStrategi1 = $rekomendasiStrategi2 = $rekomendasiStrategi3 = null;
                             $rekomendasiEvaluasi1 = $rekomendasiEvaluasi2 = $rekomendasiEvaluasi3 = null;
-
                             if (//1
                                 $akademik === 'Siap' &&
                                 $sekolah === 'Mendukung' &&
@@ -147,7 +146,7 @@ class RuleSeeder extends Seeder
                             ) {
                                 $rekomendasiStrategi1 = 'Materi Ringkasan';
                                 $rekomendasiStrategi2 = NULL;
-                                $rekomendasiStrategi3 = NULL; 
+                                $rekomendasiStrategi3 = NULL;
                                 $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
                                 $rekomendasiEvaluasi2 = NULL;
                                 $rekomendasiEvaluasi3 = NULL;
@@ -159,7 +158,7 @@ class RuleSeeder extends Seeder
                             ) {
                                 $rekomendasiStrategi1 = 'Materi Ringkasan';
                                 $rekomendasiStrategi2 = NULL;
-                                $rekomendasiStrategi3 = NULL; 
+                                $rekomendasiStrategi3 = NULL;
                                 $rekomendasiEvaluasi1 = 'Penilaian Formatif Berupa Kuis';
                                 $rekomendasiEvaluasi2 = NULL;
                                 $rekomendasiEvaluasi3 = NULL;
@@ -171,10 +170,10 @@ class RuleSeeder extends Seeder
                             ) {
                                 $rekomendasiStrategi1 = 'Diskusi Kelompok Aktif';
                                 $rekomendasiStrategi2 = 'Penjelasan Mendalam';
-                                $rekomendasiStrategi3 = NULL; 
+                                $rekomendasiStrategi3 = NULL;
                                 $rekomendasiEvaluasi1 = 'Tugas Studi Kasus Terstruktur';
                                 $rekomendasiEvaluasi2 = 'Review Materi dan Tanya Jawab';
-                                $rekomendasiEvaluasi3 = NULL; 
+                                $rekomendasiEvaluasi3 = NULL;
                             } else if (//13
                                 $akademik === 'Perlu Penguatan' &&
                                 $sekolah === 'Kurang Mendukung' &&
@@ -195,10 +194,10 @@ class RuleSeeder extends Seeder
                             ) {
                                 $rekomendasiStrategi1 = 'Mentoring dan Sesi Konsultasi';
                                 $rekomendasiStrategi2 = NULL;
-                                $rekomendasiStrategi3 = NULL; 
+                                $rekomendasiStrategi3 = NULL;
                                 $rekomendasiEvaluasi1 = 'Penilaian Formatif Berupa Kuis';
                                 $rekomendasiEvaluasi2 = NULL;
-                                $rekomendasiEvaluasi3 = NULL; 
+                                $rekomendasiEvaluasi3 = NULL;
                             } else if (//15
                                 $akademik === 'Perlu Penguatan' &&
                                 $sekolah === 'Kurang Mendukung' &&
@@ -207,10 +206,10 @@ class RuleSeeder extends Seeder
                             ) {
                                 $rekomendasiStrategi1 = 'Materi Ringkasan';
                                 $rekomendasiStrategi2 = NULL;
-                                $rekomendasiStrategi3 = NULL; 
+                                $rekomendasiStrategi3 = NULL;
                                 $rekomendasiEvaluasi1 = 'Review Materi dan Tanya Jawab';
                                 $rekomendasiEvaluasi2 = NULL;
-                                $rekomendasiEvaluasi3 = NULL; 
+                                $rekomendasiEvaluasi3 = NULL;
                             } else if (//16
                                 $akademik === 'Perlu Penguatan' &&
                                 $sekolah === 'Kurang Mendukung' &&
@@ -219,7 +218,7 @@ class RuleSeeder extends Seeder
                             ) {
                                 $rekomendasiStrategi1 = 'Diskusi Kelompok Aktif';
                                 $rekomendasiStrategi2 = NULL;
-                                $rekomendasiStrategi3 = NULL; 
+                                $rekomendasiStrategi3 = NULL;
                                 $rekomendasiEvaluasi1 = 'Penilaian Formatif Berupa Kuis';
                                 $rekomendasiEvaluasi2 = 'Review Materi dan Tanya Jawab';
                                 $rekomendasiEvaluasi3 = NULL;
