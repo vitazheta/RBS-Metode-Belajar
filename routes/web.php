@@ -13,6 +13,8 @@ use Dflydev\DotAccessData\Data; // Ini tidak digunakan, bisa dihapus jika mau
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\DataMahasiswaController;
+use App\Http\Controllers\DeveloperController;
+
 
 // TAMBAHAN: Import Controller untuk Password Reset
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -34,10 +36,9 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('
 
 // Rute Halaman Umum (Tidak memerlukan login)
 Route::get('/pelajari-lebih-lanjut', [InfoController::class, 'showPelajari'])->name('pelajari.lanjut'); // Nama rute yang lebih spesifik
-// Jika '/pelajari' juga diarahkan ke view yang sama, pilih salah satu atau beri nama yang berbeda
 Route::get('/pelajari', function () {
     return view('info.pelajari');
-})->name('pelajari'); // Ini akan menimpa yang showPelajari jika punya path yang sama
+})->name('pelajari'); 
 
 Route::get('/tutorial', [InfoController::class, 'showTutorial'])->name('tutorial');
 
@@ -133,6 +134,7 @@ Route::post('/import-csv', [DataMahasiswaController::class, 'import'])->name('im
 
 Route::get('/hasil-rekomendasi/{id}/export-pdf', [HasilRekomendasiController::class, 'exportPdf'])->name('hasil-rekomendasi.exportPdf');
 
+Route::get('/developer', [DeveloperController::class, 'index'])->name('developer.page');
 
 
 // REKOMENDASI PENTING UNTUK MENGHINDARI DUPLIKASI DAN KONFLIK RUTE DI MASA DEPAN:

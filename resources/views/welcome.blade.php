@@ -1143,14 +1143,14 @@
                 <div class="about-text">
                     <h1>Tentang Kami</h1>
                     <p>EdVise adalah platform pembelajaran cerdas yang membantu pendidik memahami pembelajaran mahasiswa secara personal. Kami menggabungkan data, teknologi, dan insight pendidikan untuk memberikan rekomendasi pengajaran yang tepat sasaran.</p>
-                    <a href="{{ route('pelajari') }}" class="btn btn-primary mt-3">Pelajari Lebih Lanjut</a>
+                    <a href="{{ route('developer.page') }}" class="btn btn-primary mt-3">Kenali Kami</a>
                 </div>
             </div>
         </div>
     </section>
 
     <div class="container metode-section">
-        <h2 class="section-title">Collaborative Peroamnce Skills</h2>
+        <h2 class="section-title">Collaborative Performance Skills</h2>
         <div class="slider-container">
             <div class="slider-wrapper">
                 <div class="slider" id="slider">
