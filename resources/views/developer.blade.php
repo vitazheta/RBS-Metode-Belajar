@@ -126,6 +126,7 @@
         .card-details p {
             font-size: 18px;
             line-height: 1.6;
+            text-align: justify;
         }
     </style>
     <div class="container">
