@@ -18,7 +18,7 @@ class DeveloperController extends Controller
             [
                 'name' => 'Dila Indra Nurdiansyah',
                 'title' => 'Database Engineer & Backend Developer',
-                'image' => 'images/developer/CONTOH 2.jpg', // Ganti dengan URL gambar sebenarnya
+                'image' => 'images/developer/CONTOH 2.png', // Ganti dengan URL gambar sebenarnya
                 'details' => 'Mendesain dan mengelola struktur database, mengintegrasikan database dengan backend dan frontend. membantu debugging dan optimasi sistem, membantu membuat kerangka awal pada frontend, membantu memberikan solusi dalam permasalahan yang dihadapi tim'
             ],
             [
@@ -45,7 +45,7 @@ class DeveloperController extends Controller
                 'image' => 'images/developer/CONTOH 6.jpg', // Ganti dengan URL gambar sebenarnya
                 'details' => 'Menghimpun dan menganalisis data mahasiswa sesuai dengan kebutuhan sistem, mengelola komunikasi dengan pihak luar dan internal, membantu memberikan solusi dalam permasalahan yang dihadapi tim'
             ]
-            
+
         ];
 
         return view('developer', compact('developers'));
