@@ -53,7 +53,7 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             background-color: #2d2d2d;
         }
-        
+
         .container-rekomendasi {
             max-width: 100%;
             margin-bottom: 100px;
@@ -81,7 +81,7 @@
             color: #ffffff;
             text-align: center;
         }
-        
+
         .table {
             margin: 0 !important;
         }
@@ -202,10 +202,10 @@
             color: #FFFFFF;
         }
 
-        body.dark-theme .table, 
-        body.dark-theme .table-bordered, 
-        body.dark-theme .table-striped, 
-        body.dark-theme .table th, 
+        body.dark-theme .table,
+        body.dark-theme .table-bordered,
+        body.dark-theme .table-striped,
+        body.dark-theme .table th,
         body.dark-theme .table td {
             background-color: #2D2D2D !important;
             color: #fff !important;
@@ -216,7 +216,7 @@
             background-color: #373737 !important;
         }
 
-        body.dark-theme .text-center-table-header, 
+        body.dark-theme .text-center-table-header,
         body.dark-theme .table thead {
             background-color: #0E1F4D !important;
             color: #fff !important;
@@ -226,10 +226,10 @@
         scroll-margin-top: 100px
     }
 
-        body.dark-theme .table, 
-        body.dark-theme .table-bordered, 
-        body.dark-theme .table-striped, 
-        body.dark-theme .table th, 
+        body.dark-theme .table,
+        body.dark-theme .table-bordered,
+        body.dark-theme .table-striped,
+        body.dark-theme .table th,
         body.dark-theme .table td {
             background-color: #2D2D2D !important;
             color: #fff !important;
@@ -240,7 +240,7 @@
             background-color: #373737 !important;
         }
 
-        body.dark-theme .text-center-table-header, 
+        body.dark-theme .text-center-table-header,
         body.dark-theme .table thead {
             background-color: #0E1F4D !important;
             color: #fff !important;
@@ -532,7 +532,7 @@
                                 <i class="fas fa-users me-2"></i> Analisis Kebutuhan Kolaborasi
                             </h5>
                             @php
-$rekom = strip_tags($KondisiDominan['rekomendasi'] ?? '');
+                            $rekom = strip_tags($KondisiDominan['rekomendasi'] ?? '');
                             @endphp
                             @if(stripos($rekom, 'diskusi kelompok aktif') !== false)
                                 <div class="mb-2 mt-3" style="font-size: 1rem;">

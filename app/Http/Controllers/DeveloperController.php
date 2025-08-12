@@ -45,7 +45,7 @@ class DeveloperController extends Controller
                 'image' => 'images/developer/DEVP6.png', // Ganti dengan URL gambar sebenarnya
                 'details' => 'Menghimpun dan menganalisis data mahasiswa sesuai dengan kebutuhan sistem, mengelola komunikasi dengan pihak luar dan internal, membantu memberikan solusi dalam permasalahan yang dihadapi tim'
             ]
-            
+
         ];
 
         return view('developer', compact('developers'));

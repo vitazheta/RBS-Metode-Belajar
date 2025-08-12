@@ -66,6 +66,12 @@
         font-size: 0.95rem; /* Sedikit lebih kecil untuk deskripsi */
     }
 
+    /* Styling for the reset button that applies to both light and dark mode */
+    .reset-form-section .btn {
+        background-color: #0E1F4D; /* Contoh warna latar belakang untuk light mode */
+        color: #FFFFFF; /* Contoh warna teks untuk light mode */
+    }
+
     /* DARK THEME STYLES (KHUSUS UNTUK HALAMAN RESET PASSWORD INI) */
     body.dark-theme .card-auth {
         /* Adjust shadow or border in dark mode if needed */
